@@ -1,1 +1,3 @@
-Some initial changes!
+Some initial changes! 
+
+Some more changes for step 7

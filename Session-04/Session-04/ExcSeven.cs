@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace Session_04
 {
     internal class ExcSeven
-    {
+    {   
+        public void TempConverter() 
+        { 
         //kelvin = celsius + 273
         //fahrenheit = celsius x 18 / 10 + 32
 
@@ -16,7 +18,7 @@ namespace Session_04
 
         Console.WriteLine("Kelvin = {0}", celsius + 273);
         Console.WriteLine("Fahrenheit = {0}", celsius* 18 / 10 + 32);
-
+        }
 
     }
 }

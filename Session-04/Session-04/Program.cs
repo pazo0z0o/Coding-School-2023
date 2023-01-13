@@ -35,4 +35,4 @@ progSix.DateTimeLib();
 
 //Temp converter from Celsius to Fahrenheit and Kelvin
 ExcSeven progSeven = new ExcSeven();
-progSeven.TenpConverter();
+progSeven.TempConverter();

@@ -37,8 +37,8 @@ namespace Session_05
             //κατέληξα να την κάνω void+Console.Write επειδή είχα θέμα με τα return και τα for που δεν είχα προβλέψει.
                 
             }
-
+            Console.WriteLine(Environment.NewLine);
         }
-
+    
     }
 }

@@ -4,6 +4,7 @@ using Session_05;
 
 int[] arr = { 0, -2, 1, 20, -31, 50, -4, 17, 89, 100 };
 
+//the ------ are for visual purposes 
 //1. Take a given string and reverse it
 ExOne reverse = new ExOne();
 Console.WriteLine(reverse.strReversal());
@@ -31,6 +32,7 @@ foreach (int i in arr) { Console.Write(+ i + " "); }
 Console.WriteLine(Environment.NewLine);
 
 sortArr.InsertionSort(arr);
+Console.WriteLine("------------------------------------------------------");
 
 
 

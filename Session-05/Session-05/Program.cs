@@ -3,7 +3,7 @@
 using Session_05;
 
 int[] arr = { 0, -2, 1, 20, -31, 50, -4, 17, 89, 100 };
-
+/*
 //1. Take a given string and reverse it
 ExOne reverse = new ExOne();
 Console.WriteLine(reverse.strReversal());
@@ -21,7 +21,7 @@ Console.WriteLine("------------------------------------------------------");
 //4.Cartesian Product of 2 tables
 ExFour cartesianProd = new ExFour();
 cartesianProd.tableXProd();
-Console.WriteLine("------------------------------------------------------");
+Console.WriteLine("------------------------------------------------------");*/
 //5. Sorting an array
 ExFive sortArr = new ExFive();
 

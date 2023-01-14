@@ -8,12 +8,10 @@ namespace Session_05
 {
     internal class ExFive
     {
-        public int[] myArray = { 0, -2, 1, 20, -31, 50, -4, 17, 89, 100 };
+        public int[]? myArray; //= { 0, -2, 1, 20, -31, 50, -4, 17, 89, 100 };
         public void InsertionSort(int[] myArray)
         {
-          //  int[] myArray = { 0, -2, 1, 20, -31, 50, -4, 17, 89, 100 };
-            
-            
+    
             for (int i = 1; i < myArray.Length; i++)
             {
                 var key = myArray[i]; //key serves as a "bookmark" for our element to be sorted   

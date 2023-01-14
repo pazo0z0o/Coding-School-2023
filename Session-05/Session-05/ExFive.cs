@@ -8,9 +8,11 @@ namespace Session_05
 {
     internal class ExFive
     {
-        public int[] InsertionSort()
+        public int[] myArray = { 0, -2, 1, 20, -31, 50, -4, 17, 89, 100 };
+        public void InsertionSort(int[] myArray)
         {
-            int[] myArray = { 0, -2, 1, 20, -31, 50, -4, 17, 89, 100 };
+          //  int[] myArray = { 0, -2, 1, 20, -31, 50, -4, 17, 89, 100 };
+            
             
             for (int i = 1; i < myArray.Length; i++)
             {
@@ -28,8 +30,17 @@ namespace Session_05
                     else flag = 1;
                 }
             }
-            return myArray;
+            newArr(myArray);
         }
+        public void newArr(int[] myArray )
+        {
+            StringBuilder sb1 = new StringBuilder("The finished, sorted array is: ");
+            Console.WriteLine(sb1) ;
 
+            foreach (int num in myArray )
+            { 
+            Console.Write(num + " ");
+            }                
+        }
     }
 }

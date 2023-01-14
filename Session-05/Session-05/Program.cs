@@ -15,11 +15,14 @@ Console.WriteLine("------------------------------------------------------");
 //3. give all the prime numbers in the range given by the chosen integer
 ExThree primes = new ExThree();
 primes.FindPrimes();
-*/
 
+//4.Cartesian Product of 2 tables
 ExFour cartesianProd = new ExFour();
-cartesianProd.tableXProd();
+cartesianProd.tableXProd();*/
 
+//5. Sorting an array
+ExFive sortArr = new ExFive();
+Console.WriteLine(sortArr.InsertionSort());
 
 
 

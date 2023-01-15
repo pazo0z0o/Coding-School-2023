@@ -17,12 +17,10 @@ namespace Session_05
             do { 
             Console.WriteLine("Give me an integer, and I will find its primes : ");
                 if (int.TryParse(Console.ReadLine(), out num))
-                {
-                    Console.Write("");
+                {           
                     choice = true;
                 }
                 else Console.WriteLine("Wrong input, try again");
-
             } while(!choice);
 
             for (i = 2; i <= num; i++)

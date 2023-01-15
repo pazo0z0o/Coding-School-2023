@@ -20,7 +20,7 @@ namespace Session_05
                 string strNUM = Console.ReadLine();
                 if (int.TryParse(strNUM, out num))
                 {
-                    Console.Write("");
+                    
                     uInput = true;
                 }
                 else Console.WriteLine("Wrong input, try again");               

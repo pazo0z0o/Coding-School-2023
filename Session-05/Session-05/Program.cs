@@ -32,7 +32,7 @@ foreach (int i in arr) { Console.Write(+ i + " "); }
 Console.WriteLine(Environment.NewLine);
 
 sortArr.InsertionSort(arr);
-Console.WriteLine("------------------------------------------------------");
+Console.WriteLine("\n------------------------------------------------------");
 
 
 

@@ -11,31 +11,42 @@ namespace Session_05
 
         public int SumOrProd()
         {   
+            bool uInput = false;
+            bool uChoiceCalc = false;
 
-            Console.WriteLine("Give me an integer : " ,(Environment.NewLine ));
-            string strNUM = Console.ReadLine();
-            int num = Convert.ToInt32(strNUM);
+            int num ;
+            do {
+                Console.WriteLine("Give me an integer : ", (Environment.NewLine));
+                string strNUM = Console.ReadLine();
+                if (int.TryParse(strNUM, out num))
+                {
+                    Console.Write("");
+                    uInput = true;
+                }
+                else Console.WriteLine("Wrong input, try again");               
+            }while(!uInput);
 
             string input;
-            /*StringBuilder sb = new StringBuilder();
-           
-            sb.AppendLine("Choose the calculation you want..."),
-            sb.AppendLine("1. Multiplication "),
-            sb.AppendLine("2. Addition ")
-                             */
-            Console.WriteLine("Pick (1) to get the product of each number of the integer or (2) to get the sum" + (Environment.NewLine)+
-                              "1. Product"+ (Environment.NewLine)+ "2. Summation");
-
-
-            input =(Console.ReadLine());
-            if (input == "1")
+            do
             {
-                return Product(num);
-            }
-            else if (input == "2") { return Summation(num); }
-            else
-                Console.WriteLine("Wrong option!Try again");
-            return 0;
+                Console.WriteLine("Pick (1) to get the product of each number of the integer or (2) to get the sum" + (Environment.NewLine) +
+                             "1. Product" + (Environment.NewLine) + "2. Summation");
+               
+                input = (Console.ReadLine());
+                if (input == "1")
+                {
+                    uChoiceCalc = true;
+                    return Product(num);
+                }
+                else if (input == "2") 
+                {
+                    uChoiceCalc = true;
+                    return Summation(num); 
+                }
+                else Console.WriteLine("Wrong option!Try again");
+            }while (!uChoiceCalc);
+                
+                return 0;
         }
 
         public int Product(int num) 

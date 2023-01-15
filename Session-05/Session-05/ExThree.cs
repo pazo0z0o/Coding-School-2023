@@ -9,12 +9,21 @@ namespace Session_05
     internal class ExThree
     {
         public void FindPrimes()
-        {
+        {   bool choice = false;
             int res=0, flag ;
             int i;
+            int num;
+            //string input;
+            do { 
             Console.WriteLine("Give me an integer, and I will find its primes : ");
-           
-            int num = Convert.ToInt32(Console.ReadLine());
+                if (int.TryParse(Console.ReadLine(), out num))
+                {
+                    Console.Write("");
+                    choice = true;
+                }
+                else Console.WriteLine("Wrong input, try again");
+
+            } while(!choice);
 
             for (i = 2; i <= num; i++)
             {

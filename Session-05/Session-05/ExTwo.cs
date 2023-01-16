@@ -9,7 +9,7 @@ namespace Session_05
     internal class ExTwo
     {
 
-        public int SumOrProd()
+        public void SumOrProd()
         {   
             bool uInput = false;
             bool uChoiceCalc = false;
@@ -19,8 +19,7 @@ namespace Session_05
                 Console.WriteLine("Give me an integer : ", (Environment.NewLine));
                 string strNUM = Console.ReadLine();
                 if (int.TryParse(strNUM, out num))
-                {
-                    
+                {   
                     uInput = true;
                 }
                 else Console.WriteLine("Wrong input, try again");               
@@ -30,7 +29,7 @@ namespace Session_05
             do
             {
                 Console.WriteLine("Pick (1) to get the product of each number of the integer or (2) to get the sum" + (Environment.NewLine) +
-                             "1. Product" + (Environment.NewLine) + "2. Summation");
+                                    "1. Product" + (Environment.NewLine) + "2. Summation");
                
                 input = (Console.ReadLine());
                 if (input == "1")
@@ -46,7 +45,7 @@ namespace Session_05
                 else Console.WriteLine("Wrong option!Try again");
             }while (!uChoiceCalc);
                 
-                return 0;
+                //return 0;
         }
 
         public int Product(int num) 

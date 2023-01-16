@@ -8,12 +8,20 @@ namespace Session_06
 {
     public class Profressor : Person
     {
-        public string Rank { get; set; }
-        public Course[] Courses  {get;set;}
+        public string? Rank { get; set; }
+        public Course[]? Courses  {get;set;}
 
-        //Course course = new Course[];
+        //constructors attempt
 
+
+
+
+        public void Teach(string course,DateTime datetime ) { }
         
+        public void SetGrade(Guid studentID,Guid courseID,int grade ) { }
+
+        public void GetName() { }
+
 
 
     }

@@ -11,9 +11,8 @@ namespace Session_06
         public Guid ID { get; set; }
         public Guid CourseID { get; set; }
         public Guid StudentID { get; set; }
-        public int StudentGrade { get; set; } //sneaky, I just changed the name,
-
-
+        public int StudentGrade { get; set; } 
+        
 
 
         public Grade() { }

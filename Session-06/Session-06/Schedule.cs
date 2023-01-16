@@ -13,9 +13,7 @@ namespace Session_06
         public Guid ProfessorID { get; set; }
         public DateTime Calendar { get; set; }
 
-      
-
-
+     
         public Schedule() { }
         public Schedule(Guid id) { ID = id; }
         public Schedule(Guid id, Guid courseId) { ID = id;
@@ -32,16 +30,6 @@ namespace Session_06
             ProfessorID = professorId;
             Calendar = calendar;
         }
-
-
-
-
-
-
-
-
-
-
 
     }
 }

@@ -27,10 +27,6 @@ namespace Session_06
 
 
 
-
-
-
-
         //???could I make a connection to class Person and use these ones?
         public void GetName() { }
         public void SetName() { }

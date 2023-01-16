@@ -9,7 +9,7 @@ namespace Session_06
     public class Person
     {
         public Guid ID { get; set; }
-        public string? Name  { get; set; }
+        public string? Name { get; set; }
         public int? Age { get; set; }
 
         public Person() { }

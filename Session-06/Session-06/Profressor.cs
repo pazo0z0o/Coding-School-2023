@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Session_06
 {
-    internal class Profressor
+    public class Profressor : Person
     {
+        public string Rank { get; set; }
+        public Course[] Courses  {get;set;}
+
+        //Course course = new Course[];
+
+        
+
+
     }
 }

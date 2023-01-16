@@ -12,7 +12,26 @@ namespace Session_06
        public string Name { get; set; }
        public int YearsInService { get; set; }
 
-        //could I make a connection to class Person and use these ones?
+       public Institute() { }
+       public Institute(Guid id) { ID = id; }
+       public Institute(Guid id,string name) { 
+            ID = id; 
+            Name= name;
+        }
+        public Institute(Guid id, string name,int yearsInService)
+        {
+            ID = id;
+            Name = name;
+            YearsInService = yearsInService;
+        }
+
+
+
+
+
+
+
+        //???could I make a connection to class Person and use these ones?
         public void GetName() { }
         public void SetName() { }
 

@@ -6,7 +6,42 @@ using System.Threading.Tasks;
 
 namespace Session_06
 {
-    internal class Schedule
+    public class Schedule
     {
+        public Guid ID { get; set; }
+        public Guid CourseID { get; set; }
+        public Guid ProfessorID { get; set; }
+        public DateTime Calendar { get; set; }
+
+      
+
+
+        public Schedule() { }
+        public Schedule(Guid id) { ID = id; }
+        public Schedule(Guid id, Guid courseId) { ID = id;
+            CourseID = courseId;
+        }
+        public Schedule(Guid id, Guid courseId, Guid professorId) {
+            ID = id;
+            CourseID = courseId;
+            ProfessorID = professorId;
+        }
+        public Schedule(Guid id, Guid courseId, Guid professorId, DateTime calendar) {
+            ID = id;
+            CourseID = courseId;
+            ProfessorID = professorId;
+            Calendar = calendar;
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 }

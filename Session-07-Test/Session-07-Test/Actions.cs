@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,41 +18,22 @@ namespace Session_07_Test
             Input= actInput;
         }
         public virtual string Action(string Input)
-        {
-
+        {  
+            Console.WriteLine("The input String is : " + Input);
+            
             return Output;
         }
-
-
-
     }
 
     public class BinConverter : Actions
     {
         public BinConverter() { }
         public BinConverter(string input) : base(input) { }
-
         public override string Action(string input)
         {
-            int n, i, outputBin = 0;
-            int[] a = new int[10];
-
-            if (int.TryParse(input, out n))
-            {
-                for (i = 0; n > 0; i++)
-                {
-                    a[i] = n % 2;
-                    n = n / 2;
-                }
-                for (i = 0; i < a.Length; i++)
-                {
-                    outputBin += a[i] * Convert.ToInt32(Math.Pow(10, a.Length - i - 1));
-                }
-
-            }
-            return outputBin.ToString();
+           
+            return Convert.ToString(int.Parse(input), 2);
         }
-
     }
 
     public class UpperCase : Actions
@@ -75,8 +57,6 @@ namespace Session_07_Test
 
             return UpperStr;
         }
-
-
     }
 
     public class Reversal : Actions

@@ -18,28 +18,31 @@ namespace Session_07_Test
         // METHODS
         public ActionResponse Execute(ActionRequest request) //
         {
+            Actions act;
+            ActionResponse resp = new ActionResponse();
             switch (request.EnumChoice)
-            {
-                case ActionEnum.Convert:
-
-
+            {      case ActionEnum.Convert:
+                    act = new BinConverter(request.Input);
+                    resp.Output = act.Action(act.Input);
                     break;
                 case ActionEnum.Uppercase:
-
-
-
+                    act = new UpperCase(request.Input);
+                    resp.Output = act.Action(act.Input);
+                    
                     break;
                 case ActionEnum.Reverse:
-
-
+                    act = new Reversal(request.Input);
+                    resp.Output = act.Action(act.Input);
+                    
                     break;
-
-                    return response.Output;
+                default:
+                    Console.WriteLine("No valid action to be taken");
+                    break;
 
             }
 
 
-
+            return resp;
         }
 
     }

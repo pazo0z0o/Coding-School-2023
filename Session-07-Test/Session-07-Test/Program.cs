@@ -4,9 +4,9 @@ using Session_07_Test;
 Console.WriteLine("Hello, World!");
 
 Console.WriteLine("Choose one of the available actions:" + (Environment.NewLine)
-    +"1. Convert the input" + (Environment.NewLine)
-    +"2. Uppercase the input" + (Environment.NewLine)
-    +"3. Reverse the input");
+    +"0. Convert the input" + (Environment.NewLine)
+    +"1. Uppercase the input" + (Environment.NewLine)
+    +"2. Reverse the input");
 
 int inputVal;
 ActionRequest request = new ActionRequest();
@@ -15,7 +15,7 @@ if (Int32.TryParse(Console.ReadLine(), out inputVal))
 { request.EnumChoice = (ActionEnum)inputVal; }
 else { Console.WriteLine("Wrong Input,try again"); }
 
-Console.WriteLine("Enter a string: ");
+Console.WriteLine("Enter a string or a decimal number: ");
 request.Input = Console.ReadLine();
 
 

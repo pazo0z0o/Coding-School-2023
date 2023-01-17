@@ -17,7 +17,8 @@ namespace Session_07
 
         //method to be virtual
         public virtual string Action(string Input)
-        {
+        {   
+
             return Output;
         }
     }

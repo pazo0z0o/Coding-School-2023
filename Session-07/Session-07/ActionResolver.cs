@@ -27,7 +27,8 @@ namespace Session_07
             {
                 case Action.Convert:
                     BinConverter act = new BinConverter();
-                   act.Action(Input);
+                   //act.Action(Input);
+                    response = act.Action(Input);
                     break;
                 case Action.Uppercase:
                     UpperCase act1= new UpperCase();

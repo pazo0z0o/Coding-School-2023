@@ -8,9 +8,10 @@ namespace Session_07
 {
     internal class Actions
     {
-
-
-
+        public string Input { get; set; }
+        
+        public string Output { get; set; }  
+        
         public Actions() { }
 
 

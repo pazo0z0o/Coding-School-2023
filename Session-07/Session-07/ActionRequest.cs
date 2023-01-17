@@ -30,7 +30,8 @@ namespace Session_07
         public Action RequestAction(Guid RequestId,string Input,Action actionEnum)
         {
 
-            return actionEnum;
+
+            return ActionEnum;
         }
 
 

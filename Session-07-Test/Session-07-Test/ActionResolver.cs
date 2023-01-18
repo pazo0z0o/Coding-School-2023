@@ -20,8 +20,21 @@ namespace Session_07_Test
         {
             Actions act;
             ActionResponse resp = new ActionResponse();
+            resp.ResponseID = Guid.NewGuid();
+            resp.ResponseID = request.RequestID;
+            
+            //Message message = new Message();
+            //message.Text = "Execution Start";
+            //message.TimeStamp 
+            //MessageLogger logger = new MessageLogger();
+               // Logger.Messages[0] = message;
+            //Logger logger.Write
+            //
+
             switch (request.EnumChoice)
             {      case ActionEnum.Convert:
+                    //UserInputConvert()
+                    
                     act = new BinConverter(request.Input);
                     resp.Output = act.Action(act.Input);
                     break;

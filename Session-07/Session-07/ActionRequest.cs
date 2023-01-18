@@ -6,33 +6,29 @@ using System.Threading.Tasks;
 
 namespace Session_07
 {
-    public enum Action
+    public enum ActionEnum
     {
         Convert,
         Uppercase,
         Reverse
     }
-    public class ActionRequest
+    public class ActionRequest : ActionInBetween
     {
         public Guid RequestID { get; set; }
         public string? Input { get; set; }
-    //public ActionEnum Action {get; set;}
-    public Action ActionEnum { get; set; }
-   
-    public ActionRequest() { }
-        public ActionRequest(Guid requestId, string input,Action actionEnum)
+    
+    public ActionEnum? Action { get; set; }
+
+        public ActionRequest( ) //ActionEnum Action } played with the constructors, comment as a ref point
         {
-            RequestID= requestId;
-            Input= input;
-            ActionEnum= actionEnum;
+           //reqID = Guid.NewGuid(); failed workaround to make arction response inherit ActionRequest,
+           //while also keeping Guid.NewGuid() in 
+            RequestID= Guid.NewGuid();
+          
+           // Action= actResolve;
         }
         //Methods
-        public Action RequestAction(Guid RequestId,string Input,Action actionEnum)
-        {
-
-
-            return ActionEnum;
-        }
+        
 
 
 

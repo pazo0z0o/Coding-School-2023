@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Session_07
 {
-    public class ActionResponse : ActionRequest
+    public class ActionResponse : ActionInBetween
     {
         public Guid ResquestID { get; set; }
         public Guid ResponseID { get; set; }
@@ -14,14 +14,14 @@ namespace Session_07
 
         //Constructors
         public ActionResponse() { }
-        public ActionResponse(Guid resquestId, Guid responseId, string? output)
+        public ActionResponse( Guid responseId)
         { 
-            ResquestID = resquestId; 
-            ResponseID= responseId;
-            Output = output;
+           // ResquestID = resquestId; 
+            ResponseID= Guid.NewGuid();
+            //Output = output;
         }
-       public ActionResponse(Guid requestId, string input, Action actionEnum) : base(requestId, input, actionEnum)
-       { }   
+       
+        //public ActionResponse(Guid requestId):base( reqID ) { }
         
 
 

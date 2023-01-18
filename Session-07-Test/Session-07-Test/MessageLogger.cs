@@ -19,6 +19,7 @@ namespace Session_07_Test
 
         public void ReadAll() { }
         public void Clear() { }
-        public void Write(string actMessage) { } // apo tin message
+        public void Write(string actMessage)
+        { } // apo tin message
     }
 }

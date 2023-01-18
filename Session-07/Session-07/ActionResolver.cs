@@ -6,24 +6,20 @@ using System.Threading.Tasks;
 
 namespace Session_07
 {
-    public class ActionResolver : ActionResponse
+    public class ActionResolver 
     {
         public MessageLogger? Logger { get; set; }
-
-
 
         //Constructors
         public ActionResolver() { }
         public ActionResolver(MessageLogger? logger) { Logger = logger; }
 
-        public ActionResolver(Guid requestId, Guid responseId, string output) : base(requestId, responseId, output) { }
-
-        //Actions act = new Actions();
+       
 
         //Methods
         public ActionResponse Execute(ActionRequest request)
-        {   ActionResponse response = null;
-            switch (ActionEnum)
+        {   
+            switch (request.Action)
             {
                 case Action.Convert:
                     BinConverter act = new BinConverter();

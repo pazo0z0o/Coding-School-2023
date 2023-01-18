@@ -12,7 +12,12 @@ namespace Session_07
         public DateTime TimeStamp { get; set; }
         public string? LogMessage { get; set; }
         //Constructors
-
+        public Message(string log) 
+        { 
+        ID= Guid.NewGuid();
+        TimeStamp= DateTime.Now;
+        LogMessage= log;
+        }
         //Methods
 
     }

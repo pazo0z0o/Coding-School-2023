@@ -6,44 +6,47 @@ using System.Threading.Tasks;
 
 namespace Session_07
 {
-    public  class MessageLogger : ActionResolver
+    public class MessageLogger
     {
-      public Message[]? Messages { get; set; }
 
-        public MessageLogger() { }
-        public MessageLogger(Message[] message) { Messages = message; }
+        //  PROPERTIES
+        public Message[] Messages { get; set; }
 
-        //
-        //Constructors
+        private int _messageCounter = 0;
 
-        //Methods
-        public void ReadAll() 
+        // CTOR
+        public MessageLogger()
         {
-            foreach  (Message mes in Messages )
-            {
-                Console.WriteLine(mes);
-            }
-        
-        
-        
-        
+            Messages = new Message[1000];
         }
 
+
+        // METHODS
+        public void ReadAll()
+        {
+            foreach (Message message in Messages)
+            {
+
+                if (message != null)
+                {
+                    Console.WriteLine(message.LogMessage);
+                }
+
+            }
+        }
 
         public void Clear()
         {
-            Console.Clear();
-        
+            Messages = new Message[1000];
+            _messageCounter = 0;
         }
 
+        public void Write(Message message)
+        {
 
-        public void Write( string Message) 
-        { 
-        
-        
+            Messages[_messageCounter] = message;
+            _messageCounter++;
         }
-
-
 
     }
 }

@@ -8,100 +8,97 @@ namespace Session_07
 {
     public class Actions
     {
-        public string Input { get; set; }
-        public string Output { get; set; }
+        public string? Input { get; set; }
+        public string? Output { get; set; }
 
-        public Actions() { } //empty constr
-        public Actions(string input)
-        { Input = input; }
+        public Actions() { }
+        public Actions(string actInput)
+        {
+            Input = actInput;
+        }
+        public virtual string Resolution(string Input)
+        {
 
-        //method to be virtual
-        public virtual string Action(string Input)
-        {   
+            string str = null;
+            return str;
+        }
 
-            return Output;
+        public virtual string UserInput(ActionRequest request)
+        {
+            decimal num = 0;
+
+            return num;
+        }
+    }
+    public class BinConverter : Actions
+    {
+        public BinConverter() { }
+        public BinConverter(string input) : base(input) { }
+
+        public override string UserInput(ActionRequest request)
+        {
+            decimal number;
+            bool flag = false;
+            do
+            {
+                if (Decimal.TryParse(request.Action.ToString(), out number)) flag = true;
+                else Console.WriteLine("Decimal number not given,try again!");
+            } while (!true);
+            return number.ToString();
+        }
+
+        public override string Resolution(string input)
+        {
+
+            return Convert.ToString(int.Parse(input), 2);
         }
     }
 
-        public class BinConverter : Actions
+    public class UpperCase : Actions
+    {
+        public UpperCase() { }
+        public UpperCase(string input) : base(input) { }
+        public override string Resolution(string input)
         {
-            public BinConverter() { }
-            public BinConverter(string input) : base(input) { }
-
-            public override string Action(string input)
+            string[] words = input.Split(new[] { " " }, StringSplitOptions.None);
+            string UpperStr = "";
+            int ctr = 0;
+            foreach (String s in words)
             {
-                int n, i, outputBin = 0;
-                int[] a = new int[10];
-
-                if (int.TryParse(input, out n))
+                if (s.Length > ctr)
                 {
-                    for (i = 0; n > 0; i++)
-                    {
-                        a[i] = n % 2;
-                        n = n / 2;
-                    }
-                    for (i = 0; i < a.Length; i++)
-                    {
-                        outputBin += a[i] * Convert.ToInt32(Math.Pow(10, a.Length - i - 1));
-                    }
-
+                    UpperStr = s;
+                    ctr = s.Length;
                 }
-                return outputBin.ToString();
+
             }
 
+            return UpperStr;
         }
+    }
 
-        public class UpperCase : Actions
+    public class Reversal : Actions
+    {
+        public Reversal() { }
+        public Reversal(string input) : base(input) { }
+        public override string Resolution(string input)
         {
-            public UpperCase() { }
-            public UpperCase(string input) : base(input) { }
-            public override string Action(string input)
+            char[] arrRevrse = input.ToCharArray();
+            string ans = " ";
+
+            if (input is string)
             {
-                string[] words = input.Split(new[] { " " }, StringSplitOptions.None);
-                string UpperStr = "";
-                int ctr = 0;
-                foreach (String s in words)
+                for (int i = arrRevrse.Length - 1; i >= 0; i--)
                 {
-                    if (s.Length > ctr)
-                    {
-                        UpperStr = s;
-                        ctr = s.Length;
-                    }
-
+                    ans += arrRevrse[i];
                 }
-
-                return UpperStr;
             }
-
-
-        }
-
-        public class Reversal : Actions
-        {
-            public Reversal() { }
-            public Reversal(string input) : base(input) { }
-            public override string Action(string input)
-            {
-                char[] arrRevrse = input.ToCharArray();
-                string ans = " ";
-
-                if (input is string)
-                {
-                    for (int i = arrRevrse.Length - 1; i >= 0; i--)
-                    {
-                        ans += arrRevrse[i];
-                    }
-                }
-                return ans;
-
-            }
-
+            return ans;
 
         }
 
 
-            
-               
+    }
 
 
 
@@ -113,5 +110,9 @@ namespace Session_07
 
 
 
-    
+
+
+
+
+
 }

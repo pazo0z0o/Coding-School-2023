@@ -8,7 +8,6 @@ namespace Session_07
 {
     public class MessageLogger
     {
-
         //  PROPERTIES
         public Message[] Messages { get; set; }
 
@@ -16,22 +15,16 @@ namespace Session_07
 
         // CTOR
         public MessageLogger()
-        {
+        {//initialization for Messages array with 1000 elements
             Messages = new Message[1000];
         }
-
 
         // METHODS
         public void ReadAll()
         {
             foreach (Message message in Messages)
             {
-
-                if (message != null)
-                {
-                    Console.WriteLine(message.LogMessage);
-                }
-
+                if (message != null){Console.WriteLine(message.LogMessage); }
             }
         }
 
@@ -43,7 +36,6 @@ namespace Session_07
 
         public void Write(Message message)
         {
-
             Messages[_messageCounter] = message;
             _messageCounter++;
         }

@@ -21,7 +21,6 @@ namespace Session_07
             string str = null;
             return str;
         }
-
         public virtual string UserInput(ActionRequest request) { return string.Empty;}
   
     }

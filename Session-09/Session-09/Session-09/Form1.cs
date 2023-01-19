@@ -1,4 +1,5 @@
 using CalculatorLib;
+using System.Text.RegularExpressions;
 
 namespace Session_09 {
     public partial class Form1 : Form {
@@ -84,7 +85,7 @@ namespace Session_09 {
                 _result = null;
             }
 
-            ctrlDisplay.Text += " 1 ";
+            ctrlDisplay.Text += "1";
 
             if (_value1 == null)
             {
@@ -107,7 +108,7 @@ namespace Session_09 {
                 _result = null;
             }
 
-            ctrlDisplay.Text += " 2 ";
+            ctrlDisplay.Text += "2";
 
             if (_value1 == null) {
                 _value1 = 2;
@@ -129,7 +130,7 @@ namespace Session_09 {
                 _result = null;
             }
 
-            ctrlDisplay.Text += " 3 ";
+            ctrlDisplay.Text += "3";
 
             if (_value1 == null)
             {
@@ -153,7 +154,7 @@ namespace Session_09 {
                 _result = null;
             }
 
-            ctrlDisplay.Text += " 4 ";
+            ctrlDisplay.Text += "4";
 
             if (_value1 == null)
             {
@@ -176,7 +177,7 @@ namespace Session_09 {
                 _result = null;
             }
 
-            ctrlDisplay.Text += " 5 ";
+            ctrlDisplay.Text += "5";
 
             if (_value1 == null)
             {
@@ -199,7 +200,7 @@ namespace Session_09 {
                 _result = null;
             }
 
-            ctrlDisplay.Text += " 6 ";
+            ctrlDisplay.Text += "6";
 
             if (_value1 == null)
             {
@@ -222,7 +223,7 @@ namespace Session_09 {
                 _result = null;
             }
 
-            ctrlDisplay.Text += " 7 ";
+            ctrlDisplay.Text += "7";
 
             if (_value1 == null)
             {
@@ -245,7 +246,7 @@ namespace Session_09 {
                 _result = null;
             }
 
-            ctrlDisplay.Text += " 8 ";
+            ctrlDisplay.Text += "8";
 
             if (_value1 == null)
             {
@@ -267,7 +268,7 @@ namespace Session_09 {
                 _result = null;
             }
 
-            ctrlDisplay.Text += " 9 ";
+            ctrlDisplay.Text += "9";
 
             if (_value1 == null)
             {
@@ -295,7 +296,7 @@ namespace Session_09 {
                 _result = null;
             }
 
-            ctrlDisplay.Text += " 0 ";
+            ctrlDisplay.Text += "0";
 
             if (_value1 == null)
             {
@@ -346,9 +347,11 @@ namespace Session_09 {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnFloat_Click(object sender, EventArgs e)
         {
-
+            ctrlDisplay.Text += ".";
+            _calcOperation = CalcOperation.RaiseToPower;
+            
         }
     }
 }

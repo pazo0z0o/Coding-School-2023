@@ -294,7 +294,7 @@
             this.btnFloat.TabIndex = 26;
             this.btnFloat.Text = ".";
             this.btnFloat.UseVisualStyleBackColor = true;
-            this.btnFloat.Click += new System.EventHandler(this.button1_Click);
+            this.btnFloat.Click += new System.EventHandler(this.btnFloat_Click);
             // 
             // Form1
             // 

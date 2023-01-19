@@ -25,15 +25,23 @@ namespace Session_09 {
         public decimal deciDigit(decimal? x)
         {
              
-            //string sub1,sub2 = String.Empty;             
+            string sub1,sub2 = String.Empty;             
             
             string[] subArr =ctrlDisplay.Text.Split('+', '-', '*', '/', '^', '√');
-            _value1 = Convert.ToDecimal(subArr[0]);
-            _value2 = Convert.ToDecimal(subArr[1]);
+            //_value1 = Convert.ToDecimal(subArr[0]);
+            //_value2 = Convert.ToDecimal(subArr[1]);
+            sub1 = subArr[0];   // sub1 has value 1, unproccessed
+            sub2 = subArr[1];   // sub2 has value 2, unproccessed
             
+            //works!!
+            subArr = sub1.Split('.');
+            _value1 = Convert.ToDecimal(subArr[0]+"."+subArr[1]);
 
-                
-                decimal res = Convert.ToDecimal(sub1);
+            subArr = sub2.Split('.');
+            _value1 = Convert.ToDecimal(subArr[0] + "." + subArr[1]);
+
+
+            decimal res = Convert.ToDecimal(sub1);
 
             //if{ }
 

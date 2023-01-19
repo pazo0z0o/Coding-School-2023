@@ -43,6 +43,7 @@
             this.btnSqRoot = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnFloat = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +82,7 @@
             // 
             // ctrlDisplay
             // 
+            this.ctrlDisplay.BackColor = System.Drawing.Color.LightGoldenrodYellow;
             this.ctrlDisplay.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ctrlDisplay.Location = new System.Drawing.Point(57, 23);
             this.ctrlDisplay.Name = "ctrlDisplay";
@@ -257,6 +259,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panel1.Controls.Add(this.btnFloat);
             this.panel1.Controls.Add(this.ctrlDisplay);
             this.panel1.Controls.Add(this.btnClear);
             this.panel1.Controls.Add(this.btnEqual);
@@ -276,17 +279,28 @@
             this.panel1.Controls.Add(this.btnSix);
             this.panel1.Controls.Add(this.btnEight);
             this.panel1.Controls.Add(this.btnNine);
-            this.panel1.Location = new System.Drawing.Point(373, 95);
+            this.panel1.Location = new System.Drawing.Point(203, 105);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(372, 327);
             this.panel1.TabIndex = 26;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // btnFloat
+            // 
+            this.btnFloat.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFloat.Location = new System.Drawing.Point(57, 209);
+            this.btnFloat.Name = "btnFloat";
+            this.btnFloat.Size = new System.Drawing.Size(62, 39);
+            this.btnFloat.TabIndex = 26;
+            this.btnFloat.Text = ".";
+            this.btnFloat.UseVisualStyleBackColor = true;
+            this.btnFloat.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1212, 616);
+            this.ClientSize = new System.Drawing.Size(643, 460);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -318,5 +332,6 @@
         private Button btnSqRoot;
         private Button btnClear;
         private Panel panel1;
+        private Button btnFloat;
     }
 }

@@ -29,9 +29,11 @@ namespace Session_09 {
         }
 
 
-        private void button3_Click(object sender, EventArgs e) {
+        private void btnThree_Click(object sender, EventArgs e) {
             ctrlDisplay.Text += " = ";
 
+
+//-------------------------------------------------------------------------
             switch (_calcOperation) {
                 case CalcOperation.Addition:
                     Addition addition = new Addition();

@@ -22,7 +22,7 @@ namespace Session_09 {
 
         }
 
-        public decimal deciDigit(decimal? x)
+        public decimal deciDigit(decimal x,decimal y)
         {
              
             string sub1,sub2 = String.Empty;             
@@ -40,13 +40,7 @@ namespace Session_09 {
             subArr = sub2.Split('.');
             _value1 = Convert.ToDecimal(subArr[0] + "." + subArr[1]);
 
-
-            decimal res = Convert.ToDecimal(sub1);
-
-            //if{ }
-
-
-            return res;
+            return 0;
         }
 
 

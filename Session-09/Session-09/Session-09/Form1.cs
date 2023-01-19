@@ -11,7 +11,8 @@ namespace Session_09 {
        // InputHandler inpMultDig; //to call multiDigit(decimal?)
 
         private CalcOperation _calcOperation;
-
+        
+       
         enum CalcOperation { 
             Addition,
             Subtraction,
@@ -22,23 +23,26 @@ namespace Session_09 {
 
         }
 
-        public decimal deciDigit(decimal x,decimal y)
+        public decimal deciDigit(string textboxCalc)
         {
              
             string sub1,sub2 = String.Empty;             
             
             string[] subArr =ctrlDisplay.Text.Split('+', '-', '*', '/', '^', '√');
-            //_value1 = Convert.ToDecimal(subArr[0]);
-            //_value2 = Convert.ToDecimal(subArr[1]);
+            
             sub1 = subArr[0];   // sub1 has value 1, unproccessed
             sub2 = subArr[1];   // sub2 has value 2, unproccessed
-            
+
+            Array.Clear(subArr);
+
             //works!!
             subArr = sub1.Split('.');
             _value1 = Convert.ToDecimal(subArr[0]+"."+subArr[1]);
 
+            Array.Clear(subArr);
+
             subArr = sub2.Split('.');
-            _value1 = Convert.ToDecimal(subArr[0] + "." + subArr[1]);
+            _value2 = Convert.ToDecimal(subArr[0] + "." + subArr[1]);
 
             return 0;
         }
@@ -53,6 +57,7 @@ namespace Session_09 {
         }
         private void btnEqual_Click(object sender, EventArgs e) 
         {
+            deciDigit(ctrlDisplay.Text);
             switch (_calcOperation) // could I implement it in a different class and get the enum _calcOperation through a form1 object?
             {                       //partial keyword creating problems 
                 case CalcOperation.Addition:
@@ -366,13 +371,13 @@ namespace Session_09 {
 
         private void btnFloat_Click(object sender, EventArgs e)
         {
-            int floatCtr = 0;
-
-            if (ctrlDisplay.Text.Contains('.') && floatCtr < 2)
-            { ctrlDisplay.Text += ".";
-                floatCtr++;
+            string[] subArrFloat = ctrlDisplay.Text.Split('.');
+            if ((!ctrlDisplay.Text.Contains('.')))
+            { ctrlDisplay.Text += "."; }
+            else 
+            {
+                if ((subArrFloat.Length < 3)) { ctrlDisplay.Text += "."; }
             }
-
         }
     }
 }

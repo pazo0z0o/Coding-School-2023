@@ -10,7 +10,13 @@ namespace Session_09 {
         private CalcOperation _calcOperation;
 
         enum CalcOperation { 
-            Addition
+            Addition,
+            Subtraction,
+            Multiplication,
+            Division,
+            RaiseToPower,
+            Squareroot
+
         }
 
 
@@ -87,6 +93,37 @@ namespace Session_09 {
             }
         }
 
-        
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (_result != null)
+            {
+
+                ctrlDisplay.Text = string.Empty;
+                _value1 = null;
+                _value2 = null;
+                _result = null;
+            }
+
+            ctrlDisplay.Text += " 4 ";
+
+            if (_value1 == null)
+            {
+                _value1 = 4;
+            }
+            else
+            {
+                _value2 = 4;
+            }
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

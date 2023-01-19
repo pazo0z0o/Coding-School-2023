@@ -28,13 +28,25 @@
             this.btnOne = new System.Windows.Forms.Button();
             this.ctrlDisplay = new System.Windows.Forms.TextBox();
             this.btnTwo = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnThree = new System.Windows.Forms.Button();
+            this.btnSix = new System.Windows.Forms.Button();
+            this.btnFive = new System.Windows.Forms.Button();
+            this.btnFour = new System.Windows.Forms.Button();
+            this.btnSeven = new System.Windows.Forms.Button();
+            this.btnEight = new System.Windows.Forms.Button();
+            this.btnNine = new System.Windows.Forms.Button();
+            this.btnZero = new System.Windows.Forms.Button();
+            this.btnSub = new System.Windows.Forms.Button();
+            this.btnMul = new System.Windows.Forms.Button();
+            this.btnDiv = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.btnSqRoot = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnEqual
             // 
             this.btnEqual.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnEqual.Location = new System.Drawing.Point(240, 235);
+            this.btnEqual.Location = new System.Drawing.Point(189, 289);
             this.btnEqual.Name = "btnEqual";
             this.btnEqual.Size = new System.Drawing.Size(62, 39);
             this.btnEqual.TabIndex = 7;
@@ -45,7 +57,7 @@
             // btnAddition
             // 
             this.btnAddition.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnAddition.Location = new System.Drawing.Point(240, 190);
+            this.btnAddition.Location = new System.Drawing.Point(278, 144);
             this.btnAddition.Name = "btnAddition";
             this.btnAddition.Size = new System.Drawing.Size(62, 39);
             this.btnAddition.TabIndex = 8;
@@ -56,7 +68,7 @@
             // btnOne
             // 
             this.btnOne.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnOne.Location = new System.Drawing.Point(25, 235);
+            this.btnOne.Location = new System.Drawing.Point(53, 144);
             this.btnOne.Name = "btnOne";
             this.btnOne.Size = new System.Drawing.Size(62, 39);
             this.btnOne.TabIndex = 9;
@@ -76,7 +88,7 @@
             // btnTwo
             // 
             this.btnTwo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnTwo.Location = new System.Drawing.Point(93, 235);
+            this.btnTwo.Location = new System.Drawing.Point(121, 144);
             this.btnTwo.Name = "btnTwo";
             this.btnTwo.Size = new System.Drawing.Size(62, 39);
             this.btnTwo.TabIndex = 11;
@@ -84,20 +96,157 @@
             this.btnTwo.UseVisualStyleBackColor = true;
             this.btnTwo.Click += new System.EventHandler(this.btnTwo_Click);
             // 
-            // textBox1
+            // btnThree
             // 
-            this.textBox1.Location = new System.Drawing.Point(400, 355);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 12;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.btnThree.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnThree.Location = new System.Drawing.Point(189, 144);
+            this.btnThree.Name = "btnThree";
+            this.btnThree.Size = new System.Drawing.Size(62, 39);
+            this.btnThree.TabIndex = 12;
+            this.btnThree.Text = "3";
+            this.btnThree.UseVisualStyleBackColor = true;
+            // 
+            // btnSix
+            // 
+            this.btnSix.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSix.Location = new System.Drawing.Point(189, 199);
+            this.btnSix.Name = "btnSix";
+            this.btnSix.Size = new System.Drawing.Size(62, 39);
+            this.btnSix.TabIndex = 15;
+            this.btnSix.Text = "6";
+            this.btnSix.UseVisualStyleBackColor = true;
+            // 
+            // btnFive
+            // 
+            this.btnFive.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFive.Location = new System.Drawing.Point(121, 199);
+            this.btnFive.Name = "btnFive";
+            this.btnFive.Size = new System.Drawing.Size(62, 39);
+            this.btnFive.TabIndex = 14;
+            this.btnFive.Text = "5";
+            this.btnFive.UseVisualStyleBackColor = true;
+            // 
+            // btnFour
+            // 
+            this.btnFour.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFour.Location = new System.Drawing.Point(53, 199);
+            this.btnFour.Name = "btnFour";
+            this.btnFour.Size = new System.Drawing.Size(62, 39);
+            this.btnFour.TabIndex = 13;
+            this.btnFour.Text = "4";
+            this.btnFour.UseVisualStyleBackColor = true;
+            this.btnFour.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // btnSeven
+            // 
+            this.btnSeven.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSeven.Location = new System.Drawing.Point(189, 244);
+            this.btnSeven.Name = "btnSeven";
+            this.btnSeven.Size = new System.Drawing.Size(62, 39);
+            this.btnSeven.TabIndex = 18;
+            this.btnSeven.Text = "7";
+            this.btnSeven.UseVisualStyleBackColor = true;
+            // 
+            // btnEight
+            // 
+            this.btnEight.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnEight.Location = new System.Drawing.Point(121, 244);
+            this.btnEight.Name = "btnEight";
+            this.btnEight.Size = new System.Drawing.Size(62, 39);
+            this.btnEight.TabIndex = 17;
+            this.btnEight.Text = "8";
+            this.btnEight.UseVisualStyleBackColor = true;
+            // 
+            // btnNine
+            // 
+            this.btnNine.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnNine.Location = new System.Drawing.Point(53, 244);
+            this.btnNine.Name = "btnNine";
+            this.btnNine.Size = new System.Drawing.Size(62, 39);
+            this.btnNine.TabIndex = 16;
+            this.btnNine.Text = "9";
+            this.btnNine.UseVisualStyleBackColor = true;
+            // 
+            // btnZero
+            // 
+            this.btnZero.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnZero.Location = new System.Drawing.Point(121, 289);
+            this.btnZero.Name = "btnZero";
+            this.btnZero.Size = new System.Drawing.Size(62, 39);
+            this.btnZero.TabIndex = 19;
+            this.btnZero.Text = "0";
+            this.btnZero.UseVisualStyleBackColor = true;
+            this.btnZero.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // btnSub
+            // 
+            this.btnSub.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSub.Location = new System.Drawing.Point(278, 190);
+            this.btnSub.Name = "btnSub";
+            this.btnSub.Size = new System.Drawing.Size(62, 39);
+            this.btnSub.TabIndex = 20;
+            this.btnSub.Text = "-";
+            this.btnSub.UseVisualStyleBackColor = true;
+            // 
+            // btnMul
+            // 
+            this.btnMul.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnMul.Location = new System.Drawing.Point(278, 235);
+            this.btnMul.Name = "btnMul";
+            this.btnMul.Size = new System.Drawing.Size(62, 39);
+            this.btnMul.TabIndex = 21;
+            this.btnMul.Text = "*";
+            this.btnMul.UseVisualStyleBackColor = true;
+            // 
+            // btnDiv
+            // 
+            this.btnDiv.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDiv.Location = new System.Drawing.Point(278, 289);
+            this.btnDiv.Name = "btnDiv";
+            this.btnDiv.Size = new System.Drawing.Size(62, 39);
+            this.btnDiv.TabIndex = 22;
+            this.btnDiv.Text = "/";
+            this.btnDiv.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button4.Location = new System.Drawing.Point(278, 335);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(62, 39);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "^";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // btnSqRoot
+            // 
+            this.btnSqRoot.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSqRoot.Location = new System.Drawing.Point(210, 335);
+            this.btnSqRoot.Name = "btnSqRoot";
+            this.btnSqRoot.Size = new System.Drawing.Size(62, 40);
+            this.btnSqRoot.TabIndex = 24;
+            this.btnSqRoot.Text = "√ ";
+            this.btnSqRoot.UseVisualStyleBackColor = true;
+            this.btnSqRoot.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 616);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnSqRoot);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnDiv);
+            this.Controls.Add(this.btnMul);
+            this.Controls.Add(this.btnSub);
+            this.Controls.Add(this.btnZero);
+            this.Controls.Add(this.btnSeven);
+            this.Controls.Add(this.btnEight);
+            this.Controls.Add(this.btnNine);
+            this.Controls.Add(this.btnSix);
+            this.Controls.Add(this.btnFive);
+            this.Controls.Add(this.btnFour);
+            this.Controls.Add(this.btnThree);
             this.Controls.Add(this.btnTwo);
             this.Controls.Add(this.ctrlDisplay);
             this.Controls.Add(this.btnOne);
@@ -117,6 +266,18 @@
         private Button btnOne;
         private TextBox ctrlDisplay;
         private Button btnTwo;
-        private TextBox textBox1;
+        private Button btnThree;
+        private Button btnSix;
+        private Button btnFive;
+        private Button btnFour;
+        private Button btnSeven;
+        private Button btnEight;
+        private Button btnNine;
+        private Button btnZero;
+        private Button btnSub;
+        private Button btnMul;
+        private Button btnDiv;
+        private Button button4;
+        private Button btnSqRoot;
     }
 }

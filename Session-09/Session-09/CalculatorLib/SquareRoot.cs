@@ -8,13 +8,13 @@ namespace CalculatorLib
 {
     internal class SquareRoot
     {
-        public decimal SqrRoot(decimal? x, decimal? y)
+        public decimal SqrRoot(decimal? x)
         {
             decimal ret = 0;
 
-            if (x != null && y != null)
+            if (x != null && x > 0 )
             {
-                ret = (decimal)Math.Pow((double)x.Value,(double)(y.Value));
+                ret = (decimal)Math.Sqrt((double)x.Value);
             }
 
             return ret;

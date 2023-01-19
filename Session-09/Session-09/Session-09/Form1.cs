@@ -29,30 +29,9 @@ namespace Session_09 {
         }
 
 
-        private void btnThree_Click(object sender, EventArgs e)
+        private void btnEqual_Click(object sender, EventArgs e)
         {
-            if (_result != null)
-            {
-
-                ctrlDisplay.Text = string.Empty;
-                _value1 = null;
-                _value2 = null;
-                _result = null;
-            }
-
-            ctrlDisplay.Text += " 3 ";
-
-            if (_value1 == null)
-            {
-                _value1 = 3;
-            }
-            else
-            {
-                _value2 = 3;
-            }
-
-            //-------------------------------------------------------------------------
-            switch (_calcOperation) 
+            switch (_calcOperation)
             {
                 case CalcOperation.Addition:
                     Addition addition = new Addition();
@@ -83,10 +62,9 @@ namespace Session_09 {
                     break;
             }
 
-            ctrlDisplay.Text += _result;
         }
 
-        
+  
 
         private void btnAddition_Click(object sender, EventArgs e) {
             ctrlDisplay.Text += " + ";
@@ -135,6 +113,31 @@ namespace Session_09 {
             else {
                 _value2 = 2;
             }
+        }
+
+        private void btnThree_Click(object sender, EventArgs e)
+        {
+
+            if (_result != null)
+            {
+
+                ctrlDisplay.Text = string.Empty;
+                _value1 = null;
+                _value2 = null;
+                _result = null;
+            }
+
+            ctrlDisplay.Text += " 3 ";
+
+            if (_value1 == null)
+            {
+                _value1 = 3;
+            }
+            else
+            {
+                _value2 = 3;
+            }
+
         }
 
         private void btnFour_Click(object sender, EventArgs e)
@@ -272,6 +275,63 @@ namespace Session_09 {
             {
                 _value2 = 9;
             }
+        }
+
+        private void btnSub_Click(object sender, EventArgs e)
+        {
+            ctrlDisplay.Text += " - ";
+            _calcOperation = CalcOperation.Subtraction;
+        }
+
+        private void btnZero_Click(object sender, EventArgs e)
+        {
+            if (_result != null)
+            {
+                ctrlDisplay.Text = string.Empty;
+                _value1 = null;
+                _value2 = null;
+                _result = null;
+            }
+
+            ctrlDisplay.Text += " 0 ";
+
+            if (_value1 == null)
+            {
+                _value1 = 0;
+            }
+            else
+            {
+                _value2 = 0;
+            }
+        }
+
+        private void btnMul_Click(object sender, EventArgs e)
+        {
+            ctrlDisplay.Text += " * ";
+            _calcOperation = CalcOperation.Multiplication;
+        }
+
+        private void btnDiv_Click(object sender, EventArgs e)
+        {
+            ctrlDisplay.Text += " /";
+            _calcOperation = CalcOperation.Division;
+        }
+
+        private void btnSqRoot_Click(object sender, EventArgs e)
+        {
+            ctrlDisplay.Text += " √";
+            _calcOperation = CalcOperation.Squareroot;
+        }
+
+        private void btnPow_Click(object sender, EventArgs e)
+        {
+            ctrlDisplay.Text += " ^";
+            _calcOperation = CalcOperation.RaiseToPower;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ctrlDisplay.Text = String.Empty;
         }
     }
 }

@@ -8,17 +8,17 @@ namespace CalculatorLib
 {
     public class Calculations 
     {   
-        private decimal _value1 { get; set; }
-        private decimal _value2 { get; set; }
+        //private decimal _value1 { get; set; }
+        //private decimal _value2 { get; set; }
 
-        private decimal _result { get; set; }
+        //private decimal _result { get; set; }
 
         
            
 
         
-        public void CalcOptions() 
-        { 
+        //public void CalcOptions() 
+        //{ 
 
             /*switch (_calcOperation) 
             {

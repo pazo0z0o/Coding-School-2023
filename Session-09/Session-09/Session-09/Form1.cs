@@ -31,6 +31,8 @@ namespace Session_09 {
 
         private void btnEqual_Click(object sender, EventArgs e) 
         {
+           
+
             switch (_calcOperation) // could I implement it in a different class and get the enum _calcOperation through a form1 object?
             {                       //partial keyword creating problems 
                 case CalcOperation.Addition:
@@ -61,7 +63,7 @@ namespace Session_09 {
                 default:
                     break;
             }
-
+            ctrlDisplay.Text += " = " + _result;
         }
 
   

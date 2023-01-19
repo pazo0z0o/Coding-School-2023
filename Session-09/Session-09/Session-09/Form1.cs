@@ -34,10 +34,28 @@ namespace Session_09 {
 
             switch (_calcOperation) {
                 case CalcOperation.Addition:
-
                     Addition addition = new Addition();
                     _result = addition.Add(_value1, _value2);
-                    
+                    break;
+                case CalcOperation.Subtraction:
+                    Subtraction sub = new Subtraction();
+                    _result = sub.Subtract(_value1, _value2);
+                    break;
+                case CalcOperation.Multiplication:
+                    Multiplication multi = new Multiplication();
+                    _result = multi.Multiply(_value1, _value2);
+                    break;
+                case CalcOperation.Division:
+                    Divide div = new Divide();
+                    _result = div.Division(_value1, _value2);
+                    break;
+                case CalcOperation.Squareroot:
+                    SquareRoot sqRoot = new SquareRoot();
+                    _result = sqRoot.SqrRoot(_value1);
+                    break;
+                case CalcOperation.RaiseToPower:
+                    RaiseToPower power = new RaiseToPower();
+                    _result = power.RaiseToP(_value1, _value2);
                     break;
 
                 default:
@@ -47,9 +65,17 @@ namespace Session_09 {
             ctrlDisplay.Text += _result;
         }
 
-        private void btnOne_Click(object sender, EventArgs e) {
+        
 
-            if (_result != null) {
+        private void btnAddition_Click(object sender, EventArgs e) {
+            ctrlDisplay.Text += " + ";
+            _calcOperation = CalcOperation.Addition;
+        }
+        private void btnOne_Click(object sender, EventArgs e)
+        {
+
+            if (_result != null)
+            {
 
                 ctrlDisplay.Text = string.Empty;
                 _value1 = null;
@@ -59,18 +85,15 @@ namespace Session_09 {
 
             ctrlDisplay.Text += " 1 ";
 
-            if (_value1 == null) {
+            if (_value1 == null)
+            {
                 _value1 = 1;
             }
-            else {
+            else
+            {
                 _value2 = 1;
             }
 
-        }
-
-        private void btnAddition_Click(object sender, EventArgs e) {
-            ctrlDisplay.Text += " + ";
-            _calcOperation = CalcOperation.Addition;
         }
 
         private void btnTwo_Click(object sender, EventArgs e) {
@@ -93,37 +116,8 @@ namespace Session_09 {
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (_result != null)
-            {
+        
 
-                ctrlDisplay.Text = string.Empty;
-                _value1 = null;
-                _value2 = null;
-                _result = null;
-            }
-
-            ctrlDisplay.Text += " 4 ";
-
-            if (_value1 == null)
-            {
-                _value1 = 4;
-            }
-            else
-            {
-                _value2 = 4;
-            }
-        }
-
-        private void button4_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

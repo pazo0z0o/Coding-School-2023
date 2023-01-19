@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculatorLib
 {
-    internal class SquareRoot
+    public class SquareRoot
     {
         public decimal SqrRoot(decimal? x)
         {

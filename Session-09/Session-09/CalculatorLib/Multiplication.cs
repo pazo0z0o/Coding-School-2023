@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculatorLib
 {
-    internal class Multiplication
+    public class Multiplication
     {
         public decimal Multiply(decimal? x, decimal? y)
         {

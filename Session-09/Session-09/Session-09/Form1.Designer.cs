@@ -79,7 +79,7 @@
             // ctrlDisplay
             // 
             this.ctrlDisplay.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ctrlDisplay.Location = new System.Drawing.Point(53, 68);
+            this.ctrlDisplay.Location = new System.Drawing.Point(45, 103);
             this.ctrlDisplay.Name = "ctrlDisplay";
             this.ctrlDisplay.ReadOnly = true;
             this.ctrlDisplay.Size = new System.Drawing.Size(206, 35);

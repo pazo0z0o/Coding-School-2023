@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculatorLib
 {
-    internal class Divide
+   public class Divide
     {
 
         public decimal Division(decimal? x, decimal? y)

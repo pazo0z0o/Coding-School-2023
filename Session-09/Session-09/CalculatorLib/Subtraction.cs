@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculatorLib
 {
-    internal class Subtraction
+    public class Subtraction
     {
         public decimal Subtract(decimal? x, decimal? y)
         {

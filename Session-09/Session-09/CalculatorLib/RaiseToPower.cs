@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace CalculatorLib
 {
-    internal class RaiseToPower
+    public class RaiseToPower
     {
 
-        public double Add(double? x, double? y)
+        public decimal RaiseToP(decimal? x, decimal? y)
         {
 
-            double ret = 0;
+            decimal ret = 0;
 
             if (x != null && y != null)
             {
-                ret = Math.Pow((double)x.Value, (double)y.Value);
+                ret = (decimal)Math.Pow((double)x.Value,(double)y.Value);
             }
 
             return ret;

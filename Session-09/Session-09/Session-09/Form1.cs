@@ -335,5 +335,15 @@ namespace Session_09 {
         {
             ctrlDisplay.Text = String.Empty;
         }
+
+        private void ctrlDisplay_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

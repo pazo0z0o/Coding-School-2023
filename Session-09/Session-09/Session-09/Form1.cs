@@ -29,12 +29,31 @@ namespace Session_09 {
         }
 
 
-        private void btnThree_Click(object sender, EventArgs e) {
-            ctrlDisplay.Text += " = ";
+        private void btnThree_Click(object sender, EventArgs e)
+        {
+            if (_result != null)
+            {
 
+                ctrlDisplay.Text = string.Empty;
+                _value1 = null;
+                _value2 = null;
+                _result = null;
+            }
 
-//-------------------------------------------------------------------------
-            switch (_calcOperation) {
+            ctrlDisplay.Text += " 3 ";
+
+            if (_value1 == null)
+            {
+                _value1 = 3;
+            }
+            else
+            {
+                _value2 = 3;
+            }
+
+            //-------------------------------------------------------------------------
+            switch (_calcOperation) 
+            {
                 case CalcOperation.Addition:
                     Addition addition = new Addition();
                     _result = addition.Add(_value1, _value2);

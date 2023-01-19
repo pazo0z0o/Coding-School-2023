@@ -33,19 +33,37 @@ namespace Session_09 {
 
             return res;
         }
+        public decimal CheckSqRoot(string substring)
+        {
+            decimal res = 0;
+
+            string[] subArr = substring.Split('√');
+           // if (subArr[0] != "")    
+            res = Convert.ToDecimal(subArr[1]);   //it screws up if you add the Sqroot AFTER the number
+            //else res = Convert.ToDecimal(subArr[0]);
+
+            return res;
+        }
 
         public decimal OperatorSpilt(string textboxCalc)
-        {   
+        {
+            //'√'
             string sub1,sub2 = String.Empty;             
-            
-            string[] subArr =ctrlDisplay.Text.Split('+', '-', '*', '/', '^', '√');
-            
-            sub1 = subArr[0];   // sub1 has value 1, unproccessed
-            sub2 = subArr[1];   // sub2 has value 2, unproccessed
+            if(textboxCalc.Contains('√'))
+            {
+               _value1 =  CheckSqRoot(textboxCalc);
+            }
+            else {
+            string[] subArr = textboxCalc.Split('+', '-', '*', '/', '^' );
+              
+                sub1 = subArr[0];   // sub1 has value 1, unproccessed
+                sub2 = subArr[1];   // sub2 has value 2, unproccessed
 
-          _value1 = InputCheck(sub1);
-          _value2 = InputCheck(sub2);
-            Array.Clear(subArr);
+                _value1 = InputCheck(sub1);
+                _value2 = InputCheck(sub2);
+                Array.Clear(subArr);
+            }
+            
 
             return 0;
         }

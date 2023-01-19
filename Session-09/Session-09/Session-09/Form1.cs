@@ -24,11 +24,12 @@ namespace Session_09 {
 
         public decimal multiDigit(decimal? x)
         {
-            //  x.ToString();
-           
-           
-            ctrlDisplay.Text += ".";
-                
+            decimal res;
+            string sub1 = String.Empty;             
+            
+            string[] subArr =ctrlDisplay.Text.Split(".");
+            sub1 = $"{subArr[0]}.{subArr[1]}";
+            res = Convert.ToDecimal(sub1);    
 
             //ctrlDisplay.Text.Split();
             //if (x == ctrlDisplay.Text )
@@ -47,12 +48,8 @@ namespace Session_09 {
         private void Form1_Load(object sender, EventArgs e) {
 
         }
-
-
         private void btnEqual_Click(object sender, EventArgs e) 
         {
-           
-
             switch (_calcOperation) // could I implement it in a different class and get the enum _calcOperation through a form1 object?
             {                       //partial keyword creating problems 
                 case CalcOperation.Addition:
@@ -85,8 +82,6 @@ namespace Session_09 {
             }
             ctrlDisplay.Text += " = " + _result;
         }
-
-  
 
         private void btnAddition_Click(object sender, EventArgs e) {
             ctrlDisplay.Text += " + ";
@@ -127,7 +122,6 @@ namespace Session_09 {
                 _value2 = null;
                 _result = null;
             }
-
             ctrlDisplay.Text += "2";
 
             if (_value1 == null) {

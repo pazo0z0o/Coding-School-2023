@@ -22,22 +22,23 @@ namespace Session_09 {
 
         }
 
-        public decimal multiDigit(decimal? x)
+        public decimal deciDigit(decimal? x)
         {
-            decimal res;
-            string sub1 = String.Empty;             
+             
+            //string sub1,sub2 = String.Empty;             
             
-            string[] subArr =ctrlDisplay.Text.Split(".");
-            sub1 = $"{subArr[0]}.{subArr[1]}";
-            res = Convert.ToDecimal(sub1);    
+            string[] subArr =ctrlDisplay.Text.Split('+', '-', '*', '/', '^', '√');
+            _value1 = Convert.ToDecimal(subArr[0]);
+            _value2 = Convert.ToDecimal(subArr[1]);
+            
 
-            //ctrlDisplay.Text.Split();
-            //if (x == ctrlDisplay.Text )
+                
+                decimal res = Convert.ToDecimal(sub1);
+
+            //if{ }
 
 
-
-
-                return 0;
+            return res;
         }
 
 

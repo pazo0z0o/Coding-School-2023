@@ -116,6 +116,7 @@
             this.btnSix.TabIndex = 15;
             this.btnSix.Text = "6";
             this.btnSix.UseVisualStyleBackColor = true;
+            this.btnSix.Click += new System.EventHandler(this.btnSix_Click);
             // 
             // btnFive
             // 
@@ -126,6 +127,7 @@
             this.btnFive.TabIndex = 14;
             this.btnFive.Text = "5";
             this.btnFive.UseVisualStyleBackColor = true;
+            this.btnFive.Click += new System.EventHandler(this.btnFive_Click);
             // 
             // btnFour
             // 
@@ -136,36 +138,40 @@
             this.btnFour.TabIndex = 13;
             this.btnFour.Text = "4";
             this.btnFour.UseVisualStyleBackColor = true;
+            this.btnFour.Click += new System.EventHandler(this.btnFour_Click);
             // 
             // btnSeven
             // 
             this.btnSeven.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSeven.Location = new System.Drawing.Point(189, 144);
+            this.btnSeven.Location = new System.Drawing.Point(53, 154);
             this.btnSeven.Name = "btnSeven";
             this.btnSeven.Size = new System.Drawing.Size(62, 39);
             this.btnSeven.TabIndex = 18;
             this.btnSeven.Text = "7";
             this.btnSeven.UseVisualStyleBackColor = true;
+            this.btnSeven.Click += new System.EventHandler(this.btnSeven_Click);
             // 
             // btnEight
             // 
             this.btnEight.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnEight.Location = new System.Drawing.Point(121, 144);
+            this.btnEight.Location = new System.Drawing.Point(121, 154);
             this.btnEight.Name = "btnEight";
             this.btnEight.Size = new System.Drawing.Size(62, 39);
             this.btnEight.TabIndex = 17;
             this.btnEight.Text = "8";
             this.btnEight.UseVisualStyleBackColor = true;
+            this.btnEight.Click += new System.EventHandler(this.btnEight_Click);
             // 
             // btnNine
             // 
             this.btnNine.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnNine.Location = new System.Drawing.Point(53, 144);
+            this.btnNine.Location = new System.Drawing.Point(189, 154);
             this.btnNine.Name = "btnNine";
             this.btnNine.Size = new System.Drawing.Size(62, 39);
             this.btnNine.TabIndex = 16;
             this.btnNine.Text = "9";
             this.btnNine.UseVisualStyleBackColor = true;
+            this.btnNine.Click += new System.EventHandler(this.btnNine_Click);
             // 
             // btnZero
             // 

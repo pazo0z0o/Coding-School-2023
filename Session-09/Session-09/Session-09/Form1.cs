@@ -8,8 +8,6 @@ namespace Session_09 {
         private decimal? _value2 = null;
         private decimal? _result = null;
 
-       // InputHandler inpMultDig; //to call multiDigit(decimal?)
-
         private CalcOperation _calcOperation;
         
        
@@ -22,7 +20,7 @@ namespace Session_09 {
             Squareroot
 
         }
-        //commented out cause I am not sure what goes wrong here, 
+       
         public decimal InputCheck(string substring)
         {
             decimal res = 0;
@@ -49,20 +47,6 @@ namespace Session_09 {
           _value2 = InputCheck(sub2);
             Array.Clear(subArr);
 
-            /*if (sub1.Contains('.'))
-            {
-                subArr = sub1.Split('.');
-                _value1 = Convert.ToDecimal(subArr[0] + "." + subArr[1]);
-            }
-            else _value1 = Convert.ToDecimal(sub1);
-            Array.Clear(subArr);
-
-            if (sub2.Contains('.'))
-            {
-                subArr = sub2.Split('.');
-                _value2 = Convert.ToDecimal(subArr[0] + "." + subArr[1]);
-            }
-            else _value2 = Convert.ToDecimal(sub2);*/
             return 0;
         }
 

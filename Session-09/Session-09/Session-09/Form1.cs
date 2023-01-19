@@ -22,10 +22,22 @@ namespace Session_09 {
             Squareroot
 
         }
-
-        public decimal deciDigit(string textboxCalc)
+        //commented out cause I am not sure what goes wrong here, 
+        public decimal InputCheck(string substring)
         {
-             
+            decimal res = 0;
+            if (substring.Contains('.'))
+            {
+                string[] subArr = substring.Split('.');
+                res = Convert.ToDecimal(subArr[0] + "." + subArr[1]);
+            }
+            else res = Convert.ToDecimal(substring);
+
+            return res;
+        }
+
+        public decimal OperatorSpilt(string textboxCalc)
+        {   
             string sub1,sub2 = String.Empty;             
             
             string[] subArr =ctrlDisplay.Text.Split('+', '-', '*', '/', '^', '√');
@@ -33,17 +45,24 @@ namespace Session_09 {
             sub1 = subArr[0];   // sub1 has value 1, unproccessed
             sub2 = subArr[1];   // sub2 has value 2, unproccessed
 
+          _value1 = InputCheck(sub1);
+          _value2 = InputCheck(sub2);
             Array.Clear(subArr);
 
-            //works!!
-            subArr = sub1.Split('.');
-            _value1 = Convert.ToDecimal(subArr[0]+"."+subArr[1]);
-
+            /*if (sub1.Contains('.'))
+            {
+                subArr = sub1.Split('.');
+                _value1 = Convert.ToDecimal(subArr[0] + "." + subArr[1]);
+            }
+            else _value1 = Convert.ToDecimal(sub1);
             Array.Clear(subArr);
 
-            subArr = sub2.Split('.');
-            _value2 = Convert.ToDecimal(subArr[0] + "." + subArr[1]);
-
+            if (sub2.Contains('.'))
+            {
+                subArr = sub2.Split('.');
+                _value2 = Convert.ToDecimal(subArr[0] + "." + subArr[1]);
+            }
+            else _value2 = Convert.ToDecimal(sub2);*/
             return 0;
         }
 
@@ -57,7 +76,7 @@ namespace Session_09 {
         }
         private void btnEqual_Click(object sender, EventArgs e) 
         {
-            deciDigit(ctrlDisplay.Text);
+            OperatorSpilt(ctrlDisplay.Text);
             switch (_calcOperation) // could I implement it in a different class and get the enum _calcOperation through a form1 object?
             {                       //partial keyword creating problems 
                 case CalcOperation.Addition:

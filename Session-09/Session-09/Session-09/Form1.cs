@@ -8,6 +8,8 @@ namespace Session_09 {
         private decimal? _value2 = null;
         private decimal? _result = null;
 
+       // InputHandler inpMultDig; //to call multiDigit(decimal?)
+
         private CalcOperation _calcOperation;
 
         enum CalcOperation { 
@@ -18,6 +20,23 @@ namespace Session_09 {
             RaiseToPower,
             Squareroot
 
+        }
+
+        public decimal multiDigit(decimal? x)
+        {
+            //  x.ToString();
+           
+           
+            ctrlDisplay.Text += ".";
+                
+
+            //ctrlDisplay.Text.Split();
+            //if (x == ctrlDisplay.Text )
+
+
+
+
+                return 0;
         }
 
 
@@ -38,27 +57,27 @@ namespace Session_09 {
             {                       //partial keyword creating problems 
                 case CalcOperation.Addition:
                     Addition addition = new Addition();
-                    _result = addition.Add(_value1, _value2);
+                    _result = addition.Op(_value1, _value2);
                     break;
                 case CalcOperation.Subtraction:
                     Subtraction sub = new Subtraction();
-                    _result = sub.Subtract(_value1, _value2);
+                    _result = sub.Op(_value1, _value2);
                     break;
                 case CalcOperation.Multiplication:
                     Multiplication multi = new Multiplication();
-                    _result = multi.Multiply(_value1, _value2);
+                    _result = multi.Op(_value1, _value2);
                     break;
                 case CalcOperation.Division:
-                    Divide div = new Divide();
-                    _result = div.Division(_value1, _value2);
+                    Division div = new Division();
+                    _result = div.Op(_value1, _value2);
                     break;
                 case CalcOperation.Squareroot:
                     SquareRoot sqRoot = new SquareRoot();
-                    _result = sqRoot.SqrRoot(_value1);
+                    _result = sqRoot.Op(_value1);
                     break;
                 case CalcOperation.RaiseToPower:
                     RaiseToPower power = new RaiseToPower();
-                    _result = power.RaiseToP(_value1, _value2);
+                    _result = power.Op(_value1, _value2);
                     break;
 
                 default:
@@ -350,9 +369,13 @@ namespace Session_09 {
 
         private void btnFloat_Click(object sender, EventArgs e)
         {
-            ctrlDisplay.Text += ".";
-            _calcOperation = CalcOperation.RaiseToPower;
-            
+            int floatCtr = 0;
+
+            if (ctrlDisplay.Text.Contains('.') && floatCtr < 2)
+            { ctrlDisplay.Text += ".";
+                floatCtr++;
+            }
+
         }
     }
 }

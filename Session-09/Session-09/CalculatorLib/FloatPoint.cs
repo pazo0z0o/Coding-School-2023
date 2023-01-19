@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculatorLib
 {
-    internal class FloatPoint
+    public class FloatPoint
     {
     }
 }

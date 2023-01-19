@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CalculatorLib
+{
+    internal class InputHandler
+    {
+
+        public decimal multiDigit(decimal? x) 
+        { 
+           
+            if()
+
+            
+            
+            
+            return 0;  
+        }
+
+
+
+
+    }
+}

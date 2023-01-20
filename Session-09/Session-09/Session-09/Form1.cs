@@ -7,7 +7,7 @@ namespace Session_09 {
         private decimal? _value1 = null;
         private decimal? _value2 = null;
         private decimal? _result = null;
-
+        int _equalCount = 0;
         private CalcOperation _calcOperation;
         
        
@@ -63,21 +63,16 @@ namespace Session_09 {
                 _value2 = InputCheck(sub2);
                 Array.Clear(subArr);
             }
-            
-
             return 0;
         }
-
-
         public Form1() {
             InitializeComponent();
         }
-
         private void Form1_Load(object sender, EventArgs e) {
-
         }
         private void btnEqual_Click(object sender, EventArgs e) 
         {
+            
             OperatorSpilt(ctrlDisplay.Text);
             switch (_calcOperation) // could I implement it in a different class and get the enum _calcOperation through a form1 object?
             {                       //partial keyword creating problems 
@@ -110,8 +105,10 @@ namespace Session_09 {
                     break;
             }
             ctrlDisplay.Text += " = " + _result;
+            _equalCount++;
+            if ((ctrlDisplay.Text.Contains('=')) && (_equalCount > 1))
+            { btnEqual.Enabled = false; }                
         }
-
         private void btnAddition_Click(object sender, EventArgs e) {
             ctrlDisplay.Text += " + ";
             _calcOperation = CalcOperation.Addition;
@@ -378,6 +375,7 @@ namespace Session_09 {
         private void btnClear_Click(object sender, EventArgs e)
         {
             ctrlDisplay.Text = String.Empty;
+            _equalCount = 0;
         }
 
         private void ctrlDisplay_TextChanged(object sender, EventArgs e)

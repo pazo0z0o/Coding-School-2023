@@ -40,10 +40,15 @@
             this.CourseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Calendar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UniversiyID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.universityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.grvCourse = new System.Windows.Forms.DataGridView();
-            this.universityBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Subject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UniversID = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.grvGrade = new System.Windows.Forms.DataGridView();
+            this.CourID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StudID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StudentGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UniID = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.labSchedule = new System.Windows.Forms.Label();
             this.labCourses = new System.Windows.Forms.Label();
             this.labGrades = new System.Windows.Forms.Label();
@@ -54,20 +59,17 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.CourID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StudID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StudentGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UniID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Subject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UniversID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.bsSchedule = new System.Windows.Forms.BindingSource(this.components);
+            this.bsCourses = new System.Windows.Forms.BindingSource(this.components);
+            this.bsGrades = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.grvStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvSchedule)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.universityBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvCourse)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.universityBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvGrade)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsSchedule)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCourses)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsGrades)).BeginInit();
             this.SuspendLayout();
             // 
             // grvStudents
@@ -142,7 +144,6 @@
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
-           
             // 
             // btnRefresh
             // 
@@ -193,10 +194,6 @@
             this.UniversiyID.HeaderText = "University";
             this.UniversiyID.Name = "UniversiyID";
             // 
-            // universityBindingSource
-            // 
-            this.universityBindingSource.DataSource = typeof(Session_10.University);
-            // 
             // grvCourse
             // 
             this.grvCourse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -211,9 +208,26 @@
             this.grvCourse.TabIndex = 4;
             this.grvCourse.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grvCourse_CellContentClick);
             // 
-            // universityBindingSource1
+            // Code
             // 
-            this.universityBindingSource1.DataSource = typeof(Session_10.University);
+            this.Code.DataPropertyName = "Code";
+            this.Code.HeaderText = "Course Code";
+            this.Code.Name = "Code";
+            // 
+            // Subject
+            // 
+            this.Subject.DataPropertyName = "Subject";
+            this.Subject.HeaderText = "Course Subject";
+            this.Subject.Name = "Subject";
+            this.Subject.Width = 200;
+            // 
+            // UniversID
+            // 
+            this.UniversID.DataPropertyName = "UniversID";
+            this.UniversID.HeaderText = "University";
+            this.UniversID.Name = "UniversID";
+            this.UniversID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.UniversID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // grvGrade
             // 
@@ -228,6 +242,34 @@
             this.grvGrade.RowTemplate.Height = 25;
             this.grvGrade.Size = new System.Drawing.Size(776, 86);
             this.grvGrade.TabIndex = 5;
+            // 
+            // CourID
+            // 
+            this.CourID.DataPropertyName = "CourID";
+            this.CourID.HeaderText = "Course ID";
+            this.CourID.Name = "CourID";
+            this.CourID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // StudID
+            // 
+            this.StudID.DataPropertyName = "StudID";
+            this.StudID.HeaderText = "Student ID";
+            this.StudID.Name = "StudID";
+            // 
+            // StudentGrade
+            // 
+            this.StudentGrade.DataPropertyName = "StudentGrade";
+            this.StudentGrade.HeaderText = "Grade";
+            this.StudentGrade.Name = "StudentGrade";
+            this.StudentGrade.Width = 50;
+            // 
+            // UniID
+            // 
+            this.UniID.DataPropertyName = "UniID";
+            this.UniID.HeaderText = "University";
+            this.UniID.Name = "UniID";
+            this.UniID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.UniID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // labSchedule
             // 
@@ -328,54 +370,14 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // CourID
+            // bsSchedule
             // 
-            this.CourID.DataPropertyName = "CourID";
-            this.CourID.HeaderText = "Course ID";
-            this.CourID.Name = "CourID";
-            this.CourID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.bsSchedule.DataSource = typeof(ClassLib_Session_10.Schedule);
+            this.bsSchedule.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
             // 
-            // StudID
+            // bsGrades
             // 
-            this.StudID.DataPropertyName = "StudID";
-            this.StudID.HeaderText = "Student ID";
-            this.StudID.Name = "StudID";
-            // 
-            // StudentGrade
-            // 
-            this.StudentGrade.DataPropertyName = "StudentGrade";
-            this.StudentGrade.HeaderText = "Grade";
-            this.StudentGrade.Name = "StudentGrade";
-            this.StudentGrade.Width = 50;
-            // 
-            // UniID
-            // 
-            this.UniID.DataPropertyName = "UniID";
-            this.UniID.HeaderText = "University";
-            this.UniID.Name = "UniID";
-            this.UniID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.UniID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Code
-            // 
-            this.Code.DataPropertyName = "Code";
-            this.Code.HeaderText = "Course Code";
-            this.Code.Name = "Code";
-            // 
-            // Subject
-            // 
-            this.Subject.DataPropertyName = "Subject";
-            this.Subject.HeaderText = "Course Subject";
-            this.Subject.Name = "Subject";
-            this.Subject.Width = 200;
-            // 
-            // UniversID
-            // 
-            this.UniversID.DataPropertyName = "UniversID";
-            this.UniversID.HeaderText = "University";
-            this.UniversID.Name = "UniversID";
-            this.UniversID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.UniversID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.bsGrades.DataSource = typeof(ClassLib_Session_10.Grade);
             // 
             // Form1
             // 
@@ -404,10 +406,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvStudents)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStudents)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvSchedule)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.universityBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvCourse)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.universityBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvGrade)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsSchedule)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCourses)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsGrades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -443,8 +446,6 @@
         private DataGridViewTextBoxColumn CourseID;
         private DataGridViewTextBoxColumn Calendar;
         private DataGridViewComboBoxColumn UniversiyID;
-        private BindingSource universityBindingSource;
-        private BindingSource universityBindingSource1;
         private DataGridViewTextBoxColumn CourID;
         private DataGridViewTextBoxColumn StudID;
         private DataGridViewTextBoxColumn StudentGrade;
@@ -455,5 +456,8 @@
         private DataGridViewComboBoxColumn DataGridViewComboBoxColumn;
         private DataGridViewComboBoxColumn UniID;
         private DataGridViewComboBoxColumn UniversID;
+        private BindingSource bsSchedule;
+        private BindingSource bsCourses;
+        private BindingSource bsGrades;
     }
 }

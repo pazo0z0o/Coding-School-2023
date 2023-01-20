@@ -12,8 +12,8 @@ namespace ClassLib_Session_10
         public Guid CourseID { get; set; }
         public Guid ProfessorID { get; set; }
         public DateTime Calendar { get; set; }
+        public Guid UniversityID { get; set; }
 
-     
         public Schedule() 
         { 
             ID = Guid.NewGuid();

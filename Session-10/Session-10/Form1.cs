@@ -22,19 +22,19 @@ namespace Session_10 {
         }
         private void PopulateSchedule()
         {
-            List<University> uniSchedule = GetUniversities();
+            List<University> unis = GetUniversities();
             grvSchedule.AutoGenerateColumns = false; 
             List<Schedule> schedule = new List<Schedule>();
 
             Schedule sched1= new Schedule()
             {
-              //Calendar = DateTime.Now
+                UniversityID = unis[0].ID
             };
             schedule.Add(sched1);
 
             Schedule sched2 = new Schedule()
             {
-              //Calendar = some other date
+                UniversityID = unis[0].ID
             };
             schedule.Add(sched2);
 
@@ -44,19 +44,21 @@ namespace Session_10 {
       
         private void PopulateGrades()
         {
-            List<University> unisGrades= GetUniversities();
+            List<University> unis= GetUniversities();
             grvGrade.AutoGenerateColumns = false;
             List<Grade> grade = new List<Grade>();
 
             Grade grade1 = new Grade()
             {               
-                StudentGrade= 10
+                StudentGrade= 10,
+                UniversityID = unis[0].ID
             };
             grade.Add(grade1);
            
             Grade grade2 = new Grade()
             {               
-                StudentGrade = 7
+                StudentGrade = 7,
+                UniversityID = unis[1].ID
             };
             grade.Add(grade2);
 
@@ -67,21 +69,23 @@ namespace Session_10 {
 
         private void PopulateCourses() 
         {
-            List<University> uniCourses = GetUniversities();
+            List<University> unis = GetUniversities();
             grvCourse.AutoGenerateColumns = false;
             List<Course> courses = new List<Course>();
 
             Course cour1 = new Course()
             {
                 Code = "mth1",
-                Subject = "Applied Math 1"
+                Subject = "Applied Math 1",
+                UniversityID = unis[0].ID
             };
             courses.Add(cour1);
 
             Course cour2 = new Course()
             {               
                 Code = "Tele1",
-                Subject = "Telecom 1"
+                Subject = "Telecom 1",
+                UniversityID = unis[1].ID
             };
             courses.Add(cour2);
         
@@ -102,7 +106,7 @@ namespace Session_10 {
                 Gender = Student.GenderEnum.Male,
                 Age = 40,
                 Undergraduate = false,
-                UniversityID = unis[0].ID,
+                UniversityID = unis[0].ID
             };
             students.Add(student1);
 
@@ -172,17 +176,17 @@ namespace Session_10 {
             colUniversity1.DisplayMember = "Name";
             colUniversity1.ValueMember = "ID";
 
-            DataGridViewComboBoxColumn UniversityIDSched = grvSchedule.Columns["UniversityID"] as DataGridViewComboBoxColumn;
+            DataGridViewComboBoxColumn UniversityIDSched = grvSchedule.Columns["UniversiyID"] as DataGridViewComboBoxColumn;
             UniversityIDSched.DataSource = GetUniversities();
             UniversityIDSched.DisplayMember = "Name";
             UniversityIDSched.ValueMember = "ID";
 
-            DataGridViewComboBoxColumn UniversityIDCourse = grvCourse.Columns["UniversityID"] as DataGridViewComboBoxColumn;
+            DataGridViewComboBoxColumn UniversityIDCourse = grvCourse.Columns["UniversiyID"] as DataGridViewComboBoxColumn;
             UniversityIDCourse.DataSource = GetUniversities();
             UniversityIDCourse.DisplayMember = "Name";
             UniversityIDCourse.ValueMember = "ID";
 
-            DataGridViewComboBoxColumn UniversityIDGrade = grvGrade.Columns["UniversityID"] as DataGridViewComboBoxColumn;
+            DataGridViewComboBoxColumn UniversityIDGrade = grvGrade.Columns["UniversiyID"] as DataGridViewComboBoxColumn;
             UniversityIDGrade.DataSource = GetUniversities();
             UniversityIDGrade.DisplayMember = "Name";
             UniversityIDGrade.ValueMember = "ID";

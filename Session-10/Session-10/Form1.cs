@@ -22,7 +22,7 @@ namespace Session_10 {
         }
         private void PopulateSchedule()
         {
-            grvSchedule.AutoGenerateColumns = false;
+            grvSchedule.AutoGenerateColumns = false; 
             List<Schedule> schedule = new List<Schedule>();
 
             Schedule sched1= new Schedule()
@@ -205,6 +205,26 @@ namespace Session_10 {
         private void labCourses_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            grvStudents.EndEdit();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            grvSchedule.EndEdit();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            grvCourse.EndEdit();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            grvGrade.EndEdit();
         }
     }
 }

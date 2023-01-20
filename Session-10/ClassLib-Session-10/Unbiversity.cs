@@ -16,7 +16,7 @@ namespace ClassLib_Session_10
         public Schedule[]? ScheduleCourse { get; set; }
         //constructors attempt
         public string Name { get; set; }
-        public University() { ID = Guid.NewGuid(); }
+        public University(Guid id) { ID = id; }
        
     }
 }

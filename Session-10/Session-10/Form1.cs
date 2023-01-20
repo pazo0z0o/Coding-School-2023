@@ -51,14 +51,14 @@ namespace Session_10 {
             Grade grade1 = new Grade()
             {               
                 StudentGrade= 10,
-                UniversityID = unis[0].ID
+                UniID = unis[0].ID
             };
             grade.Add(grade1);
            
             Grade grade2 = new Grade()
             {               
                 StudentGrade = 7,
-                UniversityID = unis[1].ID
+                UniID = unis[1].ID
             };
             grade.Add(grade2);
 
@@ -77,7 +77,7 @@ namespace Session_10 {
             {
                 Code = "mth1",
                 Subject = "Applied Math 1",
-                UniversityID = unis[0].ID
+                UniversID = unis[0].ID
             };
             courses.Add(cour1);
 
@@ -85,7 +85,7 @@ namespace Session_10 {
             {               
                 Code = "Tele1",
                 Subject = "Telecom 1",
-                UniversityID = unis[1].ID
+                UniversID = unis[1].ID
             };
             courses.Add(cour2);
         
@@ -181,12 +181,12 @@ namespace Session_10 {
             UniversityIDSched.DisplayMember = "Name";
             UniversityIDSched.ValueMember = "ID";
 
-            DataGridViewComboBoxColumn UniversityIDCourse = grvCourse.Columns["UniversiyID"] as DataGridViewComboBoxColumn;
+            DataGridViewComboBoxColumn UniversityIDCourse = grvCourse.Columns["UniversID"] as DataGridViewComboBoxColumn;
             UniversityIDCourse.DataSource = GetUniversities();
             UniversityIDCourse.DisplayMember = "Name";
             UniversityIDCourse.ValueMember = "ID";
 
-            DataGridViewComboBoxColumn UniversityIDGrade = grvGrade.Columns["UniversiyID"] as DataGridViewComboBoxColumn;
+            DataGridViewComboBoxColumn UniversityIDGrade = grvGrade.Columns["UniID"] as DataGridViewComboBoxColumn;
             UniversityIDGrade.DataSource = GetUniversities();
             UniversityIDGrade.DisplayMember = "Name";
             UniversityIDGrade.ValueMember = "ID";
@@ -264,6 +264,16 @@ namespace Session_10 {
         private void button7_Click(object sender, EventArgs e)
         {
             PopulateGrades();
+        }
+
+        private void grvCourse_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void grvSchedule_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

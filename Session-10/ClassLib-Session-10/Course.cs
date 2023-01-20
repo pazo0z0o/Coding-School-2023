@@ -11,7 +11,7 @@ namespace ClassLib_Session_10
         public Guid ID { get; set; }
         public string? Code { get; set; }
         public string?  Subject { get; set; }
-        public Guid UniversityID { get; set; }
+        public Guid UniversID { get; set; }
         public Course() { ID = Guid.NewGuid(); }
         // public Course(Guid id, string code) {ID=id; Code = code; }
 

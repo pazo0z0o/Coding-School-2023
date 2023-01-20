@@ -12,7 +12,7 @@ namespace ClassLib_Session_10
         public Guid CourseID { get; set; }
         public Guid StudentID { get; set; }
         public int StudentGrade { get; set; }
-        public Guid UniversityID { get; set; }
+        public Guid UniID { get; set; }
 
 
 

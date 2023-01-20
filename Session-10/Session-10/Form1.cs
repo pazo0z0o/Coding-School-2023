@@ -22,6 +22,7 @@ namespace Session_10 {
         }
         private void PopulateSchedule()
         {
+            grvSchedule.AutoGenerateColumns = false;
             List<Schedule> schedule = new List<Schedule>();
 
             Schedule sched1= new Schedule()
@@ -37,10 +38,12 @@ namespace Session_10 {
             schedule.Add(sched2);
 
             grvSchedule.DataSource= schedule;
+           // grvSchedule.AutoGenerateColumns = false;
         }
       
         private void PopulateGrades()
         {
+            grvGrade.AutoGenerateColumns = false;
             List<Grade> grade = new List<Grade>();
 
             Grade grade1 = new Grade()
@@ -56,11 +59,13 @@ namespace Session_10 {
             grade.Add(grade2);
 
             grvGrade.DataSource = grade;
+           // grvGrade.AutoGenerateColumns = false;
         }
 
 
         private void PopulateCourses() 
-        { 
+        {
+            grvCourse.AutoGenerateColumns = false;
             List<Course> courses = new List<Course>();
 
             Course cour1 = new Course()
@@ -78,6 +83,7 @@ namespace Session_10 {
             courses.Add(cour2);
         
             grvCourse.DataSource = courses; // grabs  elements of list courses- just visually
+            //
         }
 
 
@@ -191,5 +197,14 @@ namespace Session_10 {
             PopulateStudents();
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labCourses_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

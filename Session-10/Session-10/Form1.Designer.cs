@@ -36,8 +36,19 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.grvSchedule = new System.Windows.Forms.DataGridView();
+            this.ProfessorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CourseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Calendar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grvCourse = new System.Windows.Forms.DataGridView();
             this.grvGrade = new System.Windows.Forms.DataGridView();
+            this.labSchedule = new System.Windows.Forms.Label();
+            this.labCourses = new System.Windows.Forms.Label();
+            this.labGrades = new System.Windows.Forms.Label();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Subject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CourID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StudID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StudentGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grvStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvSchedule)).BeginInit();
@@ -132,16 +143,41 @@
             // grvSchedule
             // 
             this.grvSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grvSchedule.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ProfessorID,
+            this.CourseID,
+            this.Calendar});
             this.grvSchedule.Location = new System.Drawing.Point(12, 182);
             this.grvSchedule.Name = "grvSchedule";
             this.grvSchedule.RowTemplate.Height = 25;
             this.grvSchedule.Size = new System.Drawing.Size(776, 77);
             this.grvSchedule.TabIndex = 3;
             // 
+            // ProfessorID
+            // 
+            this.ProfessorID.DataPropertyName = "ProfessorID";
+            this.ProfessorID.HeaderText = "Professor ID";
+            this.ProfessorID.Name = "ProfessorID";
+            // 
+            // CourseID
+            // 
+            this.CourseID.DataPropertyName = "CourseID";
+            this.CourseID.HeaderText = "CourseID";
+            this.CourseID.Name = "CourseID";
+            // 
+            // Calendar
+            // 
+            this.Calendar.DataPropertyName = "Calendar";
+            this.Calendar.HeaderText = "Calendar Date";
+            this.Calendar.Name = "Calendar";
+            // 
             // grvCourse
             // 
             this.grvCourse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grvCourse.Location = new System.Drawing.Point(12, 276);
+            this.grvCourse.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Code,
+            this.Subject});
+            this.grvCourse.Location = new System.Drawing.Point(12, 288);
             this.grvCourse.Name = "grvCourse";
             this.grvCourse.RowTemplate.Height = 25;
             this.grvCourse.Size = new System.Drawing.Size(776, 86);
@@ -150,17 +186,85 @@
             // grvGrade
             // 
             this.grvGrade.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grvGrade.Location = new System.Drawing.Point(12, 384);
+            this.grvGrade.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CourID,
+            this.StudID,
+            this.StudentGrade});
+            this.grvGrade.Location = new System.Drawing.Point(12, 407);
             this.grvGrade.Name = "grvGrade";
             this.grvGrade.RowTemplate.Height = 25;
             this.grvGrade.Size = new System.Drawing.Size(776, 86);
             this.grvGrade.TabIndex = 5;
+            // 
+            // labSchedule
+            // 
+            this.labSchedule.AutoSize = true;
+            this.labSchedule.Location = new System.Drawing.Point(12, 164);
+            this.labSchedule.Name = "labSchedule";
+            this.labSchedule.Size = new System.Drawing.Size(86, 15);
+            this.labSchedule.TabIndex = 6;
+            this.labSchedule.Text = "grrid Schedule ";
+            this.labSchedule.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // labCourses
+            // 
+            this.labCourses.AutoSize = true;
+            this.labCourses.Location = new System.Drawing.Point(12, 270);
+            this.labCourses.Name = "labCourses";
+            this.labCourses.Size = new System.Drawing.Size(73, 15);
+            this.labCourses.TabIndex = 7;
+            this.labCourses.Text = "grid Courses";
+            this.labCourses.Click += new System.EventHandler(this.labCourses_Click);
+            // 
+            // labGrades
+            // 
+            this.labGrades.AutoSize = true;
+            this.labGrades.Location = new System.Drawing.Point(12, 389);
+            this.labGrades.Name = "labGrades";
+            this.labGrades.Size = new System.Drawing.Size(67, 15);
+            this.labGrades.TabIndex = 8;
+            this.labGrades.Text = "grid Grades";
+            // 
+            // Code
+            // 
+            this.Code.DataPropertyName = "Code";
+            this.Code.HeaderText = "Course Code";
+            this.Code.Name = "Code";
+            // 
+            // Subject
+            // 
+            this.Subject.DataPropertyName = "Subject";
+            this.Subject.HeaderText = "Course Subject";
+            this.Subject.Name = "Subject";
+            this.Subject.Width = 200;
+            // 
+            // CourID
+            // 
+            this.CourID.DataPropertyName = "CourID";
+            this.CourID.HeaderText = "Course ID";
+            this.CourID.Name = "CourID";
+            // 
+            // StudID
+            // 
+            this.StudID.DataPropertyName = "StudID";
+            this.StudID.HeaderText = "Student ID";
+            this.StudID.Name = "StudID";
+            // 
+            // StudentGrade
+            // 
+            this.StudentGrade.DataPropertyName = "StudentGrade";
+            this.StudentGrade.HeaderText = "Grade";
+            this.StudentGrade.Name = "StudentGrade";
+            this.StudentGrade.Width = 50;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1351, 505);
+            this.Controls.Add(this.labGrades);
+            this.Controls.Add(this.labCourses);
+            this.Controls.Add(this.labSchedule);
             this.Controls.Add(this.grvGrade);
             this.Controls.Add(this.grvCourse);
             this.Controls.Add(this.grvSchedule);
@@ -176,6 +280,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvCourse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvGrade)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -195,5 +300,16 @@
         private DataGridView grvSchedule;
         private DataGridView grvCourse;
         private DataGridView grvGrade;
+        private Label labSchedule;
+        private Label labCourses;
+        private Label labGrades;
+        private DataGridViewTextBoxColumn ProfessorID;
+        private DataGridViewTextBoxColumn CourseID;
+        private DataGridViewTextBoxColumn Calendar;
+        private DataGridViewTextBoxColumn Code;
+        private DataGridViewTextBoxColumn Subject;
+        private DataGridViewTextBoxColumn CourID;
+        private DataGridViewTextBoxColumn StudID;
+        private DataGridViewTextBoxColumn StudentGrade;
     }
 }

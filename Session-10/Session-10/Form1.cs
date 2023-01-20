@@ -278,5 +278,10 @@ namespace Session_10 {
         {
 
         }
+
+        private void bsCourses_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

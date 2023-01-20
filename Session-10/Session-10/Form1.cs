@@ -24,46 +24,31 @@ namespace Session_10 {
 
             Schedule sched1= new Schedule()
             {
-            ID = Guid.NewGuid(),
-            CourseID = Guid.NewGuid() ,
-            ProfessorID =Guid.NewGuid(),
-            Calendar = DateTime.Now
+              //Calendar = DateTime.Now
             };
             schedule.Add(sched1);
 
             Schedule sched2 = new Schedule()
             {
-                ID = Guid.NewGuid(),
-                CourseID = Guid.NewGuid(),
-                ProfessorID = Guid.NewGuid(),
-                Calendar = DateTime.Now
+              //Calendar = some other date
             };
             schedule.Add(sched2);
 
         }
 
-        /*public Guid ID { get; set; }
-        public Guid CourseID { get; set; }
-        public Guid StudentID { get; set; }
-        public int StudentGrade { get; set; } */
+      
         private void PopulateGrades()
         {
             List<Grade> grade = new List<Grade>();
 
             Grade grade1 = new Grade()
-            {
-                ID = Guid.NewGuid(),
-                CourseID= Guid.NewGuid(),
-                StudentID= Guid.NewGuid(),
+            {               
                 StudentGrade= 10
             };
             grade.Add(grade1);
            
             Grade grade2 = new Grade()
-            {
-                ID = Guid.NewGuid(),
-                CourseID = Guid.NewGuid(),
-                StudentID = Guid.NewGuid(),
+            {               
                 StudentGrade = 7
             };
             grade.Add(grade2);
@@ -76,15 +61,13 @@ namespace Session_10 {
 
             Course cour1 = new Course()
             {
-                ID = Guid.NewGuid(),
                 Code = "mth1",
                 Subject = "Applied Math 1"
             };
             courses.Add(cour1);
 
             Course cour2 = new Course()
-            {
-                ID = Guid.NewGuid(),
+            {               
                 Code = "Tele1",
                 Subject = "Telecom 1"
             };

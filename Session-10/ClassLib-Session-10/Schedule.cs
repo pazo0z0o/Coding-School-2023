@@ -14,7 +14,13 @@ namespace ClassLib_Session_10
         public DateTime Calendar { get; set; }
 
      
-        public Schedule() { ID = Guid.NewGuid(); }
+        public Schedule() 
+        { 
+            ID = Guid.NewGuid();
+            CourseID = Guid.NewGuid();
+            ProfessorID= Guid.NewGuid();
+            Calendar = DateTime.Now;
+        }
        
         
        

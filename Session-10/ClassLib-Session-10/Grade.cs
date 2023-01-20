@@ -16,7 +16,11 @@ namespace ClassLib_Session_10
 
 
 
-        public Grade() { ID = Guid.NewGuid(); }
-        
+        public Grade()
+        {
+            ID = Guid.NewGuid(); 
+            CourseID = Guid.NewGuid();
+            StudentID = Guid.NewGuid();        
+        }       
     }
 }

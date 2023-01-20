@@ -22,6 +22,7 @@ namespace Session_10 {
         }
         private void PopulateSchedule()
         {
+            List<University> unis = GetUniversities();
             grvSchedule.AutoGenerateColumns = false; 
             List<Schedule> schedule = new List<Schedule>();
 
@@ -43,6 +44,7 @@ namespace Session_10 {
       
         private void PopulateGrades()
         {
+            List<University> unis = GetUniversities();
             grvGrade.AutoGenerateColumns = false;
             List<Grade> grade = new List<Grade>();
 
@@ -65,6 +67,7 @@ namespace Session_10 {
 
         private void PopulateCourses() 
         {
+            List<University> unis = GetUniversities();
             grvCourse.AutoGenerateColumns = false;
             List<Course> courses = new List<Course>();
 
@@ -170,6 +173,8 @@ namespace Session_10 {
             colUniversity1.ValueMember = "ID";
 
             grvStudents.CellContentClick += GrvStudents_CellContentClick;
+
+
 
         }
 

@@ -25,16 +25,16 @@ namespace ClassLib_Session_10
     }
 
 
-    public class University {
+   /* public class University {
 
         public University(Guid id) {
             ID = id;
         }
 
-        public Guid ID { get; set; }
+       *//* public Guid ID { get; set; }
 
         public string Name { get; set; }
 
-        public string Region { get; set; }
-    }
+        public string Region { get; set; }*//*
+    }*/
 }

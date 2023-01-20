@@ -226,5 +226,20 @@ namespace Session_10 {
         {
             grvGrade.EndEdit();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            PopulateSchedule();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            PopulateCourses();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            PopulateGrades();
+        }
     }
 }

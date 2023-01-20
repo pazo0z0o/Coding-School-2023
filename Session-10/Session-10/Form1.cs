@@ -22,7 +22,7 @@ namespace Session_10 {
         }
         private void PopulateSchedule()
         {
-            List<University> unis = GetUniversities();
+            List<University> uniSchedule = GetUniversities();
             grvSchedule.AutoGenerateColumns = false; 
             List<Schedule> schedule = new List<Schedule>();
 
@@ -44,7 +44,7 @@ namespace Session_10 {
       
         private void PopulateGrades()
         {
-            List<University> unis = GetUniversities();
+            List<University> unisGrades= GetUniversities();
             grvGrade.AutoGenerateColumns = false;
             List<Grade> grade = new List<Grade>();
 
@@ -67,7 +67,7 @@ namespace Session_10 {
 
         private void PopulateCourses() 
         {
-            List<University> unis = GetUniversities();
+            List<University> uniCourses = GetUniversities();
             grvCourse.AutoGenerateColumns = false;
             List<Course> courses = new List<Course>();
 
@@ -172,6 +172,21 @@ namespace Session_10 {
             colUniversity1.DisplayMember = "Name";
             colUniversity1.ValueMember = "ID";
 
+            DataGridViewComboBoxColumn UniversityIDSched = grvSchedule.Columns["UniversityID"] as DataGridViewComboBoxColumn;
+            UniversityIDSched.DataSource = GetUniversities();
+            UniversityIDSched.DisplayMember = "Name";
+            UniversityIDSched.ValueMember = "ID";
+
+            DataGridViewComboBoxColumn UniversityIDCourse = grvCourse.Columns["UniversityID"] as DataGridViewComboBoxColumn;
+            UniversityIDCourse.DataSource = GetUniversities();
+            UniversityIDCourse.DisplayMember = "Name";
+            UniversityIDCourse.ValueMember = "ID";
+
+            DataGridViewComboBoxColumn UniversityIDGrade = grvGrade.Columns["UniversityID"] as DataGridViewComboBoxColumn;
+            UniversityIDGrade.DataSource = GetUniversities();
+            UniversityIDGrade.DisplayMember = "Name";
+            UniversityIDGrade.ValueMember = "ID";
+            
             grvStudents.CellContentClick += GrvStudents_CellContentClick;
 
 

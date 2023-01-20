@@ -23,7 +23,7 @@ namespace Session_10 {
         private void PopulateSchedule()
         {
             List<University> unis = GetUniversities();
-           
+                     
             List<Schedule> schedule = new List<Schedule>();
 
             Schedule sched1= new Schedule()
@@ -63,14 +63,13 @@ namespace Session_10 {
             grade.Add(grade2);
 
             bsGrade.DataSource = grade;
-           // grvGrade.AutoGenerateColumns = false;
+           
         }
-
 
         private void PopulateCourses() 
         {
             List<University> unis = GetUniversities();
-            
+           
             List<Course> courses = new List<Course>();
 
             Course cour1 = new Course()
@@ -89,10 +88,9 @@ namespace Session_10 {
             };
             courses.Add(cour2);
         
-            bsCourse.DataSource = courses; // grabs  elements of list courses- just visually
+            bsCourse.DataSource = courses; 
             //
         }
-
 
         private void PopulateStudents() {
 
@@ -119,7 +117,6 @@ namespace Session_10 {
                 UniversityID = unis[1].ID
             };
             students.Add(student2);
-
 
             bsStudents.DataSource = students;
 
@@ -162,11 +159,14 @@ namespace Session_10 {
         }
 
         private void SetControlProperties() {
-
+            grvSchedule.AutoGenerateColumns = false;
             grvStudents.AutoGenerateColumns = false;
+            grvGrade.AutoGenerateColumns = false;
+            grvCourse.AutoGenerateColumns = false;
+            //----------------------------------------------------
             grvStudents.DataSource = bsStudents;
             grvSchedule.DataSource = bsSchedule;
-            grvCourse.DataSource = bsCourse;
+            grvCourse.DataSource = bsCourse;  // Did it with designer
             grvGrade.DataSource = bsGrade;
 
             DataGridViewComboBoxColumn colGender = grvStudents.Columns["colGender"] as DataGridViewComboBoxColumn;

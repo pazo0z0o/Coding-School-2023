@@ -23,7 +23,7 @@ namespace Session_10 {
         private void PopulateSchedule()
         {
             List<University> unis = GetUniversities();
-            grvSchedule.AutoGenerateColumns = false; 
+           
             List<Schedule> schedule = new List<Schedule>();
 
             Schedule sched1= new Schedule()
@@ -38,14 +38,14 @@ namespace Session_10 {
             };
             schedule.Add(sched2);
 
-            grvSchedule.DataSource= schedule;
+            bsSchedule.DataSource= schedule;
            // grvSchedule.AutoGenerateColumns = false;
         }
       
         private void PopulateGrades()
         {
             List<University> unis= GetUniversities();
-            grvGrade.AutoGenerateColumns = false;
+            
             List<Grade> grade = new List<Grade>();
 
             Grade grade1 = new Grade()
@@ -62,7 +62,7 @@ namespace Session_10 {
             };
             grade.Add(grade2);
 
-            grvGrade.DataSource = grade;
+            bsGrade.DataSource = grade;
            // grvGrade.AutoGenerateColumns = false;
         }
 
@@ -70,7 +70,7 @@ namespace Session_10 {
         private void PopulateCourses() 
         {
             List<University> unis = GetUniversities();
-            grvCourse.AutoGenerateColumns = false;
+            
             List<Course> courses = new List<Course>();
 
             Course cour1 = new Course()
@@ -89,7 +89,7 @@ namespace Session_10 {
             };
             courses.Add(cour2);
         
-            grvCourse.DataSource = courses; // grabs  elements of list courses- just visually
+            bsCourse.DataSource = courses; // grabs  elements of list courses- just visually
             //
         }
 
@@ -165,6 +165,9 @@ namespace Session_10 {
 
             grvStudents.AutoGenerateColumns = false;
             grvStudents.DataSource = bsStudents;
+            grvSchedule.DataSource = bsSchedule;
+            grvCourse.DataSource = bsCourse;
+            grvGrade.DataSource = bsGrade;
 
             DataGridViewComboBoxColumn colGender = grvStudents.Columns["colGender"] as DataGridViewComboBoxColumn;
             colGender.Items.Add(Student.GenderEnum.Male);
@@ -280,6 +283,11 @@ namespace Session_10 {
         }
 
         private void bsCourses_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grvGrade_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

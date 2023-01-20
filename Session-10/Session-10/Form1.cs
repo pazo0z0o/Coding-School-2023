@@ -210,12 +210,8 @@ namespace Session_10 {
             }
         }
 
-        private void btnOK_Click(object sender, EventArgs e) {
+        
 
-
-
-
-        }
 
         private void btnRefresh_Click(object sender, EventArgs e) {
             PopulateStudents();

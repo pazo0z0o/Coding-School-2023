@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Session_06
+namespace ClassLib_Session_10
 {
     public class Course
     {
@@ -13,10 +13,8 @@ namespace Session_06
         public string?  Subject { get; set; }
 
 
-        public Course() { }
-        public Course(Guid ID) { }
-        public Course(Guid ID, string Code) { }
-        public Course (Guid ID, string Code, string Subject) { }
+        public Course() { ID = Guid.NewGuid(); }
+        // public Course(Guid id, string code) {ID=id; Code = code; }
 
     }
 }

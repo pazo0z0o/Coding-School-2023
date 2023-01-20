@@ -1,9 +1,12 @@
+//using Session_06;
 using System.Windows.Forms;
+using ClassLib_Session_10;
 
 namespace Session_10 {
     public partial class Form1 : Form {
 
         List<Student> students;
+        //List<Schedule> sched;
 
         public Form1() {
             InitializeComponent();
@@ -15,6 +18,79 @@ namespace Session_10 {
             PopulateStudents();
 
         }
+        private void PopulateSchedule()
+        {
+            List<Schedule> schedule = new List<Schedule>();
+
+            Schedule sched1= new Schedule()
+            {
+            ID = Guid.NewGuid(),
+            CourseID = Guid.NewGuid() ,
+            ProfessorID =Guid.NewGuid(),
+            Calendar = DateTime.Now
+            };
+            schedule.Add(sched1);
+
+            Schedule sched2 = new Schedule()
+            {
+                ID = Guid.NewGuid(),
+                CourseID = Guid.NewGuid(),
+                ProfessorID = Guid.NewGuid(),
+                Calendar = DateTime.Now
+            };
+            schedule.Add(sched2);
+
+        }
+
+        /*public Guid ID { get; set; }
+        public Guid CourseID { get; set; }
+        public Guid StudentID { get; set; }
+        public int StudentGrade { get; set; } */
+        private void PopulateGrades()
+        {
+            List<Grade> grade = new List<Grade>();
+
+            Grade grade1 = new Grade()
+            {
+                ID = Guid.NewGuid(),
+                CourseID= Guid.NewGuid(),
+                StudentID= Guid.NewGuid(),
+                StudentGrade= 10
+            };
+            grade.Add(grade1);
+           
+            Grade grade2 = new Grade()
+            {
+                ID = Guid.NewGuid(),
+                CourseID = Guid.NewGuid(),
+                StudentID = Guid.NewGuid(),
+                StudentGrade = 7
+            };
+            grade.Add(grade2);
+        }
+
+
+        private void PopulateCourses() 
+        { 
+            List<Course> courses = new List<Course>();
+
+            Course cour1 = new Course()
+            {
+                ID = Guid.NewGuid(),
+                Code = "mth1",
+                Subject = "Applied Math 1"
+            };
+            courses.Add(cour1);
+
+            Course cour2 = new Course()
+            {
+                ID = Guid.NewGuid(),
+                Code = "Tele1",
+                Subject = "Telecom 1"
+            };
+            courses.Add(cour2);
+        }
+
 
         private void PopulateStudents() {
 

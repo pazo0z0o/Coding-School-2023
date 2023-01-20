@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Session_06
+namespace ClassLib_Session_10
 {
     public class Schedule
     {
@@ -14,8 +14,8 @@ namespace Session_06
         public DateTime Calendar { get; set; }
 
      
-        public Schedule() { }
-        public Schedule(Guid id) { ID = id; }
+        public Schedule() { ID = Guid.NewGuid(); }
+       
         
        
 

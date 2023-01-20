@@ -35,10 +35,10 @@
             this.bsStudents = new System.Windows.Forms.BindingSource(this.components);
             this.btnOK = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.grvSchedule = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.grvStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStudents)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvSchedule)).BeginInit();
             this.SuspendLayout();
             // 
             // grvStudents
@@ -55,7 +55,7 @@
             this.grvStudents.Location = new System.Drawing.Point(12, 60);
             this.grvStudents.Name = "grvStudents";
             this.grvStudents.RowTemplate.Height = 25;
-            this.grvStudents.Size = new System.Drawing.Size(776, 300);
+            this.grvStudents.Size = new System.Drawing.Size(776, 95);
             this.grvStudents.TabIndex = 0;
             // 
             // colName
@@ -107,7 +107,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(614, 396);
+            this.btnOK.Location = new System.Drawing.Point(103, 31);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(119, 23);
             this.btnOK.TabIndex = 1;
@@ -125,20 +125,21 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // dataGridView1
+            // grvSchedule
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(19, 168);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 3;
+            this.grvSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grvSchedule.Location = new System.Drawing.Point(12, 182);
+            this.grvSchedule.Name = "grvSchedule";
+            this.grvSchedule.RowTemplate.Height = 25;
+            this.grvSchedule.Size = new System.Drawing.Size(776, 77);
+            this.grvSchedule.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(876, 505);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(1351, 505);
+            this.Controls.Add(this.grvSchedule);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.grvStudents);
@@ -147,7 +148,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grvStudents)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStudents)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvSchedule)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -165,6 +166,6 @@
         private DataGridViewComboBoxColumn colUniversity;
         private DataGridViewButtonColumn colShowID;
         private BindingSource bsStudents;
-        private DataGridView dataGridView1;
+        private DataGridView grvSchedule;
     }
 }

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Session_10 {
+namespace ClassLib_Session_10
+{
     public class Student {
 
         public Student() {

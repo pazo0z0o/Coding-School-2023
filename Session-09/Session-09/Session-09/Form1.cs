@@ -53,7 +53,7 @@ namespace Session_09 {
             {
                _value1 =  CheckSqRoot(textboxCalc);
             }
-            else {
+            else if(ctrlDisplay.Text != string.Empty){
             string[] subArr = textboxCalc.Split('+', '-', '*', '/', '^' );
               
                 sub1 = subArr[0];   // sub1 has value 1, unproccessed
@@ -106,7 +106,7 @@ namespace Session_09 {
             }
             ctrlDisplay.Text += " = " + _result;
             _equalCount++;
-            if ((ctrlDisplay.Text.Contains('=')) && (_equalCount > 1))
+            if ((ctrlDisplay.Text.Contains('=')) && (_equalCount > 1) && (ctrlDisplay.Text == string.Empty))
             { btnEqual.Enabled = false; }                
         }
         private void btnAddition_Click(object sender, EventArgs e) {

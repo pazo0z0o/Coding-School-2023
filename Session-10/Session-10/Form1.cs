@@ -210,8 +210,10 @@ namespace Session_10 {
             }
         }
 
-        
 
+        Serializer serializer = new Serializer();
+        /*serializer.SerializeToFile(university, "test.json");
+        university = serializer.Deserialize<University>("test.json");*/
 
         private void btnRefresh_Click(object sender, EventArgs e) {
             PopulateStudents();

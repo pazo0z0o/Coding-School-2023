@@ -1,4 +1,4 @@
-//using Session_06;
+
 using System.Windows.Forms;
 using ClassLib_Session_10;
 
@@ -16,7 +16,9 @@ namespace Session_10 {
 
             SetControlProperties();
             PopulateStudents();
-
+            PopulateSchedule();
+            PopulateCourses();
+            PopulateGrades();
         }
         private void PopulateSchedule()
         {
@@ -34,8 +36,8 @@ namespace Session_10 {
             };
             schedule.Add(sched2);
 
+            grvSchedule.DataSource= schedule;
         }
-
       
         private void PopulateGrades()
         {
@@ -52,6 +54,8 @@ namespace Session_10 {
                 StudentGrade = 7
             };
             grade.Add(grade2);
+
+            grvGrade.DataSource = grade;
         }
 
 
@@ -72,6 +76,8 @@ namespace Session_10 {
                 Subject = "Telecom 1"
             };
             courses.Add(cour2);
+        
+            grvCourse.DataSource = courses; // grabs  elements of list courses- just visually
         }
 
 

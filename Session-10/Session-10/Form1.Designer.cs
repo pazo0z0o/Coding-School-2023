@@ -36,9 +36,13 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.grvSchedule = new System.Windows.Forms.DataGridView();
+            this.grvCourse = new System.Windows.Forms.DataGridView();
+            this.grvGrade = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.grvStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvSchedule)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvCourse)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvGrade)).BeginInit();
             this.SuspendLayout();
             // 
             // grvStudents
@@ -134,11 +138,31 @@
             this.grvSchedule.Size = new System.Drawing.Size(776, 77);
             this.grvSchedule.TabIndex = 3;
             // 
+            // grvCourse
+            // 
+            this.grvCourse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grvCourse.Location = new System.Drawing.Point(12, 276);
+            this.grvCourse.Name = "grvCourse";
+            this.grvCourse.RowTemplate.Height = 25;
+            this.grvCourse.Size = new System.Drawing.Size(776, 86);
+            this.grvCourse.TabIndex = 4;
+            // 
+            // grvGrade
+            // 
+            this.grvGrade.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grvGrade.Location = new System.Drawing.Point(12, 384);
+            this.grvGrade.Name = "grvGrade";
+            this.grvGrade.RowTemplate.Height = 25;
+            this.grvGrade.Size = new System.Drawing.Size(776, 86);
+            this.grvGrade.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1351, 505);
+            this.Controls.Add(this.grvGrade);
+            this.Controls.Add(this.grvCourse);
             this.Controls.Add(this.grvSchedule);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnOK);
@@ -149,6 +173,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grvStudents)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsStudents)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvSchedule)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvCourse)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grvGrade)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -167,5 +193,7 @@
         private DataGridViewButtonColumn colShowID;
         private BindingSource bsStudents;
         private DataGridView grvSchedule;
+        private DataGridView grvCourse;
+        private DataGridView grvGrade;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,11 +26,11 @@ namespace Lib
         }
 
 
-        public T Deserialize<T>(string fileName)
+        public List<T> Deserialize <T>(string fileName)
         {
 
             string jsonString = File.ReadAllText(fileName);
-            T? obj = JsonSerializer.Deserialize<T>(jsonString);
+            List<T>? obj = JsonSerializer.Deserialize<List<T>>(jsonString);
 
             return obj;
         }

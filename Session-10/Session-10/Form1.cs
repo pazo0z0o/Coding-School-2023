@@ -219,7 +219,8 @@ namespace Session_10
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            Serializer serializer = new Serializer();
+            serializer.SerializeToFile(_formScheduledCourse, "schedules.json");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -262,6 +263,49 @@ namespace Session_10
             grvGrades.EndEdit();
         }
 
-        
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Serializer serializer = new Serializer();
+            serializer.SerializeToFile(_formStudents, "students.json");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+            Serializer serializer = new Serializer();
+            serializer.SerializeToFile(_formCourses, "courses.json");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Serializer serializer = new Serializer();
+            serializer.SerializeToFile(_formGrades, "grades.json");
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Serializer serializer = new Serializer();
+            _formStudents = serializer.Deserialize<Student>("students.json");
+
+            //MessageBox.Show(_formStudents[0].Name + " Loaded!");
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Serializer serializer = new Serializer();
+            _formCourses = serializer.Deserialize<Course>("courses.json");
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Serializer serializer = new Serializer();
+            _formGrades = serializer.Deserialize<Grade>("grades.json");
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            Serializer serializer = new Serializer();
+            _formScheduledCourse = serializer.Deserialize<Schedule>("schedules.json");
+        }
     }
 }

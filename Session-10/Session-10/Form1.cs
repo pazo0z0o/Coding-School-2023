@@ -1,295 +1,276 @@
+using Lib;
+using Microsoft.VisualBasic.Devices;
+using System.Collections.Generic;
+using System.Diagnostics;
 
-using System.Windows.Forms;
-using ClassLib_Session_10;
-
-namespace Session_10 {
-    public partial class Form1 : Form {
-
-        List<Student> students;
-        //List<Schedule> sched;
-
-        public Form1() {
+namespace Session_10
+{
+    public partial class Form1 : Form
+    {
+        List<Student>? formStudents;//= new List<Student>(); 
+        List<Course>? formCourses;  
+        List<Schedule>? formScheduledCourse;
+        List<Grade>? formGrades;
+        public Form1()
+        {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e) {
-
-            SetControlProperties();
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
             PopulateStudents();
-            PopulateSchedule();
             PopulateCourses();
+            GetStudents();
+            GetCourses();
+            PopulateSchedule();
             PopulateGrades();
+            SetControlProperties();
+            /*if (formCourses != null && formStudents != null)
+            { SetControlProperties(); }
+            else 
+            {
+                PopulateStudents();
+                PopulateCourses();
+                
+                SetControlProperties();
+            }*/
+
         }
+
+        private void PopulateStudents()
+        {
+            List<University> unis = GetUniversities();
+
+            Guid id = Guid.Parse("{D81AFE51-BCC0-4ADB-886E-952385A70098} ");
+            Student stud1 = new Student()
+            {
+                RegistrationNumber = 1,
+                ID = id,
+                Name = "Kosmas Stamos",
+                Age = 32,
+                UniversityID = unis[0].ID
+            };
+            id = Guid.Parse("{19C62019-ADC6-41EC-958E-AF0A5482384E}");
+            Student stud2 = new Student()
+            {
+                RegistrationNumber = 2,
+                ID = id,
+                Name = "Peter Ofori-Quaye",
+                Age = 18,
+                UniversityID = unis[1].ID
+            };
+            List<Student> Students = new List<Student>() { stud1, stud2 };
+            formStudents = Students; //round about way, to bypass object property restrictions
+        
+        bsStudents.DataSource = formStudents;
+        
+        }
+        
+
+        private void PopulateCourses()
+        {
+            Guid id = Guid.Parse("{5A3DE839-C51E-4783-96FB-F7F192AA30F1} ");
+            Course cour1 = new Course()
+            {
+                ID = id,
+                Code = "MTH-1",
+                Subject = "Applied Math-1"
+            };
+
+            id = Guid.Parse("{CBAA71F8-1202-4E2F-8250-E25BF15A7AD0}");
+            Course cour2 = new Course()
+            {
+                ID = id,
+                Code = "MTH-2",
+                Subject = "Applied Math-2"
+            };
+            List<Course> Courses = new List<Course>() { cour1, cour2 };
+            formCourses = Courses;
+            //round about way, to bypass object property restrictions
+            bsCourses.DataSource = formCourses;
+        }
+        private void PopulateGrades()
+        {
+            List<Student> pupil = formStudents;   //GetStudents();
+            List<Course> lesson = formCourses;
+
+            Guid id = Guid.Parse("{3B407F08-DB94-4F02-A717-1BF6BE1B3B99} ");
+            //  Guid StudID = 
+            Grade gradeStud1 = new Grade()
+            {
+                ID = id,
+                StudentID = pupil[0].ID,
+                CourseID = lesson[0].ID,
+                StudentGrade = 10
+            };
+            id = Guid.Parse("{5221E96A-34A6-4852-AA19-FCBC93EDEFBC}");
+            Grade gradeStud2 = new Grade()
+            {
+                ID = id,
+                StudentID = pupil[1].ID,
+                CourseID = lesson[1].ID,
+                StudentGrade = 7
+            };
+            //round about way, to bypass object property restrictions
+            List<Grade> Grades = new List<Grade>(){ gradeStud1, gradeStud2 };
+            formGrades = Grades ;
+
+           bsGrades.DataSource = formGrades;
+        }
+
         private void PopulateSchedule()
         {
             List<University> unis = GetUniversities();
-                     
-            List<Schedule> schedule = new List<Schedule>();
+            List<Course> pupil = formCourses;
 
-            Schedule sched1= new Schedule()
+            Guid Sid = Guid.Parse("{F1A0C8E7-31FF-48A9-BB8A-B03000E1FAD8} ");
+            Guid ProfID = Guid.Parse("{EAC4E63B-6FA0-43CA-A44D-4537071E127F}");
+
+            Schedule schedule1 = new Schedule()
             {
+                ID = Sid,
+                ProfessorID = ProfID,
+                CourseID = pupil[0].ID,
+                Calendar = DateTime.Now,
                 UniversityID = unis[0].ID
             };
-            schedule.Add(sched1);
 
-            Schedule sched2 = new Schedule()
+            Sid = Guid.Parse("{76170444-B7D3-4B85-A0D4-1A9E92D48A76}");
+            ProfID = Guid.Parse("{4818139F-7A50-400C-8E91-EB75325FC499}");
+
+            Schedule schedule2 = new Schedule()
             {
-                UniversityID = unis[0].ID
-            };
-            schedule.Add(sched2);
-
-            bsSchedule.DataSource= schedule;
-           // grvSchedule.AutoGenerateColumns = false;
-        }
-      
-        private void PopulateGrades()
-        {
-            List<University> unis= GetUniversities();
-            
-            List<Grade> grade = new List<Grade>();
-
-            Grade grade1 = new Grade()
-            {               
-                StudentGrade= 10,
-                UniID = unis[0].ID
-            };
-            grade.Add(grade1);
-           
-            Grade grade2 = new Grade()
-            {               
-                StudentGrade = 7,
-                UniID = unis[1].ID
-            };
-            grade.Add(grade2);
-
-            bsGrade.DataSource = grade;
-           
-        }
-
-        private void PopulateCourses() 
-        {
-            List<University> unis = GetUniversities();
-           
-            List<Course> courses = new List<Course>();
-
-            Course cour1 = new Course()
-            {
-                Code = "mth1",
-                Subject = "Applied Math 1",
-                UniversID = unis[0].ID
-            };
-            courses.Add(cour1);
-
-            Course cour2 = new Course()
-            {               
-                Code = "Tele1",
-                Subject = "Telecom 1",
-                UniversID = unis[1].ID
-            };
-            courses.Add(cour2);
-        
-            bsCourse.DataSource = courses; 
-            //
-        }
-
-        private void PopulateStudents() {
-
-            List<University> unis = GetUniversities();
-
-            students = new List<Student>();
-
-            Student student1 = new Student() {
-                Name = "Dimitris",
-                Surname = "Raptodimos",
-                Gender = Student.GenderEnum.Male,
-                Age = 40,
-                Undergraduate = false,
-                UniversityID = unis[0].ID
-            };
-            students.Add(student1);
-
-            Student student2 = new Student() {
-                Name = "Fotis",
-                Surname = "Chrysoulas",
-                Gender = Student.GenderEnum.Male,
-                Age = 44,
-                Undergraduate = true,
+                ID = Sid,
+                ProfessorID = ProfID,
+                CourseID = pupil[1].ID,
+                Calendar = DateTime.Now,
                 UniversityID = unis[1].ID
             };
-            students.Add(student2);
+            //round about way, to bypass object property restrictions
+            List<Schedule> ScheduledCour = new List<Schedule>() { schedule1, schedule2 };
+            formScheduledCourse = ScheduledCour;
 
-            bsStudents.DataSource = students;
-
-
-            //Student student2 = new Student() {
-            //    Name = "Dimitris",
-            //    Surname = "Raptodimos",
-            //    Gender = Student.GenderEnum.Male,
-            //    Age = 40,
-            //    Undergraduate = false
-            //};
-
-            //List<Student> students2 = new List<Student>() {
-            //   student2
-            //};
-
+            bsSchedule.DataSource = ScheduledCour;
         }
 
-        private List<University> GetUniversities() {
-
-
+        private List<University> GetUniversities()
+        {
             Guid id = Guid.Parse("{72F9974A-370C-4FCE-AD99-9A73FC089E60}");
-
-            University uni1 = new University(id) {
-                Name = "NTUA",
-                Region = "Athens"
+            University uni1 = new University()
+            {
+                ID = id,
+                Name = "UoWM",
+                YearsInService = 20
             };
 
             id = Guid.Parse("{D3DB7E60-9BDA-41F3-9FDE-A39C77FE03A9}");
-            University uni2 = new University(id) {
-                Name = "UNIPI",
-                Region = "Peiraeus"
+            University uni2 = new University()
+            {
+                ID = id,
+                Name = "AUTH",
+                YearsInService = 70
             };
 
-            University uni3 = new University(Guid.Empty) {
+            University uni3 = new University()
+            {
             };
 
             List<University> universities = new List<University>() { uni1, uni2, uni3 };
             return universities;
         }
 
-        private void SetControlProperties() {
+        private List<Student> GetStudents()
+        {   
+
+            List<Student> studs = new List<Student>();
+            studs = formStudents;
+            return studs;
+        }
+
+        private List<Course> GetCourses()
+        {
+            List<Course> cour = new List<Course>();
+            cour = formCourses;
+            return cour;
+        }
+
+        /*private List<Schedule> GetSched(List<Schedule> schedCour)
+        {
+            List<Schedule> scheduledCourses = new List<Schedule>(schedCour);
+            return scheduledCourses;
+        }*/
+
+
+        private void SetControlProperties()
+        {
             grvSchedule.AutoGenerateColumns = false;
             grvStudents.AutoGenerateColumns = false;
-            grvGrade.AutoGenerateColumns = false;
-            grvCourse.AutoGenerateColumns = false;
-            //----------------------------------------------------
+            grvGrades.AutoGenerateColumns = false;
+            grvCourses.AutoGenerateColumns = false;
+
             grvStudents.DataSource = bsStudents;
+            grvGrades.DataSource = bsGrades;
+            grvCourses.DataSource = bsCourses;
             grvSchedule.DataSource = bsSchedule;
-            grvCourse.DataSource = bsCourse;  // Did it with designer
-            grvGrade.DataSource = bsGrade;
 
-            DataGridViewComboBoxColumn colGender = grvStudents.Columns["colGender"] as DataGridViewComboBoxColumn;
-            colGender.Items.Add(Student.GenderEnum.Male);
-            colGender.Items.Add(Student.GenderEnum.Female);
-            colGender.Items.Add(Student.GenderEnum.Other);
+            DataGridViewComboBoxColumn colUniversity = grvStudents.Columns["colUniversity"] as DataGridViewComboBoxColumn;
+            colUniversity.DataSource = GetUniversities();
+            colUniversity.DisplayMember = "Name";
+            colUniversity.ValueMember = "ID";
 
-            DataGridViewComboBoxColumn colUniversity1 = grvStudents.Columns["colUniversity"] as DataGridViewComboBoxColumn;
-            colUniversity1.DataSource = GetUniversities();
-            colUniversity1.DisplayMember = "Name";
-            colUniversity1.ValueMember = "ID";
-
-            DataGridViewComboBoxColumn UniversityIDSched = grvSchedule.Columns["UniversiyID"] as DataGridViewComboBoxColumn;
-            UniversityIDSched.DataSource = GetUniversities();
-            UniversityIDSched.DisplayMember = "Name";
-            UniversityIDSched.ValueMember = "ID";
-
-            DataGridViewComboBoxColumn UniversityIDCourse = grvCourse.Columns["UniversID"] as DataGridViewComboBoxColumn;
-            UniversityIDCourse.DataSource = GetUniversities();
-            UniversityIDCourse.DisplayMember = "Name";
-            UniversityIDCourse.ValueMember = "ID";
-
-            DataGridViewComboBoxColumn UniversityIDGrade = grvGrade.Columns["UniID"] as DataGridViewComboBoxColumn;
-            UniversityIDGrade.DataSource = GetUniversities();
-            UniversityIDGrade.DisplayMember = "Name";
-            UniversityIDGrade.ValueMember = "ID";
-            
-            grvStudents.CellContentClick += GrvStudents_CellContentClick;
-
-
+            DataGridViewComboBoxColumn colUni2 = grvSchedule.Columns["UniversityID"] as DataGridViewComboBoxColumn;
+            colUni2.DataSource = GetUniversities();
+            colUni2.DisplayMember = "Name";
+            colUni2.ValueMember = "ID";
 
         }
 
-        private void GrvStudents_CellContentClick(object? sender, DataGridViewCellEventArgs e) {
-
-            var grv = (DataGridView)sender;
-
-
-            DataGridViewButtonColumn col = grv.Columns[e.ColumnIndex] as DataGridViewButtonColumn;
-
-            if (col != null && col.Name == "colShowID" && e.RowIndex >= 0) {
-                Student student = grv.CurrentRow.DataBoundItem as Student;
-                MessageBox.Show($"The ID of student {student.Surname} {student.Name} is {student.ID}");
-            }
-        }
-
-
-        Serializer serializer = new Serializer();
-        /*serializer.SerializeToFile(university, "test.json");
-        university = serializer.Deserialize<University>("test.json");*/
-
-        private void btnRefresh_Click(object sender, EventArgs e) {
-            PopulateStudents();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labCourses_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            grvStudents.EndEdit();
+            PopulateStudents();
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
-            grvSchedule.EndEdit();
+        { 
+            PopulateCourses();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            grvCourse.EndEdit();
+            PopulateGrades();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            grvGrade.EndEdit();
+            PopulateSchedule();         
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button15_Click(object sender, EventArgs e)
         {
-            PopulateSchedule();
+            grvCourses.EndEdit();
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button13_Click(object sender, EventArgs e)
         {
-            PopulateCourses();
+            grvSchedule.EndEdit();
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void StudEnd_Click(object sender, EventArgs e)
         {
-            PopulateGrades();
+            grvStudents.EndEdit();
         }
 
-        private void grvCourse_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void GradesEnd_Click(object sender, EventArgs e)
         {
-
+            grvGrades.EndEdit();
         }
 
-        private void grvSchedule_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bsCourses_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void grvGrade_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
     }
 }

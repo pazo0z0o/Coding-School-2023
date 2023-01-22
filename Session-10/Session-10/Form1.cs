@@ -83,7 +83,7 @@ namespace Session_10
         }
         private void PopulateGrades()
         {
-            List<Student> pupil = _formStudents;   //GetStudents();
+            List<Student> pupil = _formStudents;   
             List<Course> lesson = _formCourses;
 
             Guid id = Guid.Parse("{3B407F08-DB94-4F02-A717-1BF6BE1B3B99} ");

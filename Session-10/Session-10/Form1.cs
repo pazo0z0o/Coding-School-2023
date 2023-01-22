@@ -7,10 +7,10 @@ namespace Session_10
 {
     public partial class Form1 : Form
     {
-        List<Student>? formStudents;//= new List<Student>(); 
-        List<Course>? formCourses;  
-        List<Schedule>? formScheduledCourse;
-        List<Grade>? formGrades;
+        private List<Student>? _formStudents;
+        private List<Course>? _formCourses;
+        private List<Schedule>? _formScheduledCourse;
+        private List<Grade>? _formGrades;
         public Form1()
         {
             InitializeComponent();
@@ -21,20 +21,11 @@ namespace Session_10
             
             PopulateStudents();
             PopulateCourses();
-            GetStudents();
-            GetCourses();
+            GetStudents();  // Called here to solve some null reference issues with _formStudents
+            GetCourses();  // Same: for _formCourses
             PopulateSchedule();
             PopulateGrades();
             SetControlProperties();
-            /*if (formCourses != null && formStudents != null)
-            { SetControlProperties(); }
-            else 
-            {
-                PopulateStudents();
-                PopulateCourses();
-                
-                SetControlProperties();
-            }*/
 
         }
 
@@ -61,9 +52,9 @@ namespace Session_10
                 UniversityID = unis[1].ID
             };
             List<Student> Students = new List<Student>() { stud1, stud2 };
-            formStudents = Students; //round about way, to bypass object property restrictions
+            _formStudents = Students; //round about way, to bypass object property restrictions
         
-        bsStudents.DataSource = formStudents;
+        bsStudents.DataSource = _formStudents;
         
         }
         
@@ -86,14 +77,14 @@ namespace Session_10
                 Subject = "Applied Math-2"
             };
             List<Course> Courses = new List<Course>() { cour1, cour2 };
-            formCourses = Courses;
+            _formCourses = Courses;
             //round about way, to bypass object property restrictions
-            bsCourses.DataSource = formCourses;
+            bsCourses.DataSource = _formCourses;
         }
         private void PopulateGrades()
         {
-            List<Student> pupil = formStudents;   //GetStudents();
-            List<Course> lesson = formCourses;
+            List<Student> pupil = _formStudents;   //GetStudents();
+            List<Course> lesson = _formCourses;
 
             Guid id = Guid.Parse("{3B407F08-DB94-4F02-A717-1BF6BE1B3B99} ");
             //  Guid StudID = 
@@ -114,15 +105,15 @@ namespace Session_10
             };
             //round about way, to bypass object property restrictions
             List<Grade> Grades = new List<Grade>(){ gradeStud1, gradeStud2 };
-            formGrades = Grades ;
+            _formGrades = Grades ;
 
-           bsGrades.DataSource = formGrades;
+           bsGrades.DataSource = _formGrades;
         }
 
         private void PopulateSchedule()
         {
             List<University> unis = GetUniversities();
-            List<Course> pupil = formCourses;
+            List<Course> pupil = _formCourses;
 
             Guid Sid = Guid.Parse("{F1A0C8E7-31FF-48A9-BB8A-B03000E1FAD8} ");
             Guid ProfID = Guid.Parse("{EAC4E63B-6FA0-43CA-A44D-4537071E127F}");
@@ -149,7 +140,7 @@ namespace Session_10
             };
             //round about way, to bypass object property restrictions
             List<Schedule> ScheduledCour = new List<Schedule>() { schedule1, schedule2 };
-            formScheduledCourse = ScheduledCour;
+            _formScheduledCourse = ScheduledCour;
 
             bsSchedule.DataSource = ScheduledCour;
         }
@@ -184,14 +175,14 @@ namespace Session_10
         {   
 
             List<Student> studs = new List<Student>();
-            studs = formStudents;
+            studs = _formStudents;
             return studs;
         }
 
         private List<Course> GetCourses()
         {
             List<Course> cour = new List<Course>();
-            cour = formCourses;
+            cour = _formCourses;
             return cour;
         }
 

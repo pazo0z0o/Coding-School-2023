@@ -110,6 +110,7 @@ namespace Session_10
            bsGrades.DataSource = _formGrades;
         }
 
+
         private void PopulateSchedule()
         {
             List<University> unis = GetUniversities();
@@ -287,7 +288,7 @@ namespace Session_10
             Serializer serializer = new Serializer();
             _formStudents = serializer.Deserialize<Student>("students.json");
 
-            //MessageBox.Show(_formStudents[0].Name + " Loaded!");
+            MessageBox.Show(_formStudents[0].Name + " Loaded!");
         }
 
         private void button11_Click(object sender, EventArgs e)

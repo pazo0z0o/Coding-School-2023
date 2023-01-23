@@ -222,6 +222,7 @@ namespace Session_10
         {
             Serializer serializer = new Serializer();
             serializer.SerializeToFile(_formScheduledCourse, "schedules.json");
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -284,10 +285,12 @@ namespace Session_10
         }
 
         private void button9_Click(object sender, EventArgs e)
-        {
+        {   
+            //bsStudents.ResetBindings(false);
             Serializer serializer = new Serializer();
             _formStudents = serializer.Deserialize<Student>("students.json");
-
+            bsStudents.ResetBindings(false);
+            bsStudents.DataSource = "students.json";
             MessageBox.Show(_formStudents[0].Name + " Loaded!");
         }
 

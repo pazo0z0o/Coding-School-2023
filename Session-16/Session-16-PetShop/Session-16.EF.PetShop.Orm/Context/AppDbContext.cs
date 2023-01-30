@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Session_16.EF.PetShop.Orm;
 using Session_16.EF.Models;
+using System.Numerics;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Session_16.EF.PetShop.Orm.Context
 {
@@ -29,6 +31,10 @@ namespace Session_16.EF.PetShop.Orm.Context
             modelBuilder.ApplyConfiguration(new PetReportConfig());
             modelBuilder.ApplyConfiguration(new TransactionsConfig());
             modelBuilder.ApplyConfiguration(new MonLedgerConfig());
+            // modelBuilder.Entity<MonthlyLedger>().HasKey(nameof(MonthlyLedger.Year), nameof(MonthlyLedger.Month));
+            // modelBuilder.Entity<PetReport>().HasKey(nameof(PetReport.Year), nameof(PetReport.Month));
+         
+
             base.OnModelCreating(modelBuilder);
         }
 

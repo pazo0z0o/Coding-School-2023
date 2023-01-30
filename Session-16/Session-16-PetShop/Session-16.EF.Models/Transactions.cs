@@ -20,18 +20,22 @@ namespace Session_16.EF.Models
         public decimal? TotalPrice { get; set; }
         public bool loaded = false;
 
-        public Transactions(DateTime date, Guid customerID, Guid employeeID, AnimalType animalType, decimal petFoodQty,Guid pfoodID)
+        public Transactions()
+        {
+
+        }
+        public Transactions(Guid TransID, DateTime date)
         {
             TransID = Guid.NewGuid();
-            PetID = Guid.Empty;
+           // PetID = PetID;
             //_loaded = false;
             Date = date;
-            CustomerID = customerID;
-            EmployeeID = employeeID;
-            PetFoodID = pfoodID;
+            //CustomerID = customerID;
+           // EmployeeID = employeeID;
+            //PetFoodID = pfoodID;
         }
 
-
+        //  Guid customerID, Guid employeeID, AnimalType animalType, decimal petFoodQty,Guid pfoodID
 
 
 

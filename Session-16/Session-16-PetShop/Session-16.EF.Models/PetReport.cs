@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Session_16.EF.Models
 {
+    [PrimaryKey(nameof(Year), nameof(Month))]
     public class PetReport
     {   //This is very very dubious with year and month
         public int Year { get; set; }
@@ -14,11 +16,13 @@ namespace Session_16.EF.Models
 
         public decimal TotalSold { get; set; }
 
+        public PetReport() { }
+       
 
-        public PetReport(DateTime y, DateTime m)
+        public PetReport(int year, int month)
         {
-            Year = y.Year ;
-            Month = m.Month ;
+            Year = year ;
+            Month = month ;
         }
 
     }

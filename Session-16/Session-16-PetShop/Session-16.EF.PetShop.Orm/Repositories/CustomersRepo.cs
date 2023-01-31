@@ -1,5 +1,6 @@
 ﻿using Session_16.EF.Models;
 using Session_16.EF.PetShop.Orm.Context;
+using Session16.EF.PetShop.Orm.Migrations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace Session_16.EF.PetShop.Orm.Repositories
         public void Delete(Guid id)
         {
             using var context = new AppDbContext();
-            var dbTodo = context.Customs.Where(customs => customs.CustomerID == id).SingleOrDefault();
-            if (dbTodo is null)
+            var dbPetShop = context.Customs.Where(customs => customs.CustomerID == id).SingleOrDefault();
+            if (dbPetShop is null)
                 return;
-            context.Remove(dbTodo);
+            context.Remove(dbPetShop);
             context.SaveChanges();
 
         }
@@ -32,32 +33,30 @@ namespace Session_16.EF.PetShop.Orm.Repositories
 
         public IList<Customers> GetAll()
         {
-            throw new NotImplementedException();
+            using var context = new AppDbContext();
+            return context.Customs.ToList();
         }
 
         public Customers? GetById(Guid id)
         {
-            throw new NotImplementedException();
+            using var context = new AppDbContext();
+            return context.Customs.Where(customs => customs.CustomerID == id).SingleOrDefault();
+                
         }
 
         public void Update(Guid id, Customers entity)
         {
-            throw new NotImplementedException();
+            using var context = new AppDbContext();
+            var dbPetShop = context.Customs.Where(customs => customs.CustomerID == id).SingleOrDefault();
+            if (dbPetShop is null)
+                return;
+            dbPetShop.Name = entity.Name;
+            dbPetShop.Surname = entity.Surname;
+            dbPetShop.Phone = entity.Phone;
+            dbPetShop.TIN = entity.TIN;
+            context.SaveChanges();
         }
 
-        /* public IList<Customers> GetAll()
-         {
-
-         }
-
-         public Customers? GetById(int id)
-         {
-
-         }
-
-         public void Update(int id, Customers entity)
-         {
-
-         }*/
+       
     }
 }

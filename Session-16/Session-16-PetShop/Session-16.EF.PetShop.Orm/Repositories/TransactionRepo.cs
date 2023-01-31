@@ -34,42 +34,51 @@ namespace Session_16.EF.PetShop.Orm.Repositories
         public IList<Transactions> GetAll()
         {
             using var context = new AppDbContext();
-            return context.Transact.Include(trans => trans.CustomerID).Include(trans => trans.EmployeeID).Include(trans => trans.PetFoodID).ToList();
+            return context.Transact.Include(trans => trans.Customer).Include(trans => trans.Employee).Include(trans => trans.Pfood).ToList();
         }
 
         public Transactions? GetById(Guid id)
         {
 
             using var context = new AppDbContext();
-            return context.Transact.Where(trans => trans.TransID == id);
+            return context.Transact.Where(trans => trans.TransID == id).Include(trans => trans.Customer).Include(trans => trans.Employee).Include(trans => trans.Pfood).SingleOrDefault();
                 
-                //.Include(trans => trans.Customer)
-                //.Include(trans => trans.EmployeeID)
-                //.Include(trans => trans.PetFoodID).SingleOrDefault();
+               
         }
 
         
 
         public void Update(Guid id, Transactions entity)
         {
-           
+            using var context = new AppDbContext();
+            var dbPetShop = context.Transact.Where(pfs => pfs.TransID == id).SingleOrDefault();
+            if (dbPetShop is null)
+                return;
+            dbPetShop.Date = entity.Date;
+            dbPetShop.Customer = entity.Customer;
+            dbPetShop.Employee = entity.Employee;
+            dbPetShop.Pets = entity.Pets;
+            dbPetShop.Pfood = entity.Pfood;
+            dbPetShop.PetPrice= entity.PetPrice;
+            dbPetShop.PetFoodPrice = entity.PetFoodPrice;
+            dbPetShop.PetFoodQty = entity.PetFoodQty;
+            dbPetShop.TotalPrice = entity.TotalPrice;
+            dbPetShop.TotalPrice = entity.TotalPrice;
+            context.SaveChanges();
         }
 
-        Transactions? IEntity<Transactions>.GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
 
 /*
-public Guid? TransID { get; set; }
-public DateTime Date { get; set; }
-public Guid CustomerID { get; set; }
-public Guid? EmployeeID { get; set; }
-public Guid? PetID { get; set; }
-public decimal? PetPrice { get; set; }
-public Guid? PetFoodID { get; set; }
+//public Guid? TransID { get; set; }
+//public DateTime Date { get; set; }
+//public Guid CustomerID { get; set; }
+//public Guid? EmployeeID { get; set; }
+//public Guid? PetID { get; set; }
+//public decimal? PetPrice { get; set; }
+//public Guid? PetFoodID { get; set; }
 public decimal PetFoodQty { get; set; }
 public decimal? PetFoodPrice { get; set; }
 public decimal? TotalPrice { get; set; }

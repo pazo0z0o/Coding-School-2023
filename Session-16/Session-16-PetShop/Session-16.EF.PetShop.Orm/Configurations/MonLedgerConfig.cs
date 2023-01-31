@@ -14,8 +14,7 @@ namespace Session_16.EF.PetShop.Orm.Configurations
         public void Configure(EntityTypeBuilder<MonthlyLedger> builder)
         {
             builder.HasKey(todo => todo.Id); //Primary key HasKey
-                                             // builder.HasKey(todo => todo.Month);  does this count as a composite key assignment?
-            builder.Property(todo => todo.Id).ValueGeneratedOnAdd();
+            builder.Property(todo => todo.Id);
             
             builder.Property(todo => todo.Year).HasMaxLength(4).IsRequired(true);
             builder.Property(todo => todo.Month).HasMaxLength(15).IsRequired(true);

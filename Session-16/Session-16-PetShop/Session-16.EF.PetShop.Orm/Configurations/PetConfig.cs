@@ -22,8 +22,8 @@ namespace Session_16.EF.PetShop.Orm.Configurations
             builder.Property(todo => todo.Animaltype).HasMaxLength(15).IsRequired(true);
             builder.Property(todo => todo.Petstatus).HasMaxLength(15).IsRequired(true);
             builder.Property(todo => todo.Breed).HasMaxLength(20);
-            builder.Property(todo => todo.Price).HasMaxLength(5).IsRequired(true);
-            builder.Property(todo => todo.Cost).HasMaxLength(5).IsRequired(true);
+            builder.Property(todo => todo.Price).HasMaxLength(5).HasPrecision(5).IsRequired(true);
+            builder.Property(todo => todo.Cost).HasMaxLength(5).HasPrecision(5).IsRequired(true);
    
         
         }

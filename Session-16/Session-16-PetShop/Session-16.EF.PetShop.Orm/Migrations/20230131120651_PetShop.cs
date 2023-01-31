@@ -45,8 +45,8 @@ namespace Session16.EF.PetShop.Orm.Migrations
                 name: "MonthLedger",
                 columns: table => new
                 {
-                    Year = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Year = table.Column<int>(type: "int", maxLength: 4, nullable: false),
                     Month = table.Column<int>(type: "int", maxLength: 15, nullable: false),
                     Income = table.Column<decimal>(type: "decimal(18,2)", maxLength: 15, nullable: false),
                     Expenses = table.Column<decimal>(type: "decimal(18,2)", maxLength: 15, nullable: false),
@@ -54,7 +54,7 @@ namespace Session16.EF.PetShop.Orm.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MonthLedger", x => x.Year);
+                    table.PrimaryKey("PK_MonthLedger", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,15 +77,15 @@ namespace Session16.EF.PetShop.Orm.Migrations
                 name: "PetRep",
                 columns: table => new
                 {
-                    Year = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Year = table.Column<int>(type: "int", maxLength: 4, nullable: false),
                     Month = table.Column<int>(type: "int", maxLength: 15, nullable: false),
                     Animal = table.Column<int>(type: "int", maxLength: 15, nullable: false),
                     TotalSold = table.Column<decimal>(type: "decimal(18,2)", maxLength: 5, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PetRep", x => x.Year);
+                    table.PrimaryKey("PK_PetRep", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,11 +110,11 @@ namespace Session16.EF.PetShop.Orm.Migrations
                 {
                     TransID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", maxLength: 50, nullable: false),
-                    CustomerID = table.Column<Guid>(type: "uniqueidentifier", maxLength: 50, nullable: false),
-                    EmployeeID = table.Column<Guid>(type: "uniqueidentifier", maxLength: 50, nullable: true),
-                    PetID = table.Column<Guid>(type: "uniqueidentifier", maxLength: 50, nullable: false),
+                    CustomerID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EmployeeID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PetID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PetPrice = table.Column<decimal>(type: "decimal(18,2)", maxLength: 50, nullable: false),
-                    PetFoodID = table.Column<Guid>(type: "uniqueidentifier", maxLength: 50, nullable: false),
+                    PetFoodID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PetFoodQty = table.Column<decimal>(type: "decimal(18,2)", maxLength: 50, nullable: false),
                     PetFoodPrice = table.Column<decimal>(type: "decimal(18,2)", maxLength: 50, nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", maxLength: 50, nullable: false),
@@ -123,12 +123,65 @@ namespace Session16.EF.PetShop.Orm.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transactions", x => x.TransID);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Customers_CustomerID",
+                        column: x => x.CustomerID,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Employees_EmployeeID",
+                        column: x => x.EmployeeID,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Pet Food_PetFoodID",
+                        column: x => x.PetFoodID,
+                        principalTable: "Pet Food",
+                        principalColumn: "PetFoodID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Pets_PetID",
+                        column: x => x.PetID,
+                        principalTable: "Pets",
+                        principalColumn: "PetID",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_CustomerID",
+                table: "Transactions",
+                column: "CustomerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_EmployeeID",
+                table: "Transactions",
+                column: "EmployeeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_PetFoodID",
+                table: "Transactions",
+                column: "PetFoodID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_PetID",
+                table: "Transactions",
+                column: "PetID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "MonthLedger");
+
+            migrationBuilder.DropTable(
+                name: "PetRep");
+
+            migrationBuilder.DropTable(
+                name: "Transactions");
+
             migrationBuilder.DropTable(
                 name: "Customers");
 
@@ -136,19 +189,10 @@ namespace Session16.EF.PetShop.Orm.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "MonthLedger");
-
-            migrationBuilder.DropTable(
                 name: "Pet Food");
 
             migrationBuilder.DropTable(
-                name: "PetRep");
-
-            migrationBuilder.DropTable(
                 name: "Pets");
-
-            migrationBuilder.DropTable(
-                name: "Transactions");
         }
     }
 }

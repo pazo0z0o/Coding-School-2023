@@ -22,7 +22,7 @@ namespace Session_16.EF.PetShop.Orm.Configurations
             builder.Property(todo => todo.EmpName).HasMaxLength(50);
             builder.Property(todo => todo.EmpSurname).HasMaxLength(50);
             builder.Property(todo => todo.EmpType).HasMaxLength(10);
-            builder.Property(todo => todo.SalaryPerMonth).HasMaxLength(5).IsRequired(true);
+            builder.Property(todo => todo.SalaryPerMonth).HasMaxLength(5).HasPrecision(5).IsRequired(true);
         }
     }
 }

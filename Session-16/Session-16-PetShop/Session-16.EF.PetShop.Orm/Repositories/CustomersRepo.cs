@@ -1,4 +1,5 @@
-﻿using Session_16.EF.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Session_16.EF.Models;
 using Session_16.EF.PetShop.Orm.Context;
 using Session16.EF.PetShop.Orm.Migrations;
 using System;
@@ -34,13 +35,13 @@ namespace Session_16.EF.PetShop.Orm.Repositories
         public IList<Customers> GetAll()
         {
             using var context = new AppDbContext();
-            return context.Customs.ToList();
+            return context.Customs.Include(customs => customs.Transacts).ToList();
         }
 
         public Customers? GetById(Guid id)
         {
             using var context = new AppDbContext();
-            return context.Customs.Where(customs => customs.CustomerID == id).SingleOrDefault();
+            return context.Customs.Where(customs => customs.CustomerID == id).Include(customs => customs.Transacts).SingleOrDefault();
                 
         }
 
@@ -54,7 +55,9 @@ namespace Session_16.EF.PetShop.Orm.Repositories
             dbPetShop.Surname = entity.Surname;
             dbPetShop.Phone = entity.Phone;
             dbPetShop.TIN = entity.TIN;
+            dbPetShop.Transacts = entity.Transacts;
             context.SaveChanges();
+
         }
 
        

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Session_16.EF.Models
 {
-   public class PetFood
+   public class PetFood : Pet
    {
         public Guid PetFoodID { get; set; }
-        public AnimalType Animaltype { get; set; }
+        //public AnimalType Animaltype { get; set; }
         public decimal Price { get; set; }
         public decimal Cost { get; set; }
         public decimal? Qty { get; set; }

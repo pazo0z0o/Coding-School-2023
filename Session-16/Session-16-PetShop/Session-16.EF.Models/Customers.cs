@@ -14,6 +14,8 @@ namespace Session_16.EF.Models
       public string Phone { get; set; }
       public int TIN { get; set; }
 
+        public Transactions Transacts { get; set; } //Foreign
+
         public Customers() { CustomerID = new Guid(); }
         public Customers(string name, string surn, string phone, int tin)
         {   

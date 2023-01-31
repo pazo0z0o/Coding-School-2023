@@ -15,10 +15,12 @@ namespace Session_16.EF.PetShop.Orm.Configurations
     {
         public void Configure(EntityTypeBuilder<PetReport> builder)
         {
-            builder.HasKey(todo => todo.Year); //Primary key HasKey
-           // builder.HasKey(todo => todo.Month); 
-            builder.Property(todo => todo.Year).ValueGeneratedOnAdd();
-          
+            builder.HasKey(todo => todo.Id); //Primary key HasKey
+                                             // builder.HasKey(todo => todo.Month);  does this count as a composite key assignment?
+            builder.Property(todo => todo.Id).ValueGeneratedOnAdd();
+            // builder.HasKey(todo => todo.Month); 
+            builder.Property(todo => todo.Year).HasMaxLength(4).IsRequired(true);
+
             // builder.
             builder.Property(todo => todo.Month).HasMaxLength(15).IsRequired(true);
             builder.Property(todo => todo.Animal).HasMaxLength(15).IsRequired(true);

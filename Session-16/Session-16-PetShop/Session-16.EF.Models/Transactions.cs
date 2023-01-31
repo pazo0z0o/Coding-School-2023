@@ -19,6 +19,11 @@ namespace Session_16.EF.Models
         public decimal? PetFoodPrice { get; set; }
         public decimal? TotalPrice { get; set; }
         public bool loaded = false;
+        //=============Foreign Keys Emplo , Custom, Pet,PetFood  = ID 
+        public Customers Customer { get; set; }
+        public Employees Employee { get; set; }
+        public Pet Pets { get; set; }
+        public PetFood Pfood { get; set; }
 
         public Transactions()
         {

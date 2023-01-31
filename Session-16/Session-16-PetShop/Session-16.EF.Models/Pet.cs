@@ -42,6 +42,9 @@ namespace Session_16.EF.Models
 
         // public Guid? TransactionID { get; set; }
         //===================================================
+        public Transactions Transacts { get; set; } //Foreign
+
+
         public Pet() { PetID = Guid.NewGuid(); }
         public Pet(string breed, AnimalType animaltype, decimal price, decimal cost, PetStatus petstatus)
         {

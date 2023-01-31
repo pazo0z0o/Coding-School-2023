@@ -22,6 +22,9 @@ namespace Session_16.EF.Models
         public EmployeeType EmpType { get; set; }
         public decimal SalaryPerMonth { get; set; }
         //==============================================
+        public Transactions Transacts { get; set; } //Foreign
+
+
 
         public Employees()
         {

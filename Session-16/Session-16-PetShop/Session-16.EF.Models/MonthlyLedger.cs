@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace Session_16.EF.Models
 {
-    [PrimaryKey(nameof(Year), nameof(Month))]
+   // [PrimaryKey(nameof(Year), nameof(Month))]
     public  class MonthlyLedger
     {
+        public MonthlyLedger() { }
+        
+        public Guid Id { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
         public decimal? Income { get; set; }
@@ -18,6 +21,7 @@ namespace Session_16.EF.Models
 
         public MonthlyLedger(int year, int month)
         {
+            Id = Guid.NewGuid();
             Year = year;
             Month = month;
         }

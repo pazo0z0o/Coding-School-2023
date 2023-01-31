@@ -17,7 +17,6 @@ namespace Session_16.EF.PetShop.Orm.Context
         public DbSet<Customers> Customs { get; set; }
         public DbSet<Employees> Emps { get; set; }
         public DbSet<Pet> Pets { get; set; }
-
         public DbSet<PetFood> PetFoods { get; set; }
         public DbSet<MonthlyLedger> MonthLedger { get; set; }
         public DbSet<PetReport> PetRep { get; set; }
@@ -31,9 +30,7 @@ namespace Session_16.EF.PetShop.Orm.Context
             modelBuilder.ApplyConfiguration(new PetReportConfig());
             modelBuilder.ApplyConfiguration(new TransactionsConfig());
             modelBuilder.ApplyConfiguration(new MonLedgerConfig());
-            // modelBuilder.Entity<MonthlyLedger>().HasKey(nameof(MonthlyLedger.Year), nameof(MonthlyLedger.Month));
-            // modelBuilder.Entity<PetReport>().HasKey(nameof(PetReport.Year), nameof(PetReport.Month));
-         
+           
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,23 +17,34 @@ public void Configure(EntityTypeBuilder<Transactions> builder)
         {
             builder.ToTable("Transactions"); //table name
 
-            builder.HasKey(todo => todo.TransID); //Primary key HasKey
-            builder.Property(todo => todo.TransID).ValueGeneratedOnAdd();
+            builder.HasKey(trans => trans.TransID); //Primary key HasKey
+            builder.Property(trans => trans.TransID).ValueGeneratedOnAdd();
             // builder.
-            builder.Property(todo => todo.Date).HasMaxLength(50).IsRequired(true);
-            builder.Property(todo => todo.CustomerID).HasMaxLength(50).IsRequired(true);
-            builder.Property(todo => todo.EmployeeID).HasMaxLength(50);
-           
-            builder.Property(todo => todo.PetID).HasMaxLength(50).IsRequired(true);
-            builder.Property(todo => todo.PetPrice).HasMaxLength(50).IsRequired(true);
+            builder.Property(trans => trans.Date).HasMaxLength(50).IsRequired(true);
+            //builder.Property(todo => todo.CustomerID).HasMaxLength(50).IsRequired(true);
+            //builder.Property(todo => todo.EmployeeID).HasMaxLength(50);
+           //builder.Property(todo => todo.PetFoodID).HasMaxLength(50).IsRequired(true);
+            //builder.Property(todo => todo.PetID).HasMaxLength(50).IsRequired(true);
+            builder.Property(trans => trans.PetPrice).HasMaxLength(50).IsRequired(true);
                  
-            builder.Property(todo => todo.PetFoodID).HasMaxLength(50).IsRequired(true);
-            builder.Property(todo => todo.PetFoodPrice).HasMaxLength(50).IsRequired(true);
-            builder.Property(todo => todo.PetFoodQty).HasMaxLength(50).IsRequired(true);
-            builder.Property(todo => todo.TotalPrice).HasMaxLength(50).IsRequired(true);
-            builder.Property(todo => todo.loaded).HasMaxLength(50).IsRequired(true);
-
-
+            
+            builder.Property(trans => trans.PetFoodPrice).HasMaxLength(50).IsRequired(true);
+            builder.Property(trans => trans.PetFoodQty).HasMaxLength(50).IsRequired(true);
+            builder.Property(trans => trans.TotalPrice).HasMaxLength(50).IsRequired(true);
+            builder.Property(trans => trans.loaded).HasMaxLength(50).IsRequired(true);
+            // Foreign Keys
+            builder.HasOne(trans => trans.Customer)
+                 .WithMany(todo => todo.Transacts)
+                 .HasForeignKey(trans => trans.CustomerID);
+            builder.HasOne(trans => trans.Employee)
+                 .WithMany(todo => todo.Transacts)
+                 .HasForeignKey(trans => trans.EmployeeID);
+            builder.HasOne(trans => trans.Pets)
+                 .WithMany(todo => todo.Transacts)
+                 .HasForeignKey(trans => trans.PetID);
+            builder.HasOne(trans => trans.Pfood)
+                .WithMany(todo => todo.Transacts)
+                .HasForeignKey(trans => trans.PetFoodID);
 
         }
     }

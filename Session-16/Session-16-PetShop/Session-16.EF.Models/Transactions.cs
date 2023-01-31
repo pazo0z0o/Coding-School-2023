@@ -24,7 +24,7 @@ namespace Session_16.EF.Models
         public Employees Employee { get; set; }
         public Pet Pets { get; set; }
         public PetFood Pfood { get; set; }
-
+       //==============================================================
         public Transactions()
         {
 
@@ -32,15 +32,15 @@ namespace Session_16.EF.Models
         public Transactions(Guid TransID, DateTime date)
         {
             TransID = Guid.NewGuid();
-           // PetID = PetID;
+           Date = date;
+            // PetID = PetID;
             //_loaded = false;
-            Date = date;
-            //CustomerID = customerID;
-           // EmployeeID = employeeID;
-            //PetFoodID = pfoodID;
+           //CustomerID = customerID;
+          // EmployeeID = employeeID;
+            // PetFoodID = pfoodID;
         }
 
-        //  Guid customerID, Guid employeeID, AnimalType animalType, decimal petFoodQty,Guid pfoodID
+        
 
 
 

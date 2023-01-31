@@ -15,7 +15,7 @@ namespace Session_16.EF.Models
         public decimal? Qty { get; set; }
         public decimal? CurrentStock { get; set; }
 
-        public Transactions Transacts { get; set; } //Foreign
+        public List<Transactions> Transacts { get; set; }
 
 
         public PetFood()

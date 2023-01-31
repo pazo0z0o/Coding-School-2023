@@ -34,4 +34,5 @@ namespace Session_16.EF.PetShop.Orm.Configurations
 public int MyFirstKeyProperty { get; set; }
 
 [Key, Column(Order = 1)]
-public int MySecondKeyProperty { get; set; }*/
+public int MySecondKeyProperty { get; set; }
+*/

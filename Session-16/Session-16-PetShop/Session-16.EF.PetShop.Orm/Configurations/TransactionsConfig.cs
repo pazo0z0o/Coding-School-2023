@@ -21,13 +21,8 @@ public void Configure(EntityTypeBuilder<Transactions> builder)
             builder.Property(trans => trans.TransID).ValueGeneratedOnAdd();
             // builder.
             builder.Property(trans => trans.Date).HasMaxLength(50).IsRequired(true);
-            //builder.Property(todo => todo.CustomerID).HasMaxLength(50).IsRequired(true);
-            //builder.Property(todo => todo.EmployeeID).HasMaxLength(50);
-           //builder.Property(todo => todo.PetFoodID).HasMaxLength(50).IsRequired(true);
-            //builder.Property(todo => todo.PetID).HasMaxLength(50).IsRequired(true);
-            builder.Property(trans => trans.PetPrice).HasMaxLength(50).HasPrecision(5).IsRequired(true);
-                 
-            
+           
+            builder.Property(trans => trans.PetPrice).HasMaxLength(50).HasPrecision(5).IsRequired(true);     
             builder.Property(trans => trans.PetFoodPrice).HasMaxLength(50).HasPrecision(5).IsRequired(true);
             builder.Property(trans => trans.PetFoodQty).HasMaxLength(50).IsRequired(true);
             builder.Property(trans => trans.TotalPrice).HasMaxLength(50).HasPrecision(5).IsRequired(true);
@@ -40,8 +35,9 @@ public void Configure(EntityTypeBuilder<Transactions> builder)
                  .WithMany(todo => todo.Transacts)
                  .HasForeignKey(trans => trans.EmployeeID);
             builder.HasOne(trans => trans.Pets)
-                 .WithMany(todo => todo.Transacts)
-                 .HasForeignKey(trans => trans.PetID);
+                 .WithOne(pet => pet.Transacts)
+                 .HasForeignKey<Transactions>(trans => trans.PetID);
+            
             builder.HasOne(trans => trans.Pfood)
                 .WithMany(todo => todo.Transacts)
                 .HasForeignKey(trans => trans.PetFoodID);

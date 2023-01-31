@@ -24,13 +24,9 @@ namespace Session_16.EF.Models
             Phone = phone;
             TIN = tin;
         }
-    
-    
-    
-    
-    
-    
-    
-    
+
+        public Customers(string text)
+        {
+        }
     }
 }

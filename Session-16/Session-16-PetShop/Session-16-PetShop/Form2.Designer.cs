@@ -34,13 +34,14 @@
             this.btn_Update = new System.Windows.Forms.Button();
             this.btn_Refresh = new System.Windows.Forms.Button();
             this.grvCustomers = new System.Windows.Forms.DataGridView();
-            this.bsCustomers = new System.Windows.Forms.BindingSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Custom_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Custom_Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Custom_Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Custom_TIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsCustomers = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_Add = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grvCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
             this.SuspendLayout();
@@ -101,19 +102,6 @@
             this.grvCustomers.Size = new System.Drawing.Size(544, 149);
             this.grvCustomers.TabIndex = 24;
             // 
-            // bsCustomers
-            // 
-            this.bsCustomers.DataSource = typeof(Session_16.EF.Models.Customers);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 15);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Customers";
-            // 
             // CustomerID
             // 
             this.CustomerID.HeaderText = "Customer ID";
@@ -139,11 +127,35 @@
             this.Custom_TIN.HeaderText = "TIN";
             this.Custom_TIN.Name = "Custom_TIN";
             // 
+            // bsCustomers
+            // 
+            this.bsCustomers.DataSource = typeof(Session_16.EF.Models.Customers);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 15);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Customers";
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.Location = new System.Drawing.Point(652, 90);
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(79, 23);
+            this.btn_Add.TabIndex = 26;
+            this.btn_Add.Text = "Add";
+            this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1171, 629);
+            this.Controls.Add(this.btn_Add);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grvCustomers);
             this.Controls.Add(this.btn_Refresh);
@@ -174,5 +186,6 @@
         private DataGridViewTextBoxColumn Custom_Surname;
         private DataGridViewTextBoxColumn Custom_Phone;
         private DataGridViewTextBoxColumn Custom_TIN;
+        private Button btn_Add;
     }
 }

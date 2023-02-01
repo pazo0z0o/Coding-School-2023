@@ -53,7 +53,7 @@ namespace Session_16.EF.PetShop.Orm.Repositories
             dbPetShop.Surname = entity.Surname;
             dbPetShop.Phone = entity.Phone;
             dbPetShop.TIN = entity.TIN;
-            dbPetShop.Transacts = entity.Transacts;
+         // dbPetShop.Transacts = entity.Transacts;
             context.SaveChanges();
 
         }
@@ -61,3 +61,4 @@ namespace Session_16.EF.PetShop.Orm.Repositories
        
     }
 }
+                                        

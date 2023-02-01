@@ -71,21 +71,4 @@ namespace Session_16.EF.PetShop.Orm.Repositories
     }
 }
 
-/*
-//public Guid? TransID { get; set; }
-//public DateTime Date { get; set; }
-//public Guid CustomerID { get; set; }
-//public Guid? EmployeeID { get; set; }
-//public Guid? PetID { get; set; }
-//public decimal? PetPrice { get; set; }
-//public Guid? PetFoodID { get; set; }
-public decimal PetFoodQty { get; set; }
-public decimal? PetFoodPrice { get; set; }
-public decimal? TotalPrice { get; set; }
-public bool loaded = false;
-//=============Foreign Keys Emplo , Custom, Pet,PetFood  = ID 
-public Customers Customer { get; set; }
-public Employees Employee { get; set; }
-public Pet Pets { get; set; }
-public PetFood Pfood { get; set; }
-//==============================================================*/
+

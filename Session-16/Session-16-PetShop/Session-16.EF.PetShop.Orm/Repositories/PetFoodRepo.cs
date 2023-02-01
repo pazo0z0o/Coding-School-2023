@@ -51,7 +51,7 @@ namespace Session_16.EF.PetShop.Orm.Repositories
             dbPetShop.Cost = entity.Cost;
             dbPetShop.Qty = entity.Qty;
             dbPetShop.CurrentStock = entity.CurrentStock;
-            dbPetShop.Transacts = entity.Transacts;
+            //dbPetShop.Transacts = entity.Transacts;
             context.SaveChanges();
 
         }

@@ -14,7 +14,7 @@ namespace Session_16.EF.Models
       public string Phone { get; set; }
       public int TIN { get; set; }
 
-        public List<Transactions> Transacts { get; set; }
+        public List<Transactions> Transacts { get; set; } //= null;
 
         public Customers() { CustomerID = new Guid(); }
         public Customers(string name, string surn, string phone, int tin)

@@ -52,7 +52,7 @@ namespace Session_16.EF.PetShop.Orm.Repositories
             dbPetShop.Breed = entity.Breed;
             dbPetShop.Price = entity.Price;
             dbPetShop.Cost = entity.Cost;
-            dbPetShop.Transacts = entity.Transacts;
+           // dbPetShop.Transacts = entity.Transacts;
             context.SaveChanges();
         }
     }

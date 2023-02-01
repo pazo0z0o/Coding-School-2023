@@ -53,7 +53,7 @@ namespace Session_16.EF.PetShop.Orm.Repositories
             dbPetShop.EmpSurname = entity.EmpSurname;
             dbPetShop.SalaryPerMonth = entity.SalaryPerMonth;
             dbPetShop.EmpType = entity.EmpType;
-            dbPetShop.Transacts = entity.Transacts;
+           //dbPetShop.Transacts = entity.Transacts;
             context.SaveChanges();
         }
 

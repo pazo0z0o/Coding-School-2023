@@ -22,7 +22,7 @@ namespace Session_16.EF.Models
         public EmployeeType EmpType { get; set; }
         public decimal SalaryPerMonth { get; set; }
         //==============================================
-        public List<Transactions> Transacts { get; set; }
+        public List<Transactions> Transacts { get; set; } //= null;
 
 
 

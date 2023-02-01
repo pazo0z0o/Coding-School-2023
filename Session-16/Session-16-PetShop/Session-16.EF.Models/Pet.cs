@@ -42,7 +42,7 @@ namespace Session_16.EF.Models
 
         // public Guid? TransactionID { get; set; }
         //===================================================
-        public Transactions Transacts { get; set; }
+        public Transactions Transacts { get; set; } //= null;
 
 
         public Pet() { PetID = Guid.NewGuid(); }

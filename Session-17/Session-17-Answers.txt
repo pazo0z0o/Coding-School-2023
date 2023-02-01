@@ -1,0 +1,52 @@
+1.Πως μπορούμε να κάνουμε ένα Request σε ένα εξωτερικό API χωρίς να γνωρίζει ολόκληρο το url μας;
+	
+Proxy server που διαμεσολαβεί μεταξύ του API και του δικού μας domain. Εγώ στέλνω τα requests μου στον proxy , και αυτός με 
+τη σειρά του στο API που δε θέλουμε να δείξουμε το URL μας ή άλλα στοιχεία μας.  
+
+Redirect services:  πχ. bit.ly που είναι και URL shortener σαν κύριο function  
+
+2. Αν κάνω ενα GET request και ζητήσω ενα jpeg image, το response τι content-type πρεπει να εχει;
+	
+	Content-Type: image/jpeg
+
+3. Πως μπορώ να κάνω ένα GET request και το περιεχόμενο του να κρατηθεί στην cache για 1 μέρα;
+	
+	Με τη χρήση  header, συγκεκριμένα του Cache-Control: Max-age = 3600*24;  //86400
+	
+	request.Headers.Add("Cache-Control", "max-age=86400");
+	
+4. Μπορώ να έχω μια εφαρμογή που κάνει μόνο GET requests
+	
+	Short surface level answer: Όχι, χρειαζόμαστε και όλες τις άλλες κλήσεις για να υπάρχει αλληλεπίδραση μεταξύ client και server.
+	Niche answer: Μπορώ να έχω πχ server-side apps(περιορισμένων δυνατοτήτων/εύρους) για συλλογή στοιχείων για να κάνει retrieve
+				  HTML,CSS,JS resources, αλλά περιορίζεται εκεί. 
+
+5. Μπορώ να έχω μια εφαρμογή που κάνει μόνο POST requests; 
+
+	Ναι θεωρητικά, αλλά πάλι χωρίς στοιχεία από πίσω ήδη βαλμένα και χωρίς να κάνει GET,PUT requests σε κάποιον server,
+	θα είναι εξαιρετικά limited.
+	Basicly No!
+	
+6. Τι status code περιμένω από ένα API αν δεν έχω στείλει ένα υποχρεωτικό πεδίο;
+	HTTP status code: 400 Bad request
+	
+7. Τι status code περιμένω από ένα API αν δεν υπάρχει επικοινωνία με τη βάση
+
+	HTTP status code: 500 Internal Server Error
+
+8. Μπορώ να κάνω Login με GET request;
+	
+	MONO με  POST requests μιας και στέλνουν στοιχεία στο server για authentication.
+	Επίσης τα στοιχεία ενός get request φαίνονται στο address bar του browser, φαντάσου η φόρμα να κάνει απόκρυψη των στοιχείων σου,
+	και εσύ να λες "I got nothing to hide" , παρελαύνοντας το password σου στο address bar...
+
+9.  Ποια είναι η διαφορά ανάμεσα στο PUTκαι στο POST;
+
+	POST: στέλνει στοιχεία στον server, create  || PUT: update στοιχείων στον server
+	POST: same requests,multiple times = αλλαγές και παρενέργειες στον σέρβερ || PUT: same requests,multiple times = 
+	POST: η μερική ανανέωση ενός στοιχείου είναι εφικτή || PUT: χρήση του για ολική ανανέωση του στοιχείου στον server
+
+10. Ποια μέθοδο θα πρέπει να χρησιμοποιήσω για να «ανεβάσω» ένα αρχείο;
+
+	POST
+

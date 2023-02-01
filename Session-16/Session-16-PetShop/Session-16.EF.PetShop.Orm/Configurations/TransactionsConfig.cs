@@ -22,11 +22,11 @@ public void Configure(EntityTypeBuilder<Transactions> builder)
             // builder.
             builder.Property(trans => trans.Date).HasMaxLength(50).IsRequired(true);
            
-            builder.Property(trans => trans.PetPrice).HasMaxLength(50).HasPrecision(5).IsRequired(true);     
-            builder.Property(trans => trans.PetFoodPrice).HasMaxLength(50).HasPrecision(5).IsRequired(true);
+            builder.Property(trans => trans.PetPrice).HasMaxLength(50).HasPrecision(10,5).IsRequired(true);     
+            builder.Property(trans => trans.PetFoodPrice).HasMaxLength(50).HasPrecision(10,5).IsRequired(true);
             builder.Property(trans => trans.PetFoodQty).HasMaxLength(50).IsRequired(true);
-            builder.Property(trans => trans.TotalPrice).HasMaxLength(50).HasPrecision(5).IsRequired(true);
-            builder.Property(trans => trans.loaded).HasMaxLength(50).IsRequired(true);
+            builder.Property(trans => trans.TotalPrice).HasMaxLength(50).HasPrecision(10,5).IsRequired(true);
+           // builder.Property(trans => trans.loaded).HasMaxLength(50).IsRequired(true);
             // Foreign Keys
             builder.HasOne(trans => trans.Customer)
                  .WithMany(todo => todo.Transacts)
@@ -47,14 +47,3 @@ public void Configure(EntityTypeBuilder<Transactions> builder)
 }
 
 
-/*public Guid? TransID { get; set; }
-public DateTime Date { get; set; }
-public Guid CustomerID { get; set; }
-public Guid? EmployeeID { get; set; }
-public Guid? PetID { get; set; }
-public decimal? PetPrice { get; set; }
-public Guid? PetFoodID { get; set; }
-public decimal PetFoodQty { get; set; }
-public decimal? PetFoodPrice { get; set; }
-public decimal? TotalPrice { get; set; }
-//private bool _loaded = false;*/

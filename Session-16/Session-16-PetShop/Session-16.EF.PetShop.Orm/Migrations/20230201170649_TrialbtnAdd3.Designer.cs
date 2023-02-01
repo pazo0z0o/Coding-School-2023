@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Session_16.EF.PetShop.Orm.Context;
 
@@ -11,9 +12,11 @@ using Session_16.EF.PetShop.Orm.Context;
 namespace Session16.EF.PetShop.Orm.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230201170649_TrialbtnAdd3")]
+    partial class TrialbtnAdd3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,8 +241,8 @@ namespace Session16.EF.PetShop.Orm.Migrations
                     b.Property<decimal?>("PetFoodPrice")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasPrecision(10, 5)
-                        .HasColumnType("decimal(10,5)");
+                        .HasPrecision(5)
+                        .HasColumnType("decimal(5,2)");
 
                     b.Property<decimal>("PetFoodQty")
                         .HasMaxLength(50)
@@ -252,14 +255,18 @@ namespace Session16.EF.PetShop.Orm.Migrations
                     b.Property<decimal?>("PetPrice")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasPrecision(10, 5)
-                        .HasColumnType("decimal(10,5)");
+                        .HasPrecision(5)
+                        .HasColumnType("decimal(5,2)");
 
                     b.Property<decimal?>("TotalPrice")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasPrecision(10, 5)
-                        .HasColumnType("decimal(10,5)");
+                        .HasPrecision(5)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<bool>("loaded")
+                        .HasMaxLength(50)
+                        .HasColumnType("bit");
 
                     b.HasKey("TransID");
 

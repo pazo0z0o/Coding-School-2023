@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="DevExpress.AspNetCore.Core" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Win.Design" Version="22.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
       <PrivateAssets>all</PrivateAssets>

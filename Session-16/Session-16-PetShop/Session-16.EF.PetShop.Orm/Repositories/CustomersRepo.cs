@@ -15,7 +15,9 @@ namespace Session_16.EF.PetShop.Orm.Repositories
         public void Add(Customers entity)
         {
             using var context = new AppDbContext();
+            
             context.Add(entity);
+            
             context.SaveChanges();
         }
 
@@ -33,14 +35,14 @@ namespace Session_16.EF.PetShop.Orm.Repositories
         public IList<Customers> GetAll()
         {
             using var context = new AppDbContext();
-            return context.Customs.Include(customs => customs.Transacts).ToList();
+            return context.Customs.ToList();//.Include(customs => customs.Transacts).ToList();
         }
 
         public Customers? GetById(Guid id)
         {
             using var context = new AppDbContext();
-            return context.Customs.Where(customs => customs.CustomerID == id).Include(customs => customs.Transacts).SingleOrDefault();
-                
+            return context.Customs.Where(customs => customs.CustomerID == id).SingleOrDefault();
+                //.Include(customs => customs.Transacts)
         }
 
         public void Update(Guid id, Customers entity)

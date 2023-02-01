@@ -60,10 +60,10 @@ public Session_16.EF.Models.PetShop InitPetShop(EngagePopulate eps) { return pet
         {
             
             var newCustom = new Customers();
-
+          //  _customerRepo.Add(newCustom);
 //stuck question
             
-            _customerRepo.Add(newCustom);
+            
         }
 
         private void btn_Refresh_Click(object sender, EventArgs e)

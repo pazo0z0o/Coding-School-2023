@@ -14,34 +14,40 @@ using System.Windows.Forms;
 namespace Session_16_PetShop
 {
     public partial class Form2 : Form
-    {   private CustomersRepo _customerRepo;
+    {   
+        public Session_16.EF.Models.PetShop petShop = new Session_16.EF.Models.PetShop();
+        public EngagePopulate ep = new EngagePopulate();
+        private CustomersRepo _customerRepo = new CustomersRepo();
+        private EmployeesRepo _employeeRepo = new EmployeesRepo();
+        private PetRepo _petRepo = new PetRepo();
+        private PetFoodRepo _petFoodRepo = new PetFoodRepo();
+        private TransactionsRepo _transactionsRepo = new TransactionsRepo();
 
         public Form2()
-        {
+        {   
             InitializeComponent();
+            
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            _customerRepo = new CustomersRepo();
+                InitPetShop(ep);
+                SetControlProperties();
         }
 
         private void SetControlProperties()
         {   //Customer binding Source
             grvCustomers.AutoGenerateColumns = false;
-            bsCustomers.DataSource =  
-            grvCustomers.DataSource = bsCustomers;
+           /* bsCustomers.DataSource = //_customerRepo.GetAll();
+              grvCustomers.DataSource = bsCustomers;*/
+        
         }
 
-
-            private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+public Session_16.EF.Models.PetShop InitPetShop(EngagePopulate eps) { return petShop = ep.SetPopulation(); }
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-           //
+           //Save Function
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -53,7 +59,7 @@ namespace Session_16_PetShop
         private void btn_Update_Click(object sender, EventArgs e)
         {
             
-            var newCustom = new Customers(TxtBox1.Text);
+            var newCustom = new Customers();
 
 //stuck question
             

@@ -30,8 +30,6 @@ namespace Session_16.EF.PetShop.Orm.Repositories
 
         }
 
-       
-
         public IList<Customers> GetAll()
         {
             using var context = new AppDbContext();

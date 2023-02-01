@@ -25,22 +25,127 @@ namespace Session_16.EF.Models
         public Pet Pets { get; set; }
         public PetFood Pfood { get; set; }
        //==============================================================
+       
         public Transactions()
         {
-
+            TransID = Guid.NewGuid();
+            Date = DateTime.Now;
+            PetID = Guid.Empty;
         }
-        public Transactions(Guid TransID, DateTime date)
+
+
+        //CTOR with pet
+
+        public Transactions(DateTime date, Guid customerID, Guid employeeID, Guid petID, decimal petFoodQty, List<Pet> pets, List<PetFood> foods)
         {
             TransID = Guid.NewGuid();
-           Date = date;
-            // PetID = PetID;
-            //_loaded = false;
-           //CustomerID = customerID;
-          // EmployeeID = employeeID;
-            // PetFoodID = pfoodID;
+            Date = date;
+            CustomerID = customerID;
+            EmployeeID = employeeID;
+            PetFoodID = AddPetAndFood(petID, petFoodQty, foods, pets);
+
         }
 
-        
+        //Without pet
+        public Transactions(DateTime date, Guid customerID, Guid employeeID, AnimalType animalType, decimal petFoodQty, List<PetFood> foods)
+        {
+            TransID = Guid.NewGuid();
+            PetID = Guid.Empty;
+            Date = date;
+            CustomerID = customerID;
+            EmployeeID = employeeID;
+            PetFoodID = AddPetFood(animalType, petFoodQty, foods);
+        }
+
+
+        //METHODS
+
+        //addPet
+        public Guid AddPetAndFood(Guid id, decimal petFoodQty, List<PetFood> foods, List<Pet> pets)
+        {
+            AnimalType foodType;
+            foreach (Pet pet in pets)
+            {
+                if (pet.PetID == id)
+                {
+                    PetID = pet.PetID;
+                    PetPrice = pet.Price;
+                    foodType = pet.Animaltype;
+                    //pet.SetTransactionID(PetID);
+                    AddPetFood(foodType, petFoodQty, foods);
+
+                    PetFoodQty++;
+                    break;
+                }
+            }
+
+            return id;
+        }
+
+
+        //addFood 
+        public Guid AddPetFood(AnimalType foodType, decimal petFoodQty, List<PetFood> foods)
+        {
+            Guid foodID = Guid.Empty;
+            foreach (var food in foods)
+            {
+                if (foodType == food.Animaltype)
+                {
+                    PetFoodPrice = food.Price;
+
+                    foodID = food.PetFoodID;
+                    PetFoodQty = petFoodQty;
+                    break;
+                }
+            }
+            SetTotalPrice();
+            return foodID;
+        }
+
+
+        //SetTotalPrice
+        public void SetTotalPrice()
+        {
+
+            if (this.PetID != Guid.Empty)
+            {
+                this.TotalPrice = PetPrice + (PetFoodQty * PetFoodPrice);
+            }
+            else
+            {
+                this.TotalPrice = (PetFoodQty * PetFoodPrice);
+            }
+        }
+
+        public decimal FindPetPrice(List<Pet> pets)
+        {
+
+            decimal price = 0;
+            foreach (var pet in pets)
+            {
+                if (pet.PetID == PetID)
+                {
+                    price = pet.Price;
+                    break;
+                }
+            }
+            return price;
+        }
+
+        public decimal FindPetFoodPrice(List<PetFood> foods)
+        {
+            decimal price = 0;
+            foreach (var food in foods)
+            {
+                if (food.PetFoodID == PetFoodID)
+                {
+                    price = food.Price;
+                    break;
+                }
+            }
+            return price;
+        }
+
 
 
 

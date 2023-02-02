@@ -26,8 +26,6 @@ namespace Session_16.EF.Models
             TIN = tin;
         }
 
-        public Customers(string text)
-        {
-        }
+        
     }
 }

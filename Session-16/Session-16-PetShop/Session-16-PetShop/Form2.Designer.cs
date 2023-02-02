@@ -54,11 +54,16 @@
             this.colCost = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdPetFood = new DevExpress.XtraGrid.GridControl();
             this.PetFood = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colPetFoodID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdTransactions = new DevExpress.XtraGrid.GridControl();
             this.Transactions = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bsEmployees = new System.Windows.Forms.BindingSource(this.components);
             this.bsPets = new System.Windows.Forms.BindingSource(this.components);
             this.bsPetFood = new System.Windows.Forms.BindingSource(this.components);
+            this.colPetType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.pfoodPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.PfoodCost = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colQty = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grdCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
@@ -295,8 +300,23 @@
             // 
             // PetFood
             // 
+            this.PetFood.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colPetFoodID,
+            this.colPetType,
+            this.pfoodPrice,
+            this.PfoodCost,
+            this.colQty});
             this.PetFood.GridControl = this.grdPetFood;
             this.PetFood.Name = "PetFood";
+            this.PetFood.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.PetFood_RowDeleting);
+            this.PetFood.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.PetFood_ValidateRow);
+            this.PetFood.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.PetFood_RowUpdated);
+            // 
+            // colPetFoodID
+            // 
+            this.colPetFoodID.Caption = "PetFood ID";
+            this.colPetFoodID.FieldName = "PetFoodID";
+            this.colPetFoodID.Name = "colPetFoodID";
             // 
             // grdTransactions
             // 
@@ -313,6 +333,38 @@
             // 
             this.Transactions.GridControl = this.grdTransactions;
             this.Transactions.Name = "Transactions";
+            // 
+            // colPetType
+            // 
+            this.colPetType.Caption = "Pet Food Type";
+            this.colPetType.FieldName = "Animaltype";
+            this.colPetType.Name = "colPetType";
+            this.colPetType.Visible = true;
+            this.colPetType.VisibleIndex = 2;
+            // 
+            // pfoodPrice
+            // 
+            this.pfoodPrice.Caption = "Price";
+            this.pfoodPrice.FieldName = "Price";
+            this.pfoodPrice.Name = "pfoodPrice";
+            this.pfoodPrice.Visible = true;
+            this.pfoodPrice.VisibleIndex = 1;
+            // 
+            // PfoodCost
+            // 
+            this.PfoodCost.Caption = "PetFood Cost";
+            this.PfoodCost.FieldName = "Cost";
+            this.PfoodCost.Name = "PfoodCost";
+            this.PfoodCost.Visible = true;
+            this.PfoodCost.VisibleIndex = 3;
+            // 
+            // colQty
+            // 
+            this.colQty.Caption = "Quantity";
+            this.colQty.FieldName = "Qty";
+            this.colQty.Name = "colQty";
+            this.colQty.Visible = true;
+            this.colQty.VisibleIndex = 4;
             // 
             // Form2
             // 
@@ -376,5 +428,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPrice;
         private DevExpress.XtraGrid.Columns.GridColumn colCost;
         private BindingSource bsPetFood;
+        private DevExpress.XtraGrid.Columns.GridColumn colPetFoodID;
+        private DevExpress.XtraGrid.Columns.GridColumn colPetType;
+        private DevExpress.XtraGrid.Columns.GridColumn pfoodPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn PfoodCost;
+        private DevExpress.XtraGrid.Columns.GridColumn colQty;
     }
 }

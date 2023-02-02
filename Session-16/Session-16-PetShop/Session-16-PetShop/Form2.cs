@@ -140,15 +140,34 @@ namespace Session_16_PetShop
         }
 
         //==============================Pet Foods===================================================
+        private void PetFood_ValidateRow(object sender, ValidateRowEventArgs e)
+        {
+            PetFoodRepo petfoodRepo = new PetFoodRepo();
+            GridView view = sender as GridView;
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colPetFoodID).ToString());
 
+            if (petfoodRepo.GetById(id) is null)
+            {
+                petfoodRepo.Add((PetFood)bsPets.Current);
+            }
+        }
+        private void PetFood_RowUpdated(object sender, RowObjectEventArgs e)
+        {
+            PetFoodRepo petfoodRepo = new PetFoodRepo();
+            GridView view = sender as GridView;
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colPetFoodID).ToString());
 
+            petfoodRepo.Update(id, (PetFood)bsPetFood.Current);
+        }
 
+        private void PetFood_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e)
+        {
+            PetFoodRepo petfoodRepo = new PetFoodRepo();
+            GridView view = sender as GridView;
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colPetFoodID).ToString());
 
-
-
-
-
-
+            petfoodRepo.Delete(id);
+        }
 
         //==============================Transactions=================================================
 
@@ -192,7 +211,7 @@ namespace Session_16_PetShop
             grdPetFood.DataSource = bsPetFood;
         }
 
-        
+       
     }
 }
 

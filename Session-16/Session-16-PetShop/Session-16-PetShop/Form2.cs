@@ -51,41 +51,9 @@ namespace Session_16_PetShop
 
         }
 
-public Session_16.EF.Models.PetShop InitPetShop(EngagePopulate eps) { return petShop = ep.SetPopulation(); }
+        public Session_16.EF.Models.PetShop InitPetShop(EngagePopulate eps) { return petShop = ep.SetPopulation(); }
 
-        private void btn_Save_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void btn_Delete_Click(object sender, EventArgs e)
-        {
-            
-            
-        }
-
-        private void btn_Update_Click(object sender, EventArgs e)
-        {
-            
-            var newCustom = new Customers();
-
-            
-            
-        }
-
-        private void btn_Refresh_Click(object sender, EventArgs e)
-        {
-            //grvCustomers.DataSource = null;
-            grdCustomers.DataSource = _customerRepo.GetAll();
-            grdCustomers.Update();
-            grdCustomers.Refresh();
-           
-        }
-
-        private void btn_Add_Click(object sender, EventArgs e)
-        {
-           
-        }
+    
 
         
         private void gridView1_ValidateRow(object sender,ValidateRowEventArgs e)
@@ -98,10 +66,7 @@ public Session_16.EF.Models.PetShop InitPetShop(EngagePopulate eps) { return pet
                 _customerRepo.Add((Customers)bsCustomers.Current);
                     
             }  
-
         }
-
-       
         private void gridView1_RowUpdated(object sender, RowObjectEventArgs e)
         {
              GridView view = sender as GridView;
@@ -109,13 +74,23 @@ public Session_16.EF.Models.PetShop InitPetShop(EngagePopulate eps) { return pet
 
             _customerRepo.Update(id, (Customers)bsCustomers.Current);
         }
-
         private void gridView1_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e)
         {
             GridView view = sender as GridView;
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
             _customerRepo.Delete(id);
         }
+        //==============================Employees====================================================
+        
+    
+        
+    
+    
+    
+    
+    
+    
+    
     }
 }
 

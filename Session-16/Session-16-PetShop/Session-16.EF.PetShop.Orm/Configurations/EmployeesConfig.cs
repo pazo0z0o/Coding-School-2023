@@ -19,10 +19,10 @@ namespace Session_16.EF.PetShop.Orm.Configurations
             builder.HasKey(todo => todo.EmployeeID); //Primary key HasKey
             builder.Property(todo => todo.EmployeeID).ValueGeneratedOnAdd();
             // builder.
-            builder.Property(todo => todo.EmpName).HasMaxLength(50);
-            builder.Property(todo => todo.EmpSurname).HasMaxLength(50);
-            builder.Property(todo => todo.EmpType).HasMaxLength(10);
-            builder.Property(todo => todo.SalaryPerMonth).HasMaxLength(5).HasPrecision(5).IsRequired(true);
+            builder.Property(todo => todo.EmpName).HasMaxLength(50).IsRequired(true);
+            builder.Property(todo => todo.EmpSurname).HasMaxLength(50).IsRequired(true);
+            builder.Property(todo => todo.EmpType).IsRequired(true);
+            builder.Property(todo => todo.SalaryPerMonth).HasPrecision(9,2).IsRequired(true);
         }
     }
 }

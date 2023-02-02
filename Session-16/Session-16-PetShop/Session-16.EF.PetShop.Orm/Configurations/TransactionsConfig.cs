@@ -22,10 +22,10 @@ public void Configure(EntityTypeBuilder<Transactions> builder)
             // builder.
             builder.Property(trans => trans.Date).HasMaxLength(50).IsRequired(true);
            
-            builder.Property(trans => trans.PetPrice).HasMaxLength(50).HasPrecision(10,5).IsRequired(true);     
-            builder.Property(trans => trans.PetFoodPrice).HasMaxLength(50).HasPrecision(10,5).IsRequired(true);
+            builder.Property(trans => trans.PetPrice).HasMaxLength(50).HasPrecision(10,2).IsRequired(true);     
+            builder.Property(trans => trans.PetFoodPrice).HasMaxLength(50).HasPrecision(10,2).IsRequired(true);
             builder.Property(trans => trans.PetFoodQty).HasMaxLength(50).IsRequired(true);
-            builder.Property(trans => trans.TotalPrice).HasMaxLength(50).HasPrecision(10,5).IsRequired(true);
+            builder.Property(trans => trans.TotalPrice).HasMaxLength(50).HasPrecision(10,2).IsRequired(true);
            // builder.Property(trans => trans.loaded).HasMaxLength(50).IsRequired(true);
             // Foreign Keys
             builder.HasOne(trans => trans.Customer)

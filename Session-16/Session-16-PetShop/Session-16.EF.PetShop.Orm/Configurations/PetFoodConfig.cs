@@ -20,8 +20,8 @@ namespace Session_16.EF.PetShop.Orm.Configurations
             // builder.
             builder.Property(todo => todo.Animaltype).HasMaxLength(15).IsRequired(true);
             
-            builder.Property(todo => todo.Price).HasMaxLength(5).HasPrecision(5).IsRequired(true);
-            builder.Property(todo => todo.Cost).HasMaxLength(5).HasPrecision(5).IsRequired(true);
+            builder.Property(todo => todo.Price).HasMaxLength(15).HasPrecision(7, 2).IsRequired(true);
+            builder.Property(todo => todo.Cost).HasMaxLength(15).HasPrecision(7, 2).IsRequired(true);
 
             builder.Property(todo => todo.Qty).HasMaxLength(5).IsRequired(true);
             builder.Property(todo => todo.CurrentStock).HasMaxLength(3).IsRequired(true);

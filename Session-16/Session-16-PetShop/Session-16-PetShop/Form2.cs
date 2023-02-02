@@ -19,14 +19,10 @@ namespace Session_16_PetShop
 {
     public partial class Form2 : Form
     {
-        public Session_16.EF.Models.PetShop petShop = new Session_16.EF.Models.PetShop();
-        public EngagePopulate ep = new EngagePopulate();
-
-        //  private CustomersRepo _customerRepo; //= new CustomersRepo();
-        private EmployeesRepo _employeeRepo = new EmployeesRepo();
-        private PetRepo _petRepo = new PetRepo();
-        private PetFoodRepo _petFoodRepo = new PetFoodRepo();
-        private TransactionsRepo _transactionsRepo = new TransactionsRepo();
+//       /* public Session_16.EF.Models.PetShop petShop = new Session_16.EF.Models.PetShop();
+//        public EngagePopulate ep = new EngagePopulate();
+//*/
+        
 
         public Form2()
         {
@@ -37,7 +33,7 @@ namespace Session_16_PetShop
         private void Form2_Load(object sender, EventArgs e)
         {
 
-            InitPetShop(ep);
+            //InitPetShop(ep);
             SetControlProperties();
         }
 
@@ -45,12 +41,12 @@ namespace Session_16_PetShop
         {
             setupCustomerRepo();
             setupEmployeesRepo();
-
-
+            setupPetsRepo();
+            setupPetFoodsRepo();
 
         }
 
-        public Session_16.EF.Models.PetShop InitPetShop(EngagePopulate eps) { return petShop = ep.SetPopulation(); }
+        //public Session_16.EF.Models.PetShop InitPetShop(EngagePopulate eps) { return petShop = ep.SetPopulation(); }
 
 
 
@@ -82,21 +78,79 @@ namespace Session_16_PetShop
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
             customerRepo.Delete(id);
         }
-        //==============================Employees====================================================
+        //==============================Employees===================================================
         private void gdEmployees_ValidateRow(object sender, ValidateRowEventArgs e)
         {
             EmployeesRepo emplRepo = new EmployeesRepo();
             GridView view = sender as GridView;
-            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colID).ToString());
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colEmpID).ToString());
 
             if (emplRepo.GetById(id) is null)
             {
                 emplRepo.Add((Employees)bsEmployees.Current);
-
             }
+        }
+        private void gdEmployees_RowUpdated(object sender, RowObjectEventArgs e)
+        {
+            EmployeesRepo emplRepo = new EmployeesRepo();
+            GridView view = sender as GridView;
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colEmpID).ToString());
+
+            emplRepo.Update(id, (Employees)bsEmployees.Current);
+        }
+
+        private void gdEmployees_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e)
+        {
+            EmployeesRepo emplRepo = new EmployeesRepo();
+            GridView view = sender as GridView;
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colEmpID).ToString());
+        
+            emplRepo.Delete(id);
+        }
+
+        //==============================Pets========================================================
+        private void grdPets_ValidateRow(object sender, ValidateRowEventArgs e)
+        {
+            PetRepo petRepo = new PetRepo();
+            GridView view = sender as GridView;
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colPetID).ToString());
+
+            if (petRepo.GetById(id) is null)
+            {
+                petRepo.Add((Pet)bsPets.Current);
+            }
+        }
+        private void grdPets_RowUpdated(object sender, RowObjectEventArgs e)
+        {
+            PetRepo petRepo = new PetRepo();
+            GridView view = sender as GridView;
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colPetID).ToString());
+
+            petRepo.Update(id, (Pet)bsPets.Current);
 
         }
 
+        private void grdPets_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e)
+        {
+            PetRepo petRepo = new PetRepo();
+            GridView view = sender as GridView;
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colPetID).ToString());
+
+            petRepo.Delete(id);
+        }
+
+        //==============================Pet Foods===================================================
+
+
+
+
+
+
+
+
+
+
+        //==============================Transactions=================================================
 
 
 
@@ -109,9 +163,7 @@ namespace Session_16_PetShop
 
 
 
-
-
-
+        //===========================================Utility Functions================================
         public void setupCustomerRepo()
         {
             CustomersRepo customerRepo = new CustomersRepo();
@@ -140,7 +192,7 @@ namespace Session_16_PetShop
             grdPetFood.DataSource = bsPetFood;
         }
 
-     
+        
     }
 }
 

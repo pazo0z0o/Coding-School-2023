@@ -163,37 +163,49 @@
             this.gdEmployees.GridControl = this.grdEmployees;
             this.gdEmployees.Name = "gdEmployees";
             this.gdEmployees.OptionsView.ShowGroupPanel = false;
+            this.gdEmployees.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.gdEmployees_RowDeleting);
             this.gdEmployees.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gdEmployees_ValidateRow);
+            this.gdEmployees.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gdEmployees_RowUpdated);
             // 
             // colEmpName
             // 
             this.colEmpName.Caption = "Employee Name";
             this.colEmpName.FieldName = "EmpName";
             this.colEmpName.Name = "colEmpName";
+            this.colEmpName.Visible = true;
+            this.colEmpName.VisibleIndex = 0;
             // 
             // colEmpSurname
             // 
             this.colEmpSurname.Caption = "Employee Surname";
             this.colEmpSurname.FieldName = "EmpSurname";
             this.colEmpSurname.Name = "colEmpSurname";
+            this.colEmpSurname.Visible = true;
+            this.colEmpSurname.VisibleIndex = 1;
             // 
             // colEmpType
             // 
             this.colEmpType.Caption = "Employee Post";
             this.colEmpType.FieldName = "EmpType";
             this.colEmpType.Name = "colEmpType";
+            this.colEmpType.Visible = true;
+            this.colEmpType.VisibleIndex = 2;
             // 
             // colSalary
             // 
             this.colSalary.Caption = "Salary ";
             this.colSalary.FieldName = "SalaryPerMonth";
             this.colSalary.Name = "colSalary";
+            this.colSalary.Visible = true;
+            this.colSalary.VisibleIndex = 3;
             // 
             // colEmpID
             // 
             this.colEmpID.Caption = "Employee ID";
             this.colEmpID.FieldName = "EmployeeID";
             this.colEmpID.Name = "colEmpID";
+            this.colEmpID.Visible = true;
+            this.colEmpID.VisibleIndex = 4;
             // 
             // grdPet
             // 
@@ -218,6 +230,9 @@
             this.grdPets.GridControl = this.grdPet;
             this.grdPets.Name = "grdPets";
             this.grdPets.OptionsView.ShowGroupPanel = false;
+            this.grdPets.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.grdPets_RowDeleting);
+            this.grdPets.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.grdPets_ValidateRow);
+            this.grdPets.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.grdPets_RowUpdated);
             // 
             // colPetID
             // 

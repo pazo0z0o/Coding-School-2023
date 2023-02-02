@@ -25,7 +25,7 @@ namespace Session_16.EF.PetShop.Orm.Configurations
             builder.Property(todo => todo.Month).HasMaxLength(15).IsRequired(true);
             builder.Property(todo => todo.Animal).HasMaxLength(15).IsRequired(true);
 
-            builder.Property(todo => todo.TotalSold).HasMaxLength(5).HasPrecision(5).IsRequired(true);
+            builder.Property(todo => todo.TotalSold).HasMaxLength(15).HasPrecision(7, 2).IsRequired(true);
             
         }
     }

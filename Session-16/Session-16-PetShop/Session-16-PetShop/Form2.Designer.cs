@@ -61,13 +61,14 @@
             this.colQty = new DevExpress.XtraGrid.Columns.GridColumn();
             this.grdTransactions = new DevExpress.XtraGrid.GridControl();
             this.Transactions = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colTransID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTrDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPetPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsEmployees = new System.Windows.Forms.BindingSource(this.components);
             this.bsPets = new System.Windows.Forms.BindingSource(this.components);
             this.bsPetFood = new System.Windows.Forms.BindingSource(this.components);
             this.bsTransactions = new System.Windows.Forms.BindingSource(this.components);
-            this.colTransID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTrDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPetPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.aniTypeLKUP = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.grdCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
@@ -83,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsPets)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPetFood)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aniTypeLKUP)).BeginInit();
             this.SuspendLayout();
             // 
             // grdCustomers
@@ -214,15 +216,13 @@
             this.colEmpID.Caption = "Employee ID";
             this.colEmpID.FieldName = "EmployeeID";
             this.colEmpID.Name = "colEmpID";
-            this.colEmpID.Visible = true;
-            this.colEmpID.VisibleIndex = 4;
             // 
             // grdPet
             // 
             this.grdPet.Location = new System.Drawing.Point(623, 3);
             this.grdPet.MainView = this.grdPets;
             this.grdPet.Name = "grdPet";
-            this.grdPet.Size = new System.Drawing.Size(458, 151);
+            this.grdPet.Size = new System.Drawing.Size(560, 151);
             this.grdPet.TabIndex = 29;
             this.grdPet.UseEmbeddedNavigator = true;
             this.grdPet.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -249,8 +249,6 @@
             this.colPetID.Caption = "Pet ID";
             this.colPetID.FieldName = "PetID";
             this.colPetID.Name = "colPetID";
-            this.colPetID.Visible = true;
-            this.colPetID.VisibleIndex = 0;
             // 
             // colAnimalType
             // 
@@ -258,7 +256,7 @@
             this.colAnimalType.FieldName = "Animaltype";
             this.colAnimalType.Name = "colAnimalType";
             this.colAnimalType.Visible = true;
-            this.colAnimalType.VisibleIndex = 1;
+            this.colAnimalType.VisibleIndex = 0;
             // 
             // colPetStatus
             // 
@@ -266,7 +264,7 @@
             this.colPetStatus.FieldName = "Petstatus";
             this.colPetStatus.Name = "colPetStatus";
             this.colPetStatus.Visible = true;
-            this.colPetStatus.VisibleIndex = 2;
+            this.colPetStatus.VisibleIndex = 1;
             // 
             // colBreed
             // 
@@ -274,7 +272,7 @@
             this.colBreed.FieldName = "Breed";
             this.colBreed.Name = "colBreed";
             this.colBreed.Visible = true;
-            this.colBreed.VisibleIndex = 3;
+            this.colBreed.VisibleIndex = 2;
             // 
             // colPrice
             // 
@@ -282,7 +280,7 @@
             this.colPrice.FieldName = "Price";
             this.colPrice.Name = "colPrice";
             this.colPrice.Visible = true;
-            this.colPrice.VisibleIndex = 4;
+            this.colPrice.VisibleIndex = 3;
             // 
             // colCost
             // 
@@ -290,14 +288,16 @@
             this.colCost.FieldName = "Cost";
             this.colCost.Name = "colCost";
             this.colCost.Visible = true;
-            this.colCost.VisibleIndex = 5;
+            this.colCost.VisibleIndex = 4;
             // 
             // grdPetFood
             // 
             this.grdPetFood.Location = new System.Drawing.Point(623, 464);
             this.grdPetFood.MainView = this.PetFood;
             this.grdPetFood.Name = "grdPetFood";
-            this.grdPetFood.Size = new System.Drawing.Size(458, 161);
+            this.grdPetFood.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.aniTypeLKUP});
+            this.grdPetFood.Size = new System.Drawing.Size(560, 161);
             this.grdPetFood.TabIndex = 30;
             this.grdPetFood.UseEmbeddedNavigator = true;
             this.grdPetFood.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -401,6 +401,13 @@
             this.colPetPrice.Visible = true;
             this.colPetPrice.VisibleIndex = 2;
             // 
+            // aniTypeLKUP
+            // 
+            this.aniTypeLKUP.AutoHeight = false;
+            this.aniTypeLKUP.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.aniTypeLKUP.Name = "aniTypeLKUP";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -429,6 +436,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsPets)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPetFood)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aniTypeLKUP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -473,5 +481,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTransID;
         private DevExpress.XtraGrid.Columns.GridColumn colTrDate;
         private DevExpress.XtraGrid.Columns.GridColumn colPetPrice;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit aniTypeLKUP;
     }
 }

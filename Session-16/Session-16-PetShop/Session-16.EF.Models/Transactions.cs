@@ -36,7 +36,7 @@ namespace Session_16.EF.Models
 
         //CTOR with pet
 
-        public Transactions(DateTime date, Guid customerID, Guid employeeID, Guid petID, decimal petFoodQty, List<Pet> pets, List<PetFood> foods)
+       /* public Transactions(DateTime date, Guid customerID, Guid employeeID, Guid petID, decimal petFoodQty, List<Pet> pets, List<PetFood> foods)
         {
             TransID = Guid.NewGuid();
             Date = date;
@@ -44,10 +44,10 @@ namespace Session_16.EF.Models
             EmployeeID = employeeID;
             PetFoodID = AddPetAndFood(petID, petFoodQty, foods, pets);
 
-        }
+        }*/
 
         //Without pet
-        public Transactions(DateTime date, Guid customerID, Guid employeeID, AnimalType animalType, decimal petFoodQty, List<PetFood> foods)
+        /*public Transactions(DateTime date, Guid customerID, Guid employeeID, AnimalType animalType, decimal petFoodQty, List<PetFood> foods)
         {
             TransID = Guid.NewGuid();
             PetID = Guid.Empty;
@@ -56,12 +56,12 @@ namespace Session_16.EF.Models
             EmployeeID = employeeID;
             PetFoodID = AddPetFood(animalType, petFoodQty, foods);
         }
-
+*/
 
         //METHODS
 
         //addPet
-        public Guid AddPetAndFood(Guid id, decimal petFoodQty, List<PetFood> foods, List<Pet> pets)
+       /* public Guid AddPetAndFood(Guid id, decimal petFoodQty, List<PetFood> foods, List<Pet> pets)
         {
             AnimalType foodType;
             foreach (Pet pet in pets)
@@ -80,11 +80,11 @@ namespace Session_16.EF.Models
             }
 
             return id;
-        }
+        }*/
 
 
         //addFood 
-        public Guid AddPetFood(AnimalType foodType, decimal petFoodQty, List<PetFood> foods)
+        /*public Guid AddPetFood(AnimalType foodType, decimal petFoodQty, List<PetFood> foods)
         {
             Guid foodID = Guid.Empty;
             foreach (var food in foods)
@@ -100,7 +100,7 @@ namespace Session_16.EF.Models
             }
             SetTotalPrice();
             return foodID;
-        }
+        }*/
 
 
         //SetTotalPrice

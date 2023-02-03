@@ -14,55 +14,55 @@ namespace Session_16.EF.Models.Populate_Classes
 
         }
 
-        public List<PetFood> PopulatePetFoods()
+/*        public list<petfood> populatepetfoods()
         {
 
-            List<PetFood> petFood = new List<PetFood>();
-            int transactionNumber = 30;
-            DateTime date;
+            list<petfood> petfood = new list<petfood>();
+            int transactionnumber = 30;
+            datetime date;
             decimal qty;
-            PetFood pf;
+            petfood pf;
 
-            //populate
-            foreach (AnimalType type in Enum.GetValues(typeof(AnimalType)))
+            populate
+            foreach (animaltype type in enum.getvalues(typeof(animaltype)))
             {
-                pf = new PetFood(type, RandomPriceCost(2, 5), RandomPriceCost(7, 12));
-                date = RandomDate();
-                qty = RandomQty();
+                pf = new petfood(type, randompricecost(2, 5), randompricecost(7, 12));
+                date = randomdate();
+                qty = randomqty();
 
-                //PetShopTransactions - How many the PetShop bought (not customer)
-                for (int i = 0; i < transactionNumber; i++)
+                petshoptransactions - how many the petshop bought(not customer)
+                for (int i = 0; i < transactionnumber; i++)
                 {
-                    //pf.PetFoodTransactions.Add(new PetFoodTransaction(date, qty));
+                    pf.petfoodtransactions.add(new petfoodtransaction(date, qty));
                 }
-                pf.SetQty();
-                petFood.Add(pf);
+                pf.setqty();
+                petfood.add(pf);
             }
-            return petFood;
+            return petfood;
         }
 
-        public decimal RandomPriceCost(int lower, int upper)
+        public decimal randompricecost(int lower, int upper)
         {
-            var random = new Random();
-            int number = random.Next(lower, upper);
+            var random = new random();
+            int number = random.next(lower, upper);
             return number;
         }
 
 
-        //random quantity for PetFoodTransactions
-        public decimal RandomQty()
+        random quantity for petfoodtransactions
+        public decimal randomqty()
         {
-            var random = new Random();
-            int employee = random.Next(20, 60);
+            var random = new random();
+            int employee = random.next(20, 60);
             return employee;
         }
-        //random date for PetFoodTransactions
-        public DateTime RandomDate()
+        random date for petfoodtransactions
+        public datetime randomdate()
         {
-            Random gen = new Random();
-            DateTime start = new DateTime(2022, 1, 1);
-            int range = ((TimeSpan)(DateTime.Today - start)).Days;
-            return start.AddDays(gen.Next(range));
-        }
+            random gen = new random();
+            datetime start = new datetime(2022, 1, 1);
+            int range = ((timespan)(datetime.today - start)).days;
+            return start.adddays(gen.next(range));
+        }*/
     }
 }

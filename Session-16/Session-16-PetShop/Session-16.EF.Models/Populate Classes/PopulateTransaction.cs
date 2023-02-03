@@ -8,7 +8,7 @@ namespace Session_16.EF.Models.Populate_Classes
 {
     public class PopulateTransaction
     {
-
+/*
         public PopulateTransaction()
         {
 
@@ -46,7 +46,7 @@ namespace Session_16.EF.Models.Populate_Classes
         }
 
 
-        public Transactions SetPetAndFood(Transactions tr, List<Pet> pets, List<PetFood> foods, int petIndex)
+        *//*public Transactions SetPetAndFood(Transactions tr, List<Pet> pets, List<PetFood> foods, int petIndex)
         {
             var newPet = pets[petIndex];
             if (tr.PetID != Guid.Empty)
@@ -65,7 +65,7 @@ namespace Session_16.EF.Models.Populate_Classes
                 tr.PetFoodID = RandomPetFood(foods);
             }
             return tr;
-        }
+        }*//*
 
 
 
@@ -104,6 +104,6 @@ namespace Session_16.EF.Models.Populate_Classes
             Random random = new Random();
             AnimalType randomType = (AnimalType)values.GetValue(random.Next(values.Length));
             return randomType;
-        }
+        }*/
     }
 }

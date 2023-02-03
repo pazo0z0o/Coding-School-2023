@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace Session_16.EF.Models
 {
+    public enum AnimFoodType
+    {
+        Dog,
+        Cat,
+        Parrot,
+        Rodent,
+        Serpent,
+        Fish
+    }
     public class PetFood
     {
         public Guid PetFoodID { get; set; }
-        public AnimalType Animaltype { get; set; }
+        public AnimFoodType Animaltype { get; set; }
         public decimal Price { get; set; }
         public decimal Cost { get; set; }
         public decimal? Qty { get; set; }
@@ -24,7 +33,7 @@ namespace Session_16.EF.Models
             PetFoodID = Guid.NewGuid();
         }
 
-        public PetFood(AnimalType type, decimal cost, decimal price)
+        public PetFood(AnimFoodType type, decimal cost, decimal price)
         {
             Qty = 0;
             PetFoodID = Guid.NewGuid();

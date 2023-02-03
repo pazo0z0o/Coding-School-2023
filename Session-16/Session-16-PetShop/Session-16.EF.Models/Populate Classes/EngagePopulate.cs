@@ -15,8 +15,8 @@ namespace Session_16.EF.Models
         public EngagePopulate() { }
 
 
-        public PetShop SetPopulation()
-        {
+       // public PetShop SetPopulation()
+       // {
 
             PopulatePetFood populatePetFood = new PopulatePetFood();
             PopulatePet populatePet = new PopulatePet();
@@ -34,14 +34,14 @@ namespace Session_16.EF.Models
             //};
 
             string name = "Mr Pet";
-            var foods = populatePetFood.PopulatePetFoods();
-            var pets = populatePet.PopulatePets();
-            var employees = populateEmployees.PopulateEmployees();
-            var customers = populateCustomer.PopulateCustomers();
-            var transactions = populateTransaction.PopulateTransactions(foods, pets, employees, customers);
+          //  var foods = populatePetFood.PopulatePetFoods();
+          //  var pets = populatePet.PopulatePets();
+          //  var employees = populateEmployees.PopulateEmployees();
+          //  var customers = populateCustomer.PopulateCustomers();
+           // var transactions = populateTransaction.PopulateTransactions(foods, pets, employees, customers);
            // SetBoughtDate(pets, transactions);
 
-            PetShop petshop = new PetShop(name, foods, pets, employees, customers, transactions);
+            //PetShop petshop = new PetShop(name, foods, pets, employees, customers, transactions);
 
 
 
@@ -49,24 +49,24 @@ namespace Session_16.EF.Models
             //SetBoughtDate(petshop.Pets, petshop.Transactions);
             //petshop.FindMonthlyLedger(petshop.Transactions, petshop.Foods, petshop.Pets, petshop.Employees);
             //setSoldPets(petshop.Pets, petshop.Transactions);
-            return petshop;
-        }
+            //return petshop;
+       // }
 
-        public void setSoldPets(List<Pet> pets, List<Transactions> transactions)
-        { //sold pets
+       // public void setSoldPets(List<Pet> pets, List<Transactions> transactions)
+       // { //sold pets
 
-            foreach (var trans in transactions)
-            {
-                foreach (var pet in pets)
-                {
-                    if (pet.PetID == trans.PetID)
-                    {
+        //    foreach (var trans in transactions)
+        //    {
+         //       foreach (var pet in pets)
+         //       {
+           //         if (pet.PetID == trans.PetID)
+           //         {
                         //pet.Sold = true;
-                        break;
-                    }
-                }
-            }
-        }
+             //           break;
+                 //   }
+              //  }
+          //  }
+      //  }
         /*public void SetBoughtDate(List<Pet> pets, List<Transactions> transactions)
         {
 

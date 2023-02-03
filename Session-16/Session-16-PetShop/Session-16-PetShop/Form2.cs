@@ -148,7 +148,7 @@ namespace Session_16_PetShop
 
             if (petfoodRepo.GetById(id) is null)
             {
-                petfoodRepo.Add((PetFood)bsPets.Current);
+                petfoodRepo.Add((PetFood)bsPetFood.Current);
             }
         }
         private void PetFood_RowUpdated(object sender, RowObjectEventArgs e)

@@ -59,6 +59,7 @@
             this.pfoodPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PfoodCost = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQty = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.aniTypeLKUP = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.grdTransactions = new DevExpress.XtraGrid.GridControl();
             this.Transactions = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colTransID = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -68,7 +69,7 @@
             this.bsPets = new System.Windows.Forms.BindingSource(this.components);
             this.bsPetFood = new System.Windows.Forms.BindingSource(this.components);
             this.bsTransactions = new System.Windows.Forms.BindingSource(this.components);
-            this.aniTypeLKUP = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colCurrStock = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grdCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
@@ -78,13 +79,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdPets)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdPetFood)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PetFood)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aniTypeLKUP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Transactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmployees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPets)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPetFood)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aniTypeLKUP)).BeginInit();
             this.SuspendLayout();
             // 
             // grdCustomers
@@ -310,7 +311,8 @@
             this.colPetType,
             this.pfoodPrice,
             this.PfoodCost,
-            this.colQty});
+            this.colQty,
+            this.colCurrStock});
             this.PetFood.GridControl = this.grdPetFood;
             this.PetFood.Name = "PetFood";
             this.PetFood.OptionsView.ShowGroupPanel = false;
@@ -334,7 +336,7 @@
             // 
             // pfoodPrice
             // 
-            this.pfoodPrice.Caption = "Price";
+            this.pfoodPrice.Caption = "Food Price";
             this.pfoodPrice.FieldName = "Price";
             this.pfoodPrice.Name = "pfoodPrice";
             this.pfoodPrice.Visible = true;
@@ -355,6 +357,13 @@
             this.colQty.Name = "colQty";
             this.colQty.Visible = true;
             this.colQty.VisibleIndex = 3;
+            // 
+            // aniTypeLKUP
+            // 
+            this.aniTypeLKUP.AutoHeight = false;
+            this.aniTypeLKUP.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.aniTypeLKUP.Name = "aniTypeLKUP";
             // 
             // grdTransactions
             // 
@@ -401,12 +410,13 @@
             this.colPetPrice.Visible = true;
             this.colPetPrice.VisibleIndex = 2;
             // 
-            // aniTypeLKUP
+            // colCurrStock
             // 
-            this.aniTypeLKUP.AutoHeight = false;
-            this.aniTypeLKUP.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.aniTypeLKUP.Name = "aniTypeLKUP";
+            this.colCurrStock.Caption = "Current Stock";
+            this.colCurrStock.FieldName = "CurrentStock";
+            this.colCurrStock.Name = "colCurrStock";
+            this.colCurrStock.Visible = true;
+            this.colCurrStock.VisibleIndex = 4;
             // 
             // Form2
             // 
@@ -430,13 +440,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdPets)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdPetFood)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PetFood)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aniTypeLKUP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Transactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmployees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPets)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPetFood)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransactions)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aniTypeLKUP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -482,5 +492,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTrDate;
         private DevExpress.XtraGrid.Columns.GridColumn colPetPrice;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit aniTypeLKUP;
+        private DevExpress.XtraGrid.Columns.GridColumn colCurrStock;
     }
 }

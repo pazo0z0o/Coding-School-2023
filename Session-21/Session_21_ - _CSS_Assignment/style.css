@@ -10,6 +10,7 @@ header {
 
 .nav {
     display: flex;
+    align-items: center;
     float: right;
     background-color: #f1f5f6;
     position: relative;
@@ -53,6 +54,7 @@ h1 {
 
 .article {
     display: flex;
+    flex-direction: row;
 }
 /*---------------------------  main class  -------------------------------  */
 .main {
@@ -122,3 +124,10 @@ form button {
     border-radius: 10px;
 }
 /*--------------------------- Media Query-------------------------------  */
+@media (max-width: 650px) {
+    body {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }

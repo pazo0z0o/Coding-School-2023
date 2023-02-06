@@ -43,6 +43,12 @@ h1 {
 .content {
     margin: 0 15%
 }
+.article {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
 
 .article-img img {
     box-sizing: border-box;
@@ -52,10 +58,8 @@ h1 {
     padding-right: 1.4rem;
 }
 
-.article {
-    display: flex;
-    flex-direction: row;
-}
+
+
 /*---------------------------  main class  -------------------------------  */
 .main {
     flex-wrap: wrap;
@@ -125,7 +129,23 @@ form button {
 }
 /*--------------------------- Media Query-------------------------------  */
 @media (max-width: 650px) {
-    body {
+    .article {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .side {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 650px) {
+    form {
       flex-direction: column;
       align-items: center;
       justify-content: center;

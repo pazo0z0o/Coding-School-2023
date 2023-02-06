@@ -16,6 +16,8 @@ namespace Session_16.EF.PetShop.Orm.Repositories
         {
             using var context = new AppDbContext();
             context.Add(entity);
+
+
             context.SaveChanges();
 
         }
@@ -34,6 +36,7 @@ namespace Session_16.EF.PetShop.Orm.Repositories
         public IList<Transactions> GetAll()
         {
             using var context = new AppDbContext();
+            
             return context.Transact.Include(trans => trans.Customer).Include(trans => trans.Employee).Include(trans => trans.Pfood).ToList();
         }
 
@@ -63,7 +66,7 @@ namespace Session_16.EF.PetShop.Orm.Repositories
             dbPetShop.PetFoodPrice = entity.PetFoodPrice;
             dbPetShop.PetFoodQty = entity.PetFoodQty;
             dbPetShop.TotalPrice = entity.TotalPrice;
-            dbPetShop.TotalPrice = entity.TotalPrice;
+           // dbPetShop.TotalPrice = entity.TotalPrice;
             context.SaveChanges();
         }
 

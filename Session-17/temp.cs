@@ -10,3 +10,16 @@ public Guid? TransID { get; set; }
         public decimal PetFoodQty { get; set; }
         public decimal? PetFoodPrice { get; set; }
         public decimal? TotalPrice { get; set; }
+		
+		
+		lkPetID
+		lkEmployID
+		lkCustomerID
+		lkPfoodID
+		
+		bsCustomers
+		bsEmployees
+		bsPets
+		bsPetFood
+		bsTransactions
+		

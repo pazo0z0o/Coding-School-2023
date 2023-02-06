@@ -59,17 +59,29 @@
             this.pfoodPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PfoodCost = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQty = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCurrStock = new DevExpress.XtraGrid.Columns.GridColumn();
             this.aniTypeLKUP = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.grdTransactions = new DevExpress.XtraGrid.GridControl();
             this.Transactions = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colTransID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTrDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPetPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFKCustomerID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lkCustomerID = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colFKEmpID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lkEmployID = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colFKPetID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lkPetID = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colFKPetPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFKPfood = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lkPfoodID = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.colFKPfoodPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFKPfooQty = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.calcPFqty = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+            this.colFKTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsEmployees = new System.Windows.Forms.BindingSource(this.components);
             this.bsPets = new System.Windows.Forms.BindingSource(this.components);
             this.bsPetFood = new System.Windows.Forms.BindingSource(this.components);
             this.bsTransactions = new System.Windows.Forms.BindingSource(this.components);
-            this.colCurrStock = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grdCustomers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
@@ -82,6 +94,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.aniTypeLKUP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Transactions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkCustomerID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkEmployID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkPetID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkPfoodID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.calcPFqty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmployees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPets)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPetFood)).BeginInit();
@@ -358,6 +375,14 @@
             this.colQty.Visible = true;
             this.colQty.VisibleIndex = 3;
             // 
+            // colCurrStock
+            // 
+            this.colCurrStock.Caption = "Current Stock";
+            this.colCurrStock.FieldName = "CurrentStock";
+            this.colCurrStock.Name = "colCurrStock";
+            this.colCurrStock.Visible = true;
+            this.colCurrStock.VisibleIndex = 4;
+            // 
             // aniTypeLKUP
             // 
             this.aniTypeLKUP.AutoHeight = false;
@@ -367,10 +392,16 @@
             // 
             // grdTransactions
             // 
-            this.grdTransactions.Location = new System.Drawing.Point(1142, 189);
+            this.grdTransactions.Location = new System.Drawing.Point(623, 189);
             this.grdTransactions.MainView = this.Transactions;
             this.grdTransactions.Name = "grdTransactions";
-            this.grdTransactions.Size = new System.Drawing.Size(619, 178);
+            this.grdTransactions.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.lkCustomerID,
+            this.lkEmployID,
+            this.lkPetID,
+            this.lkPfoodID,
+            this.calcPFqty});
+            this.grdTransactions.Size = new System.Drawing.Size(1138, 214);
             this.grdTransactions.TabIndex = 31;
             this.grdTransactions.UseEmbeddedNavigator = true;
             this.grdTransactions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -381,10 +412,21 @@
             this.Transactions.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colTransID,
             this.colTrDate,
-            this.colPetPrice});
+            this.colFKCustomerID,
+            this.colFKEmpID,
+            this.colFKPetID,
+            this.colFKPetPrice,
+            this.colFKPfood,
+            this.colFKPfoodPrice,
+            this.colFKPfooQty,
+            this.colFKTotal});
             this.Transactions.GridControl = this.grdTransactions;
             this.Transactions.Name = "Transactions";
             this.Transactions.OptionsView.ShowGroupPanel = false;
+            this.Transactions.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.Transactions_CellValueChanged);
+            this.Transactions.RowDeleting += new DevExpress.Data.RowDeletingEventHandler(this.Transactions_RowDeleting);
+            this.Transactions.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.Transactions_ValidateRow);
+            this.Transactions.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.Transactions_RowUpdated);
             // 
             // colTransID
             // 
@@ -402,21 +444,117 @@
             this.colTrDate.Visible = true;
             this.colTrDate.VisibleIndex = 1;
             // 
-            // colPetPrice
+            // colFKCustomerID
             // 
-            this.colPetPrice.Caption = "Pet Price ";
-            this.colPetPrice.FieldName = "Pet Price";
-            this.colPetPrice.Name = "colPetPrice";
-            this.colPetPrice.Visible = true;
-            this.colPetPrice.VisibleIndex = 2;
+            this.colFKCustomerID.Caption = "Customer ID";
+            this.colFKCustomerID.ColumnEdit = this.lkCustomerID;
+            this.colFKCustomerID.FieldName = "CustomerID";
+            this.colFKCustomerID.Name = "colFKCustomerID";
+            this.colFKCustomerID.Visible = true;
+            this.colFKCustomerID.VisibleIndex = 2;
             // 
-            // colCurrStock
+            // lkCustomerID
             // 
-            this.colCurrStock.Caption = "Current Stock";
-            this.colCurrStock.FieldName = "CurrentStock";
-            this.colCurrStock.Name = "colCurrStock";
-            this.colCurrStock.Visible = true;
-            this.colCurrStock.VisibleIndex = 4;
+            this.lkCustomerID.AutoHeight = false;
+            this.lkCustomerID.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lkCustomerID.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Surname", "Surname")});
+            this.lkCustomerID.Name = "lkCustomerID";
+            // 
+            // colFKEmpID
+            // 
+            this.colFKEmpID.Caption = "Employee ID";
+            this.colFKEmpID.ColumnEdit = this.lkEmployID;
+            this.colFKEmpID.FieldName = "EmployeeID";
+            this.colFKEmpID.Name = "colFKEmpID";
+            this.colFKEmpID.Visible = true;
+            this.colFKEmpID.VisibleIndex = 3;
+            // 
+            // lkEmployID
+            // 
+            this.lkEmployID.AutoHeight = false;
+            this.lkEmployID.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lkEmployID.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EmpName", "Employee Name"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EmpSurname", "Employee Surname")});
+            this.lkEmployID.Name = "lkEmployID";
+            // 
+            // colFKPetID
+            // 
+            this.colFKPetID.Caption = "Pet ID";
+            this.colFKPetID.ColumnEdit = this.lkPetID;
+            this.colFKPetID.FieldName = "PetID";
+            this.colFKPetID.Name = "colFKPetID";
+            this.colFKPetID.Visible = true;
+            this.colFKPetID.VisibleIndex = 4;
+            // 
+            // lkPetID
+            // 
+            this.lkPetID.AutoHeight = false;
+            this.lkPetID.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lkPetID.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Animaltype", "Pet Type"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Breed", "Breed"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Petstatus", "Status")});
+            this.lkPetID.Name = "lkPetID";
+            // 
+            // colFKPetPrice
+            // 
+            this.colFKPetPrice.Caption = "Pet Price";
+            this.colFKPetPrice.FieldName = "PetPrice";
+            this.colFKPetPrice.Name = "colFKPetPrice";
+            this.colFKPetPrice.Visible = true;
+            this.colFKPetPrice.VisibleIndex = 6;
+            // 
+            // colFKPfood
+            // 
+            this.colFKPfood.Caption = "Pet Food ID";
+            this.colFKPfood.ColumnEdit = this.lkPfoodID;
+            this.colFKPfood.FieldName = "PetFoodID";
+            this.colFKPfood.Name = "colFKPfood";
+            this.colFKPfood.Visible = true;
+            this.colFKPfood.VisibleIndex = 5;
+            // 
+            // lkPfoodID
+            // 
+            this.lkPfoodID.AutoHeight = false;
+            this.lkPfoodID.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lkPfoodID.Name = "lkPfoodID";
+            // 
+            // colFKPfoodPrice
+            // 
+            this.colFKPfoodPrice.Caption = "Pet Food Price";
+            this.colFKPfoodPrice.FieldName = "PetFoodPrice";
+            this.colFKPfoodPrice.Name = "colFKPfoodPrice";
+            this.colFKPfoodPrice.Visible = true;
+            this.colFKPfoodPrice.VisibleIndex = 7;
+            // 
+            // colFKPfooQty
+            // 
+            this.colFKPfooQty.Caption = "Pet Food Qty";
+            this.colFKPfooQty.ColumnEdit = this.calcPFqty;
+            this.colFKPfooQty.FieldName = "PetFoodQty";
+            this.colFKPfooQty.Name = "colFKPfooQty";
+            this.colFKPfooQty.Visible = true;
+            this.colFKPfooQty.VisibleIndex = 8;
+            // 
+            // calcPFqty
+            // 
+            this.calcPFqty.AutoHeight = false;
+            this.calcPFqty.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.SpinUp)});
+            this.calcPFqty.Name = "calcPFqty";
+            // 
+            // colFKTotal
+            // 
+            this.colFKTotal.Caption = "Total Price";
+            this.colFKTotal.FieldName = "TotalPrice";
+            this.colFKTotal.Name = "colFKTotal";
             // 
             // Form2
             // 
@@ -443,6 +581,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.aniTypeLKUP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTransactions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Transactions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkCustomerID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkEmployID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkPetID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lkPfoodID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.calcPFqty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsEmployees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPets)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPetFood)).EndInit();
@@ -490,8 +633,20 @@
         private BindingSource bsTransactions;
         private DevExpress.XtraGrid.Columns.GridColumn colTransID;
         private DevExpress.XtraGrid.Columns.GridColumn colTrDate;
-        private DevExpress.XtraGrid.Columns.GridColumn colPetPrice;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit aniTypeLKUP;
         private DevExpress.XtraGrid.Columns.GridColumn colCurrStock;
+        private DevExpress.XtraGrid.Columns.GridColumn colFKCustomerID;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lkCustomerID;
+        private DevExpress.XtraGrid.Columns.GridColumn colFKEmpID;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lkEmployID;
+        private DevExpress.XtraGrid.Columns.GridColumn colFKPetID;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lkPetID;
+        private DevExpress.XtraGrid.Columns.GridColumn colFKPfood;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lkPfoodID;
+        private DevExpress.XtraGrid.Columns.GridColumn colFKPetPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colFKPfoodPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colFKPfooQty;
+        private DevExpress.XtraGrid.Columns.GridColumn colFKTotal;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit calcPFqty;
     }
 }

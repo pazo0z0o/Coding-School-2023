@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Session_16.EF.PetShop.Orm.Context;
 
@@ -11,9 +12,11 @@ using Session_16.EF.PetShop.Orm.Context;
 namespace Session16.EF.PetShop.Orm.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230203183416_Transact2")]
+    partial class Transact2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -214,7 +217,7 @@ namespace Session16.EF.PetShop.Orm.Migrations
 
             modelBuilder.Entity("Session_16.EF.Models.Transactions", b =>
                 {
-                    b.Property<Guid>("TransID")
+                    b.Property<Guid?>("TransID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -225,10 +228,12 @@ namespace Session16.EF.PetShop.Orm.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("EmployeeID")
+                    b.Property<Guid?>("EmployeeID")
+                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PetFoodID")
+                    b.Property<Guid?>("PetFoodID")
+                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("PetFoodPrice")
@@ -241,7 +246,8 @@ namespace Session16.EF.PetShop.Orm.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("PetID")
+                    b.Property<Guid?>("PetID")
+                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("PetPrice")
@@ -251,6 +257,7 @@ namespace Session16.EF.PetShop.Orm.Migrations
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal?>("TotalPrice")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");

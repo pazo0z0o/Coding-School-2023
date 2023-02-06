@@ -1,0 +1,124 @@
+body {
+    font-size: large;
+    font-family: sans-serif;
+    color: rgb(149, 149, 149);
+}
+/*--------------------------- General Font changes  -------------------------------  */
+header {
+    background-color: #f1f5f6;
+}
+
+.nav {
+    display: flex;
+    float: right;
+    background-color: #f1f5f6;
+    position: relative;
+    top: 1rem;
+}
+
+    .nav li {
+        color: rgb(163, 240, 214);
+        font-size: 20px;
+        display: inline;
+        list-style-type: none;
+        padding: 15px;
+    }
+/*--------------------------- header & nav bar  -------------------------------  */
+a {
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    color: #03b8af;
+}
+
+
+h1 {
+    display: flex;
+    width: 100%;
+    color: black;
+    font-size: 56;
+    font-weight: 900
+}
+
+.content {
+    margin: 0 15%
+}
+
+.article-img img {
+    box-sizing: border-box;
+    width: 320px;
+    height: 180px;
+    padding-top: 1rem;
+    padding-right: 1.4rem;
+}
+
+.article {
+    display: flex;
+}
+/*---------------------------  main class  -------------------------------  */
+.main {
+    flex-wrap: wrap;
+    height: 900px;
+}
+
+    .main ul {
+        padding-bottom: 20px;
+    }
+
+    .main strong {
+        color: black;
+        font-size: large;
+    }
+
+    .main h2 {
+        font-weight: lighter;
+    }
+/*---------------------------  Side class  -------------------------------  */
+.side {
+    margin-left: 20px;
+    flex-wrap: wrap;
+}
+
+    .side h2 {
+        margin-left: 30px;
+        margin-bottom: 1rem;
+        font-weight: light;
+    }
+
+    .side ol {
+        list-style-type: none;
+    }
+
+    .side li {
+        border-bottom: 1px solid rgba(211, 211, 211, 0.915);
+        padding: 10px 0px;
+        font-size: larger;
+    }
+/*--------------------------- Form and form item class  -------------------------------  */
+form {
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    line-height: 150%;
+}
+
+.form-item #name {
+    width: 100%;
+    line-height: 200%;
+}
+
+.form-item #comment {
+    line-height: 200%;
+    width: 100%;
+}
+/*---------------------------  BUTTON -------------------------------  */
+form button {
+    background-color: rgb(39, 213, 161);
+    color: white;
+    font-size: larger;
+    font-weight: 500;
+    width: 6em;
+    height: 2em;
+    border: 0px solid;
+    border-radius: 10px;
+}
+/*--------------------------- Media Query-------------------------------  */

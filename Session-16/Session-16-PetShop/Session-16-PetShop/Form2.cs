@@ -14,15 +14,18 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.Pdf.Native.BouncyCastle.Utilities.Collections;
 using DevExpress.CodeParser;
+using DevExpress.XtraGrid.Columns;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Session_16_PetShop
 {
     public partial class Form2 : Form
     {
-//       /* public Session_16.EF.Models.PetShop petShop = new Session_16.EF.Models.PetShop();
-//        public EngagePopulate ep = new EngagePopulate();
-//*/
-        
+
+        CustomersRepo _customerRepo = new CustomersRepo();
+        EmployeesRepo _emplRepo = new EmployeesRepo();
+        PetRepo _petRepo = new PetRepo();
+        PetFoodRepo _petfoodRepo = new PetFoodRepo();
 
         public Form2()
         {
@@ -43,11 +46,26 @@ namespace Session_16_PetShop
             setupEmployeesRepo();
             setupPetsRepo();
             setupPetFoodsRepo();
+            setupTransactionsRepo();
 
+            lkCustomerID.DataSource = _customerRepo.GetAll();
+            lkCustomerID.DisplayMember = "Name";
+            lkCustomerID.ValueMember = "CustomerID";
+
+            lkEmployID.DataSource = _emplRepo.GetAll();
+            lkEmployID.DisplayMember = "EmpName";
+            lkEmployID.ValueMember = "EmployeeID";
+
+            lkPetID.DataSource = _petRepo.GetAll();
+            lkPetID.DisplayMember = "Animaltype";
+            lkPetID.ValueMember = "PetID";
+
+            lkPfoodID.DataSource = _petfoodRepo.GetAll();
+            lkPfoodID.DisplayMember = "PetFoodID";
+            lkPfoodID.ValueMember = "PetFoodID";
         }
 
         //public Session_16.EF.Models.PetShop InitPetShop(EngagePopulate eps) { return petShop = ep.SetPopulation(); }
-
 
 
 
@@ -104,7 +122,7 @@ namespace Session_16_PetShop
             EmployeesRepo emplRepo = new EmployeesRepo();
             GridView view = sender as GridView;
             Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colEmpID).ToString());
-        
+
             emplRepo.Delete(id);
         }
 
@@ -117,7 +135,9 @@ namespace Session_16_PetShop
 
             if (petRepo.GetById(id) is null)
             {
+
                 petRepo.Add((Pet)bsPets.Current);
+
             }
         }
         private void grdPets_RowUpdated(object sender, RowObjectEventArgs e)
@@ -170,10 +190,141 @@ namespace Session_16_PetShop
         }
 
         //==============================Transactions=================================================
+        private void Transactions_ValidateRow(object sender, ValidateRowEventArgs e)
+        {
+            var tmp1 = (Transactions)bsTransactions.Current;
+            TransactionRepo transactionRepo = new TransactionRepo();
+
+            //PetRepo petRepo1 = new PetRepo();
+
+            GridView view = sender as GridView;
+            
+            Transactions? trans1 = view.GetFocusedRow() as Transactions;
+            //Transactions trans3 = (Transactions)bsTransactions.Current;
+            //=================================================================
+            if(trans1.CustomerID == Guid.Empty) 
+            {
+                e.Valid = false;
+                view.SetColumnError(colFKCustomerID, "Error, field Empty");                    
+            }
+
+            if (trans1.EmployeeID == Guid.Empty)
+            {
+                e.Valid = false;
+                view.SetColumnError(colFKEmpID, "Error, field Empty");
+            }
+
+            if (trans1.PetID == Guid.Empty)
+            {
+                e.Valid = false;
+                view.SetColumnError(colFKPetID, "Error, field Empty");
+            }
+
+            if (trans1.PetFoodID == Guid.Empty)
+            {
+                e.Valid = false;
+                view.SetColumnError(colFKPfood, "Error, field Empty");
+            }
+
+
+
+            //=================================================================
+            if (e.Valid) 
+            {
+                if (transactionRepo.GetById(trans1.TransID) == null ) 
+                {
+                 transactionRepo.Add(tmp1);
+                }
+                else
+                { transactionRepo.Update(trans1.TransID, trans1); }
+            //setupTransactionsRepo(); 
+            }
+            
+        }
+
+        private void SetColumnError<T>(T element, T comparison,GridView view ,GridColumn column,string Errmsg,ref bool retValue ) 
+        {
+            
+            if (element.ToString() == comparison.ToString())
+            {
+                retValue = false;
+                view.SetColumnError(colFKPfood, "Error, field Empty");
+            }
+
+
+
+        } 
+
+        private void Transactions_RowDeleting(object sender, DevExpress.Data.RowDeletingEventArgs e)
+        {
+            TransactionRepo transactionRepo = new TransactionRepo();
+            GridView view = sender as GridView;
+            Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colTransID).ToString());
+
+            transactionRepo.Delete(id);
+            setupTransactionsRepo();
+        }
+
+        private void Transactions_RowUpdated(object sender, RowObjectEventArgs e)
+        {
+
+            //TransactionRepo transactionRepo = new TransactionRepo();
+            //GridView view = sender as GridView;
+            //Guid id = Guid.Parse(view.GetRowCellValue(view.FocusedRowHandle, colTransID).ToString());
+
+            //transactionRepo.Update(id, (Transactions)bsTransactions.Current);
+            //setupTransactionsRepo();
+        }
+
+        private void Transactions_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (view == null) return;
+            if (e.Column.Caption != "Pet ID" && e.Column.Caption != "Pet Food ID") return;
+            //above are the checks so that it exits immediately when Pet and PetFood ID arent changed
+            PetFoodRepo pfRepo = new PetFoodRepo();
+            PetRepo petRepo = new PetRepo();
+            //handles a row as a whole entity with its properties(columns)
+            Transactions? trans2 = view.GetFocusedRow() as Transactions; 
+            //Pet Price match and change
+            if (e.Column.Caption == "Pet ID")
+            {
+                Pet petTMP = petRepo.GetById(trans2.PetID);
+                trans2.PetID = (Guid)view.GetRowCellValue(view.FocusedRowHandle, colFKPetID); 
+                //
+                if (view.GetRowCellValue(view.FocusedRowHandle, colFKPetID) != null)
+                {
+                    trans2.PetPrice = petTMP.Price;
+                    view.SetFocusedRowCellValue("PetPrice", trans2.PetPrice);
+                }
+            }
+            //Pet Food Price match and change
+            if (e.Column.Caption == "Pet Food ID")
+            {
+                PetFood pf = pfRepo.GetById(trans2.PetFoodID);
+                trans2.PetFoodID = (Guid)view.GetRowCellValue(view.FocusedRowHandle, colFKPfood);
+
+                if (view.GetRowCellValue(view.FocusedRowHandle, colFKPfood) != null)
+                {
+                    trans2.PetFoodPrice = pf.Price;
+                    view.SetFocusedRowCellValue("PetFoodPrice", trans2.PetFoodPrice);
+                }
+            }
+
+
+            //================================================================================
 
 
 
 
+
+
+
+
+
+
+
+        }
 
 
 
@@ -188,10 +339,11 @@ namespace Session_16_PetShop
             CustomersRepo customerRepo = new CustomersRepo();
             bsCustomers.DataSource = customerRepo.GetAll();
             grdCustomers.DataSource = bsCustomers;
+
         }
 
         public void setupEmployeesRepo()
-        {   
+        {
             EmployeesRepo emplRepo = new EmployeesRepo();
             bsEmployees.DataSource = emplRepo.GetAll();
             grdEmployees.DataSource = bsEmployees;
@@ -211,7 +363,14 @@ namespace Session_16_PetShop
             grdPetFood.DataSource = bsPetFood;
         }
 
-       
+        public void setupTransactionsRepo()
+        {
+            TransactionRepo transactionRepo = new TransactionRepo();
+            bsTransactions.DataSource = transactionRepo.GetAll();
+            grdTransactions.DataSource = bsTransactions;
+        }
+
+
     }
 }
 

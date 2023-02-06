@@ -62,6 +62,7 @@ h1 {
 
 /*---------------------------  main class  -------------------------------  */
 .main {
+    
     flex-wrap: wrap;
     height: 900px;
 }
@@ -80,6 +81,8 @@ h1 {
     }
 /*---------------------------  Side class  -------------------------------  */
 .side {
+    flex-direction: column;
+    justify-content: center;
     margin-left: 20px;
     flex-wrap: wrap;
 }

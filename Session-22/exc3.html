@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+       
+        <h1> Customer Details Form </h1>
+        <hr>
+        <br>
+        
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required>
+            <br>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            <br>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+              <option value="">Choose...</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            <br>
+            <input onclick="addCustomers()" type="submit" value="Submit">
+          </form>
+          <hr>
+          <br>
+          
+          <button onclick="ShowTable()" id="btn_show">Display Customers</button>
+
+          <div>
+          <table id="CusTable" hidden>
+            <tr>
+              <td>Name:</td>
+              <td><input type="text" name="name" required></td>
+            </tr>
+            <tr>
+              <td>Surname:</td>
+              <td><input type="text" name="surname" required></td>
+            </tr>
+            <tr>
+              <td>Age:</td>
+              <td><input type="number" name="age" required></td>
+            </tr>
+            <tr>
+              <td>Gender:</td>
+              <td>
+                <select name="gender">
+                  <option value="">Choose...</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><input type="submit" value="Submit"></td>
+            </tr>
+          </table>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <script src="Sess22-exc3.js" async defer></script>
+    </body>
+</html>

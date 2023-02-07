@@ -43,7 +43,7 @@ function multiply(a,b)
 var aIsNum = false;
 var bIsNum = false;
 
-while(aIsNum)
+while(!aIsNum)
 {
     if ( typeof(a) != "number" ) 
     {
@@ -53,13 +53,14 @@ while(aIsNum)
     aIsNum = true;
     }
 }
-while(bIsNum)
-    { if( typeof(b) != "number")
+while(!bIsNum)
+{ 
+    if( typeof(b) != "number")
     {
         console.log ("Enter a number")    
     }
     else bIsNum = true;
-    }
+}
 return a*b;
 }
 

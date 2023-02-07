@@ -28,6 +28,9 @@ function addCustomers()
         Gender: document.querySelector('#gender').value,
     };
 
+
+
+
     allPosts.push(Customer);
     createPostsTableRow(newCustomer, CusTable);
 }
@@ -43,10 +46,22 @@ let name = rowEl.insertCell(0);
 name.innerHTML = post.Name;
 
 let surname = rowEl.insertCell(1);
-name.innerHTML = post.Surname
+surname.innerHTML = post.Surname
 
 let age = rowEl.insertCell(2);
-name.innerHTML = post.Age;
+age.innerHTML = post.Age;
 let gender = rowEl.insertCell(3);
-name.innerHTML = post.Gender;
-}
+age.innerHTML = post.Gender;
+
+row.addEventListener("click", function() {
+    displayCustomerDetails(Customer);
+  
+})
+
+function displayCustomerDetails(customer)
+ {
+    document.getElementById("display-name").value = customer.name;
+    document.getElementById("display-surname").value = customer.surname;
+    document.getElementById("display-age").value = customer.age;
+    document.getElementById("display-gender").value = customer.gender;
+  }

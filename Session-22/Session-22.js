@@ -38,30 +38,20 @@ var output2 = checkPalindrome(input2);
 document.getElementById("out2").innerHTML = output2;
 }
 //Exc 4
+//let mulRes = multiply(4,5);
+//console.log(mulRes);
+
+
 function multiply(a,b)
 {
-var aIsNum = false;
-var bIsNum = false;
 
-while(!aIsNum)
-{
-    if ( typeof(a) != "number" ) 
+    if ( typeof(a) != "number" && typeof(b) != "number") 
     {
-        alert("Enter a number");
+       alert("Incorrect input try again");
+        return;
     }
-    else{
-    aIsNum = true;
-    }
-}
-while(!bIsNum)
-{ 
-    if( typeof(b) != "number")
-    {
-        console.log ("Enter a number")    
-    }
-    else bIsNum = true;
-}
-return a*b;
+   return a*b;
+   
 }
 
 

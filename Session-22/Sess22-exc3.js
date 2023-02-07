@@ -57,11 +57,12 @@ row.addEventListener("click", function() {
     displayCustomerDetails(Customer);
   
 })
+}
 
 function displayCustomerDetails(customer)
- {
+{
     document.getElementById("display-name").value = customer.name;
     document.getElementById("display-surname").value = customer.surname;
     document.getElementById("display-age").value = customer.age;
     document.getElementById("display-gender").value = customer.gender;
-  }
+}

@@ -15,16 +15,16 @@
         <br>
         
         <form>
-            <label for="name">Name:</label>
+            <label for="names">Name:</label>
             <input type="text" id="name" name="name" required>
             <br>
-            <label for="surname">Surname:</label>
+            <label for="surnames">Surname:</label>
             <input type="text" id="surname" name="surname" required>
             <br>
-            <label for="age">Age:</label>
+            <label for="ages">Age:</label>
             <input type="number" id="age" name="age" required>
             <br>
-            <label for="gender">Gender:</label>
+            <label for="genders">Gender:</label>
             <select id="gender" name="gender">
               <option value="">Choose...</option>
               <option value="male">Male</option>
@@ -36,10 +36,9 @@
           <hr>
           <br>
           
-          <button onclick="ShowTable()" id="btn_show">Display Customers</button>
-
-        <div id="table-box">
-          <table id="CusTable" hidden>
+          <!-- button onclick="ShowTable()" id="btn_show">Display Customers</button> -->
+      
+          <table id="CusTable" >
             <tr>
                 <thead>
                     <tr>
@@ -49,26 +48,10 @@
                       <th>Gender</th>
                     </tr>
                   </thead>
+                  <tbody></tbody>
             </table>    
 
-            <div id="customer-details">
-                <h3>Customer Details:</h3>
-                <label for="display-name">Name:</label>
-                <input type="text" id="display-name" disabled>
-                <br><br>
             
-                <label for="display-surname">Surname:</label>
-                <input type="text" id="display-surname" disabled>
-                <br><br>
-            
-                <label for="display-age">Age:</label>
-                <input type="text" id="display-age" disabled>
-                <br><br>
-            
-                <label for="display-gender">Gender:</label>
-                <input type="text" id="display-gender" disabled>
-              </div>
-            </div>
 
 
 

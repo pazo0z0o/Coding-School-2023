@@ -1,9 +1,10 @@
 //let element = document.getElementById("show");
 //element.addEventListener("click",ShowTable());
-
+let allPosts = [];
+var selectPostRowEl;
 function ShowTable()
 {
-    let tab  = document.getElementById("CusTable");
+    /* let tab  = document.getElementById("CusTable");
     let hideAttr = tab.getAttribute("hidden");
     
     if (hideAttr) {
@@ -12,7 +13,9 @@ function ShowTable()
      } else {
         tab.setAttribute("hidden", "hidden");
         btn_show.innerText = "Show table";
-     }
+     } */
+//======================================================
+
 
 }
 
@@ -23,24 +26,21 @@ function addCustomers()
     const Customer = 
     {
         Name: document.querySelector('#name').value,
-        Surname: document.querySelector('#surnamename').value,
+        Surname: document.querySelector('#surname').value,
         Age: document.querySelector('#age').value,
         Gender: document.querySelector('#gender').value,
     };
 
-
-
-
     allPosts.push(Customer);
-    createPostsTableRow(newCustomer, CusTable);
+    createPostsTableRow(Customer, tab);
 }
 
 
 function createPostsTableRow(post,CusTable)
 {
-let rowEl = CusTable.insertRow();
+    var rowCount = CusTable.rows.length; //start from 0 
+    let rowEl = CusTable.insertRow(rowCount);
 
-//rowEl.setAttribute("data-id",post.id)
 
 let name = rowEl.insertCell(0);
 name.innerHTML = post.Name;
@@ -51,18 +51,8 @@ surname.innerHTML = post.Surname
 let age = rowEl.insertCell(2);
 age.innerHTML = post.Age;
 let gender = rowEl.insertCell(3);
-age.innerHTML = post.Gender;
+gender.innerHTML = post.Gender;
 
-row.addEventListener("click", function() {
-    displayCustomerDetails(Customer);
-  
-})
 }
 
-function displayCustomerDetails(customer)
-{
-    document.getElementById("display-name").value = customer.name;
-    document.getElementById("display-surname").value = customer.surname;
-    document.getElementById("display-age").value = customer.age;
-    document.getElementById("display-gender").value = customer.gender;
-}
+

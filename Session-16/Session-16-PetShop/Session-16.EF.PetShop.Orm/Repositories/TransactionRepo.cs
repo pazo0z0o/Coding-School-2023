@@ -66,7 +66,7 @@ namespace Session_16.EF.PetShop.Orm.Repositories
             dbPetShop.PetFoodPrice = entity.PetFoodPrice;
             dbPetShop.PetFoodQty = entity.PetFoodQty;
             dbPetShop.TotalPrice = entity.TotalPrice;
-           // dbPetShop.TotalPrice = entity.TotalPrice;
+          
             context.SaveChanges();
         }
 

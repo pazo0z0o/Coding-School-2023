@@ -13,8 +13,7 @@ namespace Session_16.EF.Models
     }
     public class Employees
     {  
-        
-        
+
         public Guid EmployeeID { get; set; }
         public string EmpName { get; set; }
         public string EmpSurname { get; set; }
@@ -25,7 +24,7 @@ namespace Session_16.EF.Models
         public List<Transactions> Transacts { get; set; } //= null;
 
 
-
+/**/
         public Employees()
         {
             EmployeeID = Guid.NewGuid();

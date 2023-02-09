@@ -3,8 +3,9 @@
     public enum AnimalType
     {
         Bird = 1,
-        Mammal = 2,
+        Dog = 2,
         Reptile = 3,
-        Fish = 4
+        Fish = 4,
+        Cat = 5
     }
 }

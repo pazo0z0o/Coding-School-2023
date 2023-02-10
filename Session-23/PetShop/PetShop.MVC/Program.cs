@@ -5,13 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IEntity<Customer>, CustomerRepo>();
-builder.Services.AddScoped<IEntity<Employee>, EmployeeRepo>();
-builder.Services.AddScoped<IEntity<Pet>, PetRepo>();
-builder.Services.AddScoped<IEntity<PetFood>, PetFoodRepo>();
-builder.Services.AddScoped<IEntity<Transaction>, TransactionRepo>();
-
-
+builder.Services.AddScoped<IEntityRepo<Customer>, CustomerRepo>();
+builder.Services.AddScoped<IEntityRepo<Employee>, EmployeeRepo>();
+builder.Services.AddScoped<IEntityRepo<Pet>, PetRepo>();
+builder.Services.AddScoped<IEntityRepo<PetFood>, PetFoodRepo>();
+builder.Services.AddScoped<IEntityRepo<Transaction>, TransactionRepo>();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using PetShop.EF.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using PetShop.EF.Context;
 using PetShop.Model;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PetShop.EF.Repositories
 {
-    public class CustomerRepo : IEntity<Customer>
+    public class CustomerRepo : IEntityRepo<Customer>
     {
         public void Add(Customer entity)
         {
@@ -19,7 +20,7 @@ namespace PetShop.EF.Repositories
             context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(int? id)
         {
             using var context = new PetShopDbContext();
             var dbPetShop = context.Customers.Where(customs => customs.Id == id).SingleOrDefault();
@@ -32,16 +33,16 @@ namespace PetShop.EF.Repositories
         public IEnumerable<Customer> GetAll()
         {
             using var context = new PetShopDbContext();
-            return context.Customers.ToList();//.Include(customs => customs.Transacts).ToList();
+            return context.Customers.Include(customs => customs.Transactions).ToList();
         }
 
-        public Customer? GetById(int id)
+        public Customer? GetById(int? id)
         {
-            using var context = new PetShopDbContext();
-            return context.Customers.Where(customs => customs.Id == id).SingleOrDefault();
+            using var context = new PetShopDbContext();   //could be a mistake to include Transactions
+            return context.Customers.Where(customs => customs.Id == id).Include(customs => customs.Transactions).SingleOrDefault();
         }
 
-        public void Update(int id, Customer entity)
+        public void Update(int? id, Customer entity)
         {
             using var context = new PetShopDbContext();
             var dbPetShop = context.Customers.Where(customs => customs.Id == id).SingleOrDefault();

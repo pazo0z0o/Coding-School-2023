@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PetShop.EF.Repositories
 {
-    public class EmployeeRepo : IEntity<Employee>
+    public class EmployeeRepo : IEntityRepo<Employee>
     {
         public void Add(Employee entity)
         {
@@ -18,7 +18,7 @@ namespace PetShop.EF.Repositories
             context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(int? id)
         {
             using var context = new PetShopDbContext();
             var dbPetShop = context.Employees.Where(emps => emps.Id == id).SingleOrDefault();
@@ -34,13 +34,13 @@ namespace PetShop.EF.Repositories
             return context.Employees.Include(emps => emps.Transactions).ToList();
         }
 
-        public Employee? GetById(int id)
+        public Employee? GetById(int? id)
         {
             using var context = new PetShopDbContext();
             return context.Employees.Where(emps => emps.Id == id).Include(emps => emps.Transactions).SingleOrDefault();
         }
 
-        public void Update(int id, Employee entity)
+        public void Update(int? id, Employee entity)
         {
             using var context = new PetShopDbContext();
             var dbPetShop = context.Employees.Where(emps => emps.Id == id).SingleOrDefault();

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -18,11 +19,20 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PetShop.EF\PetShop.EF.csproj" />
     <ProjectReference Include="..\PetShop.Model\PetShop.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Transaction\" />
+    <Folder Include="Views\Employee\" />
+    <Folder Include="Views\Transaction\" />
+    <Folder Include="Views\PetFood\" />
+    <Folder Include="Views\Pet\" />
   </ItemGroup>
 
 </Project>

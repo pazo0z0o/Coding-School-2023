@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PetShop.EF.Repositories
 {
-    public interface IEntity<TEntity>
+    public interface IEntityRepo<TEntity>
     {
         IEnumerable<TEntity> GetAll();
-        TEntity? GetById(int id);
+        TEntity? GetById(int? id);
         void Add(TEntity entity);
-        void Update(int id, TEntity entity);
-        void Delete(int id);
+        void Update(int? id, TEntity entity);
+        void Delete(int? id);
 
 
     }

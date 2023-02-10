@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PetShop.EF.Repositories
 {
-    public class PetFoodRepo : IEntity<PetFood>
+    public class PetFoodRepo : IEntityRepo<PetFood>
     {
         public void Add(PetFood entity)
         {
@@ -18,7 +18,7 @@ namespace PetShop.EF.Repositories
             context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(int? id)
         {
             using var context = new PetShopDbContext();
             var dbPetShop = context.PetFoods.Where(pfs => pfs.Id == id).SingleOrDefault();
@@ -34,13 +34,13 @@ namespace PetShop.EF.Repositories
             return context.PetFoods.Include(pfs => pfs.Transactions).ToList();
         }
 
-        public PetFood? GetById(int id)
+        public PetFood? GetById(int? id)
         {
             using var context = new PetShopDbContext();
             return context.PetFoods.Where(pfs => pfs.Id == id).Include(pfs => pfs.Transactions).SingleOrDefault();
         }
 
-        public void Update(int id, PetFood entity)
+        public void Update(int? id, PetFood entity)
         {
             using var context = new PetShopDbContext();
             var dbPetShop = context.PetFoods.Where(pfs => pfs.Id == id).SingleOrDefault();

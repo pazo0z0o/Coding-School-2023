@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PetShop.EF.Repositories;
+using PetShop.Model;
 using PetShop.MVC.Models;
 using System.Diagnostics;
 
@@ -7,10 +9,10 @@ namespace PetShop.MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+       
+        public HomeController(ILogger<HomeController> logger) 
         {
-            _logger = logger;
+            _logger = logger;          
         }
 
         public IActionResult Index()

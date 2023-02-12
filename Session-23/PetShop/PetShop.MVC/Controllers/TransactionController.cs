@@ -112,13 +112,8 @@ namespace PetShop.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateTransactionsDTO trans)
         {
-            /*string ptPrice = string.Empty;
-            string pfPrice = string.Empty;*/
 
             if (!ModelState.IsValid) return View();
-
-            /*decimal petFoodPrice = 0;
-            decimal petPrice = 0;*/
 
             var dbTransact = new Transaction(trans.PetPrice, trans.PetFoodQty, trans.PetFoodPrice, trans.TotalPrice)
             {
@@ -275,6 +270,8 @@ namespace PetShop.MVC.Controllers
             return Total;
         }
 
+        //tried this Idea, didn't work, I'll try and figure it out on my own time
+
         public decimal GetPricePet(string comboStr)
         {
             decimal price = 0;
@@ -298,8 +295,91 @@ namespace PetShop.MVC.Controllers
 
             return price;
         }
+        //===================================================================================================
+        //var customers = _customerRepo.GetAll();
+        //var employees = _employeeRepo.GetAll();
+        //var pets = _petRepo.GetAll();
+        //var petfoods = _petFoodRepo.GetAll();
+
+        public void MonthGrab()
+        {   var transactions = _transactionRepo.GetAll().ToList();
+            var pets = _petRepo.GetAll().ToList();
+            decimal totalMonth = 0;
+            
+            
+            var orderedTrans =  transactions.OrderBy(m =>m.Date.Month).ToList();
+           
+            for (int i = 1; i<13;i++)
+            {
+              var monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
+                
+              foreach(var totalPrice in monthly) 
+              {
+                    totalMonth += totalPrice.TotalPrice; 
+              }
+              
 
 
-        //public int MonthGrab(){}
+
+            }
+        }
+
+        public decimal StableExpences()
+        {
+            decimal rent = 2000;
+            var pets = _petRepo.GetAll().ToList();
+            var transactions = _transactionRepo.GetAll().ToList();
+            var employees = _employeeRepo.GetAll().ToList();
+            decimal standardExpense = 0;
+
+            foreach(var employee in employees) 
+            {
+                standardExpense += employee.SalaryPerMonth;
+            }
+            foreach (var pet in pets)
+            {
+                standardExpense += pet.Cost;
+            }
+            standardExpense += rent;
+
+            return standardExpense;
+
+        }
+
+      
+
+        //public List<decimal>(){}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

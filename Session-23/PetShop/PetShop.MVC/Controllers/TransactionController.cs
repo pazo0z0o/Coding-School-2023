@@ -317,20 +317,18 @@ namespace PetShop.MVC.Controllers
               {
                     totalMonth += totalPrice.TotalPrice; 
               }
-              
-
-
 
             }
         }
 
         public decimal StableExpences()
-        {
+        {   decimal standardExpense = 0;
             decimal rent = 2000;
             var pets = _petRepo.GetAll().ToList();
             var transactions = _transactionRepo.GetAll().ToList();
             var employees = _employeeRepo.GetAll().ToList();
-            decimal standardExpense = 0;
+            var petFood = _petFoodRepo.GetAll().ToList();
+           
 
             foreach(var employee in employees) 
             {
@@ -340,8 +338,18 @@ namespace PetShop.MVC.Controllers
             {
                 standardExpense += pet.Cost;
             }
-            standardExpense += rent;
+            decimal cleanPetFoodCost = 0;
+            foreach(var pFood in transactions )
+            {
+                if (pFood.PetPrice != 0)
+                {
+                    cleanPetFoodCost += pFood.PetFoodPrice * (pFood.PetFoodQty - 1);
+                }
+                else
+                    cleanPetFoodCost += pFood.PetFoodPrice * pFood.PetFoodQty;
 
+            }
+            standardExpense += rent + cleanPetFoodCost;
             return standardExpense;
 
         }

@@ -302,59 +302,64 @@ namespace PetShop.MVC.Controllers
         //var petfoods = _petFoodRepo.GetAll();
 
         public void MonthGrab()
-        {   var transactions = _transactionRepo.GetAll().ToList();
+        {
+            var transactions = _transactionRepo.GetAll().ToList();
             var pets = _petRepo.GetAll().ToList();
-            decimal totalMonth = 0;
-            
-            
-            var orderedTrans =  transactions.OrderBy(m =>m.Date.Month).ToList();
-           
-            for (int i = 1; i<13;i++)
+            decimal totalIncMonth = 0;
+
+            var orderedTrans = transactions.OrderBy(m => m.Date.Month).ToList();
+
+            for (int i = 1; i < 13; i++)
             {
-              var monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
-                
-              foreach(var totalPrice in monthly) 
-              {
-                    totalMonth += totalPrice.TotalPrice; 
-              }
+                var monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
+                //Monthly Income
+                foreach (var totalPrice in monthly)
+                {
+                    totalIncMonth += totalPrice.TotalPrice;
+                }
+                //Monthly Expense
+                decimal cleanPetFoodCost = 0;
+                foreach (var pFood in transactions)
+                {
+                    if (pFood.PetPrice != 0)
+                    {
+                        cleanPetFoodCost += pFood.PetFoodPrice * (pFood.PetFoodQty - 1);
+                    }
+                    else
+                        cleanPetFoodCost += pFood.PetFoodPrice * pFood.PetFoodQty;
+
+                }
+                //Monthly Expense
+                decimal petCost = 0;
+                foreach (var pet in pets)
+                {
+                   petCost += pet.Cost;
+                }
 
             }
         }
 
         public decimal StableExpences()
-        {   decimal standardExpense = 0;
+        {
+            decimal standardExpense = 0;
             decimal rent = 2000;
             var pets = _petRepo.GetAll().ToList();
             var transactions = _transactionRepo.GetAll().ToList();
             var employees = _employeeRepo.GetAll().ToList();
             var petFood = _petFoodRepo.GetAll().ToList();
-           
 
-            foreach(var employee in employees) 
+
+            foreach (var employee in employees)
             {
                 standardExpense += employee.SalaryPerMonth;
             }
-            foreach (var pet in pets)
-            {
-                standardExpense += pet.Cost;
-            }
-            decimal cleanPetFoodCost = 0;
-            foreach(var pFood in transactions )
-            {
-                if (pFood.PetPrice != 0)
-                {
-                    cleanPetFoodCost += pFood.PetFoodPrice * (pFood.PetFoodQty - 1);
-                }
-                else
-                    cleanPetFoodCost += pFood.PetFoodPrice * pFood.PetFoodQty;
 
-            }
-            standardExpense += rent + cleanPetFoodCost;
+
+            standardExpense += rent;
             return standardExpense;
-
         }
 
-      
+
 
         //public List<decimal>(){}
 

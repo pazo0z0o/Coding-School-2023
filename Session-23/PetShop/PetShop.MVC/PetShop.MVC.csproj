@@ -27,12 +27,4 @@
     <ProjectReference Include="..\PetShop.Model\PetShop.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Transaction\" />
-    <Folder Include="Views\Employee\" />
-    <Folder Include="Views\Transaction\" />
-    <Folder Include="Views\PetFood\" />
-    <Folder Include="Views\Pet\" />
-  </ItemGroup>
-
 </Project>

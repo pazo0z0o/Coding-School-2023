@@ -11,7 +11,7 @@ namespace PetShop.MVC.Models.Customer
         public string? Tin { get; set; }
 
         // Relations
-       // public List<Transaction> Transactions { get; set; }
+       // public List<Transaction>? Transactions { get; set; } = new List<Transaction>();
 
 
 

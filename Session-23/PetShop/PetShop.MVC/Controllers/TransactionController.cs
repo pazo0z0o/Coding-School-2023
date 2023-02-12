@@ -1,0 +1,272 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
+using PetShop.EF.Repositories;
+using PetShop.Model;
+using PetShop.Model.Enums;
+using PetShop.MVC.Models.Customer;
+using PetShop.MVC.Models.Transactions;
+using System.Data.Common;
+using System.Diagnostics;
+using System.Drawing;
+
+namespace PetShop.MVC.Controllers
+{
+    public class TransactionController : Controller
+    {   //all the repos in the land
+        private readonly IEntityRepo<Customer> _customerRepo;
+        private readonly IEntityRepo<Employee> _employeeRepo;
+        private readonly IEntityRepo<Pet> _petRepo;
+        private readonly IEntityRepo<PetFood> _petFoodRepo;
+        private readonly IEntityRepo<Transaction> _transactionRepo;
+
+        public TransactionController(IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Pet> petRepo, IEntityRepo<PetFood> petFoodRepo, IEntityRepo<Transaction> transactionRepo)
+        {
+            _customerRepo = customerRepo;
+            _employeeRepo = employeeRepo;
+            _petRepo = petRepo;
+            _petFoodRepo = petFoodRepo;
+            _transactionRepo = transactionRepo;
+        }
+
+        // GET: Transaction
+        public ActionResult Index()
+        {
+            var transactions = _transactionRepo.GetAll().ToList();
+            return View(model: transactions);
+        }
+
+        // GET: Transaction/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null) { return NotFound(); }
+
+            var transaction = _transactionRepo.GetById(id);
+            if (transaction == null) { return NotFound(); }
+
+            var viewTransaction = new DetailsTransactionsDTO()
+            {
+                Date = transaction.Date,
+                CustomerId = transaction.CustomerId,
+                Customers = transaction.Customer,
+                EmployeeId = transaction.EmployeeId,
+                Employees = transaction.Employee,
+                PetId = transaction.PetId,
+                PetPrice = transaction.PetPrice,
+                PetFoodId = transaction.PetFoodId,
+                PetFoodPrice = transaction.PetFoodPrice,
+                PetFoodQty = transaction.PetFoodQty,
+
+
+
+                TotalPrice = transaction.TotalPrice
+            };
+
+            return View(model: viewTransaction);
+            //return View();
+        }
+
+        // GET: Transaction/Create
+        public ActionResult Create()
+        {
+            var viewTransaction = new CreateTransactionsDTO();
+
+            var customers = _customerRepo.GetAll();
+            var employees = _employeeRepo.GetAll();
+            var pet = _petRepo.GetAll();
+            var pfood = _petFoodRepo.GetAll();
+
+            //Select 
+            foreach (var cus in customers)
+            {
+                viewTransaction.Customer.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(cus.Surname + " " + cus.Name, cus.Id.ToString()));
+            }
+
+            foreach (var emp in employees)
+            {
+                viewTransaction.Employee.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(emp.Surname + " " + emp.Name, emp.Id.ToString()));
+            }
+
+            foreach (var pt in pet)
+            {
+                string AT = Enum.GetName(typeof(AnimalType), pt.AnimalType);
+                viewTransaction.Pet.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(AT + "-" + pt.Breed + "-" + pt.Price, pt.Id.ToString()));
+            }
+
+            foreach (var pf in pfood)
+            {
+                string AT = Enum.GetName(typeof(AnimalType), pf.AnimalType);
+                viewTransaction.PetFood.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(AT + "-" + pf.Price.ToString(), pf.Id.ToString()));
+            }
+
+            return View(viewTransaction);
+        }
+
+        // POST: Transaction/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CreateTransactionsDTO trans)
+        {
+            if (!ModelState.IsValid) return View();
+
+            var dbTransact = new Transaction(trans.PetPrice, trans.PetFoodQty, trans.PetFoodPrice, trans.TotalPrice)
+            {
+                Date = DateTime.Now,
+                CustomerId = trans.CustomerId,
+                EmployeeId = trans.EmployeeId,
+                PetId = trans.PetId,
+                PetFoodId = trans.PetFoodId
+            };
+            // Some calculations about the free pet food 
+
+            dbTransact.TotalPrice = CalcTotal(dbTransact.PetId, dbTransact.PetPrice, dbTransact.PetFoodPrice, dbTransact.PetFoodQty);
+
+            _transactionRepo.Add(dbTransact);
+            return RedirectToAction("Index");
+        }
+
+
+        // GET: Transaction/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var customers = _customerRepo.GetAll();
+            var employees = _employeeRepo.GetAll();
+            var pet = _petRepo.GetAll();
+            var pfood = _petFoodRepo.GetAll();
+
+            if (id == null) { return NotFound(); }
+
+            var dbTransact = _transactionRepo.GetById(id);
+            if (dbTransact == null) return NotFound();
+
+
+            var viewTransaction = new EditTransactionsDTO()
+            {
+                Date = dbTransact.Date,
+                PetFoodQty = dbTransact.PetFoodQty,
+                TotalPrice = dbTransact.TotalPrice,
+                CustomerId = dbTransact.CustomerId,
+                EmployeeId = dbTransact.EmployeeId,
+                PetId = dbTransact.PetId,
+                PetFoodId = dbTransact.PetFoodId
+
+
+            };
+
+            foreach (var cus in customers)
+            {
+                viewTransaction.Customer.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(cus.Surname + " "+cus.Name, cus.Id.ToString()));
+            }
+
+            foreach (var emp in employees)
+            {
+                viewTransaction.Employee.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(emp.Surname + " " + emp.Name, emp.Id.ToString()));
+            }
+
+            foreach (var pt in pet)
+            {
+                string AT = Enum.GetName(typeof(AnimalType), pt.AnimalType);
+                viewTransaction.Pet.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(AT + "-" + pt.Price.ToString(), pt.Id.ToString()));
+            }
+
+
+            foreach (var pf in pfood)
+            {
+                string AT = Enum.GetName(typeof(AnimalType), pf.AnimalType);
+                viewTransaction.PetFood.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem( AT + "-" + pf.Price.ToString(), pf.Id.ToString()));
+            }
+
+
+
+            return View(viewTransaction);
+
+        }
+
+        // POST: Transaction/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, EditTransactionsDTO edTrans)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+
+            var dbTransact = _transactionRepo.GetById(id);
+            if (dbTransact == null) return NotFound();
+
+            dbTransact.Date = edTrans.Date;
+            dbTransact.CustomerId = edTrans.CustomerId;
+            dbTransact.EmployeeId = edTrans.EmployeeId;
+            dbTransact.PetId = edTrans.PetId;
+            dbTransact.PetPrice = edTrans.PetPrice;
+            dbTransact.PetFoodId = edTrans.PetFoodId;
+            dbTransact.PetFoodPrice = edTrans.PetFoodPrice;
+            dbTransact.PetFoodQty = edTrans.PetFoodQty;
+
+            dbTransact.TotalPrice = CalcTotal(dbTransact.PetId, dbTransact.PetPrice, dbTransact.PetFoodPrice, dbTransact.PetFoodQty);
+
+            _transactionRepo.Update(id, dbTransact);
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Transaction/Delete/5
+        public ActionResult Delete(int id)
+        {
+            var dbTransaction = _transactionRepo.GetById(id);
+            if(dbTransaction == null) return NotFound();
+
+            var viewTrans = new DeleteTransactionsDTO() 
+            { 
+                Id = dbTransaction.Id,
+                Date = dbTransaction.Date,
+                CustomerId =dbTransaction.CustomerId,
+                EmployeeId = dbTransaction.EmployeeId,
+                PetId = dbTransaction.PetId,
+                PetPrice= dbTransaction.PetPrice,
+                PetFoodId= dbTransaction.PetFoodId,
+                PetFoodPrice= dbTransaction.PetFoodPrice,
+                TotalPrice = dbTransaction.PetPrice
+            };
+           
+            return View(model: viewTrans);
+        }
+
+        // POST: Transaction/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            _transactionRepo.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
+        //========================= Some Helping Methods for field manipulation ============================    
+
+        public decimal CalcTotal(int petId, decimal petPrice, decimal pfoodPrice, int pfoodQty)
+        {
+            decimal Total = 0;
+
+            if (petId != null)
+            {
+                if (pfoodQty == 1)
+                {
+                    Total = petPrice + pfoodPrice * pfoodQty;
+                }
+                else
+                {
+                    Total = petPrice + pfoodPrice * (pfoodQty - 1);
+                }
+            }
+            else
+            {
+                Total = pfoodPrice * pfoodQty;
+            }
+
+            return Total;
+        }
+
+        //public 
+
+    }
+}

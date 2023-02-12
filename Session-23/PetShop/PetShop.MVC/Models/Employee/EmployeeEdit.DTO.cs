@@ -6,8 +6,8 @@ namespace PetShop.MVC.Models.Employee
     public class EmployeeEditDTO
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string? Name { get; set; }
+        public string? Surname { get; set; }
         public EmployeeType EmployeeType { get; set; }
         public int SalaryPerMonth { get; set; }
 

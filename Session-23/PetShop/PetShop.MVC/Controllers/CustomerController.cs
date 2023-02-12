@@ -23,6 +23,7 @@ namespace PetShop.MVC.Controllers
             var customers = _customerRepo.GetAll().ToList();
             return View(model: customers);
         }
+
         // GET: CustomerController/Details/5
 
         public ActionResult Details(int? id)
@@ -41,16 +42,12 @@ namespace PetShop.MVC.Controllers
                 Tin = customers.Tin,
                 Transactions = customers.Transactions
             };
-
-
-
             return View(model: viewCustomer);
         }
 
         // GET: CustomerController/Create
         public ActionResult AddCustomer()
         {
-
             var newCustomer = new CustomerCreateDTO();
             var transactions = _transactionRepo.GetAll();
 
@@ -73,7 +70,7 @@ namespace PetShop.MVC.Controllers
         }
 
         // GET: CustomerController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             var dbCustomer = _customerRepo.GetById(id);
             if (dbCustomer == null)

@@ -12,6 +12,6 @@ namespace PetShop.MVC.Models.PetFood
         public decimal Cost { get; set; }
 
         // Relations
-       // public List<Transaction> Transactions { get; set; }
+       //public List<Transaction> Transactions { get; set; }
     }
 }

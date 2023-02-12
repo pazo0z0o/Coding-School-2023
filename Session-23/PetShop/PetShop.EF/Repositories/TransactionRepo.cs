@@ -40,8 +40,9 @@ namespace PetShop.EF.Repositories
         public Transaction? GetById(int? id)
         {
             using var context = new PetShopDbContext();
+            //return context.Transactions.Where(trans => trans.TransID == id).Include(trans => trans.Customer).Include(trans => trans.Employee).Include(trans => trans.Pfood).SingleOrDefault();
 
-            return context.Transactions.Include(trans => trans.Customer).Include(trans => trans.Employee).Include(trans => trans.Pet).Include(trans => trans.PetFood).SingleOrDefault();
+            return context.Transactions.Where(trans => trans.Id == id).Include(trans => trans.Customer).Include(trans => trans.Employee).Include(trans => trans.Pet).Include(trans => trans.PetFood).SingleOrDefault();
         }
 
         public void Update(int? id, Transaction entity)

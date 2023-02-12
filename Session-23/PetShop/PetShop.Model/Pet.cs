@@ -4,6 +4,9 @@ namespace PetShop.Model
 {
     public class Pet
     {
+        private AnimalType animalType;
+        private PetStatus petStatus;
+
         public Pet(string breed, AnimalType animalType, PetStatus petStatus, decimal price, decimal cost)
         {
             Breed = breed;

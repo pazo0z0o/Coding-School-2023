@@ -39,7 +39,7 @@ namespace PetShop.EF.Repositories
         public Customer? GetById(int? id)
         {
             using var context = new PetShopDbContext();   //could be a mistake to include Transactions
-            return context.Customers.Where(customs => customs.Id == id).Include(customs => customs.Transactions).SingleOrDefault();
+            return context.Customers.Include(customs => customs.Transactions).Where(customs => customs.Id == id).SingleOrDefault();
         }
 
         public void Update(int? id, Customer entity)

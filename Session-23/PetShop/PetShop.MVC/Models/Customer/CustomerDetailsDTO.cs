@@ -10,7 +10,7 @@ namespace PetShop.MVC.Models.Customer
         public string? Phone { get; set; }
         public string? Tin { get; set; }
 
-        public List<Transaction> Transactions { get; set; } = new List<Transaction>();
+        public List<Transaction>? Transactions { get; set; } = new List<Transaction>();
 
     }
 }

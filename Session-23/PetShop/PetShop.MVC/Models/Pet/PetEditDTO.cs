@@ -13,6 +13,6 @@ namespace PetShop.MVC.Models.Pet
         public decimal Cost { get; set; }
 
         // Relations
-        public List<Transaction> Transactions { get; set; }
+       // public List<Transaction> Transactions { get; set; }
     }
 }

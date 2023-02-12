@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Newtonsoft.Json.Linq;
 using PetShop.EF.Repositories;
 using PetShop.Model;
@@ -8,6 +9,7 @@ using PetShop.MVC.Models.Customer;
 using PetShop.MVC.Models.Transactions;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 
 namespace PetShop.MVC.Controllers
@@ -58,7 +60,6 @@ namespace PetShop.MVC.Controllers
                 PetFoodQty = transaction.PetFoodQty,
 
 
-
                 TotalPrice = transaction.TotalPrice
             };
 
@@ -69,12 +70,13 @@ namespace PetShop.MVC.Controllers
         // GET: Transaction/Create
         public ActionResult Create()
         {
+
             var viewTransaction = new CreateTransactionsDTO();
 
             var customers = _customerRepo.GetAll();
             var employees = _employeeRepo.GetAll();
-            var pet = _petRepo.GetAll();
-            var pfood = _petFoodRepo.GetAll();
+            var pets = _petRepo.GetAll();
+            var petfoods = _petFoodRepo.GetAll();
 
             //Select 
             foreach (var cus in customers)
@@ -87,16 +89,19 @@ namespace PetShop.MVC.Controllers
                 viewTransaction.Employee.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(emp.Surname + " " + emp.Name, emp.Id.ToString()));
             }
 
-            foreach (var pt in pet)
+            foreach (var pet in pets)
             {
-                string AT = Enum.GetName(typeof(AnimalType), pt.AnimalType);
-                viewTransaction.Pet.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(AT + "-" + pt.Breed + "-" + pt.Price, pt.Id.ToString()));
+                string AT = Enum.GetName(typeof(AnimalType), pet.AnimalType);
+                string ptStr = AT + pet.Breed + "-" + pet.Price.ToString();
+                viewTransaction.Pet.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(ptStr, pet.Id.ToString()));
             }
 
-            foreach (var pf in pfood)
+            foreach (var pfood in petfoods)
             {
-                string AT = Enum.GetName(typeof(AnimalType), pf.AnimalType);
-                viewTransaction.PetFood.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(AT + "-" + pf.Price.ToString(), pf.Id.ToString()));
+                string AT = Enum.GetName(typeof(AnimalType), pfood.AnimalType);
+                string pfStr = AT + "-" + pfood.Price.ToString();
+
+                viewTransaction.PetFood.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(pfStr, pfood.Id.ToString()));
             }
 
             return View(viewTransaction);
@@ -107,10 +112,17 @@ namespace PetShop.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateTransactionsDTO trans)
         {
+            /*string ptPrice = string.Empty;
+            string pfPrice = string.Empty;*/
+
             if (!ModelState.IsValid) return View();
+
+            /*decimal petFoodPrice = 0;
+            decimal petPrice = 0;*/
 
             var dbTransact = new Transaction(trans.PetPrice, trans.PetFoodQty, trans.PetFoodPrice, trans.TotalPrice)
             {
+
                 Date = DateTime.Now,
                 CustomerId = trans.CustomerId,
                 EmployeeId = trans.EmployeeId,
@@ -125,20 +137,21 @@ namespace PetShop.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-
         // GET: Transaction/Edit/5
         public ActionResult Edit(int id)
         {
+            //string ptPrice = string.Empty;
+            // string pfPrice = string.Empty;
+
             var customers = _customerRepo.GetAll();
             var employees = _employeeRepo.GetAll();
-            var pet = _petRepo.GetAll();
-            var pfood = _petFoodRepo.GetAll();
+            var pets = _petRepo.GetAll();
+            var petfoods = _petFoodRepo.GetAll();
 
             if (id == null) { return NotFound(); }
 
             var dbTransact = _transactionRepo.GetById(id);
             if (dbTransact == null) return NotFound();
-
 
             var viewTransaction = new EditTransactionsDTO()
             {
@@ -149,13 +162,11 @@ namespace PetShop.MVC.Controllers
                 EmployeeId = dbTransact.EmployeeId,
                 PetId = dbTransact.PetId,
                 PetFoodId = dbTransact.PetFoodId
-
-
             };
 
             foreach (var cus in customers)
             {
-                viewTransaction.Customer.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(cus.Surname + " "+cus.Name, cus.Id.ToString()));
+                viewTransaction.Customer.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(cus.Surname + " " + cus.Name, cus.Id.ToString()));
             }
 
             foreach (var emp in employees)
@@ -163,23 +174,22 @@ namespace PetShop.MVC.Controllers
                 viewTransaction.Employee.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(emp.Surname + " " + emp.Name, emp.Id.ToString()));
             }
 
-            foreach (var pt in pet)
+            foreach (var pet in pets)
             {
-                string AT = Enum.GetName(typeof(AnimalType), pt.AnimalType);
-                viewTransaction.Pet.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(AT + "-" + pt.Price.ToString(), pt.Id.ToString()));
+                string AT = Enum.GetName(typeof(AnimalType), pet.AnimalType);
+                string ptStr = AT + pet.Breed + "-" + pet.Price.ToString();
+                viewTransaction.Pet.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(ptStr, pet.Id.ToString()));
             }
-
-
-            foreach (var pf in pfood)
+            //  viewTransaction.PetPrice = GetPricePet(ptPrice);
+            foreach (var petfood in petfoods)
             {
-                string AT = Enum.GetName(typeof(AnimalType), pf.AnimalType);
-                viewTransaction.PetFood.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem( AT + "-" + pf.Price.ToString(), pf.Id.ToString()));
+                string AT = Enum.GetName(typeof(AnimalType), petfood.AnimalType);
+                string pfStr = AT + "-" + petfood.Price.ToString();
+                viewTransaction.PetFood.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(pfStr, petfood.Id.ToString()));
             }
-
-
+            // viewTransaction.PetFoodPrice = GetPricePetFood(pfPrice);
 
             return View(viewTransaction);
-
         }
 
         // POST: Transaction/Edit/5
@@ -191,7 +201,6 @@ namespace PetShop.MVC.Controllers
             {
                 return View();
             }
-
 
             var dbTransact = _transactionRepo.GetById(id);
             if (dbTransact == null) return NotFound();
@@ -215,21 +224,21 @@ namespace PetShop.MVC.Controllers
         public ActionResult Delete(int id)
         {
             var dbTransaction = _transactionRepo.GetById(id);
-            if(dbTransaction == null) return NotFound();
+            if (dbTransaction == null) return NotFound();
 
-            var viewTrans = new DeleteTransactionsDTO() 
-            { 
+            var viewTrans = new DeleteTransactionsDTO()
+            {
                 Id = dbTransaction.Id,
                 Date = dbTransaction.Date,
-                CustomerId =dbTransaction.CustomerId,
+                CustomerId = dbTransaction.CustomerId,
                 EmployeeId = dbTransaction.EmployeeId,
                 PetId = dbTransaction.PetId,
-                PetPrice= dbTransaction.PetPrice,
-                PetFoodId= dbTransaction.PetFoodId,
-                PetFoodPrice= dbTransaction.PetFoodPrice,
+                PetPrice = dbTransaction.PetPrice,
+                PetFoodId = dbTransaction.PetFoodId,
+                PetFoodPrice = dbTransaction.PetFoodPrice,
                 TotalPrice = dbTransaction.PetPrice
             };
-           
+
             return View(model: viewTrans);
         }
 
@@ -266,7 +275,31 @@ namespace PetShop.MVC.Controllers
             return Total;
         }
 
-        //public 
+        public decimal GetPricePet(string comboStr)
+        {
+            decimal price = 0;
+            char[] seperator = { '-' };
+            int count = 3;
 
+            String[] strlist = comboStr.Split(seperator, count, StringSplitOptions.None);
+            price = Convert.ToDecimal(strlist[strlist.Length - 1]);
+
+            return price;
+        }
+
+        public decimal GetPricePetFood(string comboStr)
+        {
+            decimal price = 0;
+            char[] seperator = { '-' };
+            int count = 2;
+
+            String[] strlist = comboStr.Split(seperator, count, StringSplitOptions.None);
+            price = Convert.ToDecimal(strlist[strlist.Length - 1]);
+
+            return price;
+        }
+
+
+        //public int MonthGrab(){}
     }
 }

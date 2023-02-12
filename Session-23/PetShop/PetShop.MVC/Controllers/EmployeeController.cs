@@ -9,9 +9,9 @@ namespace PetShop.MVC.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEntityRepo<Employee> _employeeRepo;
-        private readonly IEntityRepo<TransactionController> _transactionRepo;
+        private readonly IEntityRepo<Transaction> _transactionRepo;
 
-        public EmployeeController(IEntityRepo<Employee> employeeRepo, IEntityRepo<TransactionController> transactionRepo)
+        public EmployeeController(IEntityRepo<Employee> employeeRepo, IEntityRepo<Transaction> transactionRepo)
         {
             _employeeRepo = employeeRepo;
             _transactionRepo = transactionRepo;

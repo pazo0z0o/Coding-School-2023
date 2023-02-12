@@ -10,10 +10,10 @@ namespace PetShop.MVC.Controllers
     public class PetFoodController : Controller
     {
         private readonly IEntityRepo<PetFood> _petFoodRepo;
-        private readonly IEntityRepo<TransactionController> _transactionRepo;
+        private readonly IEntityRepo<Transaction> _transactionRepo;
         // GET: PetFoodController
 
-        public PetFoodController(IEntityRepo<PetFood> petFoodRepo, IEntityRepo<TransactionController> transactionRepo)
+        public PetFoodController(IEntityRepo<PetFood> petFoodRepo, IEntityRepo<Transaction> transactionRepo)
         {
             _petFoodRepo = petFoodRepo;
             _transactionRepo = transactionRepo;

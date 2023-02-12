@@ -12,9 +12,9 @@ namespace PetShop.MVC.Controllers
     {
 
         private readonly IEntityRepo<Pet> _petRepo;
-        private readonly IEntityRepo<TransactionController> _transactionRepo;
+        private readonly IEntityRepo<Transaction> _transactionRepo;
         // GET: PetController
-        public PetController(IEntityRepo<Pet> petRepo, IEntityRepo<TransactionController> transactionRepo)
+        public PetController(IEntityRepo<Pet> petRepo, IEntityRepo<Transaction> transactionRepo)
         {
             _transactionRepo = transactionRepo;
             _petRepo = petRepo;

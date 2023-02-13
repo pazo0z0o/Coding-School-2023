@@ -303,38 +303,62 @@ namespace PetShop.MVC.Controllers
 
         public void MonthGrab()
         {
+            var pets = _petRepo.GetAll().ToList();          
+            var petFood = _petFoodRepo.GetAll().ToList();
             var transactions = _transactionRepo.GetAll().ToList();
-            var pets = _petRepo.GetAll().ToList();
-            decimal totalIncMonth = 0;
+            
+            decimal totalIncomeMonth = 0;
+            //key column will have the pet's Price and value column will have the Cost
+            Dictionary<int, decimal> PetCost = new Dictionary<int, decimal>(); //Somehow, all pets have different prices, how could that be...Too Sleepy
+            foreach (var pet in pets)
+            {
+                PetCost.Add(pet.Id, pet.Cost);
+            }
 
             var orderedTrans = transactions.OrderBy(m => m.Date.Month).ToList();
 
             for (int i = 1; i < 13; i++)
-            {
+            {   
+
                 var monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
+                
                 //Monthly Income
-                foreach (var totalPrice in monthly)
+                foreach (var totalInc in monthly)
                 {
-                    totalIncMonth += totalPrice.TotalPrice;
+                    if (PetCost.ContainsKey(totalInc.PetId))
+                    {
+                    totalIncomeMonth += totalInc.TotalPrice - PetCost[totalInc.PetId];
+
+                    }
+
+                        
                 }
+
                 //Monthly Expense
                 decimal cleanPetFoodCost = 0;
-                foreach (var pFood in transactions)
+                foreach (var pFood in monthly)
                 {
-                    if (pFood.PetPrice != 0)
+                    if (pFood.PetPrice != 0) // alternate check for pet being bought
                     {
                         cleanPetFoodCost += pFood.PetFoodPrice * (pFood.PetFoodQty - 1);
                     }
                     else
                         cleanPetFoodCost += pFood.PetFoodPrice * pFood.PetFoodQty;
-
                 }
                 //Monthly Expense
-                decimal petCost = 0;
-                foreach (var pet in pets)
+                foreach (var trans in transactions)
                 {
-                   petCost += pet.Cost;
+                   // trans
+
                 }
+
+
+
+
+
+
+
+
 
             }
         }
@@ -343,11 +367,8 @@ namespace PetShop.MVC.Controllers
         {
             decimal standardExpense = 0;
             decimal rent = 2000;
-            var pets = _petRepo.GetAll().ToList();
-            var transactions = _transactionRepo.GetAll().ToList();
-            var employees = _employeeRepo.GetAll().ToList();
-            var petFood = _petFoodRepo.GetAll().ToList();
 
+            var employees = _employeeRepo.GetAll().ToList();
 
             foreach (var employee in employees)
             {

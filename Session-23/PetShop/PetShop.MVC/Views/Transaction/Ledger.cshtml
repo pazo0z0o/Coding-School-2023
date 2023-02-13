@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<PetShop.Model.Transaction>
+@*@model PetShop.MVC.Models.Transactions.MonthlyLedgerDTO*@
 
 @{
     ViewData["Title"] = "Ledger";
@@ -13,21 +14,21 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+               
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PetPrice)
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PetFoodQty)
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PetFoodPrice)
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
+                
             </th>
-            <th>
+           @* <th>
                 @Html.DisplayNameFor(model => model.Customer)
             </th>
             <th>
@@ -39,7 +40,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.PetFood)
             </th>
-            <th></th>
+            <th></th>*@
         </tr>
     </thead>
     <tbody>

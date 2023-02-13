@@ -22,7 +22,7 @@ namespace PetShop.MVC.Helpers
             _transactionRepo = transactionRepo;
         }
 
-        /*public List<decimal> MonthIncome(IEntityRepo<Pet> petRepo, IEntityRepo<PetFood> petFoodRepo, IEntityRepo<Transaction> transactionRepo)
+        public List<decimal> MonthIncome(IEntityRepo<Pet> petRepo, IEntityRepo<PetFood> petFoodRepo, IEntityRepo<Transaction> transactionRepo)
         {
             var pets = _petRepo.GetAll().ToList();
             var petFood = _petFoodRepo.GetAll().ToList();
@@ -35,18 +35,14 @@ namespace PetShop.MVC.Helpers
 
             for (int i = 1; i < 13; i++)
             {
-
                 var monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
 
                 //Monthly Income
                 foreach (var totalInc in monthly)
                 {
                     monthlyInc += totalInc.TotalPrice;
-
                 }
-
                 IncomePerMonth.Add(monthlyInc);
-
             }
             return IncomePerMonth;
 
@@ -119,17 +115,17 @@ namespace PetShop.MVC.Helpers
             return standardExpense;
         }
 
-        public List<decimal> Total(List<decimal> income , List<decimal> expenses)
+        public List<decimal> Total(List<decimal> income, List<decimal> expenses)
         {
             List<decimal> totals = new List<decimal>();
-           
-            for(int i=0; i<income.Count;i++)
+
+            for (int i = 0; i < income.Count; i++)
             {
-               totals.Add( income[i] - expenses[i]);
+                totals.Add(income[i] - expenses[i]);
             }
 
             return totals;
-        }*/
+        }
 
 
 

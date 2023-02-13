@@ -35,7 +35,13 @@ namespace PetShop.MVC.Controllers
         public ActionResult Index()
         {
             var transactions = _transactionRepo.GetAll().ToList();
-            return View(model: transactions);
+            var pets = _petRepo.GetAll().ToList();
+            var petfoods = _petFoodRepo.GetAll().ToList();
+            //just a triel since I have nowhere else to do it
+            List<decimal> trial = new List<decimal>();
+            trial = MonthlyExpenses(_petRepo, _petFoodRepo, _transactionRepo);
+        
+        return View(model: transactions);
         }
 
         // GET: Transaction/Details/5
@@ -64,7 +70,7 @@ namespace PetShop.MVC.Controllers
             };
 
             return View(model: viewTransaction);
-            //return View();
+           
         }
 
         // GET: Transaction/Create
@@ -135,8 +141,7 @@ namespace PetShop.MVC.Controllers
         // GET: Transaction/Edit/5
         public ActionResult Edit(int id)
         {
-            //string ptPrice = string.Empty;
-            // string pfPrice = string.Empty;
+       
 
             var customers = _customerRepo.GetAll();
             var employees = _employeeRepo.GetAll();
@@ -347,9 +352,11 @@ namespace PetShop.MVC.Controllers
             var orderedTrans = transactions.OrderBy(m => m.Date.Month).ToList();
 
             for (int i = 1; i < 13; i++)
-            {
-                var monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
-
+            {       //tragedy! how do I make it choose JUST the month, SEQUENTIALLY Could be usefull to check and continue  IF a month is not present
+                    //Must use mock data for each month (one at least) - then delete and leave some spaces
+               // if(Date.Month)
+                var monthly = orderedTrans.Where(m=>m.Date.Month == i ).DistinctBy(m => m.Date.Month).ToList();
+                
                 //Monthly Expense
                 decimal cleanPetFoodCost = 0;
                 foreach (var pFood in monthly)
@@ -376,7 +383,7 @@ namespace PetShop.MVC.Controllers
 
                 ExpensesPerMonth.Add(monthlyExp);
             }
-            return ExpensesPerMonth;
+            return ExpensesPerMonth; //Takes them all in :'(
         }
       
         public decimal StableExpences()

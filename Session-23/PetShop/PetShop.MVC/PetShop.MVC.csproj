@@ -27,4 +27,8 @@
     <ProjectReference Include="..\PetShop.Model\PetShop.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\MonthlyLedger\" />
+  </ItemGroup>
+
 </Project>

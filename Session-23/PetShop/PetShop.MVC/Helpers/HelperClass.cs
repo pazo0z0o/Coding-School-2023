@@ -94,12 +94,12 @@ namespace PetShop.MVC.Helpers
                         monthlyPetCost += PetCost[pet.PetId];
                     }
                 }
+
                 decimal standardExp = StableExpences();
                 monthlyExp = monthlyPetCost + standardExp + cleanPetFoodCost;
 
                 ExpensesPerMonth.Add(monthlyExp);
             }
-
             return ExpensesPerMonth;
         }
 
@@ -119,8 +119,17 @@ namespace PetShop.MVC.Helpers
             return standardExpense;
         }
 
+        public List<decimal> Total(List<decimal> income , List<decimal> expenses)
+        {
+            List<decimal> totals = new List<decimal>();
+           
+            for(int i=0; i<income.Count;i++)
+            {
+               totals.Add( income[i] - expenses[i]);
+            }
 
-
+            return totals;
+        }
 
 
 

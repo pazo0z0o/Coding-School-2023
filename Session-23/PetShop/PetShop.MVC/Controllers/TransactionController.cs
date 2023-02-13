@@ -313,11 +313,12 @@ namespace PetShop.MVC.Controllers
             List<decimal> IncomePerMonth = new List<decimal>();
 
             var orderedTrans = transactions.OrderBy(m => m.Date.Month).ToList();
+            List<Transaction> monthly = new List<Transaction>();
 
             for (int i = 1; i < 13; i++)
             {
 
-                var monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
+                monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
 
                 //Monthly Income
                 foreach (var totalInc in monthly)
@@ -350,12 +351,12 @@ namespace PetShop.MVC.Controllers
             }
             //============================================ Loop Start ==========================================================================
             var orderedTrans = transactions.OrderBy(m => m.Date.Month).ToList();
-
+           
+            List<Transaction> monthly = new List<Transaction>();  //tragedy! how do I make it choose JUST the month, SEQUENTIALLY Could be usefull to check and continue  IF a month is not present
+              
             for (int i = 1; i < 13; i++)
-            {       //tragedy! how do I make it choose JUST the month, SEQUENTIALLY Could be usefull to check and continue  IF a month is not present
-                    //Must use mock data for each month (one at least) - then delete and leave some spaces
-               // if(Date.Month)
-                var monthly = orderedTrans.Where(m=>m.Date.Month == i ).DistinctBy(m => m.Date.Month).ToList();
+            {       
+                 monthly = orderedTrans.Where(m=>m.Date.Month == i ).DistinctBy(m => m.Date.Month).ToList();
                 
                 //Monthly Expense
                 decimal cleanPetFoodCost = 0;

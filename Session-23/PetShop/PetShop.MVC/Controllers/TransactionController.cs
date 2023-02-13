@@ -296,19 +296,116 @@ namespace PetShop.MVC.Controllers
             return price;
         }
         //===================================================================================================
-        //var customers = _customerRepo.GetAll();
-        //var employees = _employeeRepo.GetAll();
-        //var pets = _petRepo.GetAll();
-        //var petfoods = _petFoodRepo.GetAll();
 
+
+        public List<decimal> MonthIncome(IEntityRepo<Pet> petRepo, IEntityRepo<PetFood> petFoodRepo, IEntityRepo<Transaction> transactionRepo)
+        {
+            var pets = _petRepo.GetAll().ToList();
+            var petFood = _petFoodRepo.GetAll().ToList();
+            var transactions = _transactionRepo.GetAll().ToList();
+
+            decimal monthlyInc = 0;
+            List<decimal> IncomePerMonth = new List<decimal>();
+
+            var orderedTrans = transactions.OrderBy(m => m.Date.Month).ToList();
+
+            for (int i = 1; i < 13; i++)
+            {
+
+                var monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
+
+                //Monthly Income
+                foreach (var totalInc in monthly)
+                {
+                    monthlyInc += totalInc.TotalPrice;
+
+                }
+
+                IncomePerMonth.Add(monthlyInc);
+
+            }
+            return IncomePerMonth;
+
+        }
        
+        public List<decimal> MonthlyExpenses(IEntityRepo<Pet> petRepo, IEntityRepo<PetFood> petFoodRepo, IEntityRepo<Transaction> transactionRepo)
+        {
+            var pets = _petRepo.GetAll().ToList();
+            var petFood = _petFoodRepo.GetAll().ToList();
+            var transactions = _transactionRepo.GetAll().ToList();
 
+            decimal monthlyExp = 0;
+            List<decimal> ExpensesPerMonth = new List<decimal>();
 
+            //key column will have the pet's Id and value column will have the Cost
+            Dictionary<int, decimal> PetCost = new Dictionary<int, decimal>();
+            foreach (var pet in pets)
+            {
+                PetCost.Add(pet.Id, pet.Cost);
+            }
+            //============================================ Loop Start ==========================================================================
+            var orderedTrans = transactions.OrderBy(m => m.Date.Month).ToList();
 
-        //public List<decimal>(){}
+            for (int i = 1; i < 13; i++)
+            {
+                var monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
 
+                //Monthly Expense
+                decimal cleanPetFoodCost = 0;
+                foreach (var pFood in monthly)
+                {
+                    if (pFood.PetPrice != 0) // alternate check for pet being bought
+                    {
+                        cleanPetFoodCost += pFood.PetFoodPrice * (pFood.PetFoodQty - 1);
+                    }
+                    else
+                        cleanPetFoodCost += pFood.PetFoodPrice * pFood.PetFoodQty;
+                }
+                //Monthly Expense
+                decimal monthlyPetCost = 0;
+                foreach (var pet in transactions)
+                {
+                    if (PetCost.ContainsKey(pet.PetId))
+                    {
+                        monthlyPetCost += PetCost[pet.PetId];
+                    }
+                }
 
+                decimal standardExp = StableExpences();
+                monthlyExp = monthlyPetCost + standardExp + cleanPetFoodCost;
 
+                ExpensesPerMonth.Add(monthlyExp);
+            }
+            return ExpensesPerMonth;
+        }
+      
+        public decimal StableExpences()
+        {
+            decimal standardExpense = 0;
+            decimal rent = 2000;
+
+            var employees = _employeeRepo.GetAll().ToList();
+
+            foreach (var employee in employees)
+            {
+                standardExpense += employee.SalaryPerMonth;
+            }
+
+            standardExpense += rent;
+            return standardExpense;
+        }
+      
+        public List<decimal> Total(List<decimal> income, List<decimal> expenses)
+        {
+            List<decimal> totals = new List<decimal>();
+
+            for (int i = 0; i < income.Count; i++)
+            {
+                totals.Add(income[i] - expenses[i]);
+            }
+
+            return totals;
+        }
 
 
 

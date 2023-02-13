@@ -22,7 +22,7 @@ namespace PetShop.MVC.Helpers
             _transactionRepo = transactionRepo;
         }
 
-        public List<decimal> MonthIncome(IEntityRepo<Pet> petRepo, IEntityRepo<PetFood> petFoodRepo, IEntityRepo<Transaction> transactionRepo)
+        /*public List<decimal> MonthIncome(IEntityRepo<Pet> petRepo, IEntityRepo<PetFood> petFoodRepo, IEntityRepo<Transaction> transactionRepo)
         {
             var pets = _petRepo.GetAll().ToList();
             var petFood = _petFoodRepo.GetAll().ToList();
@@ -129,7 +129,7 @@ namespace PetShop.MVC.Helpers
             }
 
             return totals;
-        }
+        }*/
 
 
 

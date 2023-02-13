@@ -29,7 +29,7 @@ namespace PetShop.MVC.Helpers
             var transactions = _transactionRepo.GetAll().ToList();
 
             decimal monthlyInc = 0;
-            List<decimal> IncomePerMonth  = new List<decimal>();
+            List<decimal> IncomePerMonth = new List<decimal>();
 
             var orderedTrans = transactions.OrderBy(m => m.Date.Month).ToList();
 
@@ -42,14 +42,14 @@ namespace PetShop.MVC.Helpers
                 foreach (var totalInc in monthly)
                 {
                     monthlyInc += totalInc.TotalPrice;
-                
+
                 }
 
-               IncomePerMonth.Add(monthlyInc);    
+                IncomePerMonth.Add(monthlyInc);
 
             }
             return IncomePerMonth;
-        
+
         }
 
         public List<decimal> MonthlyExpenses(IEntityRepo<Pet> petRepo, IEntityRepo<PetFood> petFoodRepo, IEntityRepo<Transaction> transactionRepo)

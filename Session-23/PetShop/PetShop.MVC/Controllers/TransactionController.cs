@@ -313,11 +313,11 @@ namespace PetShop.MVC.Controllers
             List<decimal> IncomePerMonth = new List<decimal>();
 
             var orderedTrans = transactions.OrderBy(m => m.Date.Month).ToList();
-            List<Transaction> monthly = new List<Transaction>();
+           // List<Transaction> monthly = new List<Transaction>();
 
             for (int i = 1; i < 13; i++)
             {
-
+                List<Transaction> monthly = new List<Transaction>();
                 monthly = orderedTrans.DistinctBy(m => m.Date.Month == i).ToList();
 
                 //Monthly Income
@@ -352,10 +352,11 @@ namespace PetShop.MVC.Controllers
             //============================================ Loop Start ==========================================================================
             var orderedTrans = transactions.OrderBy(m => m.Date.Month).ToList();
            
-            List<Transaction> monthly = new List<Transaction>();  //tragedy! how do I make it choose JUST the month, SEQUENTIALLY Could be usefull to check and continue  IF a month is not present
+              //tragedy! how do I make it choose JUST the month, SEQUENTIALLY Could be usefull to check and continue  IF a month is not present
               
             for (int i = 1; i < 13; i++)
-            {       
+            {   
+                 List<Transaction> monthly = new List<Transaction>();   
                  monthly = orderedTrans.Where(m=>m.Date.Month == i ).DistinctBy(m => m.Date.Month).ToList();
                 
                 //Monthly Expense
@@ -371,7 +372,7 @@ namespace PetShop.MVC.Controllers
                 }
                 //Monthly Expense
                 decimal monthlyPetCost = 0;
-                foreach (var pet in transactions)
+                foreach (var pet in monthly)
                 {
                     if (PetCost.ContainsKey(pet.PetId))
                     {

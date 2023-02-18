@@ -18,7 +18,7 @@ namespace FuelStation.Model
 
         //Relations
         public int TransactionID { get; set; }
-        public Transaction Transaction { get; set; } = null!;
+        public TransactionListDTO Transaction { get; set; } = null!;
 
         public int ItemID { get; set; }
         public Item Item { get; set; } = null!;

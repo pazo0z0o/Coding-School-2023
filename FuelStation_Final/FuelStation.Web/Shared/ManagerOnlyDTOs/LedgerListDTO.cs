@@ -17,7 +17,7 @@ namespace FuelStation.Web.Shared.ManagerOnlyDTOs
 
 
         // Relations
-        public List<Transaction> Transactions { get; set; }
+        public List<TransactionListDTO> Transactions { get; set; }
         //public List<Employee> Employees { get; set; }
         //public List<Customer> Customers  { get; set; }
     }

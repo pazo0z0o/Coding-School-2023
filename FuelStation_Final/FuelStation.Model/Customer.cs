@@ -23,11 +23,11 @@ namespace FuelStation.Model
             Name= name;
             Surname= surname;
             CardNumber = cardNumber;
-            Transactions = new List<Transaction>();
+            Transactions = new List<TransactionListDTO>();
         }
         //Relationships
 
-        public List<Transaction> Transactions { get; set; }
+        public List<TransactionListDTO> Transactions { get; set; }
 
 
     }

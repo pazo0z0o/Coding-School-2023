@@ -12,7 +12,9 @@ namespace FuelStation.EF.Repositories
     {
         public void Add(Item item)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            context.Add(item);
+            context.SaveChanges();
         }
 
         public void Delete(int id)

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FuelStation.EF.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace FuelStation.EF.Repositories
 {
@@ -12,27 +13,53 @@ namespace FuelStation.EF.Repositories
     {
         public void Add(Customer customer)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            context.Add(customer);
+            context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            var CustomerDb = context.Customers
+                .Where(customer => customer.ID == id)
+                .Include(customer => customer.Transactions)
+                .SingleOrDefault();
+            if (CustomerDb is null)
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
+            context.Remove(CustomerDb);
+            context.SaveChanges();
         }
 
         public IList<Customer> GetAll()
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            return context.Customers
+                .Include(customer => customer.Transactions)
+                .ToList();
         }
 
         public Customer? GetById(int id)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            return context.Customers
+                .Where(customer => customer.ID == id)
+                .Include(customer => customer.Transactions)
+                .SingleOrDefault();
         }
 
         public void Update(int id, Customer customer)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            var CustomerDb = context.Customers
+                .Where(customer => customer.ID == id)
+                .Include(customer => customer.Transactions)
+                .SingleOrDefault();
+            if (CustomerDb is null) throw new KeyNotFoundException($"Given id '{id}' was not found");
+            CustomerDb.Name = customer.Name;
+            CustomerDb.Surname = customer.Surname;
+            CustomerDb.CardNumber = customer.CardNumber;
+            context.SaveChanges();
         }
     }
 }

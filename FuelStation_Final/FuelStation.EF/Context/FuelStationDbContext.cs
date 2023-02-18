@@ -16,7 +16,6 @@ namespace FuelStation.EF.Context
         public DbSet<Employee> Employees { get; set; } = null!;
         public DbSet<Transaction> Transactions { get; set; } = null!; 
         public DbSet<TransactionLine> TransactionLines { get; set; } = null!; 
-        public DbSet<Ledger> Ledgers { get; set; } = null!;
 
         //==========================================================================
 
@@ -26,8 +25,7 @@ namespace FuelStation.EF.Context
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new ItemConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
-            modelBuilder.ApplyConfiguration(new TransactionLineConfiguration());
-            modelBuilder.ApplyConfiguration(new LedgerConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionLineConfiguration());         
             base.OnModelCreating(modelBuilder);
         }
 

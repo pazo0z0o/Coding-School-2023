@@ -16,6 +16,30 @@ namespace FuelStation.EF.Configurations
         {
             builder.ToTable("TransactionLine");
 
+            builder.HasKey(t => t.ID);
+            builder.Property(t => t.ID).ValueGeneratedOnAdd();
+
+            // Properties
+            builder.Property(t => t.Quantity).HasPrecision(10, 2).IsRequired();
+            builder.Property(t => t.ItemPrice).HasPrecision(10, 2).IsRequired();
+            builder.Property(t => t.NetValue).HasPrecision(10, 2).IsRequired();
+            builder.Property(t => t.DiscountPercent).HasPrecision(10, 2).IsRequired();
+            builder.Property(t => t.DiscountValue).HasPrecision(10, 2).IsRequired();
+            builder.Property(t => t.TotalValue).HasPrecision(10, 2).IsRequired();
+
+            // Relations
+            builder
+           .HasOne(tl => tl.Transaction)
+           .WithMany(t => t.TransactionLines)
+           .HasForeignKey(tl => tl.TransactionID)
+           .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+           .HasOne(tl => tl.Item)
+           .WithMany(i => i.TransactionLines)
+           .HasForeignKey(tl => tl.ItemID)
+           .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

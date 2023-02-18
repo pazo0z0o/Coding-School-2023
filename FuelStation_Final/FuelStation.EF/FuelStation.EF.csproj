@@ -19,8 +19,4 @@
     <ProjectReference Include="..\FuelStation.Model\FuelStation.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

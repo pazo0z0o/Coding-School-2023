@@ -15,6 +15,18 @@ namespace FuelStation.EF.Configurations
         {
             builder.ToTable("Item");
 
+            // Primary Key
+            builder.HasKey(t => t.ID);
+            builder.Property(t => t.ID).ValueGeneratedOnAdd();
+
+            // Properties
+            builder.Property(t => t.Code).HasMaxLength(50).IsRequired();
+            builder.Property(t => t.Description).HasMaxLength(300).IsRequired();
+            builder.Property(t => t.ItemType).HasMaxLength(50).IsRequired();
+            builder.Property(t => t.Price).HasMaxLength(50).HasPrecision(10, 2).IsRequired();
+            builder.Property(t => t.Cost).HasMaxLength(50).HasPrecision(10, 2).IsRequired();
+
+            // Relations
         }
     }
 }

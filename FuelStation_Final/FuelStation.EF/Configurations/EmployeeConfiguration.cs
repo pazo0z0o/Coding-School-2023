@@ -15,6 +15,20 @@ namespace FuelStation.EF.Configurations
         {
             builder.ToTable("Employee");
 
+            // Primary Key
+            builder.HasKey(t => t.ID);
+            builder.Property(t => t.ID).ValueGeneratedOnAdd();
+
+            // Properties
+            builder.Property(t => t.Name).HasMaxLength(50).IsRequired();
+            builder.Property(t => t.Surname).HasMaxLength(50).IsRequired();
+            builder.Property(t => t.HireDateStart).HasMaxLength(50).IsRequired();
+            builder.Property(t => t.HireDateEnd).HasMaxLength(50); //Did nullable cover this one? Or required
+            builder.Property(t => t.SallaryPerMonth).HasMaxLength(50).HasPrecision(10,2).IsRequired();
+            builder.Property(t => t.EmployeeType).HasMaxLength(15).IsRequired();
+
+
+            // Relations
         }
     }
 }

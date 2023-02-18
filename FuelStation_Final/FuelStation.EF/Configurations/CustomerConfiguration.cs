@@ -13,7 +13,19 @@ namespace FuelStation.EF.Configurations
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.ToTable("Customer");
+            // Table Name
+            builder.ToTable("Customers");
+
+            // Primary Key
+            builder.HasKey(t => t.ID);
+            builder.Property(t => t.ID).ValueGeneratedOnAdd();
+
+            // Properties
+            builder.Property(t => t.Name).HasMaxLength(50).IsRequired();
+            builder.Property(t => t.Surname).HasMaxLength(50).IsRequired();
+            builder.Property(t => t.CardNumber).HasMaxLength(20).IsRequired();        
+
+            // Relations
 
         }
     }

@@ -1,15 +1,15 @@
-﻿using FuelStation.Model.Enums;
+﻿using FuelStation.Model;
+using FuelStation.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FuelStation.Model
+namespace FuelStation.Web.Shared.ManagerOnlyDTOs
 {
-    public class Employee
+    public class EmployeeCreateDTO
     {
-
         public int ID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -20,13 +20,8 @@ namespace FuelStation.Model
         public EmployeeType EmployeeType { get; set; }
         //===============================================
         public string FullName { get { return string.Format("{0} {1}", Name, Surname); } }
-       
-             public List<Transaction> Transactions { get; set; }
 
-        public Employee() { }
+        public List<Transaction> Transactions { get; set; } = new();
 
-        
-        //Relationships
-      
     }
 }

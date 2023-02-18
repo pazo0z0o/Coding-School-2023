@@ -13,8 +13,6 @@ namespace Session_27.Server.Controllers {
             _carRepo = carRepo;
 
         }
-
-
         //Index - GetAlL()
         [HttpGet]
         public async Task<IEnumerable<CarListDto>> Get() {
@@ -33,8 +31,6 @@ namespace Session_27.Server.Controllers {
             newCar.Transactions = new();
             _carRepo.Add(newCar);
         }
-
-
 
         //Delete
         [HttpDelete("{id}")]

@@ -59,6 +59,7 @@ namespace FuelStation.EF.Repositories
                 .SingleOrDefault();
             if (TransactionLineDb is null)
                 throw new KeyNotFoundException($"Given id '{id}' was not found");
+            TransactionLineDb.Quantity = tline.Quantity;
             TransactionLineDb.ItemPrice = tline.ItemPrice;
             TransactionLineDb.NetValue =  tline.NetValue;
             TransactionLineDb.DiscountPercent = tline.DiscountPercent;

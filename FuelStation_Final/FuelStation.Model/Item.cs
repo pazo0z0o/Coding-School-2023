@@ -13,21 +13,10 @@ namespace FuelStation.Model
        public string Code { get; set; }
        public string Description { get; set; }
        public ItemType ItemType { get; set; }
-       public decimal Price { get; set; }
+        public decimal Price { get; set; }
        public decimal Cost { get; set; }
         //==========================
         public Item() { }
-
-        public Item(string code, string description, ItemType item,decimal price, decimal cost)
-        {
-            Code = code;
-            Description = description;
-            ItemType = item;
-            Price = price;
-            Cost = cost;
-            TransactionLines = new List<TransactionLine>();
-    }
-
 
         //Relationships
         public List<TransactionLine> TransactionLines { get; set; }

@@ -11,11 +11,11 @@ namespace FuelStation.Model
         public int ID { get; set; }
         public int Quantity { get; set; }
 
-        public decimal ItemPrice { get; set; }
-        public decimal NetValue { get; set; }  // value after discounts and cost
-        public decimal DiscountPercent { get; set; }
-        public decimal DiscountValue { get; set; }
-        public decimal TotalValue { get; set; } 
+        public decimal ItemPrice        { get; set; }
+        public decimal NetValue         { get; set; }  // value after discounts and cost
+        public decimal DiscountPercent  { get; set; }
+        public decimal DiscountValue    { get; set; }
+        public decimal TotalValue       { get; set; } 
 
         //Relations
         public int TransactionID { get; set; }

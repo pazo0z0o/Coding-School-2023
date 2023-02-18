@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FuelStation.EF.Context;
 using FuelStation.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace FuelStation.EF.Repositories
 {
@@ -19,22 +20,49 @@ namespace FuelStation.EF.Repositories
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            var EmployeeDb = context.Employees
+                .Where(employee => employee.ID == id)
+                .Include(employee => employee.Transactions)
+                .SingleOrDefault();
+            if (EmployeeDb is null)
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
+            context.Remove(EmployeeDb);
+            context.SaveChanges();
         }
 
         public IList<Employee> GetAll()
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            return context.Employees
+                .Include(employee => employee.Transactions)
+                .ToList();
         }
 
         public Employee? GetById(int id)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            return context.Employees
+                .Where(employee => employee.ID == id)
+                .Include(employee => employee.Transactions)
+                .SingleOrDefault();
         }
 
         public void Update(int id, Employee emp)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            var EmployeeDb = context.Employees
+                .Where(emp => emp.ID == id)
+                .Include(customer => customer.Transactions)
+                .SingleOrDefault();
+            if (EmployeeDb is null) throw new KeyNotFoundException($"Given id '{id}' was not found");
+            EmployeeDb.Name = emp.Name;
+            EmployeeDb.Surname = emp.Surname;
+            EmployeeDb.HireDateStart = emp.HireDateStart;
+            EmployeeDb.HireDateEnd = emp.HireDateEnd;
+            EmployeeDb.SallaryPerMonth = emp.SallaryPerMonth;
+            EmployeeDb.EmployeeType = emp.EmployeeType;
+            context.SaveChanges();
         }
     }
 }

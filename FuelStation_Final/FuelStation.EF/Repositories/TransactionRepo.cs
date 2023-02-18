@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FuelStation.EF.Context;
 using FuelStation.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace FuelStation.EF.Repositories
 {
@@ -19,22 +20,62 @@ namespace FuelStation.EF.Repositories
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            var TransactionDb = context.Transactions
+                .Where(transaction => transaction.ID == id)
+                .Include(transaction => transaction.TransactionLines)
+                .Include(transaction => transaction.Customer)
+                .Include(transaction => transaction.Employee)
+                .SingleOrDefault();
+            if (TransactionDb is null)
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
+            context.Remove(TransactionDb);
+            context.SaveChanges();
         }
 
         public IList<Transaction> GetAll()
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            return context.Transactions
+
+                .Include(transaction => transaction.Customer)
+                .Include(transaction => transaction.Employee)
+                .Include(transaction => transaction.TransactionLines)
+                    .ThenInclude(transactionLine => transactionLine.Item)
+                .Include(transaction => transaction.TransactionLines)
+                    .ThenInclude(transactionLine => transactionLine.Transaction)
+                .ToList();
         }
 
         public Transaction? GetById(int id)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            return context.Transactions
+                .Where(transaction => transaction.ID == id)
+
+                .Include(transaction => transaction.Customer)
+                .Include(transaction => transaction.Employee)
+                .Include(transaction => transaction.TransactionLines)
+                    .ThenInclude(transactionLine => transactionLine.Item)
+                .Include(transaction => transaction.TransactionLines)
+                    .ThenInclude(transactionLine => transactionLine.Transaction)
+                .SingleOrDefault();
         }
 
         public void Update(int id, Transaction transaction)
         {
-            throw new NotImplementedException();
+            using var context = new FuelStationDbContext();
+            var TransactionDb = context.Transactions
+                .Where(transaction => transaction.ID == id)
+                .SingleOrDefault();
+            if (TransactionDb is null)
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
+            TransactionDb.Date = transaction.Date;
+            TransactionDb.TotalValue = transaction.TotalValue;
+            TransactionDb.PaymentMethod = transaction.PaymentMethod;
+            TransactionDb.CustomerId = transaction.CustomerId;
+            TransactionDb.EmployeeId = transaction.EmployeeId;
+            context.SaveChanges();
         }
     }
 }

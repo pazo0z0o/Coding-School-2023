@@ -10,9 +10,14 @@ namespace FuelStation.Web.Server.Controllers
     [ApiController]
     public class EmployeeController : Controller
     {
-        public IActionResult Index()
+      private readonly IEntityRepo<Employee> _employeeRepo;
+        private readonly IEntityRepo<FuelStation.Model.Transaction> _transactionRepo;
+
+
+        public EmployeeController(IEntityRepo<Employee> employeeRepo)
         {
-            return View();
+            _employeeRepo= employeeRepo;
         }
+
     }
 }

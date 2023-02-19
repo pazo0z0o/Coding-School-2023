@@ -21,7 +21,7 @@ namespace FuelStation.Model
         //===============================================
         public string FullName { get { return string.Format("{0} {1}", Name, Surname); } }
        
-             public List<TransactionListDTO> Transactions { get; set; }
+             public List<Transaction> Transactions { get; set; }
 
         public Employee() { }
 

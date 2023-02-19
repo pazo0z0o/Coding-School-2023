@@ -10,9 +10,9 @@ using System.Reflection.Emit;
 
 namespace FuelStation.EF.Configurations
 {
-    public class TransactionConfiguration : IEntityTypeConfiguration<TransactionListDTO>
+    public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
     {
-        public void Configure(EntityTypeBuilder<TransactionListDTO> builder)
+        public void Configure(EntityTypeBuilder<Transaction> builder)
         {
             builder.ToTable("Transaction");
 

@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FuelStation.EF.Repositories
 {
-    public class TransactionRepo : IEntityRepo<TransactionListDTO>
+    public class TransactionRepo : IEntityRepo<Transaction>
     {
-        public void Add(TransactionListDTO transaction)
+        public void Add(Transaction transaction)
         {
             using var context = new FuelStationDbContext();
             context.Add(transaction);
@@ -33,7 +33,7 @@ namespace FuelStation.EF.Repositories
             context.SaveChanges();
         }
 
-        public IList<TransactionListDTO> GetAll()
+        public IList<Transaction> GetAll()
         {
             using var context = new FuelStationDbContext();
             return context.Transactions
@@ -47,7 +47,7 @@ namespace FuelStation.EF.Repositories
                 .ToList();
         }
 
-        public TransactionListDTO? GetById(int id)
+        public Transaction? GetById(int id)
         {
             using var context = new FuelStationDbContext();
             return context.Transactions
@@ -62,7 +62,7 @@ namespace FuelStation.EF.Repositories
                 .SingleOrDefault();
         }
 
-        public void Update(int id, TransactionListDTO transaction)
+        public void Update(int id, Transaction transaction)
         {
             using var context = new FuelStationDbContext();
             var TransactionDb = context.Transactions

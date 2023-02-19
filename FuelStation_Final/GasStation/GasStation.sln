@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelStation.Win", "GasStation\FuelStation.Win.csproj", "{9B450015-6720-4850-A45E-12F06FDC1CD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuelStation.Win", "GasStation\FuelStation.Win.csproj", "{9B450015-6720-4850-A45E-12F06FDC1CD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelStation.Model", "..\FuelStation.Model\FuelStation.Model.csproj", "{4CFEFE14-B5BB-4319-B3D0-5C821681BD35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuelStation.Model", "..\FuelStation.Model\FuelStation.Model.csproj", "{4CFEFE14-B5BB-4319-B3D0-5C821681BD35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelStation.EF", "..\FuelStation.EF\FuelStation.EF.csproj", "{CCCB4361-507B-4E6D-9BBA-20E4B5C957FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuelStation.EF", "..\FuelStation.EF\FuelStation.EF.csproj", "{CCCB4361-507B-4E6D-9BBA-20E4B5C957FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelStation.Web.Server", "..\FuelStation.Web\Server\FuelStation.Web.Server.csproj", "{073EE665-9973-49C2-BF5D-C9C76706A846}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuelStation.Web.Server", "..\FuelStation.Web\Server\FuelStation.Web.Server.csproj", "{073EE665-9973-49C2-BF5D-C9C76706A846}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelStation.Web.Client", "..\FuelStation.Web\Client\FuelStation.Web.Client.csproj", "{B65F47E8-693F-4185-9ECE-4199328C9E29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuelStation.Web.Client", "..\FuelStation.Web\Client\FuelStation.Web.Client.csproj", "{B65F47E8-693F-4185-9ECE-4199328C9E29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelStation.Web.Shared", "..\FuelStation.Web\Shared\FuelStation.Web.Shared.csproj", "{E5A35B28-11C4-4537-80CD-669FDD834C81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuelStation.Web.Shared", "..\FuelStation.Web\Shared\FuelStation.Web.Shared.csproj", "{E5A35B28-11C4-4537-80CD-669FDD834C81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

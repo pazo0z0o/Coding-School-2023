@@ -21,7 +21,7 @@ namespace FuelStation.Web.Shared.ManagerOnlyDTOs
         //===============================================
         public string FullName { get { return string.Format("{0} {1}", Name, Surname); } }
 
-        public List<TransactionListDTO> Transactions { get; set; } = new();
+        public List<Transaction> Transactions { get; set; } = new();
 
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FuelStation.Model
 {
-   public class TransactionListDTO
+   public class Transaction
     {
         public int ID { get; set; }
         public DateTime Date { get; set; }
@@ -23,7 +23,7 @@ namespace FuelStation.Model
 
        
 
-        public TransactionListDTO() { }    
+        public Transaction() { }    
 
         //Relationships
         public List<TransactionLine> TransactionLines { get; set; }

@@ -1,0 +1,77 @@
+﻿@page "/customerlist/edit/{Id:int?}"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
+
+<h3>Edit Customer Info</h3>
+@if (isLoading)
+{
+    <div class="lds-hourglass"></div>
+}
+else
+{
+    <EditForm Model="Customer" OnValidSubmit="OnUpdate">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="col-md-6">
+            <input type="hidden" class="form-control" id="id" @bind="Customer.ID" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Name</label>
+            <InputText class="form-control" id="name" @bind-Value="Customer.Name" />
+            <ValidationMessage For="@(() => Customer.Name)" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Surname</label>
+            <InputText class="form-control" id="surname" @bind-Value="Customer.Surname" />
+            <ValidationMessage For="@(() => Customer.Surname)" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Card Number</label>
+            <input class="form-control" id="cardNumber" @bind="Customer.CardNumber" />
+      
+        </div>
+
+        <div class="row mt-2">
+            <div class="col">
+                <button class="btn btn-success" type="submit">Edit Customer Info</button>
+                <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+
+    [Parameter] public int? Id { get; set; }
+    CustomerEditDTO Customer { get; set; }
+    bool isLoading = true;
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadItemsFromServer();
+        isLoading = false;
+    }
+    private async Task LoadItemsFromServer()
+    {
+        if (Id.HasValue)
+            Customer = await httpClient.GetFromJsonAsync<CustomerEditDTO>($"customer/{Id}");
+    }
+
+    private void OnCancel()
+    {
+        navigationManager.NavigateTo("customerlist");
+    }
+    private async Task OnUpdate()
+    {
+        HttpResponseMessage? response;
+        response = await httpClient.PutAsJsonAsync("customer", Customer);
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("customerlist");
+    }
+
+
+
+
+
+
+}

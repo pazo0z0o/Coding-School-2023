@@ -1,0 +1,100 @@
+﻿@page "/employeelist/create/{Id:int?}"
+@using FuelStation.Model.Enums;
+@using FuelStation.Web.Shared.ManagerOnlyDTOs;
+@using FuelStation.Model;
+@using FuelStation.Web.Shared;
+@using System.Net.Http.Json;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+<h3> Edit Employee</h3>
+
+@if (Employee == null)
+{
+    <p>Loading ...</p>
+}
+else
+{
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <label class="form-label">Name</label>
+            <input class="form-control" @bind="@Employee.Name" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <label class="form-label">Surname</label>
+            <input class="form-control" @bind="@Employee.Surname" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Hire Date Start</label>
+        <input class="form-control" @bind="@Employee.HireDateStart" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Hire Date End</label>
+        <input class="form-control" @bind="@Employee.HireDateEnd" />
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <label class="form-label">Employee Type</label>
+            <select class="form-control" @bind="@Employee.EmployeeType">
+                @foreach (var empType in Enum.GetValues<EmployeeType>())
+                {
+                    <option value="@empType">@empType</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <label class="form-label">SalaryPerMonth(&euro)</label>
+            <input class="form-control" @bind="@Employee.SalaryPerMonth" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <button class="btn btn-success" @onclick="OnSave">Save Changes</button>
+            <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public int? Id { get; set; }
+    EmployeeEditDTO Employee { get; set; }
+    bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id == null)
+        {
+            Employee = new();
+        }
+        else
+        {
+            Employee = await httpClient.GetFromJsonAsync<EmployeeEditDTO>($"employee/{Id}");
+        }
+        bool isLoading = false;
+    }
+
+    private void OnCancel()
+    {
+        navigationManager.NavigateTo("employeelist");
+    }
+
+    private async Task OnSave()
+    {
+        HttpResponseMessage? response = null;
+        if (Id == null)
+        {
+            response = await httpClient.PostAsJsonAsync("employee", Employee);
+        }
+        else
+        {
+            response = await httpClient.PutAsJsonAsync("employee", Employee);
+        }
+
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("employeelist");
+    }
+}

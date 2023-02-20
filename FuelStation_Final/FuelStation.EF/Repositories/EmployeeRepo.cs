@@ -60,7 +60,7 @@ namespace FuelStation.EF.Repositories
             EmployeeDb.Surname = emp.Surname;
             EmployeeDb.HireDateStart = emp.HireDateStart;
             EmployeeDb.HireDateEnd = emp.HireDateEnd;
-            EmployeeDb.SallaryPerMonth = emp.SallaryPerMonth;
+            EmployeeDb.SalaryPerMonth = emp.SalaryPerMonth;
             EmployeeDb.EmployeeType = emp.EmployeeType;
             context.SaveChanges();
         }

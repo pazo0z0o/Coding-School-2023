@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Shared\FuelStation.Web.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Employee\" />
-  </ItemGroup>
-
 </Project>

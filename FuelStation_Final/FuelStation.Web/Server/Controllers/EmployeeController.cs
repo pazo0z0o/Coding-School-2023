@@ -33,8 +33,8 @@ namespace FuelStation.Web.Server.Controllers
                 Surname = employee.Surname,
                 HireDateStart = employee.HireDateStart,
                 HireDateEnd = employee.HireDateEnd,
-                SallaryPerMonth= employee.SallaryPerMonth,
-                EmployeeType = employee.EmployeeType,
+                SalaryPerMonth = employee.SalaryPerMonth,
+                EmployeeType = employee.EmployeeType
             });
         }
 
@@ -47,7 +47,7 @@ namespace FuelStation.Web.Server.Controllers
                 newEmployee.Surname = employee.Surname;
                 newEmployee.HireDateStart = employee.HireDateStart;
                 newEmployee.HireDateEnd = employee.HireDateEnd;
-                newEmployee.SallaryPerMonth = employee.SallaryPerMonth;    
+                newEmployee.SalaryPerMonth = employee.SalaryPerMonth;    
                 newEmployee.EmployeeType = employee.EmployeeType;
                 newEmployee.Transactions = new();
                 _employeeRepo.Add(newEmployee);
@@ -72,20 +72,20 @@ namespace FuelStation.Web.Server.Controllers
                 Surname = result.Surname,
                 HireDateStart = result.HireDateStart,
                 HireDateEnd = result.HireDateEnd,
-                SallaryPerMonth= result.SallaryPerMonth,
+                SalaryPerMonth = result.SalaryPerMonth,
                 EmployeeType = result.EmployeeType
             };
         }
         //Put
-        public async Task Put(EmployeeListDTO employee)
+        public async Task Put(EmployeeEditDTO employee)
         {
             var itemToUpdate = _employeeRepo.GetById(employee.ID);
             itemToUpdate.ID = employee.ID;
             itemToUpdate.Name = employee.Name;
             itemToUpdate.Surname = employee.Surname;
-            itemToUpdate.HireDateStart = employee.HireDateStart;
+           // itemToUpdate.HireDateStart = employee.HireDateStart;
             itemToUpdate.HireDateEnd = employee.HireDateEnd;
-            itemToUpdate.SallaryPerMonth= employee.SallaryPerMonth;
+            itemToUpdate.SalaryPerMonth = employee.SalaryPerMonth;
             itemToUpdate.EmployeeType = employee.EmployeeType;
             itemToUpdate.Transactions = employee.Transactions;
             _employeeRepo.Update(employee.ID, itemToUpdate);

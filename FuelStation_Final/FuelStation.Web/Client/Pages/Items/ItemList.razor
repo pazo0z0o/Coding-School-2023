@@ -1,0 +1,85 @@
+﻿@page "/itemlist"
+@using FuelStation.Web.Shared.ItemDTOs;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+
+<h3>Item List</h3>
+
+@if (isLoading)
+{
+    <p>Loading ...</p>
+}
+else
+{
+    <button class="btn btn-primary" @onclick="CreateItem">Create</button>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Code             </th>
+                <th>Description      </th>
+                <th>Item Type        </th>
+                <th>Price Sold(&euro)</th>
+                <th>Cost(&euro)     </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in itemList)
+            {
+                <tr>
+                    <td>@item.Code</td>
+                    <td>@item.Description</td>
+                    <td>@item.ItemType</td>
+                    <td>@item.Price</td>
+                    <td>@item.Cost</td> 
+                    <td>
+                        <button class="btn btn-primary" @onclick="()=> EditItem(item)">Edit</button>
+                        <button class="btn btn-danger" @onclick="()=> DeleteItem(item)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<ItemListDTO> itemList = new();
+   
+    bool isLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadItemsFromServer();
+        isLoading = false;
+    }
+
+    private async Task LoadItemsFromServer()
+    {
+        itemList = await httpClient.GetFromJsonAsync<List<ItemListDTO>>("employee");
+    }
+
+    private void CreateItem()
+    {
+        navigationManager.NavigateTo("itemlist/create");
+    }
+
+    private void EditItem(ItemListDTO item)
+    {
+        navigationManager.NavigateTo($"itemlist/create/{item.ID}");
+    }
+
+
+    //works
+    private async Task DeleteItem(ItemListDTO item)
+    {
+        var confirm = await jsRuntime.InvokeAsync<bool>("confirm", "Delete Item. Are you sure?");
+        if (confirm)
+        {
+            var response = await httpClient.DeleteAsync($"item/{item.ID}");
+            response.EnsureSuccessStatusCode();
+            await LoadItemsFromServer();
+        }
+    }
+}

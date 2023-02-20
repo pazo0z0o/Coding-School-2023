@@ -24,7 +24,7 @@ namespace FuelStation.EF.Configurations
             builder.Property(t => t.Surname).HasMaxLength(50).IsRequired();
             builder.Property(t => t.HireDateStart).HasMaxLength(50).IsRequired();
             builder.Property(t => t.HireDateEnd).HasMaxLength(50); //Did nullable cover this one? Or required
-            builder.Property(t => t.SallaryPerMonth).HasMaxLength(50).HasPrecision(10,2).IsRequired();
+            builder.Property(t => t.SalaryPerMonth).HasMaxLength(50).HasPrecision(10,2).IsRequired();
             builder.Property(t => t.EmployeeType).HasMaxLength(15).IsRequired();
 
 

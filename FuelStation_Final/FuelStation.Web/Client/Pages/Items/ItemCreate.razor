@@ -38,11 +38,11 @@ else
         </div>
     </div>
     <div class="col-md-6">
-        <label class="form-label">Price (&euro)</label>
+        <label class="form-label">Price </label>
         <input class="form-control" @bind="@Item.Price" />
     </div>
     <div class="col-md-6">
-        <label class="form-label">Cost (&euro)</label>
+        <label class="form-label">Cost </label>
         <input class="form-control" @bind="@Item.Cost" />
     </div>
     <div class="row mt-2">
@@ -73,7 +73,7 @@ else
 
     private void OnCancel()
     {
-        navigationManager.NavigateTo("employeelist");
+        navigationManager.NavigateTo("itemlist");
     }
 
     private async Task OnSave()

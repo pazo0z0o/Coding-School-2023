@@ -20,8 +20,8 @@ else
                 <th>Code             </th>
                 <th>Description      </th>
                 <th>Item Type        </th>
-                <th>Price Sold(&euro)</th>
-                <th>Cost(&euro)     </th>
+                <th>Price Sold</th>
+                <th>Cost     </th>
                
             </tr>
         </thead>
@@ -46,7 +46,6 @@ else
 
 @code {
     private List<ItemListDTO> itemList = new();
-   
     bool isLoading { get; set; } = true;
 
     protected override async Task OnInitializedAsync()
@@ -57,7 +56,7 @@ else
 
     private async Task LoadItemsFromServer()
     {
-        itemList = await httpClient.GetFromJsonAsync<List<ItemListDTO>>("employee");
+        itemList = await httpClient.GetFromJsonAsync<List<ItemListDTO>>("item");
     }
 
     private void CreateItem()

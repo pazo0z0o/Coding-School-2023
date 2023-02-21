@@ -1,9 +1,79 @@
 ﻿@page "/"
-
+@inject NavigationManager navigationManager
 <PageTitle>Index</PageTitle>
+<head>
+    @*<style>
+        /* Center the form on the page */
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        
+    </style>*@
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+</head>
+<h2>StamOil Fuel </h2>
+<br />
+<h3> Since about a week and a half ago, we are there for all your refueling needs. </h3>
+
+<div class="row">
+    <div class="col-4">
+        <button class="btn btn-primary btn-block" style="height: 240px;" onclick="@(() => GoManager())">
+           Connect as manager
+        </button>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-secondary btn-block" style="height: 240px;" onclick="@(() => GoCashier())">
+            Connect as cashier
+        </button>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-danger btn-block" style="height: 200px; width:300px" onclick="@(() => GoStaff())">
+            Connect as staff
+        </button>
+    </div>
+</div>
+
+
+
+
+@code{
+    public void GoManager()
+    {
+        navigationManager.NavigateTo($"landingpage/");
+    }
+
+public void GoCashier()
+    {
+        navigationManager.NavigateTo($"customerlist/");
+    }
+
+public void GoStaff()
+    {
+        navigationManager.NavigateTo($"itemlist/");
+    }
+    
+
+}
+
+@*
+
+<body>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="password-input">Password</label>
+                <input type="password" class="form-control" id="password-input" placeholder="Enter password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+*@

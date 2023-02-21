@@ -2,7 +2,8 @@
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 @using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
-
+@using FuelStation.Web.Shared.Services_Logic;
+@using System.Net;
 
 
 <h3>Add new Customer</h3>
@@ -32,12 +33,14 @@
         <div class="col">
             <button class="btn btn-success" type="submit">Add new Customer</button>
             <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+            <button class="btn btn-warning" @onclick="CardNumberGen">Generate Number </button>
         </div>
     </div>
 </EditForm>
 
 @code {
     CustomerCreateDTO Customer { get; set; } = new();
+    RandomGenerators randCard { get; set; } = new();
     bool isLoading = true;
 
     private void OnCancel()
@@ -50,6 +53,24 @@
         response = await httpClient.PostAsJsonAsync("customer", Customer);
         response.EnsureSuccessStatusCode();
         navigationManager.NavigateTo("customerlist");
+    }
+
+    //not elegant -- but works
+    private async Task<string> CardNumberGen()
+    {   try{
+            string value = await randCard.CardNumberGeneratorAsync();
+            Customer.CardNumber = value;
+        }
+        catch (HttpRequestException ex)
+        {
+           if (ex.StatusCode == HttpStatusCode.BadRequest)
+            {
+            Console.WriteLine($"Error: {ex.Message}"); //works but throws bad request anyway
+            }
+        
+        }
+        
+     return  Customer.CardNumber;
     }
 
 

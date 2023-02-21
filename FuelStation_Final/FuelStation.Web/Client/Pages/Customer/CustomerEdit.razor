@@ -2,6 +2,8 @@
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 @using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
+@using System.Net;
+@using FuelStation.Web.Shared.Services_Logic;
 
 <h3>Edit Customer Info</h3>
 @if (isLoading)
@@ -36,6 +38,7 @@ else
             <div class="col">
                 <button class="btn btn-success" type="submit">Edit Customer Info</button>
                 <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+                <button class="btn btn-warning" @onclick="CardNumberGen">Generate Number </button>
             </div>
         </div>
     </EditForm>
@@ -45,6 +48,7 @@ else
 
     [Parameter] public int? Id { get; set; }
     CustomerEditDTO Customer { get; set; }
+    RandomGenerators randCard { get; set; } = new();
     bool isLoading = true;
     protected override async Task OnInitializedAsync()
     {
@@ -69,7 +73,25 @@ else
         navigationManager.NavigateTo("customerlist");
     }
 
+    //not elegant -- but works
+    private async Task<string> CardNumberGen()
+    {
+        try
+        {
+            string value = await randCard.CardNumberGeneratorAsync();
+            Customer.CardNumber = value;
+        }
+        catch (HttpRequestException ex)
+        {
+            if (ex.StatusCode == HttpStatusCode.BadRequest)
+            {
+                Console.WriteLine($"Error: {ex.Message}"); //works but throws bad request anyway
+            }
 
+        }
+
+        return Customer.CardNumber;
+    }
 
 
 

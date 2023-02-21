@@ -17,36 +17,37 @@ namespace FuelStation.Web.Shared.Services_Logic
             _customerRepo= customerRepo;
         }
 
+        public RandomGenerators()
+        {
 
-        public string CardNumberGenerator()
-        {   int length = 9;
+        }
+
+        public async Task<string> CardNumberGeneratorAsync()
+        {
+            int length = 9;
             string standard = "A";
             string CardNumber = string.Empty;
-            var customerCheck = _customerRepo.GetAll(); //.Where(card => card.CardNumber).ToList(); 
+            string validInputs = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            char[] chars = new char[length];
+            Random rndPick = new Random();
 
-        string validInputs = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            char[] chars= new char[length];
-            Random rndPick = new Random(); 
+            for (int i = 0; i < length; i++)
+            {
+                chars[i] = validInputs[rndPick.Next(0, validInputs.Length)];
+            }
 
-            for (int i = 0;i < length; i++)
-            {
-                chars[i] = validInputs[rndPick.Next(0,validInputs.Length)];
-            }
-            CardNumber = standard + chars.ToString();
-            foreach(var customer in customerCheck)
-            {
-                if (CardNumber != customer.CardNumber) continue;
-                else CardNumber = CardNumberGenerator(); 
-            }
-            
-            return CardNumber;
+            CardNumber = standard + new string(chars);
+
+            return  CardNumber;
         }
+
+
         //TODO if I have time
         public string PasswordGenerator()
         {
             string pass = string.Empty;
 
-            int length = 9; 
+            int length = 10; 
 
             string validInputs = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!./+*-";
             char[] chars = new char[length];

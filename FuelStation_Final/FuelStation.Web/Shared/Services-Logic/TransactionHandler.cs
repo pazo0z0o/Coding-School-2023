@@ -13,7 +13,7 @@ using FuelStation.EF.Repositories;
 
 namespace FuelStation.Web.Shared.Services_Logic
 {
-    public class TransactionHandler : ITransactionHandler
+    public class TransactionHandler //: ITransactionHandler
     {
         public TransactionHandler()
         {

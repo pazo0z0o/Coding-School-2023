@@ -79,12 +79,12 @@ namespace FuelStation.Web.Shared.Services_Logic
         public decimal CalculateTotalValue(Transaction transaction)
         {
 
-            decimal totalCost = 0;
+            decimal totalValue = 0;
             foreach (var trl in transaction.TransactionLines)
             {
-               // totalCost += trl.ServiceTask.Hours * _workhour;
+               // totalValue += trl.ServiceTask.Hours * _workhour;
             }
-            return totalCost;
+            return totalValue;
         }
 
 

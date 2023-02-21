@@ -3,9 +3,95 @@
 @inject NavigationManager navigationManager
 @using FuelStation.Web.Shared;
 
+<head>
+    <style>
+        /* Center the form on the page */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin:auto;
+            
+        }
+    </style>
 
-<h2>StamOil Fuel </h2>
-<h3> Since about a week and a half ago, we are there for all your refueling needs. </h3>
+
+
+
+</head>
+<style>
+    /* Center the form on the page */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    button{margin: 1.5rem;}
+
+</style>
+<h2 style="color:darkred">StamOil Fuel </h2>
+<br />
+<h4>Since about a week and a half ago, we are there for all your refueling needs.</h4>
+<div class="container">
+    <table class="tab-content">
+    <tr>
+       <div>
+            <td> <div class="col-md-6">
+            <button class="btn btn-primary btn-block" style="height: 200px; width:300px" onclick="@(() => GoCustomer())">
+                Customers
+            </button>
+                </div>
+            </td>
+       <td> <div class="col-md-6">
+            <button class="btn btn-success btn-block" style="height: 200px; width:300px" onclick="@(() => GoItems())">
+                Items
+            </button>
+              </div>
+            </td>
+       </div>
+     </tr>
+<tr>
+    <div>
+       <td> <div class="col-md-6">
+            <button class="btn btn-danger btn-block" style="height: 200px; width:300px" onclick="@(() => GoEmployees())">
+                Employees
+            </button>
+        </div>
+        </td>
+      <td>  <div class="col-md-6">
+            <button class="btn btn-warning btn-block" style="height: 200px; width:300px" onclick="@(() => GoLedger())">
+                Finances Ledger
+            </button>
+        </div>
+        </td>
+    </div>
+</tr>
+    </table>
+</div>
+
+
+
 @code {
+    public void GoCustomer()
+    {
+        navigationManager.NavigateTo("/customerlist");
+    }
 
+    public void GoItems()
+    {
+        navigationManager.NavigateTo("/itemlist");
+    }
+
+    public void GoEmployees()
+    {
+        navigationManager.NavigateTo("/employeelist");
+    }
+
+    public void GoLedger()
+    {
+        navigationManager.NavigateTo("/ledger");
+    }
 }

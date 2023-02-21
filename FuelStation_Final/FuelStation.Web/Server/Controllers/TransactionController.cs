@@ -23,15 +23,16 @@ namespace FuelStation.Web.Server.Controllers
         private readonly IEntityRepo<Item> _itemRepo;
         private readonly IEntityRepo<TransactionLine> _transLineRepo;
         private TransactionHandler _transHandler;
-        private RandomGenerators _rangomGen;
+        private RandomGenerators _randomGen;
 
-        public TransactionController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo, IEntityRepo<TransactionLine> transLineRepo, TransactionHandler transHandler)
+        public TransactionController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo, IEntityRepo<TransactionLine> transLineRepo, TransactionHandler transHandler, RandomGenerators rangomGen)
         {
             _transactionRepo = transactionRepo;
             _customerRepo = customerRepo;
             _employeeRepo = employeeRepo;
             _transLineRepo = transLineRepo;
             _transHandler = transHandler;
+            _randomGen = rangomGen;
         }
 
         [HttpGet]

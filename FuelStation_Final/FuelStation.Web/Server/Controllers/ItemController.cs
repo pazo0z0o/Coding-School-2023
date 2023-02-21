@@ -6,7 +6,7 @@ using FuelStation.Web.Shared;
 using FuelStation.Web.Shared;
 using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
 using FuelStation.Web.Shared.ItemDTOs;
-
+using FuelStation.Web.Shared.Services_Logic;
 
 namespace FuelStation.Web.Server.Controllers
 {
@@ -14,7 +14,8 @@ namespace FuelStation.Web.Server.Controllers
     [ApiController]
     public class ItemController : ControllerBase
     {
-
+        private TransactionHandler _transHandler;
+        private RandomGenerators _randomGen;
         private readonly IEntityRepo<Item> _itemRepo;
 
         public ItemController(IEntityRepo<Item> itemRepo)

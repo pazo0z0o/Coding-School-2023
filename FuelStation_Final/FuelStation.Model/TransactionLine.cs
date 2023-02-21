@@ -23,7 +23,8 @@ namespace FuelStation.Model
         public int ItemID { get; set; }
         public Item Item { get; set; } = null!;
         //===============================
-        public TransactionLine() { }   
+        public TransactionLine() { }
+        
 
     }
 }

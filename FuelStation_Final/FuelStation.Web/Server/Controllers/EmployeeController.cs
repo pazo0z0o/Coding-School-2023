@@ -5,6 +5,7 @@ using FuelStation.Model;
 using FuelStation.Web.Shared;
 using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
 using FuelStation.Web.Shared.ManagerOnlyDTOs;
+using FuelStation.Web.Shared.Services_Logic;
 
 namespace FuelStation.Web.Server.Controllers
 {
@@ -13,12 +14,15 @@ namespace FuelStation.Web.Server.Controllers
     public class EmployeeController : Controller
     {
       private readonly IEntityRepo<Employee> _employeeRepo;
-        private readonly IEntityRepo<FuelStation.Model.Transaction> _transactionRepo;
+       // private readonly IEntityRepo<FuelStation.Model.Transaction> _transactionRepo;
+        private TransactionHandler _transHandler;
+        private RandomGenerators _randomGen;
 
-
-        public EmployeeController(IEntityRepo<Employee> employeeRepo)
+        public EmployeeController(IEntityRepo<Employee> employeeRepo, TransactionHandler transHandler, RandomGenerators randomGen)
         {
             _employeeRepo= employeeRepo;
+            _transHandler= transHandler;
+            _randomGen= randomGen;
         }
 
 

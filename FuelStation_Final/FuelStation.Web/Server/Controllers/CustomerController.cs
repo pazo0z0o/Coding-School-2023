@@ -4,6 +4,7 @@ using FuelStation.EF.Repositories;
 using FuelStation.Model;
 using FuelStation.Web.Shared;
 using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
+using FuelStation.Web.Shared.Services_Logic;
 
 namespace FuelStation.Web.Server.Controllers
 {
@@ -12,9 +13,13 @@ namespace FuelStation.Web.Server.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IEntityRepo<Customer> _customerRepo;
-        public CustomerController(IEntityRepo<Customer> customerRepo)
+        private TransactionHandler _transHandler;
+        private RandomGenerators _randomGen;
+        public CustomerController(IEntityRepo<Customer> customerRepo, TransactionHandler transHandler, RandomGenerators randomGen)
         {
             _customerRepo = customerRepo;
+            _transHandler = transHandler;
+            _randomGen = randomGen;
         }
 
         [HttpGet]

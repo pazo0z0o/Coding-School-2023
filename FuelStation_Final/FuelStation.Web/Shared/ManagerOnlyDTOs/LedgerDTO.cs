@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FuelStation.Web.Shared.ManagerOnlyDTOs
 {
-    public class LedgerListDTO
+    public class LedgerDTO
     {
         public int Year { get; set; }
         public int Month { get; set; }
@@ -18,7 +18,6 @@ namespace FuelStation.Web.Shared.ManagerOnlyDTOs
 
         // Relations
         public List<Transaction> Transactions { get; set; }
-        //public List<Employee> Employees { get; set; }
-        //public List<Customer> Customers  { get; set; }
+        public List<Employee> Employees { get; set; }
     }
 }

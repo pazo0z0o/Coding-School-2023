@@ -2,34 +2,33 @@
 @inject NavigationManager navigationManager
 <PageTitle>Index</PageTitle>
 <head>
-    @*<style>
+    <style>
         /* Center the form on the page */
-
-
         .container {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
+        </style>
         
-        
-    </style>*@
+   
 
 
 </head>
-<h2>StamOil Fuel </h2>
+<h2 style="color:darkred">StamOil Fuel </h2>
 <br />
-<h3> Since about a week and a half ago, we are there for all your refueling needs. </h3>
+<h4> Since about a week and a half ago, we are there for all your refueling needs. </h4>
 
+<div class="container" >
 <div class="row">
     <div class="col-4">
-        <button class="btn btn-primary btn-block" style="height: 240px;" onclick="@(() => GoManager())">
+        <button class="btn btn-primary btn-block" style="height: 200px; width:300px" onclick="@(() => GoManager())">
            Connect as manager
         </button>
     </div>
     <div class="col-4">
-        <button class="btn btn-secondary btn-block" style="height: 240px;" onclick="@(() => GoCashier())">
+        <button class="btn btn-success btn-block" style="height: 200px; width:300px" onclick="@(() => GoCashier())">
             Connect as cashier
         </button>
     </div>
@@ -39,7 +38,7 @@
         </button>
     </div>
 </div>
-
+</div>
 
 
 

@@ -28,57 +28,94 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.btn_Manager = new System.Windows.Forms.Button();
+            this.btn_Cashier = new System.Windows.Forms.Button();
+            this.btn_Staff = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.SuspendLayout();
             // 
-            // button1
+            // btn_Manager
             // 
-            this.button1.Location = new System.Drawing.Point(68, 73);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(220, 131);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_Manager.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btn_Manager.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Manager.Location = new System.Drawing.Point(0, 0);
+            this.btn_Manager.Name = "btn_Manager";
+            this.btn_Manager.Size = new System.Drawing.Size(220, 638);
+            this.btn_Manager.TabIndex = 0;
+            this.btn_Manager.Text = "Manager ";
+            this.btn_Manager.UseVisualStyleBackColor = false;
+            this.btn_Manager.Click += new System.EventHandler(this.btn_Manager_Click);
             // 
-            // button2
+            // btn_Cashier
             // 
-            this.button2.Location = new System.Drawing.Point(356, 73);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(220, 131);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_Cashier.BackColor = System.Drawing.Color.Aquamarine;
+            this.btn_Cashier.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Cashier.Location = new System.Drawing.Point(220, 0);
+            this.btn_Cashier.Name = "btn_Cashier";
+            this.btn_Cashier.Size = new System.Drawing.Size(220, 638);
+            this.btn_Cashier.TabIndex = 1;
+            this.btn_Cashier.Text = "Cashier";
+            this.btn_Cashier.UseVisualStyleBackColor = false;
+            this.btn_Cashier.Click += new System.EventHandler(this.btn_Cashier_Click);
             // 
-            // button3
+            // btn_Staff
             // 
-            this.button3.Location = new System.Drawing.Point(628, 73);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(220, 131);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_Staff.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btn_Staff.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Staff.Location = new System.Drawing.Point(440, 0);
+            this.btn_Staff.Name = "btn_Staff";
+            this.btn_Staff.Size = new System.Drawing.Size(220, 638);
+            this.btn_Staff.TabIndex = 2;
+            this.btn_Staff.Text = "Staff";
+            this.btn_Staff.UseVisualStyleBackColor = false;
+            this.btn_Staff.Click += new System.EventHandler(this.btn_Staff_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox1.Location = new System.Drawing.Point(805, 0);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(370, 200);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.monthCalendar1.Location = new System.Drawing.Point(1318, 0);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1216, 619);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.BackColor = System.Drawing.Color.Maroon;
+            this.ClientSize = new System.Drawing.Size(1545, 638);
+            this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btn_Staff);
+            this.Controls.Add(this.btn_Cashier);
+            this.Controls.Add(this.btn_Manager);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Landing Page";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private Button btn_Manager;
+        private Button btn_Cashier;
+        private Button btn_Staff;
+        private TextBox textBox1;
+        private MonthCalendar monthCalendar1;
     }
 }

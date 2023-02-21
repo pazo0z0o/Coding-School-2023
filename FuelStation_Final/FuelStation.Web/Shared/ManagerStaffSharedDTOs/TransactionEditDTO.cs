@@ -12,7 +12,7 @@ namespace FuelStation.Web.Shared.ManagerStaffSharedDTOs
    public class TransactionEditDTO
     {
         public int ID { get; set; }
-       // public DateTime Date { get; set; }
+        public DateTime Date { get; set; }
         public decimal TotalValue { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
 
@@ -20,8 +20,8 @@ namespace FuelStation.Web.Shared.ManagerStaffSharedDTOs
         public int CustomerId { get; set; }
         public int EmployeeId { get; set; }
 
-        public CustomerListDTO Customer { get; set; } = null;
-        public EmployeeListDTO Employee { get; set; } = null;
-        public List<TransactionLine> TransactionLines { get; set; } = null;
+        //public CustomerListDTO Customer { get; set; } = null;
+        //public EmployeeListDTO Employee { get; set; } = null;
+        public List<TransactionLineEditDTO> TransactionLines { get; set; } = null;
     }
 }

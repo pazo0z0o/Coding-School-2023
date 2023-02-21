@@ -9,7 +9,7 @@ using FuelStation.Web.Shared.ManagerOnlyDTOs;
 
 namespace FuelStation.Web.Shared.ManagerStaffSharedDTOs
 {
-    public class TrabsactionListDTO
+    public class TransactionListDTO
     {
         public int ID { get; set; }
         public DateTime Date { get; set; }
@@ -22,7 +22,7 @@ namespace FuelStation.Web.Shared.ManagerStaffSharedDTOs
 
         public CustomerListDTO Customer { get; set; } = null;
         public EmployeeListDTO Employee { get; set; } = null;
-        public List<TransactionLine> TransactionLines { get; set; }
+        //public List<TransactionLine> TransactionLines { get; set; }
 
     }
 }

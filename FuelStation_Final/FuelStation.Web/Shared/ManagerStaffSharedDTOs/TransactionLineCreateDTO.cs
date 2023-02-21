@@ -19,10 +19,10 @@ namespace FuelStation.Web.Shared.ManagerStaffSharedDTOs
         public decimal TotalValue { get; set; }
 
         //Relations
-        public int TransactionID { get; set; }
-        public Transaction Transaction { get; set; } = null!;
+        public int TransactionId { get; set; }
+       // public Transaction Transaction { get; set; } = null!;
 
         public int ItemID { get; set; }
-        public ItemListDTO Item { get; set; } = null!;
+    //    public ItemListDTO Item { get; set; } = null!;
     }
 }

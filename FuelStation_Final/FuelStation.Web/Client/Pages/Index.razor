@@ -45,34 +45,19 @@
 @code{
     public void GoManager()
     {
-        navigationManager.NavigateTo($"landingpage/");
+        navigationManager.NavigateTo("/landingpage");
     }
 
 public void GoCashier()
     {
-        navigationManager.NavigateTo($"customerlist/");
+        navigationManager.NavigateTo("/customerlist");
     }
 
 public void GoStaff()
     {
-        navigationManager.NavigateTo($"itemlist/");
+        navigationManager.NavigateTo("/itemlist");
     }
     
 
 }
 
-@*
-
-<body>
-    <div class="container">
-        <form>
-            <div class="form-group">
-                <label for="password-input">Password</label>
-                <input type="password" class="form-control" id="password-input" placeholder="Enter password">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-</body>
-</html>
-*@

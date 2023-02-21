@@ -41,7 +41,7 @@ namespace FuelStation.Web.Shared.Services_Logic
             
             return CardNumber;
         }
-
+        //TODO if I have time
         public string PasswordGenerator()
         {
             string pass = string.Empty;

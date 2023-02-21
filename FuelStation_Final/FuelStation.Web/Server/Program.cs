@@ -1,6 +1,8 @@
 using FuelStation.EF.Repositories;
 using FuelStation.Model;
+using FuelStation.Web.Shared.Services_Logic;
 using Microsoft.AspNetCore.ResponseCompression;
+using System.ComponentModel.DataAnnotations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +15,9 @@ builder.Services.AddScoped<IEntityRepo<Item>, ItemRepo>();
 builder.Services.AddScoped<IEntityRepo<Transaction>, TransactionRepo>();
 builder.Services.AddScoped<IEntityRepo<TransactionLine>, TransactionLineRepo>();
 builder.Services.AddScoped<IEntityRepo<Customer>, CustomerRepo>();
-//builder.Services.AddScoped<TransactionHandler>();
+builder.Services.AddScoped<TransactionHandler>();
+builder.Services.AddScoped<RandomGenerators>();
+builder.Services.AddScoped<CustomerValidation>();
 
 var app = builder.Build();
 

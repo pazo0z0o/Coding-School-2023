@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 using FuelStation.Web.Shared.ManagerOnlyDTOs;
 using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
 using Microsoft.EntityFrameworkCore;
+using FuelStation.EF.Repositories;
 
 
 namespace FuelStation.Web.Shared.Services_Logic
 {
-    public class TransactionHandler
+    public class TransactionHandler : ITransactionHandler
     {
+        public TransactionHandler()
+        {
 
+        }
 
         public bool FuelDiscountCheck(TransactionLine transLine)
         {

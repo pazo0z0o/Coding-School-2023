@@ -9,12 +9,8 @@
 
 @if (isLoading)
 {
-    <svg class="loading-progress">
-        <circle r="40%" cx="50%" cy="50%" />
-        <circle r="40%" cx="50%" cy="50%" />
-    </svg>
-    <div class="loading-progress-text"></div>
-    <p>Loading ...</p>
+    <div class="lds-hourglass"></div>
+    
 }
 else
 {
@@ -61,7 +57,7 @@ else
 
     private async Task LoadItemsFromServer()
     {
-        customerList = await httpClient.GetFromJsonAsync<List<CustomerListDTO >> ("customer");
+        customerList = await httpClient.GetFromJsonAsync<List<CustomerListDTO>> ("customer");
     }
 
     private async Task CreateItem()

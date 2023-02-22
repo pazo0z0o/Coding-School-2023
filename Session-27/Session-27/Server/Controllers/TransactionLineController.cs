@@ -39,6 +39,7 @@ namespace Session_27.Server.Controllers {
             _transactionLineRepo.Delete(id);
             _transHandler.CalculateTotalCost(_transactionRepo.GetById(tr));
         }
+        [HttpPut]
         public async Task<ActionResult> Put(TransactionLineEditDto transLine) {
             var trans = _transactionRepo.GetById(transLine.TransactionId);
             var itemToUpdate = _transactionLineRepo.GetById(transLine.Id);

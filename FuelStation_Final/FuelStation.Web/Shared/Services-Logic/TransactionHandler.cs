@@ -29,16 +29,23 @@ namespace FuelStation.Web.Shared.Services_Logic
         }
         public decimal CalculateDiscountValue(TransactionLine transline)
         {
-            if (transline.Item.ItemType == ItemType.Fuel && transline.NetValue > 20)
-            {
-                transline.DiscountValue = (transline.NetValue * 10) / 100;
+            return transline.DiscountValue = transline.NetValue * transline.DiscountPercent;
+        }        
 
-            }
-            return transline.DiscountValue;
+        public decimal CalcTransactionLineTotal(TransactionLine tline)
+        {
+
+            return tline.TotalValue = tline.NetValue - tline.DiscountValue;
         }
 
-
-
+        public decimal CalcNetValue(TransactionLine transline)
+        { return transline.NetValue = transline.Quantity * transline.ItemPrice; }
+       
+        public bool HasMultipleFuelLines(Transaction transaction)
+        {
+            return transaction.TransactionLines.Count(x => x.Item.ItemType == ItemType.Fuel) > 1;
+        }
+        //=========================================================================
         //for posts & edits
         public bool EmployeeUpperLimitCheck(EmployeeType emploType, List<Employee> employees, out string msg)
         {
@@ -103,10 +110,7 @@ namespace FuelStation.Web.Shared.Services_Logic
         }
 
 
-        public bool HasMultipleFuelLines(Transaction transaction)
-        {
-            return transaction.TransactionLines.Count(x => x.Item.ItemType == ItemType.Fuel) > 1;
-        }
+        
 
         // check if an employee's hire dates are valid -- Do it for Employee not datetime
         public bool HireDatesValid(DateTime hireDateStart, DateTime? hireDateEnd, out string msg)
@@ -165,22 +169,11 @@ namespace FuelStation.Web.Shared.Services_Logic
 
        
 
-        // check if an item code is unique - do it for Items
-        /* public bool IsItemCodeUnique(Item itemCode)
-         {
-             if (itemCode == null)
-             {
-                 return false;
-             }
-
-             var existingItem = Item.FirstOrDefault(i => i.Code == itemCode);
-             return existingItem == null;
-         }
 
 
- */
 
-       // public bool CheckFor 
+
+      
 
     }
 }

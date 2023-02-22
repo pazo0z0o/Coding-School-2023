@@ -5,6 +5,7 @@ using FuelStation.Model;
 using FuelStation.Web.Shared;
 using FuelStation.Web.Shared.Services_Logic;
 using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
+using FuelStation.Model.Enums;
 
 namespace FuelStation.Web.Server.Controllers
 {
@@ -19,16 +20,16 @@ namespace FuelStation.Web.Server.Controllers
         private readonly IEntityRepo<Item> _itemRepo;
         private readonly IEntityRepo<TransactionLine> _transactionLineRepo;
         private TransactionHandler _transHandler;
-        private RandomGenerators _randomGen;
+       
 
-        public TransactionLineController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo, IEntityRepo<TransactionLine> transLineRepo, TransactionHandler transHandler, RandomGenerators rangomGen)
+        public TransactionLineController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo, IEntityRepo<TransactionLine> transLineRepo, TransactionHandler transHandler)
         {
             _transactionRepo = transactionRepo;
             _customerRepo = customerRepo;
             _employeeRepo = employeeRepo;
             _transactionLineRepo = transLineRepo;
             _transHandler = transHandler;
-            _randomGen = rangomGen;
+            
         }
 
         [HttpDelete("{id}")]
@@ -36,7 +37,7 @@ namespace FuelStation.Web.Server.Controllers
         {
             var tr = _transactionLineRepo.GetById(id).TransactionID;
             _transactionLineRepo.Delete(id);
-            // _transHandler.CalculateTotalCost(_transactionRepo.GetById(tr));   //FIX AND IMPLEMENT
+            _transHandler.CalculateTotalValue(_transactionRepo.GetById(tr));
         }
 
         [HttpPut]
@@ -87,39 +88,26 @@ namespace FuelStation.Web.Server.Controllers
             newTransactionLine.TransactionID = transLine.TransactionId;
             newTransactionLine.ItemID = transLine.ItemID;
             newTransactionLine.Quantity = transLine.Quantity;
-            newTransactionLine.ItemPrice = transLine.ItemPrice;
-            newTransactionLine.NetValue = transLine.NetValue;
+            newTransactionLine.ItemPrice = _itemRepo.GetById(newTransactionLine.ItemID).Price; //seems shaky
+            newTransactionLine.NetValue = 0;
             newTransactionLine.DiscountPercent = transLine.DiscountPercent;
-            newTransactionLine.DiscountValue = transLine.DiscountValue;
-            newTransactionLine.TotalValue = transLine.TotalValue;
+            newTransactionLine.DiscountValue = 0;
+            newTransactionLine.TotalValue = 0;
+
+            //create a temporary transaction for calculation purposes 
+            var tmpTrans = _transactionRepo.GetById(newTransactionLine.TransactionID);
+            var tmpTransLine = _transactionLineRepo.GetById(newTransactionLine.ID);
+
+            tmpTransLine.NetValue = _transHandler.CalcNetValue(tmpTransLine);
+            if (tmpTransLine.Item.ItemType == ItemType.Fuel && tmpTransLine.NetValue > 20)
+            {
+                tmpTransLine.DiscountPercent = 0.10M;
+                tmpTransLine.DiscountValue = _transHandler.CalculateDiscountValue(tmpTransLine); }
+            tmpTransLine.TotalValue = _transHandler.CalcTransactionLineTotal(tmpTransLine);   
+           // tmpTrans.TotalValue = (_transHandler.CalculateTotalValueTransLine(tmpTrans));
 
 
 
-            //newTransactionLine.TransactionId = transLine.TransactionId;
-            //newTransactionLine.Hours = _serviceTaskRepo.GetById(transLine.ServiceTaskId).Hours;
-
-            //if (_transHandler.ValidateInsertTransactionLine(trans, transLine))
-            //{
-            //    if (_transHandler.ValidateMaxWorkLoad(trans, newTransactionLine, _engineerRepo.GetAll().Count()))
-            //    {
-            //        _transactionLineRepo.Add(newTransactionLine);
-            //        var tmpTrans = _transactionRepo.GetById(newTransactionLine.TransactionId);
-            //        tmpTrans.TotalPrice = (_transHandler.CalculateTotalCost(tmpTrans));
-            //        _transactionRepo.Update(transLine.TransactionId, tmpTrans);
-            //        return Ok();
-
-            //    }
-            //    else
-            //    {
-            //        return StatusCode(StatusCodes.Status409Conflict,
-            //        "Max WorkLoad Reached");
-            //    }
-            //}
-            //else
-            //{
-            //    return StatusCode(StatusCodes.Status406NotAcceptable,
-            //   "Either Engineer Or Task exists in another TransactionLine");
-            //}
             return Ok();
         }
 

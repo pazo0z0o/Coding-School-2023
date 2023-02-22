@@ -13,15 +13,13 @@ using FuelStation.EF.Repositories;
 
 namespace FuelStation.Web.Shared.Services_Logic
 {
-    public class TransactionHandler //: ITransactionHandler
+    public class TransactionHandler 
     {
-        public TransactionHandler()
-        {
-
-        }
+        public TransactionHandler() { }
 
         public bool FuelDiscountCheck(TransactionLine transLine)
         {
+
             if (transLine.Item.ItemType == ItemType.Fuel && transLine.NetValue > 20)
             {
                 return true;
@@ -29,68 +27,143 @@ namespace FuelStation.Web.Shared.Services_Logic
 
             return false;
         }
-
-
-     /*   public void EmployeeUpperLimitCheck(Employee employee)
+        public decimal CalculateDiscountValue(TransactionLine transline)
         {
+            if (transline.Item.ItemType == ItemType.Fuel && transline.NetValue > 20)
+            {
+                transline.DiscountValue = (transline.NetValue * 10) / 100;
+
+            }
+            return transline.DiscountValue;
+        }
 
 
-        }*/
 
-
-        /*public void EmployeeUpperLimitCheck(EmployeeListDTO employee)
+        //for posts & edits
+        public bool EmployeeUpperLimitCheck(EmployeeType emploType, List<Employee> employees, out string msg)
         {
-           if(employee.EmployeeType.)
+            bool res = true;
+            msg = "Success";
+            int maxCashiers = 4;
+            int maxManagers = 3;
+            int maxStaff = 10;
+            var cashiers = employees.Where(emp => emp.EmployeeType == EmployeeType.Cashier);
+            var managers = employees.Where(emp => emp.EmployeeType == EmployeeType.Manager);
+            var staff = employees.Where(emp => emp.EmployeeType == EmployeeType.Staff);
 
-        }*/
 
+            if (emploType == EmployeeType.Cashier && cashiers.Count() > maxCashiers)
+            {
+                msg = $"Exceeded the maximum number of Cashiers allowed. (Max = {maxCashiers})";
+                res = false;
+            }
+            else if (emploType == EmployeeType.Manager && managers.Count() > maxManagers)
+            {
+                msg = $"Exceeded the maximum number of Managers allowed. (Max = {maxManagers})";
+                res = false;
+            }
+            else if (emploType == EmployeeType.Staff && staff.Count() > maxStaff)
+            {
+                msg = $"Exceeded the maximum number of Staff allowed. (Max = {maxStaff})";
+                res = false;
+            }
 
-       // private bool HasPurchasedFuelItems(Transaction trans )
-       // {
-            // Query the database to check if the user has purchased fuel items in previous transactions
-           // return Transactions.Any(t => t.Item == Item.Fuel && t.Value >= 20);
-       // }
+            return res;
 
-        /*public bool HasFuel(Transaction transaction, TransactionEditDTO transaction)
+        }
+        //for the deletes
+        public bool EmployeeLowerLimitCheck(EmployeeType emploType, List<Employee> employees, out string msg)
         {
-            if (transaction.FindAll(x => x. == transaction.CarId).Count == 0 || // checks if theres an existing transaction with customer or car inserted.
-                transactionList.FindAll(x => x.CustomerId == transaction.CustomerId).Count == 0) { return true; }
-            return false;
-        }*/
+            bool res = true;
+            msg = "Success";
+            int minCashiers = 1;
+            int minManagers = 1;
+            int minStaff = 1;
+            var cashiers = employees.Where(emp => emp.EmployeeType == EmployeeType.Cashier);
+            var managers = employees.Where(emp => emp.EmployeeType == EmployeeType.Manager);
+            var staff = employees.Where(emp => emp.EmployeeType == EmployeeType.Staff);
+
+
+            if (emploType == EmployeeType.Cashier && cashiers.Count() < minCashiers)
+            {
+                msg = $"Can't pass the minimum number of Cashiers allowed. (Min = {minCashiers})";
+                res = false;
+            }
+            else if (emploType == EmployeeType.Manager && managers.Count() < minManagers)
+            {
+                msg = $"Can't pass the minimum number of Managers allowed. (Max = {minManagers})";
+                res = false;
+            }
+            else if (emploType == EmployeeType.Staff && staff.Count() < minStaff)
+            {
+                msg = $"Can't pass the minimum number of Staff allowed. (Max = {minStaff})";
+                res = false;
+            }
+            return res;
+        }
+
 
         public bool HasMultipleFuelLines(Transaction transaction)
         {
             return transaction.TransactionLines.Count(x => x.Item.ItemType == ItemType.Fuel) > 1;
         }
 
-// check if an employee's hire dates are valid -- Do it for Employee not datetime
-	public bool AreHireDatesValid(DateTime hireDateStart, DateTime hireDateEnd)
-	{
-    if (hireDateStart > hireDateEnd)
-    {
-        return false;
-    }
+        // check if an employee's hire dates are valid -- Do it for Employee not datetime
+        public bool HireDatesValid(DateTime hireDateStart, DateTime? hireDateEnd, out string msg)
+        {
+            msg = "Successfull";
+            if (hireDateStart > hireDateEnd)
+            {
+                msg = "Can't be fired, before even getting hired";
+                return false;
+            }
+            var currentDate = DateTime.Now.Date;
+            if (hireDateStart > currentDate || hireDateEnd < currentDate)
+            {
+                msg = " No future hirings OR past firings allowed";
+                return false;
+            }
 
-    var currentDate = DateTime.Now.Date;
-    if (hireDateStart > currentDate || hireDateEnd < currentDate)
-    {
-        return false;
-    }
+            return true;
+        }
 
-    return true;
-	}
-        //needs modifications
+        public bool HireDateCheck(DateTime hireStart)
+        {
+            bool res = true;
+            if(hireStart < DateTime.Now) { res = false; }
+            return res;
+        }
+
+        public bool FiredDateCheck(DateTime hireStart ,DateTime? hireEnd)
+        {  bool res = true;
+            if (hireEnd < hireStart || hireEnd < DateTime.Now) { res = false; }
+            return res;
+        }
+
+        public bool CashOnlyOverFifty(Transaction transaction)
+        {   
+            bool res = false;
+            if(transaction.TotalValue > 50) { res = true; }
+            return res;            
+        }           
+
+
+
+
+      
         public decimal CalculateTotalValue(Transaction transaction)
         {
 
             decimal totalValue = 0;
             foreach (var trl in transaction.TransactionLines)
             {
-               // totalValue += trl.ServiceTask.Hours * _workhour;
+                totalValue = trl.NetValue - trl.DiscountValue; 
             }
             return totalValue;
         }
 
+
+       
 
         // check if an item code is unique - do it for Items
         /* public bool IsItemCodeUnique(Item itemCode)
@@ -105,19 +178,9 @@ namespace FuelStation.Web.Shared.Services_Logic
          }
 
 
-         // check if a customer card number is unique and starts with 'A'
-         public bool IsCustomerCardNumberValid(Customer customer)
-         {
-             if (customer.CardNumber == null || customer.CardNumber.Length < 2 || customer.CardNumber[0] != 'A')
-             {
-                 return false;
-             }
-
-             var existingCustomer = _context.Customers.FirstOrDefault(c => c.CardNumber == customer.CardNumber);
-             return existingCustomer == null;
-         }
  */
 
+       // public bool CheckFor 
 
     }
 }

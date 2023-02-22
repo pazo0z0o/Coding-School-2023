@@ -36,6 +36,7 @@ else
                     <td>
                         <button class="btn btn-primary" @onclick="()=> EditItem(customer)">Edit</button>
                         <button class="btn btn-danger" @onclick="()=> DeleteItem(customer)">Delete</button>
+                        <button class="btn btn-info" @onclick="OnBack"> Back </button>
                     </td>
                 </tr>
             }
@@ -59,7 +60,7 @@ else
     {
         customerList = await httpClient.GetFromJsonAsync<List<CustomerListDTO>> ("customer");
     }
-
+    private void OnBack() { navigationManager.NavigateTo("landingpage"); }
     private async Task CreateItem()
     {
         navigationManager.NavigateTo("customerlist/add");

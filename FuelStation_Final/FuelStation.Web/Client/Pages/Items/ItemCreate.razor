@@ -54,6 +54,7 @@ else
         <div class="col-md-6">
             <button class="btn btn-success" @onclick="OnSave">Save Changes</button>
             <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+            <button class="btn btn-info" @onclick="OnBack"> Back </button>
         </div>
     </div>
 }
@@ -80,7 +81,7 @@ else
     {
         navigationManager.NavigateTo("itemlist");
     }
-
+    private void OnBack() { navigationManager.NavigateTo("landingpage"); }
     private async Task OnSave()
     {
         HttpResponseMessage? response = null;

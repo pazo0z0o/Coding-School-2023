@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FuelStation.EF.Repositories;
 using FuelStation.Model;
+using FuelStation.Model.Enums;
 using FuelStation.Web.Shared;
 using FuelStation.Web.Shared.Services_Logic;
 using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
@@ -23,23 +24,23 @@ namespace FuelStation.Web.Server.Controllers
         private readonly IEntityRepo<Item> _itemRepo;
         private readonly IEntityRepo<TransactionLine> _transLineRepo;
         private TransactionHandler _transHandler;
-        private RandomGenerators _randomGen;
+       
 
-        public TransactionController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo, IEntityRepo<TransactionLine> transLineRepo, TransactionHandler transHandler, RandomGenerators rangomGen)
+        public TransactionController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo, IEntityRepo<TransactionLine> transLineRepo, TransactionHandler transHandler)
         {
             _transactionRepo = transactionRepo;
             _customerRepo = customerRepo;
             _employeeRepo = employeeRepo;
             _transLineRepo = transLineRepo;
             _transHandler = transHandler;
-            _randomGen = rangomGen;
+            
         }
 
         [HttpGet]
         public async Task<IEnumerable<TransactionListDTO>> Get()
         {
             var result = _transactionRepo.GetAll();
-
+            foreach (var tr in result) { tr.TotalValue = _transHandler.CalculateTotalValue(tr); }
             var transList = result.Select(transaction => new TransactionListDTO
             {
                 ID = transaction.ID,
@@ -79,21 +80,25 @@ namespace FuelStation.Web.Server.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(TransactionEditDTO transaction)
         {
-            var transactionList = _transactionRepo.GetAll().ToList();
-            // if (_transHandler.ValidateInsertTransaction(transactionList, transaction))
+              
+            var newTransaction = new Transaction();
+            
+            newTransaction.Date = transaction.Date;
+            newTransaction.CustomerId = transaction.CustomerId;
+            newTransaction.EmployeeId = transaction.EmployeeId;
+            newTransaction.TotalValue = _transHandler.CalculateTotalValue(newTransaction);
+            newTransaction.TransactionLines = new();
+            try
             {
-                var newTransaction = new Transaction();
-                newTransaction.Date = transaction.Date;
-                newTransaction.CustomerId = transaction.CustomerId;
-                newTransaction.EmployeeId = transaction.EmployeeId;
-                newTransaction.TotalValue = 0; //Could Call some Calculation from transLine
-                newTransaction.PaymentMethod = transaction.PaymentMethod; // Could validate for Cash
-                newTransaction.TransactionLines = new();
-                _transactionRepo.Add(newTransaction);
-                return Ok();
+                if (newTransaction.TransactionLines.Count > 0 && _transHandler.CashOnlyOverFifty(newTransaction))
+                {newTransaction.PaymentMethod = PaymentMethod.Cash;}
+                else    
+                {newTransaction.PaymentMethod = transaction.PaymentMethod;  }
             }
-            //return StatusCode(StatusCodes.Status406NotAcceptable,
-              // "Either Customer or Car Exists in another Transaction");
+            catch (Exception ex)
+            {  Console.WriteLine($"An exception occurred: {ex.Message}");}          
+            _transactionRepo.Add(newTransaction);
+            return Ok();    
         }
 
         [HttpGet("{id}")]
@@ -104,7 +109,7 @@ namespace FuelStation.Web.Server.Controllers
             var resultEmployee = _employeeRepo.GetAll();
             var resultCustomer = _customerRepo.GetAll();
             
-            var transaction = new TransactionEditDTO {
+                var transaction = new TransactionEditDTO {
                 ID = id,
                 Date = result.Date,
                 CustomerId = result.CustomerId,
@@ -126,19 +131,28 @@ namespace FuelStation.Web.Server.Controllers
             return transaction;
         }
 
-
         [HttpPut]
         public async Task<ActionResult> Put(TransactionEditDTO transaction)
         {
-            var transactionList = _transactionRepo.GetAll().ToList();
-            //if (_transHandler.ValidateUpdateTransaction(transactionList, transaction))
+            //var transactionList = _transactionRepo.GetAll().ToList();
             {
                 var transactionUpdate = _transactionRepo.GetById(transaction.ID);
-                // transactionUpdate.Date = transaction.Date;
+                // transactionUpdate.Date = transaction.Date;  logically shouldn't be able to touch it!
                 transactionUpdate.TotalValue = transaction.TotalValue;
                 transactionUpdate.CustomerId = transaction.CustomerId;
                 transactionUpdate.EmployeeId = transaction.EmployeeId;
                 transactionUpdate.PaymentMethod = transaction.PaymentMethod;
+                try
+                {
+                    if (transactionUpdate.TransactionLines.Count > 0 && _transHandler.CashOnlyOverFifty(transactionUpdate))
+                    { transactionUpdate.PaymentMethod = PaymentMethod.Cash; }
+                    else
+                    { transactionUpdate.PaymentMethod = transaction.PaymentMethod; }
+                }
+                catch (Exception ex)
+                { Console.WriteLine($"An exception occurred: {ex.Message}"); }
+               
+
                 _transactionRepo.Update(transaction.ID, transactionUpdate);
                 return Ok();
             }

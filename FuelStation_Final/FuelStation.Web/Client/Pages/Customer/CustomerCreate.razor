@@ -6,6 +6,7 @@
 @using System.Net;
 
 
+ 
 <h3>Add new Customer</h3>
 <EditForm Model="Customer" OnValidSubmit="OnCreate">
     <DataAnnotationsValidator />
@@ -34,6 +35,7 @@
             <button class="btn btn-success" type="submit">Add new Customer</button>
             <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
             <button class="btn btn-warning" @onclick="CardNumberGen">Generate Number </button>
+            <button class="btn btn-info" @onclick="OnBack"> Back </button>
         </div>
     </div>
 </EditForm>
@@ -54,7 +56,7 @@
         response.EnsureSuccessStatusCode();
         navigationManager.NavigateTo("customerlist");
     }
-
+private void OnBack() { navigationManager.NavigateTo("landingpage"); }
     //not elegant -- but works
     private async Task<string> CardNumberGen()
     {   try{

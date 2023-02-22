@@ -6,6 +6,7 @@ using FuelStation.Web.Shared;
 using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
 using FuelStation.Web.Shared.ManagerOnlyDTOs;
 using FuelStation.Web.Shared.Services_Logic;
+using Microsoft.EntityFrameworkCore;
 
 namespace FuelStation.Web.Server.Controllers
 {
@@ -43,10 +44,12 @@ namespace FuelStation.Web.Server.Controllers
         }
 
         [HttpPost]
-        public async Task Post(EmployeeListDTO employee)
-        {
+        public async Task<ActionResult> Post(EmployeeListDTO employee)
+        {   
+            var employees = _employeeRepo.GetAll().ToList(); //weird error here? without ToList()
+            string msg = "Success";
+            string datesMsg = "Success";
             var newEmployee = new Employee();
-
                 newEmployee.Name = employee.Name;
                 newEmployee.Surname = employee.Surname;
                 newEmployee.HireDateStart = employee.HireDateStart;
@@ -54,20 +57,36 @@ namespace FuelStation.Web.Server.Controllers
                 newEmployee.SalaryPerMonth = employee.SalaryPerMonth;    
                 newEmployee.EmployeeType = employee.EmployeeType;
                 newEmployee.Transactions = new();
+            if (_transHandler.EmployeeUpperLimitCheck(newEmployee.EmployeeType, employees, out msg))
+            {
                 _employeeRepo.Add(newEmployee);
+                return Ok();
+            }
+            else return BadRequest(msg);
         }
 
 
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
-        {
-            _employeeRepo.Delete(id);
+        public async Task<ActionResult> Delete(int id)
+        {//validate for minumum Employees
+            string msg = "Success"; 
+            List<Employee> singleEmployee = new List<Employee>();
+            var selectedEmployee = _employeeRepo.GetById(id);
+     //this is such a dumb way to do this,use lambda when I get back to it    
+            singleEmployee.Add(selectedEmployee); 
+            if (_transHandler.EmployeeLowerLimitCheck(selectedEmployee.EmployeeType,singleEmployee,out msg))
+            {
+               _employeeRepo.Delete(id);
+                return Ok();
+            }
+            else return BadRequest(msg);
+
         }
 
 
         [HttpGet("{id}")]
         public async Task<EmployeeListDTO> GetById(int id)
-        {
+        { 
             var result = _employeeRepo.GetById(id);
             return new EmployeeListDTO
             {

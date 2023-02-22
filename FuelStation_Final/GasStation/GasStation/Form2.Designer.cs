@@ -40,6 +40,7 @@
             this.btn_mng_Customer.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_mng_Customer.BackColor = System.Drawing.Color.PaleGreen;
             this.btn_mng_Customer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_mng_Customer.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_mng_Customer.Location = new System.Drawing.Point(504, 211);
             this.btn_mng_Customer.Name = "btn_mng_Customer";
             this.btn_mng_Customer.Size = new System.Drawing.Size(202, 114);
@@ -52,9 +53,10 @@
             // 
             this.asskissing_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.asskissing_label.AutoSize = true;
-            this.asskissing_label.Location = new System.Drawing.Point(648, 29);
+            this.asskissing_label.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.asskissing_label.Location = new System.Drawing.Point(530, 108);
             this.asskissing_label.Name = "asskissing_label";
-            this.asskissing_label.Size = new System.Drawing.Size(154, 15);
+            this.asskissing_label.Size = new System.Drawing.Size(400, 40);
             this.asskissing_label.TabIndex = 1;
             this.asskissing_label.Text = "Welcome Glorious Manager";
             this.asskissing_label.Click += new System.EventHandler(this.label1_Click);
@@ -63,6 +65,7 @@
             // 
             this.btn_mng_Item.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_mng_Item.BackColor = System.Drawing.Color.IndianRed;
+            this.btn_mng_Item.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_mng_Item.Location = new System.Drawing.Point(743, 211);
             this.btn_mng_Item.Name = "btn_mng_Item";
             this.btn_mng_Item.Size = new System.Drawing.Size(202, 114);
@@ -75,6 +78,7 @@
             // 
             this.btn_mng_Transaction.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_mng_Transaction.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btn_mng_Transaction.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_mng_Transaction.Location = new System.Drawing.Point(634, 331);
             this.btn_mng_Transaction.Name = "btn_mng_Transaction";
             this.btn_mng_Transaction.Size = new System.Drawing.Size(202, 114);

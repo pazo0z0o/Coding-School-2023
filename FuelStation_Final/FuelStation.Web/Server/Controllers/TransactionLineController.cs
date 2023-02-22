@@ -20,7 +20,7 @@ namespace FuelStation.Web.Server.Controllers
         private readonly IEntityRepo<Item> _itemRepo;
         private readonly IEntityRepo<TransactionLine> _transactionLineRepo;
         private TransactionHandler _transHandler;
-       
+
 
         public TransactionLineController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo, IEntityRepo<TransactionLine> transLineRepo, TransactionHandler transHandler)
         {
@@ -29,7 +29,7 @@ namespace FuelStation.Web.Server.Controllers
             _employeeRepo = employeeRepo;
             _transactionLineRepo = transLineRepo;
             _transHandler = transHandler;
-            
+
         }
 
         [HttpDelete("{id}")]
@@ -49,34 +49,32 @@ namespace FuelStation.Web.Server.Controllers
             //itemToUpdate.TransactionId = transLine.TransactionId;
             itemToUpdate.Quantity = transLine.Quantity;
             itemToUpdate.ItemPrice = _itemRepo.GetById(transLine.ItemID).Price;
-            itemToUpdate.NetValue = transLine.NetValue; //Could call a method to auto update
+            itemToUpdate.NetValue = transLine.NetValue; 
             itemToUpdate.DiscountPercent = transLine.DiscountPercent;
             itemToUpdate.DiscountValue = transLine.DiscountValue;
-            itemToUpdate.TotalValue = transLine.TotalValue;//Could call a method to auto update
-                                                           //itemToUpdate.Hours = _serviceTaskRepo.GetById(transLine.ServiceTaskId).Hours;
-                                                           //itemToUpdate.ServiceTaskId = transLine.ServiceTaskId;
-                                                           //if (_transHandler.ValidateUpdateTransactionLine(trans, transLine))
-                                                           //{
-                                                           //    if (_transHandler.ValidateMaxWorkLoad(trans, itemToUpdate, _engineerRepo.GetAll().Count()))
-                                                           //    {
-                                                           //        _transactionLineRepo.Update(transLine.Id, itemToUpdate);
-                                                           //        var tmpTrans = _transactionRepo.GetById(itemToUpdate.TransactionId);
-                                                           //        tmpTrans.TotalPrice = (_transHandler.CalculateTotalCost(tmpTrans));
-                                                           //        _transactionRepo.Update(itemToUpdate.TransactionId, tmpTrans);
-                                                           //        return Ok();
-                                                           //    }
-                                                           //    else
-                                                           //    {
-                                                           //        return StatusCode(StatusCodes.Status409Conflict,
-                                                           //        "Max WorkLoad Reached");
-                                                           //    }
-                                                           //}
-                                                           //else
-                                                           //{
-                                                           //    return StatusCode(StatusCodes.Status406NotAcceptable,
-                                                           //   "Either Engineer Or Task exists in another TransactionLine");
-                                                           //}
-            return Ok();
+            itemToUpdate.TotalValue = transLine.TotalValue;         //Could call a method to auto update
+            if (_transHandler.HasMultipleFuelLines(trans))
+            {
+                _transactionLineRepo.Add(itemToUpdate);
+
+
+                itemToUpdate.NetValue = _transHandler.CalcNetValue(itemToUpdate);
+                if (itemToUpdate.Item.ItemType == ItemType.Fuel && itemToUpdate.NetValue > 20)
+                {
+                    itemToUpdate.DiscountPercent = 0.10M;
+                    itemToUpdate.DiscountValue = _transHandler.CalculateDiscountValue(itemToUpdate);
+                }
+                itemToUpdate.TotalValue = _transHandler.CalcTransactionLineTotal(itemToUpdate);
+                _transactionLineRepo.Update(itemToUpdate.ID, itemToUpdate);
+                var tmpTrans = _transactionRepo.GetById(itemToUpdate.TransactionID);
+                _transactionRepo.Update(itemToUpdate.TransactionID, tmpTrans);
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status406NotAcceptable,
+                "Only one transaction line may have Fuel as an Item");
+            }                                                        
         }
 
 
@@ -94,21 +92,29 @@ namespace FuelStation.Web.Server.Controllers
             newTransactionLine.DiscountValue = 0;
             newTransactionLine.TotalValue = 0;
 
-            //create a temporary transaction for calculation purposes 
-            var tmpTrans = _transactionRepo.GetById(newTransactionLine.TransactionID);
-            var tmpTransLine = _transactionLineRepo.GetById(newTransactionLine.ID);
-
-            tmpTransLine.NetValue = _transHandler.CalcNetValue(tmpTransLine);
-            if (tmpTransLine.Item.ItemType == ItemType.Fuel && tmpTransLine.NetValue > 20)
+            // var tmpTransLine = _transactionLineRepo.GetById(newTransactionLine.ID);
+            if (_transHandler.HasMultipleFuelLines(trans))
             {
-                tmpTransLine.DiscountPercent = 0.10M;
-                tmpTransLine.DiscountValue = _transHandler.CalculateDiscountValue(tmpTransLine); }
-            tmpTransLine.TotalValue = _transHandler.CalcTransactionLineTotal(tmpTransLine);   
-           // tmpTrans.TotalValue = (_transHandler.CalculateTotalValueTransLine(tmpTrans));
+                _transactionLineRepo.Add(newTransactionLine);
 
 
-
-            return Ok();
+                newTransactionLine.NetValue = _transHandler.CalcNetValue(newTransactionLine);
+                if (newTransactionLine.Item.ItemType == ItemType.Fuel && newTransactionLine.NetValue > 20)
+                {
+                    newTransactionLine.DiscountPercent = 0.10M;
+                    newTransactionLine.DiscountValue = _transHandler.CalculateDiscountValue(newTransactionLine);
+                }
+                newTransactionLine.TotalValue = _transHandler.CalcTransactionLineTotal(newTransactionLine);
+                _transactionLineRepo.Update(newTransactionLine.ID, newTransactionLine);
+                var tmpTrans = _transactionRepo.GetById(newTransactionLine.TransactionID);
+                _transactionRepo.Update(newTransactionLine.TransactionID, tmpTrans);
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status406NotAcceptable,
+                "Only one transaction line may have Fuel as an Item");
+            }
         }
 
 

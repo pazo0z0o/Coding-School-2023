@@ -20,7 +20,7 @@ namespace GasStation
         {
             frm_manager managerForm = new frm_manager();
             managerForm.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -32,14 +32,14 @@ namespace GasStation
         {
             CashierMenu frm_Cashier = new CashierMenu();
             frm_Cashier.ShowDialog();
-            this.Close();
+            this.Hide();
         }
 
         private void btn_Staff_Click(object sender, EventArgs e)
         {
             frm_Items newItem = new frm_Items();
             newItem.ShowDialog();
-            this.Close();
+            this.Hide();
         }
     }
 }

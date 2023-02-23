@@ -66,22 +66,26 @@
             // 
             // col_ID
             // 
+            this.col_ID.DataPropertyName = "ID";
             this.col_ID.HeaderText = "Customer ID";
             this.col_ID.Name = "col_ID";
             this.col_ID.Visible = false;
             // 
             // col_Name
             // 
+            this.col_Name.DataPropertyName = "Name";
             this.col_Name.HeaderText = "Name";
             this.col_Name.Name = "col_Name";
             // 
             // col_Surname
             // 
+            this.col_Surname.DataPropertyName = "Surname";
             this.col_Surname.HeaderText = "Surname";
             this.col_Surname.Name = "col_Surname";
             // 
             // col_CardNum
             // 
+            this.col_CardNum.DataPropertyName = "CardNumber";
             this.col_CardNum.HeaderText = "Card Number";
             this.col_CardNum.Name = "col_CardNum";
             // 
@@ -94,6 +98,7 @@
             this.btn_Customer_Add.TabIndex = 15;
             this.btn_Customer_Add.Text = "+Add";
             this.btn_Customer_Add.UseVisualStyleBackColor = false;
+            this.btn_Customer_Add.Click += new System.EventHandler(this.btn_Customer_Add_Click);
             // 
             // btn_Customer_edit
             // 
@@ -124,6 +129,7 @@
             this.btn_Customer_Load.TabIndex = 12;
             this.btn_Customer_Load.Text = "Load";
             this.btn_Customer_Load.UseVisualStyleBackColor = false;
+            this.btn_Customer_Load.Click += new System.EventHandler(this.btn_Customer_Load_Click);
             // 
             // btn_Customer_save
             // 
@@ -134,6 +140,7 @@
             this.btn_Customer_save.TabIndex = 11;
             this.btn_Customer_save.Text = "Save";
             this.btn_Customer_save.UseVisualStyleBackColor = false;
+            this.btn_Customer_save.Click += new System.EventHandler(this.btn_Customer_save_Click);
             // 
             // cash_Back
             // 
@@ -169,10 +176,6 @@
         #endregion
 
         private DataGridView grv_Customers;
-        private DataGridViewTextBoxColumn col_ID;
-        private DataGridViewTextBoxColumn col_Name;
-        private DataGridViewTextBoxColumn col_Surname;
-        private DataGridViewTextBoxColumn col_CardNum;
         private Button btn_Customer_Add;
         private Button btn_Customer_edit;
         private Button btn_Customer_delete;
@@ -180,5 +183,9 @@
         private Button btn_Customer_save;
         private Button cash_Back;
         private BindingSource bsCustomers;
+        private DataGridViewTextBoxColumn col_ID;
+        private DataGridViewTextBoxColumn col_Name;
+        private DataGridViewTextBoxColumn col_Surname;
+        private DataGridViewTextBoxColumn col_CardNum;
     }
 }

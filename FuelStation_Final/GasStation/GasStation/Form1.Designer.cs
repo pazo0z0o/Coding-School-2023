@@ -40,6 +40,7 @@
             // 
             this.btn_Manager.BackColor = System.Drawing.Color.DodgerBlue;
             this.btn_Manager.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Manager.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_Manager.Location = new System.Drawing.Point(0, 0);
             this.btn_Manager.Name = "btn_Manager";
             this.btn_Manager.Size = new System.Drawing.Size(220, 638);
@@ -52,6 +53,7 @@
             // 
             this.btn_Cashier.BackColor = System.Drawing.Color.Aquamarine;
             this.btn_Cashier.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Cashier.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_Cashier.Location = new System.Drawing.Point(220, 0);
             this.btn_Cashier.Name = "btn_Cashier";
             this.btn_Cashier.Size = new System.Drawing.Size(220, 638);
@@ -64,6 +66,7 @@
             // 
             this.btn_Staff.BackColor = System.Drawing.Color.LemonChiffon;
             this.btn_Staff.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Staff.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_Staff.Location = new System.Drawing.Point(440, 0);
             this.btn_Staff.Name = "btn_Staff";
             this.btn_Staff.Size = new System.Drawing.Size(220, 638);
@@ -75,11 +78,11 @@
             // textBox1
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.textBox1.Location = new System.Drawing.Point(805, 0);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(370, 200);
+            this.textBox1.Size = new System.Drawing.Size(421, 277);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);

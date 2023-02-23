@@ -25,6 +25,7 @@ namespace FuelStation.Win
         public Customer_frm()
         {
             InitializeComponent();
+            client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7086/");
             SetControlProperties();
         }
@@ -36,49 +37,70 @@ namespace FuelStation.Win
 
         private async void Customer_frm_Load(object sender, EventArgs e)
         {
-            endpoint = "customer";
-            /* HttpResponseMessage response = await client.GetAsync(baseURI+ endpoint);
-             string responseContent = await response.Content.ReadAsStringAsync();
-             List<Transaction> transactions  = JsonConvert.DeserializeObject<List<Transaction>>(responseContent);    
-             grv_Customers.DataSource = bsCustomers;*/
+            
             grv_Customers.AutoGenerateColumns = false;
+            SetControlProperties();
 
 
 
         }
-
-        private void cash_Back_Click(object sender, EventArgs e)
-        {
-            Form1 form1 = new Form1();
-            form1.ShowDialog();
-            this.Close();
-        }
-    //==============================================================
+     //========================= METHODS =====================================
+      
+    
         private async Task SetControlProperties()
         {
             var customer = await CustomerGetAll();
             if( customer !=null)
             {
                 bsCustomers.DataSource = customer;
-                grv_Customers.DataSource = customer;
+                grv_Customers.DataSource = bsCustomers;
             }
 
         }
-    //==============================================================
-    private async Task<List<CustomerListDTO>> CustomerGetAll() 
-    {    
-            HttpResponseMessage response = await client.GetAsync("customer");
-           
-            if (response.IsSuccessStatusCode) 
+       
+        private async Task<List<CustomerListDTO>> CustomerGetAll()
+        {
+            try
             {
-                var content = await response.Content.ReadAsStringAsync(); 
-                return JsonConvert.DeserializeObject<List<CustomerListDTO>>(content);
+                HttpResponseMessage response = await client.GetAsync("customer");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<CustomerListDTO>>(content);
+                }
+                else
+                {
+                    throw new Exception($"Failed to retrieve customer list. Status code: {response.StatusCode}");
+                }
             }
-            return null;        
-        
-    }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while retrieving the customer list: {ex.Message}");
+                return null;
+            }
+        }
+        //=========================== BUTTON EVENTS ===================================
+        private void btn_Customer_Load_Click(object sender, EventArgs e)
+        {
+            SetControlProperties();
+        }
 
+        private void btn_Customer_save_Click(object sender, EventArgs e)
+        {
+            OnSave();
+            SetControlProperties();
+        }
 
+        private void btn_Customer_Add_Click(object sender, EventArgs e)
+        {
+            bsCustomers.Add(new CustomerListDTO());
+        }
 
+        private void cash_Back_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Form1 form1 = new Form1();
+            form1.ShowDialog();
+        }
     }
 }

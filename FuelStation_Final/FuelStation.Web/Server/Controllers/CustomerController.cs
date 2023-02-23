@@ -13,14 +13,13 @@ namespace FuelStation.Web.Server.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IEntityRepo<Customer> _customerRepo;
-        //private readonly ITransactionHandler _transHandler;
         private TransactionHandler _transHandler; 
         private RandomGenerators _randomGen;
         public CustomerController(IEntityRepo<Customer> customerRepo, TransactionHandler transHandler) //RandomGenerators randomGen)
         {
             _customerRepo = customerRepo;
             _transHandler = transHandler;
-           // _randomGen = randomGen;
+          
         }
 
         [HttpGet]
@@ -71,8 +70,7 @@ namespace FuelStation.Web.Server.Controllers
             itemToUpdate.ID = customer.ID;
             itemToUpdate.Name = customer.Name;
             itemToUpdate.Surname = customer.Surname;
-            itemToUpdate.CardNumber = customer.CardNumber;            
-            itemToUpdate.Transactions = customer.Transactions;
+            itemToUpdate.CardNumber = customer.CardNumber;                     
             _customerRepo.Update(customer.ID, itemToUpdate);
         }
 

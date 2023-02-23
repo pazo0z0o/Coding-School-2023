@@ -25,9 +25,9 @@ namespace FuelStation.Win
 
         private void btn_mng_Customer_Click(object sender, EventArgs e)
         {
-            Customer frm_Customer = new Customer();
-            frm_Customer.ShowDialog();
-            this.Close();
+            CustomerListF customF = new CustomerListF();
+            customF.ShowDialog();
+            this.Hide();
         }
 
         private void btn_mng_Transaction_Click(object sender, EventArgs e)

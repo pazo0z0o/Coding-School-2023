@@ -40,9 +40,9 @@ namespace FuelStation.Win
         private void cash_Back_Click(object sender, EventArgs e)
         {
 
-            this.Hide();
             Form1 form1 = new Form1();
             form1.Show();
+            this.Hide();
         }
     }
 }

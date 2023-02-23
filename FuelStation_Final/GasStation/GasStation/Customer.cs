@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
+using System.Net.Http.Json;
+using GasStation;
 
 namespace FuelStation.Win
 {
@@ -16,5 +19,24 @@ namespace FuelStation.Win
         {
             InitializeComponent();
         }
+
+        private void grv_Items_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Customer_frm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cash_Back_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.ShowDialog();
+            this.Close();
+        }
+
+       
     }
 }

@@ -29,20 +29,21 @@
         private void InitializeComponent()
         {
             this.grv_Items = new System.Windows.Forms.DataGridView();
-            this.col_Item_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_ItemType = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.col_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Item_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grv_Items)).BeginInit();
             this.SuspendLayout();
             // 
             // grv_Items
             // 
+            this.grv_Items.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grv_Items.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grv_Items.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
@@ -56,23 +57,6 @@
             this.grv_Items.RowTemplate.Height = 25;
             this.grv_Items.Size = new System.Drawing.Size(556, 150);
             this.grv_Items.TabIndex = 0;
-            // 
-            // col_Item_ID
-            // 
-            this.col_Item_ID.HeaderText = "ItemID";
-            this.col_Item_ID.Name = "col_Item_ID";
-            this.col_Item_ID.Visible = false;
-            // 
-            // col_ID
-            // 
-            this.col_ID.HeaderText = "ID";
-            this.col_ID.Name = "col_ID";
-            this.col_ID.Visible = false;
-            // 
-            // col_Code
-            // 
-            this.col_Code.HeaderText = "Code";
-            this.col_Code.Name = "col_Code";
             // 
             // colID
             // 
@@ -106,6 +90,23 @@
             // 
             this.col_Cost.HeaderText = "Cost";
             this.col_Cost.Name = "col_Cost";
+            // 
+            // col_Item_ID
+            // 
+            this.col_Item_ID.HeaderText = "ItemID";
+            this.col_Item_ID.Name = "col_Item_ID";
+            this.col_Item_ID.Visible = false;
+            // 
+            // col_ID
+            // 
+            this.col_ID.HeaderText = "ID";
+            this.col_ID.Name = "col_ID";
+            this.col_ID.Visible = false;
+            // 
+            // col_Code
+            // 
+            this.col_Code.HeaderText = "Code";
+            this.col_Code.Name = "col_Code";
             // 
             // frm_Items
             // 

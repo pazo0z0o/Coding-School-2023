@@ -38,6 +38,8 @@
             // 
             this.btn_mng_Transaction.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_mng_Transaction.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btn_mng_Transaction.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_mng_Transaction.Location = new System.Drawing.Point(761, 245);
             this.btn_mng_Transaction.Name = "btn_mng_Transaction";
             this.btn_mng_Transaction.Size = new System.Drawing.Size(202, 114);
@@ -51,20 +53,24 @@
             this.btn_mng_Customer.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_mng_Customer.BackColor = System.Drawing.Color.PaleGreen;
             this.btn_mng_Customer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_mng_Customer.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_mng_Customer.Location = new System.Drawing.Point(511, 245);
             this.btn_mng_Customer.Name = "btn_mng_Customer";
             this.btn_mng_Customer.Size = new System.Drawing.Size(202, 114);
             this.btn_mng_Customer.TabIndex = 5;
-            this.btn_mng_Customer.Text = "Customer View";
+            this.btn_mng_Customer.Text = "Customers";
             this.btn_mng_Customer.UseVisualStyleBackColor = false;
             this.btn_mng_Customer.Click += new System.EventHandler(this.btn_mng_Customer_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(695, 169);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 15);
+            this.label1.Size = new System.Drawing.Size(147, 25);
             this.label1.TabIndex = 7;
             this.label1.Text = "Cashier Choices";
             this.label1.Click += new System.EventHandler(this.label1_Click);

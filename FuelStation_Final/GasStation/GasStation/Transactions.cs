@@ -26,7 +26,7 @@ namespace FuelStation.Win
 
         private void btn_trans_Add_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
            // frm_Cursomer_Check CustomerValidation = new frm_Cursomer_Check();
             //CustomerValidation.ShowDialog();
         }

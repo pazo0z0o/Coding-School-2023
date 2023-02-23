@@ -29,31 +29,31 @@ namespace FuelStation.Win
 
         private void btn_mng_Customer_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Customer_frm frm_Customer = new Customer_frm();
             frm_Customer.ShowDialog();
+            this.Close();
         }
 
 
         private void btn_mng_Item_Click(object sender, EventArgs e)
         {
-            this.Hide();
             frm_Items frm_Items = new frm_Items();
             frm_Items.ShowDialog();
+            this.Close();
         }
 
         private void btn_mng_Transaction_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Transactions_frm frm_Transaction = new Transactions_frm();
             frm_Transaction.ShowDialog();
+            this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide(); 
             Form1 form1 = new Form1();
             form1.Show();
+            this.Close();
         }
 
         //accidental double clicks bellow here -- remember to clean up afterwards from the designer

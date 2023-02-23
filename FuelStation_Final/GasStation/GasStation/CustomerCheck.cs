@@ -26,7 +26,7 @@ namespace FuelStation.Win
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Customer_frm frm_Customer = new Customer_frm();
+            Customer frm_Customer = new Customer();
             frm_Customer.ShowDialog();
             this.Close();
         }

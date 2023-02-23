@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.grv_Items = new System.Windows.Forms.DataGridView();
+            this.grv_Customers = new System.Windows.Forms.DataGridView();
             this.col_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,28 +41,28 @@
             this.btn_Customer_save = new System.Windows.Forms.Button();
             this.cash_Back = new System.Windows.Forms.Button();
             this.bsCustomers = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.grv_Items)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grv_Customers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).BeginInit();
             this.SuspendLayout();
             // 
-            // grv_Items
+            // grv_Customers
             // 
-            this.grv_Items.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.grv_Customers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grv_Items.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grv_Items.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grv_Items.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grv_Customers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.grv_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grv_Customers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_ID,
             this.col_Name,
             this.col_Surname,
             this.col_CardNum});
-            this.grv_Items.Location = new System.Drawing.Point(21, 64);
-            this.grv_Items.Name = "grv_Items";
-            this.grv_Items.RowTemplate.Height = 25;
-            this.grv_Items.Size = new System.Drawing.Size(604, 135);
-            this.grv_Items.TabIndex = 0;
-            this.grv_Items.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_Items_CellContentClick);
+            this.grv_Customers.Location = new System.Drawing.Point(21, 64);
+            this.grv_Customers.Name = "grv_Customers";
+            this.grv_Customers.RowTemplate.Height = 25;
+            this.grv_Customers.Size = new System.Drawing.Size(604, 135);
+            this.grv_Customers.TabIndex = 0;
+            this.grv_Customers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_Items_CellContentClick);
             // 
             // col_ID
             // 
@@ -156,11 +156,11 @@
             this.Controls.Add(this.btn_Customer_delete);
             this.Controls.Add(this.btn_Customer_Load);
             this.Controls.Add(this.btn_Customer_save);
-            this.Controls.Add(this.grv_Items);
+            this.Controls.Add(this.grv_Customers);
             this.Name = "Customer_frm";
             this.Text = "Customers";
             this.Load += new System.EventHandler(this.Customer_frm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.grv_Items)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grv_Customers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsCustomers)).EndInit();
             this.ResumeLayout(false);
 
@@ -168,7 +168,7 @@
 
         #endregion
 
-        private DataGridView grv_Items;
+        private DataGridView grv_Customers;
         private DataGridViewTextBoxColumn col_ID;
         private DataGridViewTextBoxColumn col_Name;
         private DataGridViewTextBoxColumn col_Surname;

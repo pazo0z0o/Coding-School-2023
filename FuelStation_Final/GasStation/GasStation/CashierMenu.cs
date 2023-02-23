@@ -25,16 +25,16 @@ namespace FuelStation.Win
 
         private void btn_mng_Customer_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Customer_frm frm_Customer = new Customer_frm();
             frm_Customer.ShowDialog();
+            this.Close();
         }
 
         private void btn_mng_Transaction_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Transactions_frm frm_Transaction = new Transactions_frm();
             frm_Transaction.ShowDialog();
+            this.Close();
         }
 
         private void cash_Back_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace FuelStation.Win
 
             Form1 form1 = new Form1();
             form1.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

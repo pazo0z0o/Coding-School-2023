@@ -13,13 +13,14 @@ namespace GasStation
         private void Form1_Load(object sender, EventArgs e)
         {
 
+
         }
 
         private void btn_Manager_Click(object sender, EventArgs e)
         {
-            this.Hide();
             frm_manager managerForm = new frm_manager();
             managerForm.Show();
+            this.Close();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -29,16 +30,16 @@ namespace GasStation
 
         private void btn_Cashier_Click(object sender, EventArgs e)
         {
-            this.Hide();
             CashierMenu frm_Cashier = new CashierMenu();
             frm_Cashier.ShowDialog();
+            this.Close();
         }
 
         private void btn_Staff_Click(object sender, EventArgs e)
         {
-            this.Hide();
             frm_Items newItem = new frm_Items();
             newItem.ShowDialog();
+            this.Close();
         }
     }
 }

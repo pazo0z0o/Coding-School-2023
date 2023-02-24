@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GasStation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,27 +19,37 @@ namespace FuelStation.Win
         }
         private void Transactions_frm_Load(object sender, EventArgs e)
         {
+            
+
 
         }
 
 
-       
 
+//===============================Transaction  Buttons=============================================
         private void btn_trans_Add_Click(object sender, EventArgs e)
         {
-            
-           // frm_Cursomer_Check CustomerValidation = new frm_Cursomer_Check();
-            //CustomerValidation.ShowDialog();
-        }
-        //=============================================================================================================
-        private void grv_Transactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            this.Hide();
+            CustomerCheck cardCheck = new CustomerCheck();
+           
         }
         
-         private void grv_TransactionLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
+       
+        
+       
+//===============================Transaction Line Buttons=========================================
+        private void btn_trl_Add_Click(object sender, EventArgs e)
         {
+           
+            
+        }
 
+        private void btn_Back_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form1 frm1= new Form1();
+            frm1.ShowDialog();
+            this.Dispose();
         }
     }
 }

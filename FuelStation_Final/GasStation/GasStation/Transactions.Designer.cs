@@ -55,6 +55,7 @@
             this.btn_trl_save = new System.Windows.Forms.Button();
             this.btn_trans_Add = new System.Windows.Forms.Button();
             this.btn_trl_Add = new System.Windows.Forms.Button();
+            this.btn_Back = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grv_Transactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grv_TransactionLine)).BeginInit();
             this.SuspendLayout();
@@ -75,7 +76,6 @@
             this.grv_Transactions.RowTemplate.Height = 25;
             this.grv_Transactions.Size = new System.Drawing.Size(597, 96);
             this.grv_Transactions.TabIndex = 0;
-            this.grv_Transactions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_Transactions_CellContentClick);
             // 
             // trans_ID
             // 
@@ -131,7 +131,6 @@
             this.grv_TransactionLine.RowTemplate.Height = 25;
             this.grv_TransactionLine.Size = new System.Drawing.Size(913, 150);
             this.grv_TransactionLine.TabIndex = 1;
-            this.grv_TransactionLine.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_TransactionLine_CellContentClick);
             // 
             // col_trl_ID
             // 
@@ -281,13 +280,28 @@
             this.btn_trl_Add.TabIndex = 11;
             this.btn_trl_Add.Text = "+Add";
             this.btn_trl_Add.UseVisualStyleBackColor = false;
+            this.btn_trl_Add.Click += new System.EventHandler(this.btn_trl_Add_Click);
+            // 
+            // btn_Back
+            // 
+            this.btn_Back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Back.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btn_Back.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_Back.Location = new System.Drawing.Point(945, 604);
+            this.btn_Back.Name = "btn_Back";
+            this.btn_Back.Size = new System.Drawing.Size(71, 39);
+            this.btn_Back.TabIndex = 30;
+            this.btn_Back.Text = "BACK";
+            this.btn_Back.UseVisualStyleBackColor = false;
+            this.btn_Back.Click += new System.EventHandler(this.btn_Back_Click);
             // 
             // Transactions_frm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1438, 599);
+            this.ClientSize = new System.Drawing.Size(1028, 655);
+            this.Controls.Add(this.btn_Back);
             this.Controls.Add(this.btn_trl_Add);
             this.Controls.Add(this.btn_trans_Add);
             this.Controls.Add(this.btn_trl_del);
@@ -338,5 +352,6 @@
         private Button btn_trl_save;
         private Button btn_trans_Add;
         private Button btn_trl_Add;
+        private Button btn_Back;
     }
 }

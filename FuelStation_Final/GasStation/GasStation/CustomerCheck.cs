@@ -65,11 +65,13 @@ namespace FuelStation.Win
             bool cardCheckResult = await CheckCustomerCardExists(textBox1.Text);
            if (cardCheckResult) 
             {
+                textBox1.BackColor = Color.LimeGreen;
                 btn_Success.Visible= true;
            MessageBox.Show("Existing Customer Found!", "Customer Exists",MessageBoxButtons.OK, MessageBoxIcon.Information); 
             }
            else
             {
+                textBox1.BackColor = Color.LightCoral;
                 btn_CreateCustomer.Visible= true;
                 MessageBox.Show("Customer Not Found, Proceed to create a new account", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -84,7 +86,22 @@ namespace FuelStation.Win
 
         }
 
-       
+        private void label1_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form1 frm1 = new Form1();
+            frm1.ShowDialog();
+            this.Dispose();
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+        }
     }
 }

@@ -48,7 +48,7 @@
             // 
             this.cash_Back.BackColor = System.Drawing.Color.LightSeaGreen;
             this.cash_Back.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cash_Back.Location = new System.Drawing.Point(717, 406);
+            this.cash_Back.Location = new System.Drawing.Point(672, 399);
             this.cash_Back.Name = "cash_Back";
             this.cash_Back.Size = new System.Drawing.Size(71, 39);
             this.cash_Back.TabIndex = 23;
@@ -60,7 +60,7 @@
             // 
             this.btn_Customer_Add.BackColor = System.Drawing.Color.Red;
             this.btn_Customer_Add.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_Customer_Add.Location = new System.Drawing.Point(638, 406);
+            this.btn_Customer_Add.Location = new System.Drawing.Point(593, 399);
             this.btn_Customer_Add.Name = "btn_Customer_Add";
             this.btn_Customer_Add.Size = new System.Drawing.Size(73, 39);
             this.btn_Customer_Add.TabIndex = 22;
@@ -166,6 +166,7 @@
             this.Controls.Add(this.btn_Customer_Load);
             this.Controls.Add(this.btn_Customer_save);
             this.Controls.Add(this.grv_Customers);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CustomerListF";
             this.Text = "CustomerListF";
             this.Load += new System.EventHandler(this.CustomerListF_Load);

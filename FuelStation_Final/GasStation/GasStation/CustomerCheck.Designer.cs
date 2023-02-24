@@ -99,6 +99,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btn_Success);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "CustomerCheck";
             this.Text = "CustomerCheck";
             this.Load += new System.EventHandler(this.CustomerCheck_Load);

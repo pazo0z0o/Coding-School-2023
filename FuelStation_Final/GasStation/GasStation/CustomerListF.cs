@@ -20,17 +20,15 @@ namespace FuelStation.Win
 {
     public partial class CustomerListF : Form
     {
-        public readonly HttpClient client;
-        // public readonly string baseURI; 
-        public string? endpoint;
+        private readonly HttpClient _client;
         private List<CustomerListDTO> customerList = new();
         private readonly RandomGenerators _generator = new();
 
         public CustomerListF()
         {
 
-            client = new HttpClient(new HttpClientHandler());
-            client.BaseAddress = new Uri("https://localhost:7086/");
+            _client = new HttpClient(new HttpClientHandler());
+            _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
 
         }
@@ -43,8 +41,9 @@ namespace FuelStation.Win
 
         private async Task SetControlProperties()
         {
-            customerList = await client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
             grv_Customers.AutoGenerateColumns = false;
+            customerList = await _client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
+
             bsCustomers.DataSource = customerList;
             grv_Customers.DataSource = bsCustomers;
 
@@ -54,8 +53,35 @@ namespace FuelStation.Win
 
         private async Task OnSave()
         {
+            CustomerListDTO cutomer = (CustomerListDTO)bsCustomers.Current;
+            HttpResponseMessage response = null;
+            if (cutomer.ID == 0)
+            {
+                CustomerCreateDTO customerCreate = new CustomerCreateDTO
+                {
+                    Name = cutomer.Name,
+                    Surname = cutomer.Surname,
+                    CardNumber = cutomer.CardNumber
+                };
+                response = await _client.PostAsJsonAsync("customer", customerCreate);
+            }
+            else
+            {
+               // CustomerListDTO originalCustomer = _customerRepo.GetById(customer.ID);
+                CustomerEditDTO customerEdit = new CustomerEditDTO
+                {
+                    ID = cutomer.ID,
+                    Name = cutomer.Name,
+                    Surname = cutomer.Surname,
+                    CardNumber = cutomer.CardNumber
 
-
+                };
+                response = await _client.PutAsJsonAsync("customer", customerEdit);
+            }
+            if (response.IsSuccessStatusCode) 
+            {MessageBox.Show("Save successful!","Success",MessageBoxButtons.OK,MessageBoxIcon.Information); }
+            else
+            { MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
 
         }
@@ -69,7 +95,7 @@ namespace FuelStation.Win
 
         private async void btn_Customer_save_Click(object sender, EventArgs e)
         {
-            // OnSave();
+            await OnSave();
             await SetControlProperties();
         }
 
@@ -88,7 +114,7 @@ namespace FuelStation.Win
         private async void btn_Customer_delete_Click(object sender, EventArgs e)
         {
             CustomerListDTO customer = (CustomerListDTO)bsCustomers.Current;
-            var response = await client.DeleteAsync($"customer/{customer.ID}");
+            var response = await _client.DeleteAsync($"customer/{customer.ID}");
             MessageBox.Show("Failed to add new data.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             await SetControlProperties();
         }
@@ -96,80 +122,12 @@ namespace FuelStation.Win
         private async void btn_Customer_edit_Click(object sender, EventArgs e)
         {
             ((CustomerListDTO)(bsCustomers.Current)).CardNumber = await _generator.CardNumberGeneratorAsync();
-
-            // SetControlProperties();
         }
 
-      
-
-        private async void grv_Customers_RowValidated(object sender, DataGridViewCellEventArgs e)
-        {
-            List<CustomerListDTO> data = (List < CustomerListDTO > )bsCustomers.DataSource;
-            CustomerListDTO currentSelection = (CustomerListDTO)bsCustomers.Current;
-            //Put operation
-            if (currentSelection != null)
-            {
-                HttpResponseMessage response = await client.PutAsJsonAsync($"customer/{currentSelection.ID}", currentSelection);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Edit Failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-            }
-            //Post operation
-            else
-            {
-                CustomerCreateDTO newCustomer = new CustomerCreateDTO();
-                newCustomer = (CustomerCreateDTO)grv_Customers.Rows[e.RowIndex].DataBoundItem;
-                HttpResponseMessage response = await client.PostAsJsonAsync($"customer", newCustomer);
-
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Failed to add new data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    
-                }
-
-            }
 
 
 
 
-
-
-
-            //  
-            //
-            //
-            //   if (customerOnTable == null) { return; }
-            //    if (customerOnTable.CardNumber == null) return;
-            //    if (customerOnTable.ID == 0)
-            //    {
-            //        CustomerCreateDTO customer = new CustomerCreateDTO
-            //        {
-            //            Name = customerOnTable.Name,
-            //            Surname = customerOnTable.Surname,
-            //            CardNumber = customerOnTable.CardNumber
-            //        };
-            //        HttpResponseMessage? response;
-            //        response = await client.PostAsJsonAsync("customer", customer);
-            //        response.EnsureSuccessStatusCode();
-            //        await SetControlProperties();
-            //    }
-            //    else
-            //    {
-            //        CustomerEditDTO customerToEdit = new CustomerEditDTO
-            //        {
-            //             customerToEdit
-            //             customerToEdit
-            //             customerToEdit
-            //        };
-            //    }
-        }
 
 
 

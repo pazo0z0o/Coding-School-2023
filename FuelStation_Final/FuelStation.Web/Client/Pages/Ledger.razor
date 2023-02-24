@@ -32,7 +32,7 @@
             </thead>
             <tbody>
                 @foreach (var item in ledger)
-               {
+                {
                    <tr>
                        <td>@item.Year</td>
                        <td>@item.Month</td>
@@ -41,10 +41,10 @@
                        <td>@item.Total</td> 
                        
                    </tr>
-           }
+                }
             </tbody>
     </table>
-
+        <button class="btn btn-info" @onclick="OnBack"> Back </button>
    }
 
 @code {
@@ -63,6 +63,7 @@
 
 
     }
+    private void OnBack() { navigationManager.NavigateTo(""); }
 
 
 

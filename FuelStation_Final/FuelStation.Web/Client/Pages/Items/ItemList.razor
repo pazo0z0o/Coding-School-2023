@@ -63,7 +63,7 @@ else
     {
         itemList = await httpClient.GetFromJsonAsync<List<ItemListDTO>>("item");
     }
-    private void OnBack() { navigationManager.NavigateTo("landingpage"); }
+    private void OnBack() { navigationManager.NavigateTo(""); }
     private void CreateItem()
     {
         navigationManager.NavigateTo("itemlist/create");

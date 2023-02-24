@@ -39,7 +39,6 @@
             this.btn_Item_Load = new System.Windows.Forms.Button();
             this.btn_Item_save = new System.Windows.Forms.Button();
             this.bsItems = new System.Windows.Forms.BindingSource(this.components);
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_ItemType = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -54,7 +53,6 @@
             this.grv_Items.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grv_Items.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grv_Items.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colID,
             this.colCode,
             this.col_Description,
             this.col_ItemType,
@@ -148,13 +146,6 @@
             this.btn_Item_save.UseVisualStyleBackColor = false;
             this.btn_Item_save.Click += new System.EventHandler(this.btn_Item_save_Click);
             // 
-            // colID
-            // 
-            this.colID.DataPropertyName = "ID";
-            this.colID.HeaderText = "Item ID";
-            this.colID.Name = "colID";
-            this.colID.Visible = false;
-            // 
             // colCode
             // 
             this.colCode.DataPropertyName = "Code";
@@ -220,7 +211,6 @@
         private Button btn_Item_Load;
         private Button btn_Item_save;
         private BindingSource bsItems;
-        private DataGridViewTextBoxColumn colID;
         private DataGridViewTextBoxColumn colCode;
         private DataGridViewTextBoxColumn col_Description;
         private DataGridViewComboBoxColumn col_ItemType;

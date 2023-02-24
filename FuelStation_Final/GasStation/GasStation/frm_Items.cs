@@ -43,50 +43,51 @@ namespace FuelStation.Win
             _itemList = await _client.GetFromJsonAsync<List<ItemListDTO>>("item");
             bsItems.DataSource = _itemList;
             grv_Items.DataSource = bsItems;
+           
             DataGridViewComboBoxColumn col_ItemType = grv_Items.Columns["col_ItemType"] as DataGridViewComboBoxColumn;
             col_ItemType.DataSource = Enum.GetValues(typeof(ItemType));
-            col_ItemType.ValueMember = "ID";
-            col_ItemType.DisplayMember = "ItemType";
-
+           // col_ItemType.ValueMember = "ID";
+            //col_ItemType.DisplayMember = "ItemType";
         }
 
         //==============================Buttons & Events ================================
         private async void btn_Item_save_Click(object sender, EventArgs e)
         {
             //TODO: SAVE for POST AND EDIT
-            //HttpResponseMessage response = null;
-            //if (cutomer.ID == 0)
-            //{
-            //    CustomerCreateDTO customerCreate = new CustomerCreateDTO
-            //    {
-            //        Name = cutomer.Name,
-            //        Surname = cutomer.Surname,
-            //        CardNumber = cutomer.CardNumber
-            //    };
-            //    response = await _client.PostAsJsonAsync("customer", customerCreate);
-            //}
-            //else
-            //{
-            //    // CustomerListDTO originalCustomer = _customerRepo.GetById(customer.ID);
-            //    CustomerEditDTO customerEdit = new CustomerEditDTO
-            //    {
-            //        ID = cutomer.ID,
-            //        Name = cutomer.Name,
-            //        Surname = cutomer.Surname,
-            //        CardNumber = cutomer.CardNumber
-
-            //    };
-            //    response = await _client.PutAsJsonAsync("customer", customerEdit);
-            //}
-            //if (response.IsSuccessStatusCode)
-            //{ MessageBox.Show("Save successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-            //else
-            //{ MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-
-
+            HttpResponseMessage response = null;
+            ItemListDTO item = (ItemListDTO)bsItems.Current;
+            if (item.ID == 0)
+            {
+                ItemCreateDTO itemCreate = new ItemCreateDTO
+                {
+                    Code = item.Code,
+                    Description = item.Description,
+                    ItemType = item.ItemType,
+                    Price = item.Price,
+                    Cost= item.Cost
+                };
+                response = await _client.PostAsJsonAsync("item", itemCreate);
+            }
+            else
+            {
+                ItemEditDTO itemEdit = new ItemEditDTO
+                {
+                    ID = item.ID,
+                    Code = item.Code,
+                    Description = item.Description,
+                    ItemType = item.ItemType,
+                    Price = item.Price,
+                    Cost = item.Cost
+                };
+                response = await _client.PutAsJsonAsync("item", itemEdit);
+            }
+            if (response.IsSuccessStatusCode)
+            { MessageBox.Show("Save successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            else
+            { MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private async void btn_Item_Load_Click(object sender, EventArgs e)
+            private async void btn_Item_Load_Click(object sender, EventArgs e)
         {
             bsItems.DataSource = null;
             SetControlProperties();
@@ -98,6 +99,14 @@ namespace FuelStation.Win
             ItemListDTO items = (ItemListDTO)bsItems.Current;
             HttpResponseMessage response = null;
             response = await _client.DeleteAsync($"item/{items.ID}");
+            if (response.IsSuccessStatusCode)
+            {
+            MessageBox.Show("Delete Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+            MessageBox.Show("Delete unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }    
             await SetControlProperties();
         }
 
@@ -118,16 +127,16 @@ namespace FuelStation.Win
             form1.ShowDialog();
             this.Dispose();
         }
-        public async Task<bool> CodeChecker(ItemListDTO currentItem)
-        {
-            currentItem = (ItemListDTO)bsItems.Current;
-            _itemList = await _client.GetFromJsonAsync<List<ItemListDTO>>("item");
-            foreach (var item in _itemList)
-            {
-                if (item.Code == currentItem.Code) return false;
-            }
-            return true;
-        }
+        //public async Task<bool> CodeChecker(ItemListDTO currentItem)
+        //{
+        //    currentItem = (ItemListDTO)bsItems.Current;
+        //    _itemList = await _client.GetFromJsonAsync<List<ItemListDTO>>("item");
+        //    foreach (var item in _itemList)
+        //    {
+        //        if (item.Code == currentItem.Code) return false;
+        //    }
+        //    return true;
+        //}
 
     }
 }

@@ -4,6 +4,7 @@
 @inject NavigationManager navigationManager
 @inject IJSRuntime jsRuntime
 
+
 <h3>Customer Managment</h3>
 
 
@@ -60,7 +61,11 @@ else
     {
         customerList = await httpClient.GetFromJsonAsync<List<CustomerListDTO>> ("customer");
     }
-    private void OnBack() { navigationManager.NavigateTo("landingpage"); }
+    private void OnBack()
+    {
+     navigationManager.NavigateTo(""); 
+    
+    }
     private async Task CreateItem()
     {
         navigationManager.NavigateTo("customerlist/add");

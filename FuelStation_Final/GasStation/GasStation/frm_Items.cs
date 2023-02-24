@@ -15,6 +15,8 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FuelStation.Model.Enums;
+
 namespace FuelStation.Win
 {
     public partial class frm_Items : Form
@@ -35,53 +37,97 @@ namespace FuelStation.Win
             SetControlProperties();
         }
 
-        private async Task SetControlProperties() 
+        private async Task SetControlProperties()
         {
             grv_Items.AutoGenerateColumns = false;
             _itemList = await _client.GetFromJsonAsync<List<ItemListDTO>>("item");
             bsItems.DataSource = _itemList;
-            grv_Items.DataSource = _itemList;
-
-
-
-
-
-
-
-
+            grv_Items.DataSource = bsItems;
+            DataGridViewComboBoxColumn col_ItemType = grv_Items.Columns["col_ItemType"] as DataGridViewComboBoxColumn;
+            col_ItemType.DataSource = Enum.GetValues(typeof(ItemType));
+            col_ItemType.ValueMember = "ID";
+            col_ItemType.DisplayMember = "ItemType";
 
         }
 
-//==============================Buttons & Events ================================
-        private  async void btn_Item_save_Click(object sender, EventArgs e)
+        //==============================Buttons & Events ================================
+        private async void btn_Item_save_Click(object sender, EventArgs e)
         {
             //TODO: SAVE for POST AND EDIT
+            //HttpResponseMessage response = null;
+            //if (cutomer.ID == 0)
+            //{
+            //    CustomerCreateDTO customerCreate = new CustomerCreateDTO
+            //    {
+            //        Name = cutomer.Name,
+            //        Surname = cutomer.Surname,
+            //        CardNumber = cutomer.CardNumber
+            //    };
+            //    response = await _client.PostAsJsonAsync("customer", customerCreate);
+            //}
+            //else
+            //{
+            //    // CustomerListDTO originalCustomer = _customerRepo.GetById(customer.ID);
+            //    CustomerEditDTO customerEdit = new CustomerEditDTO
+            //    {
+            //        ID = cutomer.ID,
+            //        Name = cutomer.Name,
+            //        Surname = cutomer.Surname,
+            //        CardNumber = cutomer.CardNumber
+
+            //    };
+            //    response = await _client.PutAsJsonAsync("customer", customerEdit);
+            //}
+            //if (response.IsSuccessStatusCode)
+            //{ MessageBox.Show("Save successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            //else
+            //{ MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+
         }
 
         private async void btn_Item_Load_Click(object sender, EventArgs e)
         {
-            
-
+            bsItems.DataSource = null;
+            SetControlProperties();
         }
 
         private async void btn_Item_delete_Click(object sender, EventArgs e)
         {
             //TODO: DELETE BUTTON WITH  ASYNC
+            ItemListDTO items = (ItemListDTO)bsItems.Current;
+            HttpResponseMessage response = null;
+            response = await _client.DeleteAsync($"item/{items.ID}");
+            await SetControlProperties();
         }
 
         private void btn_Back_Click(object sender, EventArgs e)
         {
             //BACK TO FORM1
+            this.Hide();
+            Form1 form1 = new Form1();
+            form1.ShowDialog();
+            this.Dispose();
         }
 
         private void btn_Close_Click(object sender, EventArgs e)
         {
             //CLOSE BUT RETURN TO FORM 1
+            this.Hide();
+            Form1 form1 = new Form1();
+            form1.ShowDialog();
+            this.Dispose();
         }
-
-        private void sqlDataAdapter1_RowUpdated(object sender, Microsoft.Data.SqlClient.SqlRowUpdatedEventArgs e)
+        public async Task<bool> CodeChecker(ItemListDTO currentItem)
         {
-
+            currentItem = (ItemListDTO)bsItems.Current;
+            _itemList = await _client.GetFromJsonAsync<List<ItemListDTO>>("item");
+            foreach (var item in _itemList)
+            {
+                if (item.Code == currentItem.Code) return false;
+            }
+            return true;
         }
+
     }
 }

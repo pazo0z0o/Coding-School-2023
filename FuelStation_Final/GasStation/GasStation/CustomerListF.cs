@@ -98,21 +98,22 @@ namespace FuelStation.Win
 
         private void cash_Back_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             Form1 form1 = new Form1();
             form1.ShowDialog();
+            this.Dispose();
         }
 
         private async void btn_Customer_delete_Click(object sender, EventArgs e)
         {
             CustomerListDTO customer = (CustomerListDTO)bsCustomers.Current;
             var response = await _client.DeleteAsync($"customer/{customer.ID}");
-            MessageBox.Show("Failed to add new data.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Delete Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             await SetControlProperties();
         }
 
         private async void btn_Customer_edit_Click(object sender, EventArgs e)
-        {
+        {   //Repurposed edit button for a CardNumber Generator method click event
             ((CustomerListDTO)(bsCustomers.Current)).CardNumber = await _generator.CardNumberGeneratorAsync();
         }
 

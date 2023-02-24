@@ -30,12 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.grv_Items = new System.Windows.Forms.DataGridView();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_ItemType = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.col_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Item_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +39,12 @@
             this.btn_Item_Load = new System.Windows.Forms.Button();
             this.btn_Item_save = new System.Windows.Forms.Button();
             this.bsItems = new System.Windows.Forms.BindingSource(this.components);
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ItemType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.col_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grv_Items)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsItems)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +55,7 @@
             this.grv_Items.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grv_Items.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
-            this.dataGridViewTextBoxColumn1,
+            this.colCode,
             this.col_Description,
             this.col_ItemType,
             this.col_Price,
@@ -65,39 +65,6 @@
             this.grv_Items.RowTemplate.Height = 25;
             this.grv_Items.Size = new System.Drawing.Size(556, 150);
             this.grv_Items.TabIndex = 0;
-            // 
-            // colID
-            // 
-            this.colID.HeaderText = "Item ID";
-            this.colID.Name = "colID";
-            this.colID.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Code";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // col_Description
-            // 
-            this.col_Description.HeaderText = "Description";
-            this.col_Description.Name = "col_Description";
-            // 
-            // col_ItemType
-            // 
-            this.col_ItemType.HeaderText = "Item Type";
-            this.col_ItemType.Name = "col_ItemType";
-            this.col_ItemType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_ItemType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // col_Price
-            // 
-            this.col_Price.HeaderText = "Price";
-            this.col_Price.Name = "col_Price";
-            // 
-            // col_Cost
-            // 
-            this.col_Cost.HeaderText = "Cost";
-            this.col_Cost.Name = "col_Cost";
             // 
             // col_Item_ID
             // 
@@ -181,6 +148,45 @@
             this.btn_Item_save.UseVisualStyleBackColor = false;
             this.btn_Item_save.Click += new System.EventHandler(this.btn_Item_save_Click);
             // 
+            // colID
+            // 
+            this.colID.DataPropertyName = "ID";
+            this.colID.HeaderText = "Item ID";
+            this.colID.Name = "colID";
+            this.colID.Visible = false;
+            // 
+            // colCode
+            // 
+            this.colCode.DataPropertyName = "Code";
+            this.colCode.HeaderText = "Code";
+            this.colCode.Name = "colCode";
+            // 
+            // col_Description
+            // 
+            this.col_Description.DataPropertyName = "Description";
+            this.col_Description.HeaderText = "Description";
+            this.col_Description.Name = "col_Description";
+            // 
+            // col_ItemType
+            // 
+            this.col_ItemType.DataPropertyName = "ItemType";
+            this.col_ItemType.HeaderText = "Item Type";
+            this.col_ItemType.Name = "col_ItemType";
+            this.col_ItemType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_ItemType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // col_Price
+            // 
+            this.col_Price.DataPropertyName = "Price";
+            this.col_Price.HeaderText = "Price";
+            this.col_Price.Name = "col_Price";
+            // 
+            // col_Cost
+            // 
+            this.col_Cost.DataPropertyName = "Cost";
+            this.col_Cost.HeaderText = "Cost";
+            this.col_Cost.Name = "col_Cost";
+            // 
             // frm_Items
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -192,6 +198,7 @@
             this.Controls.Add(this.btn_Item_Load);
             this.Controls.Add(this.btn_Item_save);
             this.Controls.Add(this.grv_Items);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frm_Items";
             this.Text = "frm_Items";
             this.Load += new System.EventHandler(this.frm_Items_Load);
@@ -207,17 +214,17 @@
         private DataGridViewTextBoxColumn col_Item_ID;
         private DataGridViewTextBoxColumn col_ID;
         private DataGridViewTextBoxColumn col_Code;
-        private DataGridViewTextBoxColumn colID;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn col_Description;
-        private DataGridViewComboBoxColumn col_ItemType;
-        private DataGridViewTextBoxColumn col_Price;
-        private DataGridViewTextBoxColumn col_Cost;
         private Button btn_Back;
         private Button btn_Close;
         private Button btn_Item_delete;
         private Button btn_Item_Load;
         private Button btn_Item_save;
         private BindingSource bsItems;
+        private DataGridViewTextBoxColumn colID;
+        private DataGridViewTextBoxColumn colCode;
+        private DataGridViewTextBoxColumn col_Description;
+        private DataGridViewComboBoxColumn col_ItemType;
+        private DataGridViewTextBoxColumn col_Price;
+        private DataGridViewTextBoxColumn col_Cost;
     }
 }

@@ -41,7 +41,7 @@
             this.btn_mng_Customer.BackColor = System.Drawing.Color.PaleGreen;
             this.btn_mng_Customer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_mng_Customer.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
-            this.btn_mng_Customer.Location = new System.Drawing.Point(140, 227);
+            this.btn_mng_Customer.Location = new System.Drawing.Point(116, 227);
             this.btn_mng_Customer.Name = "btn_mng_Customer";
             this.btn_mng_Customer.Size = new System.Drawing.Size(202, 114);
             this.btn_mng_Customer.TabIndex = 0;
@@ -54,7 +54,7 @@
             this.asskissing_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.asskissing_label.AutoSize = true;
             this.asskissing_label.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.asskissing_label.Location = new System.Drawing.Point(158, 132);
+            this.asskissing_label.Location = new System.Drawing.Point(134, 132);
             this.asskissing_label.Name = "asskissing_label";
             this.asskissing_label.Size = new System.Drawing.Size(400, 40);
             this.asskissing_label.TabIndex = 1;
@@ -66,7 +66,7 @@
             this.btn_mng_Item.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_mng_Item.BackColor = System.Drawing.Color.IndianRed;
             this.btn_mng_Item.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
-            this.btn_mng_Item.Location = new System.Drawing.Point(379, 227);
+            this.btn_mng_Item.Location = new System.Drawing.Point(355, 227);
             this.btn_mng_Item.Name = "btn_mng_Item";
             this.btn_mng_Item.Size = new System.Drawing.Size(202, 114);
             this.btn_mng_Item.TabIndex = 3;
@@ -79,7 +79,7 @@
             this.btn_mng_Transaction.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_mng_Transaction.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btn_mng_Transaction.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
-            this.btn_mng_Transaction.Location = new System.Drawing.Point(270, 347);
+            this.btn_mng_Transaction.Location = new System.Drawing.Point(246, 347);
             this.btn_mng_Transaction.Name = "btn_mng_Transaction";
             this.btn_mng_Transaction.Size = new System.Drawing.Size(202, 114);
             this.btn_mng_Transaction.TabIndex = 4;
@@ -90,8 +90,9 @@
             // btn_mng_back
             // 
             this.btn_mng_back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_mng_back.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btn_mng_back.Location = new System.Drawing.Point(625, 635);
+            this.btn_mng_back.BackColor = System.Drawing.Color.Red;
+            this.btn_mng_back.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_mng_back.Location = new System.Drawing.Point(577, 635);
             this.btn_mng_back.Name = "btn_mng_back";
             this.btn_mng_back.Size = new System.Drawing.Size(65, 30);
             this.btn_mng_back.TabIndex = 6;
@@ -105,7 +106,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(702, 677);
+            this.ClientSize = new System.Drawing.Size(654, 677);
             this.Controls.Add(this.btn_mng_back);
             this.Controls.Add(this.btn_mng_Transaction);
             this.Controls.Add(this.btn_mng_Item);

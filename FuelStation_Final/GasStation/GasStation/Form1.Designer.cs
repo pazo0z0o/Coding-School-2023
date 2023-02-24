@@ -43,7 +43,7 @@
             this.btn_Manager.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_Manager.Location = new System.Drawing.Point(0, 0);
             this.btn_Manager.Name = "btn_Manager";
-            this.btn_Manager.Size = new System.Drawing.Size(220, 638);
+            this.btn_Manager.Size = new System.Drawing.Size(220, 707);
             this.btn_Manager.TabIndex = 0;
             this.btn_Manager.Text = "Manager ";
             this.btn_Manager.UseVisualStyleBackColor = false;
@@ -56,7 +56,7 @@
             this.btn_Cashier.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_Cashier.Location = new System.Drawing.Point(220, 0);
             this.btn_Cashier.Name = "btn_Cashier";
-            this.btn_Cashier.Size = new System.Drawing.Size(220, 638);
+            this.btn_Cashier.Size = new System.Drawing.Size(220, 707);
             this.btn_Cashier.TabIndex = 1;
             this.btn_Cashier.Text = "Cashier";
             this.btn_Cashier.UseVisualStyleBackColor = false;
@@ -69,7 +69,7 @@
             this.btn_Staff.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.btn_Staff.Location = new System.Drawing.Point(440, 0);
             this.btn_Staff.Name = "btn_Staff";
-            this.btn_Staff.Size = new System.Drawing.Size(220, 638);
+            this.btn_Staff.Size = new System.Drawing.Size(220, 707);
             this.btn_Staff.TabIndex = 2;
             this.btn_Staff.Text = "Staff";
             this.btn_Staff.UseVisualStyleBackColor = false;
@@ -79,10 +79,10 @@
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(805, 0);
+            this.textBox1.Location = new System.Drawing.Point(706, 0);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(421, 277);
+            this.textBox1.Size = new System.Drawing.Size(599, 235);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -90,7 +90,7 @@
             // monthCalendar1
             // 
             this.monthCalendar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.monthCalendar1.Location = new System.Drawing.Point(1318, 0);
+            this.monthCalendar1.Location = new System.Drawing.Point(1331, 0);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 4;
             // 
@@ -99,7 +99,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(1545, 638);
+            this.ClientSize = new System.Drawing.Size(1558, 707);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btn_Staff);

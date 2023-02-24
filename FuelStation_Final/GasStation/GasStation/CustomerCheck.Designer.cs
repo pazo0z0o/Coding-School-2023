@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btn_Success = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_CreateCustomer = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Check = new System.Windows.Forms.Button();
@@ -45,19 +45,21 @@
             this.btn_Success.TabIndex = 0;
             this.btn_Success.Text = "Proceed to new Transaction";
             this.btn_Success.UseVisualStyleBackColor = false;
+            this.btn_Success.Visible = false;
             this.btn_Success.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // btn_CreateCustomer
             // 
-            this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(108, 273);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(153, 54);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Customer Not Found!";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btn_CreateCustomer.BackColor = System.Drawing.Color.Red;
+            this.btn_CreateCustomer.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_CreateCustomer.Location = new System.Drawing.Point(108, 273);
+            this.btn_CreateCustomer.Name = "btn_CreateCustomer";
+            this.btn_CreateCustomer.Size = new System.Drawing.Size(153, 54);
+            this.btn_CreateCustomer.TabIndex = 1;
+            this.btn_CreateCustomer.Text = "Customer Not Found!";
+            this.btn_CreateCustomer.UseVisualStyleBackColor = false;
+            this.btn_CreateCustomer.Visible = false;
+            this.btn_CreateCustomer.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox1
             // 
@@ -66,6 +68,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(298, 53);
             this.textBox1.TabIndex = 2;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -97,9 +100,10 @@
             this.Controls.Add(this.btn_Check);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btn_CreateCustomer);
             this.Controls.Add(this.btn_Success);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "CustomerCheck";
             this.Text = "CustomerCheck";
             this.Load += new System.EventHandler(this.CustomerCheck_Load);
@@ -111,7 +115,7 @@
         #endregion
 
         private Button btn_Success;
-        private Button button2;
+        private Button btn_CreateCustomer;
         private TextBox textBox1;
         private Label label1;
         private Button btn_Check;

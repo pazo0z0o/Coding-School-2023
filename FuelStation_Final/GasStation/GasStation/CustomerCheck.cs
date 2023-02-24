@@ -19,14 +19,18 @@ namespace FuelStation.Win
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Transactions_frm newTrans = new Transactions_frm();
-            newTrans.ShowDialog();
-            this.Close();
+            this.Hide();
+            Transactions_frm frm_Transaction = new Transactions_frm();
+            frm_Transaction.ShowDialog();
+            this.Dispose();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            this.Hide();
+            CustomerListF customF = new CustomerListF();
+            customF.ShowDialog();
+            this.Dispose();
         }
 
         private void CustomerCheck_Load(object sender, EventArgs e)
@@ -37,6 +41,9 @@ namespace FuelStation.Win
         private void btn_Check_Click(object sender, EventArgs e)
         {
             //TODO: call a GET_BY_CUSTOMER_ID function
+
+            //HIDE BOTH buttons and Show according to the outcome of the check
+            //for the cardNumber <-->Customer ID 
         }
     }
 }

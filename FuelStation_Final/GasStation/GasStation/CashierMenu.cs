@@ -25,24 +25,31 @@ namespace FuelStation.Win
 
         private void btn_mng_Customer_Click(object sender, EventArgs e)
         {
+            this.Hide();
             CustomerListF customF = new CustomerListF();
             customF.ShowDialog();
-            this.Hide();
+            this.Dispose();
         }
 
         private void btn_mng_Transaction_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Transactions_frm frm_Transaction = new Transactions_frm();
             frm_Transaction.ShowDialog();
-            this.Close();
+            this.Dispose();
         }
 
         private void cash_Back_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
             Form1 form1 = new Form1();
             form1.Show();
-            this.Close();
+            this.Dispose();
+        }
+
+        private void CashierMenu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

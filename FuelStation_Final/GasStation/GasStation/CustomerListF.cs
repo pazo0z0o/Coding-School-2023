@@ -1,5 +1,4 @@
-﻿using Azure;
-using FuelStation.EF.Repositories;
+﻿using FuelStation.EF.Repositories;
 using FuelStation.Model;
 using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
 using FuelStation.Web.Shared.Services_Logic;
@@ -21,16 +20,14 @@ namespace FuelStation.Win
     public partial class CustomerListF : Form
     {
         private readonly HttpClient _client;
-        private List<CustomerListDTO> customerList = new();
+        private List<CustomerListDTO> _customerList = new();
         private readonly RandomGenerators _generator = new();
 
         public CustomerListF()
         {
-
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
-
         }
 
         private void CustomerListF_Load(object sender, EventArgs e)
@@ -42,14 +39,10 @@ namespace FuelStation.Win
         private async Task SetControlProperties()
         {
             grv_Customers.AutoGenerateColumns = false;
-            customerList = await _client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
-
-            bsCustomers.DataSource = customerList;
+            _customerList = await _client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
+            bsCustomers.DataSource = _customerList;
             grv_Customers.DataSource = bsCustomers;
-
-
         }
-
 
         private async Task OnSave()
         {
@@ -85,7 +78,6 @@ namespace FuelStation.Win
 
 
         }
-
         //=========================== BUTTON EVENTS ===================================
         private async void btn_Customer_Load_Click(object sender, EventArgs e)
         {

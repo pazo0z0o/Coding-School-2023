@@ -97,6 +97,7 @@
             this.Controls.Add(this.btn_mng_Customer);
             this.Name = "CashierMenu";
             this.Text = "CashierMenu";
+            this.Load += new System.EventHandler(this.CashierMenu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

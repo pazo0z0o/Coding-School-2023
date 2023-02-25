@@ -50,20 +50,23 @@ namespace FuelStation.Win
         {
             grv_Transactions.AutoGenerateColumns = false;
             _customerList = await _client.GetFromJsonAsync < List<CustomerListDTO>>("customer");
-           _transactionList = await _client.GetFromJsonAsync<List<TransactionListDTO>>("transaction");
-            
+            _transactionList = await _client.GetFromJsonAsync<List<TransactionListDTO>>("transaction");
+            _employeeList= await _client.GetFromJsonAsync<List<EmployeeListDTO>>("employee");
+           
             bsTransaction.DataSource= _transactionList;
             grv_Transactions.DataSource = bsTransaction;
 
             DataGridViewComboBoxColumn col_EmployeeID = grv_Transactions.Columns["col_EmployeeID"] as DataGridViewComboBoxColumn;
             col_EmployeeID.DataSource = await _client.GetFromJsonAsync<List<EmployeeListDTO>>("employee" );
+            col_EmployeeID.ValueMember = "EmployeeId";
+            col_EmployeeID.DisplayMember = "Surname" + "Name";
+
+            DataGridViewComboBoxColumn col_PaymentMethod = grv_Transactions.Columns["col_Payment"] as DataGridViewComboBoxColumn;
+            col_PaymentMethod.DataSource = Enum.GetValues(typeof(PaymentMethod));
+
+           
 
 
-
-            
-                                                                                    
-                    
-                    
         }
 
 

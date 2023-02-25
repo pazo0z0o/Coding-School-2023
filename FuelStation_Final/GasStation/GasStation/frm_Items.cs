@@ -46,14 +46,13 @@ namespace FuelStation.Win
            
             DataGridViewComboBoxColumn col_ItemType = grv_Items.Columns["col_ItemType"] as DataGridViewComboBoxColumn;
             col_ItemType.DataSource = Enum.GetValues(typeof(ItemType));
-           // col_ItemType.ValueMember = "ID";
-            //col_ItemType.DisplayMember = "ItemType";
+         
         }
 
         //==============================Buttons & Events ================================
         private async void btn_Item_save_Click(object sender, EventArgs e)
         {
-            //TODO: SAVE for POST AND EDIT
+         
             HttpResponseMessage response = null;
             ItemListDTO item = (ItemListDTO)bsItems.Current;
             if (item.ID == 0)
@@ -127,16 +126,6 @@ namespace FuelStation.Win
             form1.ShowDialog();
             this.Dispose();
         }
-        //public async Task<bool> CodeChecker(ItemListDTO currentItem)
-        //{
-        //    currentItem = (ItemListDTO)bsItems.Current;
-        //    _itemList = await _client.GetFromJsonAsync<List<ItemListDTO>>("item");
-        //    foreach (var item in _itemList)
-        //    {
-        //        if (item.Code == currentItem.Code) return false;
-        //    }
-        //    return true;
-        //}
-
+        
     }
 }

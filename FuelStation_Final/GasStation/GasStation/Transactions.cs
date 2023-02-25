@@ -86,17 +86,20 @@ namespace FuelStation.Win
 //===============================Transaction  Button s=============================================
         private async void btn_trans_Add_Click(object sender, EventArgs e)
         {
+            //Scrapped Idea cause of BindingSource Desync -- Might need the row grabbing later on though!
             
-           int currentTransCustomer = _customerList.Where(customer => customer.CardNumber == CustomerCheck.CurrentCustomerCard).Select(Customer => Customer.ID).FirstOrDefault();
-            
-           // bsTransaction.AddNew();
-            
-            grv_Transactions.Rows.Add();            
-            int rowIndex = grv_Transactions.Rows.Count - 1;            
-            DataGridViewRow newRow = grv_Transactions.Rows[rowIndex];
-            newRow.Cells["col_CustomerID"].Value =  currentTransCustomer;
-            newRow.Cells["col_Date"].Value = DateTime.Now;
-            if (newRow.Cells["col_CustomerID"].Value != null)
+            //int rowIndex = grv_Transactions.Rows.Count - 1;            
+            //DataGridViewRow newRow = grv_Transactions.Rows[rowIndex];
+            //newRow.Cells["col_CustomerID"].Value = _foundCustomer.ID;   
+            //newRow.Cells["col_Date"].Value = DateTime.Now;
+
+            bsTransaction.AddNew();
+            newTrans = bsTransaction.Current as Transaction;
+            newTrans.CustomerId = _foundCustomer.ID;
+            newTrans.Date = DateTime.Now;
+            bsTransaction.EndEdit();
+
+            if (newTrans.CustomerId != null)
             {
                 btn_procceed.Enabled = true;
             }

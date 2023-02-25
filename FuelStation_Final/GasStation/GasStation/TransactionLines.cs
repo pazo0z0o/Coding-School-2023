@@ -20,7 +20,7 @@ using FuelStation.Model.Enums;
 
 namespace FuelStation.Win
 {
-    public partial class TransactionLines : Form
+    public partial class frm_TransactionLines : Form
     {
         private readonly HttpClient _client;
         private List<TransactionListDTO> _transactionList = new();
@@ -29,7 +29,7 @@ namespace FuelStation.Win
         private List<CustomerListDTO> _customerList = new();
         private List<EmployeeListDTO> _employeeList = new();
         private readonly TransactionHandler _transHandler = new();
-        public TransactionLines()
+        public frm_TransactionLines()
         {
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");

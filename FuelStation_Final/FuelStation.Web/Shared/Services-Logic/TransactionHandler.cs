@@ -152,7 +152,7 @@ namespace FuelStation.Web.Shared.Services_Logic
         }           
 
 
-
+       
 
       
         public decimal CalculateTotalValue(Transaction transaction)

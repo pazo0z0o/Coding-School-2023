@@ -19,9 +19,10 @@ namespace FuelStation.Win
 {
     public partial class CustomerCheck : Form
     {
+        public static string CurrentCustomerCard { get; set; }
         private readonly HttpClient _client;
         private List<CustomerListDTO> _customerList = new();
-        private readonly RandomGenerators _generator = new();
+        private readonly TransactionHandler  _thandler = new();
 
         public CustomerCheck()
         {
@@ -34,6 +35,8 @@ namespace FuelStation.Win
         {
             this.Hide();
             Transactions_frm frm_Transaction = new Transactions_frm();
+            
+
             frm_Transaction.ShowDialog();
             this.Dispose();
         }
@@ -53,11 +56,19 @@ namespace FuelStation.Win
 
         private async Task<bool> CheckCustomerCardExists(string textboxInput)
         {
+            bool ret = false;
             _customerList = await _client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
-
-            if (_customerList.FindAll(card =>card.CardNumber == textboxInput).Count() >=1) 
-            { return true; }
-            return false;
+            foreach(var card in _customerList) 
+            {
+                if (_customerList.Where(card => card.CardNumber == textboxInput).Count() > 0 ) 
+                {
+                   CurrentCustomerCard = textboxInput;
+                   ret =  true; 
+                
+                }  
+                else { CurrentCustomerCard = string.Empty; }
+            }
+            { return ret; } 
         }
 
     private async void btn_Check_Click(object sender, EventArgs e)
@@ -92,7 +103,7 @@ namespace FuelStation.Win
         }
 
         private void btn_back_Click(object sender, EventArgs e)
-        {
+        { 
             this.Hide();
             Form1 frm1 = new Form1();
             frm1.ShowDialog();
@@ -101,7 +112,11 @@ namespace FuelStation.Win
 
         private void btn_clear_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            CustomerCheck newCheck = new CustomerCheck();
             textBox1.Clear();
+            newCheck.ShowDialog();
+            this.Dispose();
         }
     }
 }

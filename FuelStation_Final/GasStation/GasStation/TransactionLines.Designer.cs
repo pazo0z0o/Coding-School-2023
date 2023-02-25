@@ -1,6 +1,6 @@
 ﻿namespace FuelStation.Win
 {
-    partial class TransactionLines
+    partial class frm_TransactionLines
     {
         /// <summary>
         /// Required designer variable.
@@ -224,7 +224,7 @@
             this.col_ItemID.Name = "col_ItemID";
             this.col_ItemID.Visible = false;
             // 
-            // TransactionLines
+            // frm_TransactionLines
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -236,7 +236,7 @@
             this.Controls.Add(this.btn_trl_load);
             this.Controls.Add(this.btn_trl_save);
             this.Controls.Add(this.grv_TransactionLine);
-            this.Name = "TransactionLines";
+            this.Name = "frm_TransactionLines";
             this.Text = "TransactionLines";
             this.Load += new System.EventHandler(this.TransactionLines_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grv_TransactionLine)).EndInit();

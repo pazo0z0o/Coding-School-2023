@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FuelStation.Model.Enums;
+using FuelStation.Web.Client.Pages.Customer;
 
 namespace FuelStation.Win
 {
@@ -48,20 +49,62 @@ namespace FuelStation.Win
         private  async Task SetControlProperties()
         {
             grv_Transactions.AutoGenerateColumns = false;
-            _transactionList = await _client.GetFromJsonAsync<List<TransactionListDTO>>("transaction");
+            _customerList = await _client.GetFromJsonAsync < List<CustomerListDTO>>("customer");
+           _transactionList = await _client.GetFromJsonAsync<List<TransactionListDTO>>("transaction");
+            
             bsTransaction.DataSource= _transactionList;
-            grv_Transactions.DataSource = bsTransaction; 
+            grv_Transactions.DataSource = bsTransaction;
+
+            DataGridViewComboBoxColumn col_EmployeeID = grv_Transactions.Columns["col_EmployeeID"] as DataGridViewComboBoxColumn;
+            col_EmployeeID.DataSource = await _client.GetFromJsonAsync<List<EmployeeListDTO>>("employee" );
+
+
+
+            
+                                                                                    
+                    
+                    
         }
 
 
 //===============================Transaction  Button s=============================================
-        private void btn_trans_Add_Click(object sender, EventArgs e)
+        private async void btn_trans_Add_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
+           int currentTransCustomer = _customerList.Where(customer => customer.CardNumber == CustomerCheck.CurrentCustomerCard).Select(Customer => Customer.ID).FirstOrDefault();
+            
+           // bsTransaction.AddNew();
+            
+            grv_Transactions.Rows.Add();            
+            int rowIndex = grv_Transactions.Rows.Count - 1;            
+            DataGridViewRow newRow = grv_Transactions.Rows[rowIndex];
+            newRow.Cells["CustomerID"].Value =  currentTransCustomer;
+
+            if (newRow.Cells["CustomerID"].Value != null)
+            {
+                btn_procceed.Enabled = true;
+            }
+
+
+
+        }
+
+        private void btn_customerCheck_Click(object sender, EventArgs e)
+        {
             CustomerCheck cardCheck = new CustomerCheck();
             cardCheck.ShowDialog();
-           
         }
+
+        private void btn_procceed_Click(object sender, EventArgs e)
+        {   
+            this.Hide();
+            frm_TransactionLines tlines = new frm_TransactionLines();
+            tlines.ShowDialog();
+            
+        }
+
+
+
 
 
 

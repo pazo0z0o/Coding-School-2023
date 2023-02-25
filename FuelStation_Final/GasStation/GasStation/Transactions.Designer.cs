@@ -35,7 +35,7 @@
             this.trans_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_EmployeeID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.col_CustomerID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.col_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Payment = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Trans_save = new System.Windows.Forms.Button();
@@ -44,12 +44,15 @@
             this.btn_trans_Add = new System.Windows.Forms.Button();
             this.btn_Back = new System.Windows.Forms.Button();
             this.bsTransaction = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_customerCheck = new System.Windows.Forms.Button();
+            this.btn_procceed = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grv_Transactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransaction)).BeginInit();
             this.SuspendLayout();
             // 
             // grv_Transactions
             // 
+            this.grv_Transactions.AllowUserToAddRows = false;
             this.grv_Transactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grv_Transactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grv_Transactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -62,7 +65,7 @@
             this.grv_Transactions.Location = new System.Drawing.Point(2, 2);
             this.grv_Transactions.Name = "grv_Transactions";
             this.grv_Transactions.RowTemplate.Height = 25;
-            this.grv_Transactions.Size = new System.Drawing.Size(911, 175);
+            this.grv_Transactions.Size = new System.Drawing.Size(850, 175);
             this.grv_Transactions.TabIndex = 0;
             // 
             // trans_ID
@@ -93,7 +96,6 @@
             this.col_CustomerID.HeaderText = "CustomerID";
             this.col_CustomerID.Name = "col_CustomerID";
             this.col_CustomerID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_CustomerID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // col_Payment
             // 
@@ -107,7 +109,7 @@
             // 
             this.col_Total.DataPropertyName = "TotalValue";
             dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.NullValue = "0";
             this.col_Total.DefaultCellStyle = dataGridViewCellStyle2;
             this.col_Total.HeaderText = "Total Value";
             this.col_Total.Name = "col_Total";
@@ -138,7 +140,7 @@
             // 
             this.btn_trans_delete.BackColor = System.Drawing.Color.Red;
             this.btn_trans_delete.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_trans_delete.Location = new System.Drawing.Point(920, 137);
+            this.btn_trans_delete.Location = new System.Drawing.Point(920, 92);
             this.btn_trans_delete.Name = "btn_trans_delete";
             this.btn_trans_delete.Size = new System.Drawing.Size(104, 39);
             this.btn_trans_delete.TabIndex = 4;
@@ -149,11 +151,11 @@
             // 
             this.btn_trans_Add.BackColor = System.Drawing.Color.LimeGreen;
             this.btn_trans_Add.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_trans_Add.Location = new System.Drawing.Point(919, 92);
+            this.btn_trans_Add.Location = new System.Drawing.Point(855, 227);
             this.btn_trans_Add.Name = "btn_trans_Add";
-            this.btn_trans_Add.Size = new System.Drawing.Size(105, 39);
+            this.btn_trans_Add.Size = new System.Drawing.Size(169, 39);
             this.btn_trans_Add.TabIndex = 10;
-            this.btn_trans_Add.Text = "+Add";
+            this.btn_trans_Add.Text = "+Transaction";
             this.btn_trans_Add.UseVisualStyleBackColor = false;
             this.btn_trans_Add.Click += new System.EventHandler(this.btn_trans_Add_Click);
             // 
@@ -169,12 +171,39 @@
             this.btn_Back.Text = "BACK";
             this.btn_Back.UseVisualStyleBackColor = false;
             // 
+            // btn_customerCheck
+            // 
+            this.btn_customerCheck.BackColor = System.Drawing.Color.Gold;
+            this.btn_customerCheck.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_customerCheck.Location = new System.Drawing.Point(855, 182);
+            this.btn_customerCheck.Name = "btn_customerCheck";
+            this.btn_customerCheck.Size = new System.Drawing.Size(169, 39);
+            this.btn_customerCheck.TabIndex = 31;
+            this.btn_customerCheck.Text = "Check Customer Card";
+            this.btn_customerCheck.UseVisualStyleBackColor = false;
+            this.btn_customerCheck.Click += new System.EventHandler(this.btn_customerCheck_Click);
+            // 
+            // btn_procceed
+            // 
+            this.btn_procceed.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btn_procceed.Enabled = false;
+            this.btn_procceed.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_procceed.Location = new System.Drawing.Point(855, 272);
+            this.btn_procceed.Name = "btn_procceed";
+            this.btn_procceed.Size = new System.Drawing.Size(169, 39);
+            this.btn_procceed.TabIndex = 32;
+            this.btn_procceed.Text = "Procceed to Order";
+            this.btn_procceed.UseVisualStyleBackColor = false;
+            this.btn_procceed.Click += new System.EventHandler(this.btn_procceed_Click);
+            // 
             // Transactions_frm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1028, 655);
+            this.Controls.Add(this.btn_procceed);
+            this.Controls.Add(this.btn_customerCheck);
             this.Controls.Add(this.btn_Back);
             this.Controls.Add(this.btn_trans_Add);
             this.Controls.Add(this.btn_trans_delete);
@@ -198,12 +227,14 @@
         private Button btn_trans_delete;
         private Button btn_trans_Add;
         private Button btn_Back;
+        private BindingSource bsTransaction;
         private DataGridViewTextBoxColumn trans_ID;
         private DataGridViewTextBoxColumn col_Date;
         private DataGridViewComboBoxColumn col_EmployeeID;
-        private DataGridViewComboBoxColumn col_CustomerID;
+        private DataGridViewTextBoxColumn col_CustomerID;
         private DataGridViewComboBoxColumn col_Payment;
         private DataGridViewTextBoxColumn col_Total;
-        private BindingSource bsTransaction;
+        private Button btn_customerCheck;
+        private Button btn_procceed;
     }
 }

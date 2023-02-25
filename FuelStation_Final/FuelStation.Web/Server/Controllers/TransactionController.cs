@@ -78,7 +78,7 @@ namespace FuelStation.Web.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(TransactionEditDTO transaction)
+        public async Task<ActionResult<int>> Post(TransactionEditDTO transaction)
         {
               
             var newTransaction = new Transaction();

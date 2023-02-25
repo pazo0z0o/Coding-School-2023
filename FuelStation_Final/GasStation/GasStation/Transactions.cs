@@ -23,7 +23,9 @@ namespace FuelStation.Win
     public partial class Transactions_frm : Form
     {
         private readonly HttpClient _client;
-       
+
+        private List<TransactionListDTO> _transactionList = new();
+        private List<TransactionLineListDTO> _translineList = new();
         private List<ItemListDTO> _itemList = new();
         private List<CustomerListDTO> _customerList = new();
         private List<EmployeeListDTO> _employeeList = new();
@@ -38,18 +40,21 @@ namespace FuelStation.Win
         }
         private void Transactions_frm_Load(object sender, EventArgs e)
         {
-            grv_TransactionLine.AutoGenerateColumns = false;
+           
             grv_Transactions.AutoGenerateColumns = false;
             SetControlProperties();
 
         }
         private  async Task SetControlProperties()
         {
-
+            grv_Transactions.AutoGenerateColumns = false;
+            _transactionList = await _client.GetFromJsonAsync<List<TransactionListDTO>>("transaction");
+            bsTransaction.DataSource= _transactionList;
+            grv_Transactions.DataSource = bsTransaction; 
         }
 
 
-//===============================Transaction  Buttons=============================================
+//===============================Transaction  Button s=============================================
         private void btn_trans_Add_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -57,23 +62,13 @@ namespace FuelStation.Win
             cardCheck.ShowDialog();
            
         }
-        
-       
-        
-       
-//===============================Transaction Line Buttons=========================================
-        private void btn_trl_Add_Click(object sender, EventArgs e)
-        {
-            grv_TransactionLine.Rows.Add();
-            
-        }
 
-        private void btn_Back_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Form1 frm1= new Form1();
-            frm1.ShowDialog();
-            this.Dispose();
-        }
+
+
+
+        //===============================Transaction Line Buttons=========================================
+
+
+
     }
 }

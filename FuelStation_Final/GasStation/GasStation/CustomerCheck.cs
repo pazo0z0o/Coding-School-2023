@@ -55,7 +55,7 @@ namespace FuelStation.Win
         {
             _customerList = await _client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
 
-            if (_customerList.FindAll(card =>card.CardNumber == textboxInput ).Count() != 0 ) 
+            if (_customerList.FindAll(card =>card.CardNumber == textboxInput).Count() >=1) 
             { return true; }
             return false;
         }

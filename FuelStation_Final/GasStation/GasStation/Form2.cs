@@ -44,8 +44,9 @@ namespace FuelStation.Win
 
         private void btn_mng_Transaction_Click(object sender, EventArgs e)
         {
-            Transactions_frm frm_Transaction = new Transactions_frm();
-            frm_Transaction.ShowDialog();
+            this.Hide();
+            CustomerCheck cardCheck = new CustomerCheck();
+            cardCheck.ShowDialog();
             this.Close();
         }
 

@@ -42,8 +42,6 @@ namespace FuelStation.EF.Repositories
                 .Include(transaction => transaction.Employee)
                 .Include(transaction => transaction.TransactionLines)
                     .ThenInclude(transactionLine => transactionLine.Item)
-                .Include(transaction => transaction.TransactionLines)
-                    .ThenInclude(transactionLine => transactionLine.Transaction)
                 .ToList();
         }
 
@@ -57,8 +55,6 @@ namespace FuelStation.EF.Repositories
                 .Include(transaction => transaction.Employee)
                 .Include(transaction => transaction.TransactionLines)
                     .ThenInclude(transactionLine => transactionLine.Item)
-                .Include(transaction => transaction.TransactionLines)
-                    .ThenInclude(transactionLine => transactionLine.Transaction)
                 .SingleOrDefault();
         }
 

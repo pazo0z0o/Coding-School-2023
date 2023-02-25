@@ -34,9 +34,9 @@ namespace FuelStation.Win
         private void btn_mng_Transaction_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Transactions_frm frm_Transaction = new Transactions_frm();
-            frm_Transaction.ShowDialog();
-            this.Dispose();
+            CustomerCheck cardCheck = new CustomerCheck();
+            cardCheck.ShowDialog();
+            this.Close();
         }
 
         private void cash_Back_Click(object sender, EventArgs e)
@@ -45,6 +45,7 @@ namespace FuelStation.Win
             Form1 form1 = new Form1();
             form1.Show();
             this.Dispose();
+            this.Close();
         }
 
         private void CashierMenu_Load(object sender, EventArgs e)

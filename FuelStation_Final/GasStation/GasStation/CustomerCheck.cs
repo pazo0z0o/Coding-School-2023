@@ -23,6 +23,7 @@ namespace FuelStation.Win
         private readonly HttpClient _client;
         private List<CustomerListDTO> _customerList = new();
         private readonly TransactionHandler  _thandler = new();
+        private CustomerListDTO customerFound = new();
 
         public CustomerCheck()
         {
@@ -34,11 +35,10 @@ namespace FuelStation.Win
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Transactions_frm frm_Transaction = new Transactions_frm();
-            
-
-            frm_Transaction.ShowDialog();
+            Transactions_frm frm_Transaction = new Transactions_frm(customerFound);
+             frm_Transaction.ShowDialog();
             this.Dispose();
+            this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -47,6 +47,7 @@ namespace FuelStation.Win
             CustomerListF customF = new CustomerListF();
             customF.ShowDialog();
             this.Dispose();
+            this.Close();
         }
 
         private void CustomerCheck_Load(object sender, EventArgs e)
@@ -56,19 +57,19 @@ namespace FuelStation.Win
 
         private async Task<bool> CheckCustomerCardExists(string textboxInput)
         {
-            bool ret = false;
             _customerList = await _client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
-            foreach(var card in _customerList) 
+            var card = _customerList.FirstOrDefault(c => c.CardNumber == textboxInput);
+            if (card != null)
             {
-                if (_customerList.Where(card => card.CardNumber == textboxInput).Count() > 0 ) 
-                {
-                   CurrentCustomerCard = textboxInput;
-                   ret =  true; 
-                
-                }  
-                else { CurrentCustomerCard = string.Empty; }
+                CurrentCustomerCard = textboxInput;
+                customerFound= card;
+                return true;
             }
-            { return ret; } 
+            else
+            {   
+                CurrentCustomerCard = string.Empty;
+                return false;
+            }
         }
 
     private async void btn_Check_Click(object sender, EventArgs e)
@@ -78,13 +79,13 @@ namespace FuelStation.Win
             {
                 textBox1.BackColor = Color.LimeGreen;
                 btn_Success.Visible= true;
-           MessageBox.Show("Existing Customer Found!", "Customer Exists",MessageBoxButtons.OK, MessageBoxIcon.Information); 
+          // MessageBox.Show("Existing Customer Found!", "Customer Exists",MessageBoxButtons.OK, MessageBoxIcon.Information); 
             }
            else
             {
                 textBox1.BackColor = Color.LightCoral;
                 btn_CreateCustomer.Visible= true;
-                MessageBox.Show("Customer Not Found, Proceed to create a new account", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           //     MessageBox.Show("Customer Not Found, Proceed to create a new account", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
            

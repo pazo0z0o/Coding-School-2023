@@ -29,8 +29,18 @@ namespace FuelStation.Win
         private List<CustomerListDTO> _customerList = new();
         private List<EmployeeListDTO> _employeeList = new();
         private readonly TransactionHandler _transHandler = new();
+        private TransactionLine _newLine = new();
+
+        //Constructors
         public frm_TransactionLines()
         {
+            _client = new HttpClient(new HttpClientHandler());
+            _client.BaseAddress = new Uri("https://localhost:7086/");
+            InitializeComponent();
+        }
+        public frm_TransactionLines(int newTransactionID)
+        {
+            _newLine.TransactionID = newTransactionID;
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();

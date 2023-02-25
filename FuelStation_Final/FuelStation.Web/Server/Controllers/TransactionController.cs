@@ -82,7 +82,7 @@ namespace FuelStation.Web.Server.Controllers
         {
               
             var newTransaction = new Transaction();
-            
+            //newTransaction.ID = transaction.ID;
             newTransaction.Date = transaction.Date;
             newTransaction.CustomerId = transaction.CustomerId;
             newTransaction.EmployeeId = transaction.EmployeeId;

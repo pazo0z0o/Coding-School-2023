@@ -31,10 +31,18 @@ namespace FuelStation.Win
         private List<CustomerListDTO> _customerList = new();
         private List<EmployeeListDTO> _employeeList = new();
         private readonly TransactionHandler _transHandler = new();
-        
+        private readonly CustomerListDTO _foundCustomer = new();
+        public Transaction newTrans = new();
 
         public Transactions_frm()
         {
+            _client = new HttpClient(new HttpClientHandler());
+            _client.BaseAddress = new Uri("https://localhost:7086/");
+            InitializeComponent();
+        }
+        public Transactions_frm(CustomerListDTO incomingCustomer)
+        {
+            _foundCustomer = incomingCustomer;
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
@@ -49,23 +57,28 @@ namespace FuelStation.Win
         private  async Task SetControlProperties()
         {
             grv_Transactions.AutoGenerateColumns = false;
-            _customerList = await _client.GetFromJsonAsync < List<CustomerListDTO>>("customer");
-            _transactionList = await _client.GetFromJsonAsync<List<TransactionListDTO>>("transaction");
-            _employeeList= await _client.GetFromJsonAsync<List<EmployeeListDTO>>("employee");
-           
-            bsTransaction.DataSource= _transactionList;
-            grv_Transactions.DataSource = bsTransaction;
+            try
+            {
+                _customerList = await _client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
+                _employeeList = await _client.GetFromJsonAsync<List<EmployeeListDTO>>("employee");
+                _transactionList = await _client.GetFromJsonAsync<List<TransactionListDTO>>("transaction");
 
-            DataGridViewComboBoxColumn col_EmployeeID = grv_Transactions.Columns["col_EmployeeID"] as DataGridViewComboBoxColumn;
-            col_EmployeeID.DataSource = await _client.GetFromJsonAsync<List<EmployeeListDTO>>("employee" );
-            col_EmployeeID.ValueMember = "EmployeeId";
-            col_EmployeeID.DisplayMember = "Surname" + "Name";
+                bsTransaction.DataSource = _transactionList;
+                grv_Transactions.DataSource = bsTransaction;
 
-            DataGridViewComboBoxColumn col_PaymentMethod = grv_Transactions.Columns["col_Payment"] as DataGridViewComboBoxColumn;
-            col_PaymentMethod.DataSource = Enum.GetValues(typeof(PaymentMethod));
+                DataGridViewComboBoxColumn col_EmployeeID = grv_Transactions.Columns["col_EmployeeID"] as DataGridViewComboBoxColumn;
+                col_EmployeeID.DataSource = _employeeList;
+                col_EmployeeID.ValueMember = "EmployeeId";
+                col_EmployeeID.DisplayMember = "Surname";
 
-           
-
+                DataGridViewComboBoxColumn col_PaymentMethod = grv_Transactions.Columns["col_Payment"] as DataGridViewComboBoxColumn;
+                col_PaymentMethod.DataSource = Enum.GetValues(typeof(PaymentMethod));
+            }
+            catch (Exception ex)
+            {
+                // handle any exceptions thrown by the async methods
+                MessageBox.Show($"An error occurred while loading data: {ex.Message}");
+            }
 
         }
 
@@ -81,9 +94,9 @@ namespace FuelStation.Win
             grv_Transactions.Rows.Add();            
             int rowIndex = grv_Transactions.Rows.Count - 1;            
             DataGridViewRow newRow = grv_Transactions.Rows[rowIndex];
-            newRow.Cells["CustomerID"].Value =  currentTransCustomer;
-
-            if (newRow.Cells["CustomerID"].Value != null)
+            newRow.Cells["col_CustomerID"].Value =  currentTransCustomer;
+            newRow.Cells["col_Date"].Value = DateTime.Now;
+            if (newRow.Cells["col_CustomerID"].Value != null)
             {
                 btn_procceed.Enabled = true;
             }
@@ -92,11 +105,7 @@ namespace FuelStation.Win
 
         }
 
-        private void btn_customerCheck_Click(object sender, EventArgs e)
-        {
-            CustomerCheck cardCheck = new CustomerCheck();
-            cardCheck.ShowDialog();
-        }
+       
 
         private void btn_procceed_Click(object sender, EventArgs e)
         {   
@@ -104,6 +113,14 @@ namespace FuelStation.Win
             frm_TransactionLines tlines = new frm_TransactionLines();
             tlines.ShowDialog();
             
+        }
+
+        private void btn_Back_Click(object sender, EventArgs e)
+        {   
+            Form1 frm1_return = new Form1();
+            frm1_return.ShowDialog();
+            this.Dispose();
+            this.Close();
         }
 
 

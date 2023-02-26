@@ -60,7 +60,6 @@ namespace FuelStation.Win
             }
             else
             {
-               // CustomerListDTO originalCustomer = _customerRepo.GetById(customer.ID);
                 CustomerEditDTO customerEdit = new CustomerEditDTO
                 {
                     ID = cutomer.ID,

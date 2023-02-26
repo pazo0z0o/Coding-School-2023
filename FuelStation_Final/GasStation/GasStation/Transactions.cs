@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FuelStation.Model.Enums;
 using FuelStation.Web.Client.Pages.Customer;
+using static System.Net.WebRequestMethods;
 
 namespace FuelStation.Win
 {
@@ -34,6 +35,7 @@ namespace FuelStation.Win
         private readonly CustomerListDTO _foundCustomer = new();
         public Transaction newTrans = new();
 
+
         public Transactions_frm()
         {
             _client = new HttpClient(new HttpClientHandler());
@@ -49,12 +51,12 @@ namespace FuelStation.Win
         }
         private void Transactions_frm_Load(object sender, EventArgs e)
         {
-           
+
             grv_Transactions.AutoGenerateColumns = false;
             SetControlProperties();
 
         }
-        private  async Task SetControlProperties()
+        private async Task SetControlProperties()
         {
             grv_Transactions.AutoGenerateColumns = false;
             try
@@ -83,11 +85,11 @@ namespace FuelStation.Win
         }
 
 
-//===============================Transaction  Button s=============================================
+        //===============================Transaction  Button s=============================================
         private async void btn_trans_Add_Click(object sender, EventArgs e)
         {
             //Scrapped Idea cause of BindingSource Desync -- Might need the row grabbing later on though!
-            
+
             //int rowIndex = grv_Transactions.Rows.Count - 1;            
             //DataGridViewRow newRow = grv_Transactions.Rows[rowIndex];
             //newRow.Cells["col_CustomerID"].Value = _foundCustomer.ID;   
@@ -102,39 +104,73 @@ namespace FuelStation.Win
             if (newTrans.CustomerId != null)
             {
                 btn_procceed.Enabled = true;
+                btn_trans_Add.Enabled = false;
             }
 
 
 
         }
 
-       
 
-        private void btn_procceed_Click(object sender, EventArgs e)
-        {   
+
+        private  void btn_procceed_Click(object sender, EventArgs e)
+        {
+            OnSave();
+            SetControlProperties();
+            var tmpTrans = bsTransaction.Current as Transaction;
+            int passedTransID = tmpTrans.ID;
+            //Roundabout way to pass ID 
             this.Hide();
-            frm_TransactionLines tlines = new frm_TransactionLines();
+            frm_TransactionLines tlines = new frm_TransactionLines(passedTransID);
             tlines.ShowDialog();
-            
+
         }
 
         private void btn_Back_Click(object sender, EventArgs e)
-        {   
+        {
             Form1 frm1_return = new Form1();
             frm1_return.ShowDialog();
             this.Dispose();
             this.Close();
         }
 
+        private async Task OnSave()
+        {
+            TransactionListDTO transactionToSave = (TransactionListDTO)bsTransaction.Current;
+            HttpResponseMessage response = null;
+        
+            if (transactionToSave.ID == 0)
+            {
+                TransactionCreateDTO newTransact = new TransactionCreateDTO()
+                {
+                    ID = transactionToSave.ID,
+                    Date = transactionToSave.Date,
+                    EmployeeId = transactionToSave.Employee.ID,
+                    PaymentMethod = transactionToSave.PaymentMethod,
+                    TotalValue = transactionToSave.TotalValue
+                };
+                response = await _client.PostAsJsonAsync("transaction", newTransact);
+                if (response.IsSuccessStatusCode)
+                { MessageBox.Show("Save successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                else
+                { MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+
+            }
+        }
 
 
 
-
-
-
-        //===============================Transaction Line Buttons=========================================
 
 
 
     }
+
+
+
+
+
+
+
 }
+

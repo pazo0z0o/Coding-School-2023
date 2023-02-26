@@ -73,7 +73,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.PlaceholderText = "Enter Card Number";
-            this.textBox1.Size = new System.Drawing.Size(298, 39);
+            this.textBox1.Size = new System.Drawing.Size(298, 29);
             this.textBox1.TabIndex = 2;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -82,6 +82,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.DarkRed;
             this.label1.Location = new System.Drawing.Point(23, 58);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(298, 30);
@@ -92,10 +93,11 @@
             // btn_Check
             // 
             this.btn_Check.BackColor = System.Drawing.Color.Gold;
+            this.btn_Check.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Check.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.btn_Check.Location = new System.Drawing.Point(327, 124);
+            this.btn_Check.Location = new System.Drawing.Point(237, 165);
             this.btn_Check.Name = "btn_Check";
-            this.btn_Check.Size = new System.Drawing.Size(54, 39);
+            this.btn_Check.Size = new System.Drawing.Size(84, 35);
             this.btn_Check.TabIndex = 4;
             this.btn_Check.Text = "Check";
             this.btn_Check.UseVisualStyleBackColor = false;
@@ -119,9 +121,9 @@
             // 
             this.btn_clear.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_clear.ForeColor = System.Drawing.Color.SlateBlue;
-            this.btn_clear.Location = new System.Drawing.Point(23, 169);
+            this.btn_clear.Location = new System.Drawing.Point(23, 164);
             this.btn_clear.Name = "btn_clear";
-            this.btn_clear.Size = new System.Drawing.Size(88, 30);
+            this.btn_clear.Size = new System.Drawing.Size(88, 35);
             this.btn_clear.TabIndex = 6;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;

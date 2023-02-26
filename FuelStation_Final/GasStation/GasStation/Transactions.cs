@@ -28,12 +28,13 @@ namespace FuelStation.Win
 
         private List<TransactionListDTO> _transactionList = new();
         private List<TransactionLineListDTO> _translineList = new();
-        private List<ItemListDTO> _itemList = new();
+        //  private List<ItemListDTO> _itemList = new();
         private List<CustomerListDTO> _customerList = new();
         private List<EmployeeListDTO> _employeeList = new();
-        private readonly TransactionHandler _transHandler = new();
+        // private readonly TransactionHandler _transHandler = new();
         private readonly CustomerListDTO _foundCustomer = new();
-        public Transaction newTrans = new();
+        private readonly int _employeeHandledTransation ;
+        public TransactionListDTO newTrans = new TransactionListDTO() { Date = DateTime.Now };
 
 
         public Transactions_frm()
@@ -42,8 +43,9 @@ namespace FuelStation.Win
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
         }
-        public Transactions_frm(CustomerListDTO incomingCustomer)
+        public Transactions_frm(CustomerListDTO incomingCustomer, int currentEmployeeID)
         {
+            _employeeHandledTransation = currentEmployeeID;
             _foundCustomer = incomingCustomer;
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");
@@ -69,9 +71,16 @@ namespace FuelStation.Win
                 grv_Transactions.DataSource = bsTransaction;
 
                 DataGridViewComboBoxColumn col_EmployeeID = grv_Transactions.Columns["col_EmployeeID"] as DataGridViewComboBoxColumn;
-                col_EmployeeID.DataSource = _employeeList;
-                col_EmployeeID.ValueMember = "EmployeeId";
+                col_EmployeeID.DataSource = _employeeList.ToList();
+                col_EmployeeID.ValueMember = "ID";
                 col_EmployeeID.DisplayMember = "Surname";
+
+                DataGridViewComboBoxColumn col_CustomerID = grv_Transactions.Columns["col_CustomerID"] as DataGridViewComboBoxColumn;
+                col_CustomerID.DataSource = _customerList.ToList();
+                col_CustomerID.ValueMember = "ID";
+                col_CustomerID.DisplayMember = "Surname";
+
+
 
                 DataGridViewComboBoxColumn col_PaymentMethod = grv_Transactions.Columns["col_Payment"] as DataGridViewComboBoxColumn;
                 col_PaymentMethod.DataSource = Enum.GetValues(typeof(PaymentMethod));
@@ -81,49 +90,68 @@ namespace FuelStation.Win
                 // handle any exceptions thrown by the async methods
                 MessageBox.Show($"An error occurred while loading data: {ex.Message}");
             }
-
         }
-
-
         //===============================Transaction  Button s=============================================
         private async void btn_trans_Add_Click(object sender, EventArgs e)
         {
-            //Scrapped Idea cause of BindingSource Desync -- Might need the row grabbing later on though!
-
-            //int rowIndex = grv_Transactions.Rows.Count - 1;            
-            //DataGridViewRow newRow = grv_Transactions.Rows[rowIndex];
-            //newRow.Cells["col_CustomerID"].Value = _foundCustomer.ID;   
-            //newRow.Cells["col_Date"].Value = DateTime.Now;
 
             bsTransaction.AddNew();
-            newTrans = bsTransaction.Current as Transaction;
-            newTrans.CustomerId = _foundCustomer.ID;
-            newTrans.Date = DateTime.Now;
-            bsTransaction.EndEdit();
 
-            if (newTrans.CustomerId != null)
+            newTrans = bsTransaction.Current as TransactionListDTO;
+            if (newTrans != null)
             {
-                btn_procceed.Enabled = true;
-                btn_trans_Add.Enabled = false;
+                if (_foundCustomer != null)
+                {
+                    newTrans.CustomerId = _foundCustomer.ID;
+                    newTrans.EmployeeId = _employeeHandledTransation;
+                    newTrans.Date = DateTime.Now;
+                    bsTransaction.EndEdit();
+                    grv_Transactions.DataSource = bsTransaction;
+                }
+                else
+                {
+                    MessageBox.Show("Save successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                if (newTrans.CustomerId != null)
+                {
+                    btn_procceed.Enabled = true;
+                    btn_trans_Add.Enabled = false;
+                }
             }
-
-
-
         }
 
-
-
-        private  void btn_procceed_Click(object sender, EventArgs e)
-        {
-            OnSave();
-            SetControlProperties();
-            var tmpTrans = bsTransaction.Current as Transaction;
+        private async void btn_procceed_Click(object sender, EventArgs e)
+        {//NEED TO BE ABLE TO PASS to the DATABASE ID AFTER PULLING FROM IT AGAIN
+            await OnSave();
+            await SetControlProperties();
+            
+            var tmpTrans = bsTransaction.Current as TransactionListDTO;
             int passedTransID = tmpTrans.ID;
             //Roundabout way to pass ID 
             this.Hide();
             frm_TransactionLines tlines = new frm_TransactionLines(passedTransID);
             tlines.ShowDialog();
+        }
 
+        private async Task OnSave()
+        {
+            HttpResponseMessage response = null;
+            if (newTrans.ID == 0)
+            {
+                TransactionEditDTO transactionToSave = new TransactionEditDTO()
+                {
+                    ID = newTrans.ID,
+                    Date = newTrans.Date,
+                    EmployeeId = newTrans.EmployeeId,
+                    PaymentMethod = newTrans.PaymentMethod,
+                    TotalValue = newTrans.TotalValue
+                };
+                response = await _client.PostAsJsonAsync("transaction", transactionToSave);
+                if (response.IsSuccessStatusCode)
+                { MessageBox.Show("Save successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                else
+                { MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
         }
 
         private void btn_Back_Click(object sender, EventArgs e)
@@ -133,37 +161,10 @@ namespace FuelStation.Win
             this.Dispose();
             this.Close();
         }
-
-        private async Task OnSave()
+        private void grv_Transactions_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            TransactionListDTO transactionToSave = (TransactionListDTO)bsTransaction.Current;
-            HttpResponseMessage response = null;
-        
-            if (transactionToSave.ID == 0)
-            {
-                TransactionCreateDTO newTransact = new TransactionCreateDTO()
-                {
-                    ID = transactionToSave.ID,
-                    Date = transactionToSave.Date,
-                    EmployeeId = transactionToSave.Employee.ID,
-                    PaymentMethod = transactionToSave.PaymentMethod,
-                    TotalValue = transactionToSave.TotalValue
-                };
-                response = await _client.PostAsJsonAsync("transaction", newTransact);
-                if (response.IsSuccessStatusCode)
-                { MessageBox.Show("Save successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-                else
-                { MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-
-
-            }
+            e.Cancel = true;
         }
-
-
-
-
-
-
     }
 
 

@@ -78,11 +78,11 @@ namespace FuelStation.Web.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Post(TransactionEditDTO transaction)
+        public async Task<ActionResult> Post(TransactionEditDTO transaction)
         {
               
             var newTransaction = new Transaction();
-            //newTransaction.ID = transaction.ID;
+            newTransaction.ID = transaction.ID;
             newTransaction.Date = transaction.Date;
             newTransaction.CustomerId = transaction.CustomerId;
             newTransaction.EmployeeId = transaction.EmployeeId;

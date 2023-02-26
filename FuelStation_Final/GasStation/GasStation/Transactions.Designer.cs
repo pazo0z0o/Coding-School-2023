@@ -31,11 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grv_Transactions = new System.Windows.Forms.DataGridView();
             this.trans_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_EmployeeID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.col_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_CustomerID = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.col_Payment = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Trans_save = new System.Windows.Forms.Button();
@@ -66,6 +67,7 @@
             this.grv_Transactions.RowTemplate.Height = 25;
             this.grv_Transactions.Size = new System.Drawing.Size(858, 175);
             this.grv_Transactions.TabIndex = 0;
+            this.grv_Transactions.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grv_Transactions_DataError);
             // 
             // trans_ID
             // 
@@ -93,9 +95,12 @@
             // col_CustomerID
             // 
             this.col_CustomerID.DataPropertyName = "CustomerId";
+            dataGridViewCellStyle2.NullValue = null;
+            this.col_CustomerID.DefaultCellStyle = dataGridViewCellStyle2;
             this.col_CustomerID.HeaderText = "CustomerID";
             this.col_CustomerID.Name = "col_CustomerID";
             this.col_CustomerID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_CustomerID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // col_Payment
             // 
@@ -108,9 +113,9 @@
             // col_Total
             // 
             this.col_Total.DataPropertyName = "TotalValue";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = "0";
-            this.col_Total.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = "0";
+            this.col_Total.DefaultCellStyle = dataGridViewCellStyle3;
             this.col_Total.HeaderText = "Total Value";
             this.col_Total.Name = "col_Total";
             // 
@@ -220,7 +225,7 @@
         private DataGridViewTextBoxColumn trans_ID;
         private DataGridViewTextBoxColumn col_Date;
         private DataGridViewComboBoxColumn col_EmployeeID;
-        private DataGridViewTextBoxColumn col_CustomerID;
+        private DataGridViewComboBoxColumn col_CustomerID;
         private DataGridViewComboBoxColumn col_Payment;
         private DataGridViewTextBoxColumn col_Total;
     }

@@ -12,7 +12,7 @@ namespace FuelStation.Web.Shared.ManagerStaffSharedDTOs
     public class TransactionListDTO
     {
         public int ID { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
         public decimal TotalValue { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
 

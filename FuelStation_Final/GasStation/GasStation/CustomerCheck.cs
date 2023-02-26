@@ -1,5 +1,6 @@
 ﻿using FuelStation.EF.Repositories;
 using FuelStation.Model;
+using FuelStation.Web.Shared.ManagerOnlyDTOs;
 using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
 using FuelStation.Web.Shared.Services_Logic;
 using GasStation;
@@ -19,11 +20,13 @@ namespace FuelStation.Win
 {
     public partial class CustomerCheck : Form
     {
-        public static string CurrentCustomerCard { get; set; }
+        //public static string CurrentCustomerCard { get; set; }
         private readonly HttpClient _client;
         private List<CustomerListDTO> _customerList = new();
+        private List<EmployeeListDTO> _employeeList = new();
         private readonly TransactionHandler  _thandler = new();
-        private CustomerListDTO customerFound = new();
+        private  CustomerListDTO _customerFound = new();
+        private int _empIDHandler { get; set; }    
 
         public CustomerCheck()
         {
@@ -31,11 +34,23 @@ namespace FuelStation.Win
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
         }
+        private async void CustomerCheck_Load(object sender, EventArgs e)
+        {
+            _customerList = await _client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
+            _employeeList = await _client.GetFromJsonAsync<List<EmployeeListDTO>>("employee");
 
+            //Set a single combobox
+            
+            comboBox1.DataSource = _employeeList.ToList();
+            comboBox1.ValueMember = "ID";
+            comboBox1.DisplayMember = "Surname";
+       
+        }
+    //===================================================================================================
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Transactions_frm frm_Transaction = new Transactions_frm(customerFound);
+            Transactions_frm frm_Transaction = new Transactions_frm(_customerFound, _empIDHandler  );
              frm_Transaction.ShowDialog();
             this.Dispose();
             this.Close();
@@ -49,11 +64,7 @@ namespace FuelStation.Win
             this.Dispose();
             this.Close();
         }
-
-        private void CustomerCheck_Load(object sender, EventArgs e)
-        {
-
-        }
+   //===================================================================================================
 
         private async Task<bool> CheckCustomerCardExists(string textboxInput)
         {
@@ -61,13 +72,11 @@ namespace FuelStation.Win
             var card = _customerList.FirstOrDefault(c => c.CardNumber == textboxInput);
             if (card != null)
             {
-                CurrentCustomerCard = textboxInput;
-                customerFound= card;
+                _customerFound= card;
                 return true;
             }
             else
             {   
-                CurrentCustomerCard = string.Empty;
                 return false;
             }
         }
@@ -78,31 +87,25 @@ namespace FuelStation.Win
            if (cardCheckResult) 
             {
                 textBox1.BackColor = Color.LimeGreen;
+                comboBox1.Visible= true;
                 btn_Success.Visible= true;
-          // MessageBox.Show("Existing Customer Found!", "Customer Exists",MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                label2.Visible = true;
+
             }
            else
             {
                 textBox1.BackColor = Color.LightCoral;
                 btn_CreateCustomer.Visible= true;
-           //     MessageBox.Show("Customer Not Found, Proceed to create a new account", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
-           
-        
         
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+             _empIDHandler = (int)comboBox1.SelectedValue;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+   //===================================================================================================
         private void btn_back_Click(object sender, EventArgs e)
         { 
             this.Hide();
@@ -119,5 +122,6 @@ namespace FuelStation.Win
             newCheck.ShowDialog();
             this.Dispose();
         }
+
     }
 }

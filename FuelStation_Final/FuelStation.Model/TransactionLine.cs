@@ -24,7 +24,16 @@ namespace FuelStation.Model
         public Item Item { get; set; } = null!;
         //===============================
         public TransactionLine() { }
-        
+
+        public TransactionLine(int quantity, decimal itemPrice, decimal netValue, decimal discountPercent, decimal discountValue, decimal totalValue)
+        {
+            Quantity = quantity;
+            ItemPrice = itemPrice;
+            NetValue = netValue;
+            DiscountPercent = discountPercent;
+            DiscountValue = discountValue;
+            TotalValue = totalValue;
+        }
 
     }
 }

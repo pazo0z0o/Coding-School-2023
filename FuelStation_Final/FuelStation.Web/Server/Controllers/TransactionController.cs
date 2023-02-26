@@ -39,8 +39,8 @@ namespace FuelStation.Web.Server.Controllers
         [HttpGet]
         public async Task<IEnumerable<TransactionListDTO>> Get()
         {
-            var result = _transactionRepo.GetAll();
-            foreach (var tr in result) { tr.TotalValue = _transHandler.CalculateTotalValue(tr); }
+            var result = _transactionRepo.GetAll().ToList();
+           // foreach (var tr in result) { tr.TotalValue = _transHandler.CalculateTotalValue(tr); }
             var transList = result.Select(transaction => new TransactionListDTO
             {
                 ID = transaction.ID,
@@ -50,7 +50,7 @@ namespace FuelStation.Web.Server.Controllers
                 EmployeeId = transaction.EmployeeId,
                 PaymentMethod = transaction.PaymentMethod,
 
-                Customer = new CustomerListDTO()
+               /* Customer = new CustomerListDTO()
                 {
                     ID = transaction.Customer.ID,
                     Name = transaction.Customer.Name,
@@ -66,7 +66,7 @@ namespace FuelStation.Web.Server.Controllers
                     HireDateEnd = transaction.Employee.HireDateEnd,
                     SalaryPerMonth = transaction.Employee.SalaryPerMonth,
                     EmployeeType = transaction.Employee.EmployeeType,
-                }
+                }*/
             });
             return transList;
         }
@@ -78,27 +78,28 @@ namespace FuelStation.Web.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(TransactionEditDTO transaction)
+        public async Task Post(TransactionListDTO transaction)
         {
-              
-            var newTransaction = new Transaction();
-            newTransaction.ID = transaction.ID;
-            newTransaction.Date = transaction.Date;
-            newTransaction.CustomerId = transaction.CustomerId;
-            newTransaction.EmployeeId = transaction.EmployeeId;
-            newTransaction.TotalValue = _transHandler.CalculateTotalValue(newTransaction);
-            newTransaction.TransactionLines = new();
-            try
+            Transaction newTransaction = new Transaction(transaction.PaymentMethod, transaction.TotalValue, transaction.Date)
             {
-                if (newTransaction.TransactionLines.Count > 0 && _transHandler.CashOnlyOverFifty(newTransaction))
-                {newTransaction.PaymentMethod = PaymentMethod.Cash;}
-                else    
-                {newTransaction.PaymentMethod = transaction.PaymentMethod;  }
-            }
-            catch (Exception ex)
-            {  Console.WriteLine($"An exception occurred: {ex.Message}");}          
+                ID = transaction.ID,
+                CustomerId = transaction.CustomerId,
+                EmployeeId = transaction.EmployeeId,
+                TransactionLines = transaction.TransactionLines.Select(transactionLine => new TransactionLine(
+                    transactionLine.Quantity,
+                    transactionLine.ItemPrice,
+                    transactionLine.NetValue,
+                    transactionLine.DiscountPercent,
+                    transactionLine.DiscountValue, transactionLine.TotalValue)
+                {
+                    ID = transactionLine.ID,
+                    TransactionID = transactionLine.TransactionID,
+                    ItemID = transactionLine.ItemID,
+                }).ToList()
+            };
+         
             _transactionRepo.Add(newTransaction);
-            return Ok();    
+             
         }
 
         [HttpGet("{id}")]

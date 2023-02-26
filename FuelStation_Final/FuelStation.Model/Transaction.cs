@@ -23,7 +23,14 @@ namespace FuelStation.Model
 
        
 
-        public Transaction() { }    
+        public Transaction() { }
+
+        public Transaction(PaymentMethod paymentMethod, decimal totalValue, DateTime date)
+        {
+            PaymentMethod = paymentMethod;
+            TotalValue = totalValue;
+            Date = date;
+        }
 
         //Relationships
         public List<TransactionLine> TransactionLines { get; set; }

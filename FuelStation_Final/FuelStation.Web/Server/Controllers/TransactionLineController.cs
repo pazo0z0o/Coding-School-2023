@@ -86,8 +86,8 @@ namespace FuelStation.Web.Server.Controllers
             newTransactionLine.TransactionID = transLine.TransactionId;
             newTransactionLine.ItemID = transLine.ItemID;
             newTransactionLine.Quantity = transLine.Quantity;
-            newTransactionLine.ItemPrice = _itemRepo.GetById(newTransactionLine.ItemID).Price; //seems shaky
-            newTransactionLine.NetValue = newTransactionLine.ItemPrice * newTransactionLine.Quantity;
+            newTransactionLine.ItemPrice = newTransactionLine.ItemPrice; //seems shaky
+            newTransactionLine.NetValue = 0;
             newTransactionLine.DiscountPercent = transLine.DiscountPercent;
             newTransactionLine.DiscountValue = 0;
             newTransactionLine.TotalValue = 0;

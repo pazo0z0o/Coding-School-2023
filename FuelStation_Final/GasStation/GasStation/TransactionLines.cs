@@ -17,6 +17,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FuelStation.Model.Enums;
+using FuelStation.Web.Client.Pages.Customer;
+using static System.Net.WebRequestMethods;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FuelStation.Win
 {
@@ -59,7 +62,7 @@ namespace FuelStation.Win
             grv_TransactionLine.DataSource = bsTransLine;
         }
 
-        private async Task OnSave()
+        private async Task OnSave(TransactionLine newLine)
         { 
         //TODO: EDIT + Post functionalities
 
@@ -100,7 +103,7 @@ namespace FuelStation.Win
         private async void btn_trl_save_Click(object sender, EventArgs e)
         {
             //Save for POST PUT purposes
-            await OnSave();
+            await OnSave(_newLine);
             await SetControlProperties();
         }
 
@@ -108,5 +111,7 @@ namespace FuelStation.Win
         {
 
         }
+
+       
     }
 }

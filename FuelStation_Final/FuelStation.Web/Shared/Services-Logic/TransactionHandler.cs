@@ -17,16 +17,7 @@ namespace FuelStation.Web.Shared.Services_Logic
     {
         public TransactionHandler() { }
 
-        public bool FuelDiscountCheck(TransactionLine transLine)
-        {
-
-            if (transLine.Item.ItemType == ItemType.Fuel && transLine.NetValue > 20)
-            {
-                return true;
-            }
-
-            return false;
-        }
+       
         public decimal CalculateDiscountValue(TransactionLine transline)
         {
             return transline.DiscountValue = transline.NetValue * transline.DiscountPercent;

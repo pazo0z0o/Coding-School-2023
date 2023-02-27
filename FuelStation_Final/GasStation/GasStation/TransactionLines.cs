@@ -156,5 +156,21 @@ namespace FuelStation.Win
                 }
             }
         }
+
+        //validationfor
+        private bool ValidateTransactionLines()
+        {
+            // check if the parent transaction has more than one transaction line
+            if (_parentTransaction.TransactionLines.Count() > 1)
+            {
+                // check if any of the transaction lines have a discount value greater than zero
+                if (_parentTransaction.TransactionLines.Any(x => x.DiscountValue > 0))
+                {
+                    return true; // validation succeeded
+                }
+            }
+
+            return false; // validation failed
+        }
     }
 }

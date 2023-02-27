@@ -42,6 +42,7 @@
             this.btn_trl_load = new System.Windows.Forms.Button();
             this.btn_trl_save = new System.Windows.Forms.Button();
             this.grv_TransactionLine = new System.Windows.Forms.DataGridView();
+            this.bsTransLine = new System.Windows.Forms.BindingSource(this.components);
             this.col_trl_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_ItemPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,7 +52,6 @@
             this.col_TotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_transID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_ItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsTransLine = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.grv_TransactionLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransLine)).BeginInit();
             this.SuspendLayout();
@@ -214,12 +214,14 @@
             // 
             // col_transID
             // 
+            this.col_transID.DataPropertyName = "TransactionID";
             this.col_transID.HeaderText = "TransactionID";
             this.col_transID.Name = "col_transID";
             this.col_transID.Visible = false;
             // 
             // col_ItemID
             // 
+            this.col_ItemID.DataPropertyName = "ItemID";
             this.col_ItemID.HeaderText = "Item ID";
             this.col_ItemID.Name = "col_ItemID";
             this.col_ItemID.Visible = false;
@@ -257,6 +259,7 @@
         private Button btn_trl_load;
         private Button btn_trl_save;
         private DataGridView grv_TransactionLine;
+        private BindingSource bsTransLine;
         private DataGridViewTextBoxColumn col_trl_ID;
         private DataGridViewTextBoxColumn col_Quantity;
         private DataGridViewTextBoxColumn col_ItemPrice;
@@ -266,6 +269,5 @@
         private DataGridViewTextBoxColumn col_TotalValue;
         private DataGridViewTextBoxColumn col_transID;
         private DataGridViewTextBoxColumn col_ItemID;
-        private BindingSource bsTransLine;
     }
 }

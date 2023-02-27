@@ -29,10 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grv_Transactions = new System.Windows.Forms.DataGridView();
+            this.trans_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_EmployeeID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.col_CustomerID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.col_Payment = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Trans_save = new System.Windows.Forms.Button();
             this.btn_trans_Load = new System.Windows.Forms.Button();
             this.btn_trans_delete = new System.Windows.Forms.Button();
@@ -40,12 +46,6 @@
             this.btn_Back = new System.Windows.Forms.Button();
             this.bsTransaction = new System.Windows.Forms.BindingSource(this.components);
             this.btn_procceed = new System.Windows.Forms.Button();
-            this.trans_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_EmployeeID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.col_CustomerID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.col_Payment = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grv_Transactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransaction)).BeginInit();
             this.SuspendLayout();
@@ -69,6 +69,58 @@
             this.grv_Transactions.TabIndex = 0;
             this.grv_Transactions.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grv_Transactions_DataError);
             // 
+            // trans_ID
+            // 
+            this.trans_ID.DataPropertyName = "ID";
+            this.trans_ID.HeaderText = "Transaction ID";
+            this.trans_ID.Name = "trans_ID";
+            this.trans_ID.Visible = false;
+            // 
+            // col_Date
+            // 
+            this.col_Date.DataPropertyName = "Date";
+            dataGridViewCellStyle4.Format = "g";
+            dataGridViewCellStyle4.NullValue = null;
+            this.col_Date.DefaultCellStyle = dataGridViewCellStyle4;
+            this.col_Date.HeaderText = "Date";
+            this.col_Date.Name = "col_Date";
+            // 
+            // col_EmployeeID
+            // 
+            this.col_EmployeeID.DataPropertyName = "EmployeeId";
+            this.col_EmployeeID.HeaderText = "EmployeeID";
+            this.col_EmployeeID.Name = "col_EmployeeID";
+            this.col_EmployeeID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_EmployeeID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // col_CustomerID
+            // 
+            this.col_CustomerID.DataPropertyName = "CustomerId";
+            dataGridViewCellStyle5.NullValue = null;
+            this.col_CustomerID.DefaultCellStyle = dataGridViewCellStyle5;
+            this.col_CustomerID.HeaderText = "CustomerID";
+            this.col_CustomerID.Name = "col_CustomerID";
+            this.col_CustomerID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_CustomerID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // col_Payment
+            // 
+            this.col_Payment.DataPropertyName = "PaymentMethod";
+            this.col_Payment.HeaderText = "Payment Method";
+            this.col_Payment.Name = "col_Payment";
+            this.col_Payment.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_Payment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // col_Total
+            // 
+            this.col_Total.DataPropertyName = "TotalValue";
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = "0";
+            this.col_Total.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col_Total.HeaderText = "Total Value";
+            this.col_Total.Name = "col_Total";
+            this.col_Total.ReadOnly = true;
+            // 
             // btn_Trans_save
             // 
             this.btn_Trans_save.BackColor = System.Drawing.Color.Gold;
@@ -90,6 +142,7 @@
             this.btn_trans_Load.TabIndex = 3;
             this.btn_trans_Load.Text = "Load";
             this.btn_trans_Load.UseVisualStyleBackColor = false;
+            this.btn_trans_Load.Click += new System.EventHandler(this.btn_trans_Load_Click);
             // 
             // btn_trans_delete
             // 
@@ -101,6 +154,7 @@
             this.btn_trans_delete.TabIndex = 4;
             this.btn_trans_delete.Text = "DEL";
             this.btn_trans_delete.UseVisualStyleBackColor = false;
+            this.btn_trans_delete.Click += new System.EventHandler(this.btn_trans_delete_Click);
             // 
             // btn_trans_Add
             // 
@@ -139,57 +193,6 @@
             this.btn_procceed.Text = "Procceed to Order";
             this.btn_procceed.UseVisualStyleBackColor = false;
             this.btn_procceed.Click += new System.EventHandler(this.btn_procceed_Click);
-            // 
-            // trans_ID
-            // 
-            this.trans_ID.DataPropertyName = "ID";
-            this.trans_ID.HeaderText = "Transaction ID";
-            this.trans_ID.Name = "trans_ID";
-            this.trans_ID.Visible = false;
-            // 
-            // col_Date
-            // 
-            dataGridViewCellStyle1.Format = "g";
-            dataGridViewCellStyle1.NullValue = null;
-            this.col_Date.DefaultCellStyle = dataGridViewCellStyle1;
-            this.col_Date.HeaderText = "Date";
-            this.col_Date.Name = "col_Date";
-            // 
-            // col_EmployeeID
-            // 
-            this.col_EmployeeID.DataPropertyName = "EmployeeId";
-            this.col_EmployeeID.HeaderText = "EmployeeID";
-            this.col_EmployeeID.Name = "col_EmployeeID";
-            this.col_EmployeeID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_EmployeeID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // col_CustomerID
-            // 
-            this.col_CustomerID.DataPropertyName = "CustomerId";
-            dataGridViewCellStyle2.NullValue = null;
-            this.col_CustomerID.DefaultCellStyle = dataGridViewCellStyle2;
-            this.col_CustomerID.HeaderText = "CustomerID";
-            this.col_CustomerID.Name = "col_CustomerID";
-            this.col_CustomerID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_CustomerID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // col_Payment
-            // 
-            this.col_Payment.DataPropertyName = "PaymentMethod";
-            this.col_Payment.HeaderText = "Payment Method";
-            this.col_Payment.Name = "col_Payment";
-            this.col_Payment.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_Payment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // col_Total
-            // 
-            this.col_Total.DataPropertyName = "TotalValue";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = "0";
-            this.col_Total.DefaultCellStyle = dataGridViewCellStyle3;
-            this.col_Total.HeaderText = "Total Value";
-            this.col_Total.Name = "col_Total";
-            this.col_Total.ReadOnly = true;
             // 
             // Transactions_frm
             // 

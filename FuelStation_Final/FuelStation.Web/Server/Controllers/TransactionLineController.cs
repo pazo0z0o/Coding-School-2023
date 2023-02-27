@@ -37,7 +37,7 @@ namespace FuelStation.Web.Server.Controllers
         {
             var tr = _transactionLineRepo.GetById(id).TransactionID;
             _transactionLineRepo.Delete(id);
-            _transHandler.CalculateTotalValue(_transactionRepo.GetById(tr));
+           // _transHandler.CalculateTotalValue(_transactionRepo.GetById(tr));
         }
 
         [HttpPut]
@@ -79,7 +79,7 @@ namespace FuelStation.Web.Server.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> Post(TransactionLineEditDTO transLine)
+        public async Task<ActionResult> Post(TransactionLineListDTO transLine)
         {
             var trans = _transactionRepo.GetById(transLine.TransactionId);
             var newTransactionLine = new TransactionLine();
@@ -87,7 +87,7 @@ namespace FuelStation.Web.Server.Controllers
             newTransactionLine.ItemID = transLine.ItemID;
             newTransactionLine.Quantity = transLine.Quantity;
             newTransactionLine.ItemPrice = _itemRepo.GetById(newTransactionLine.ItemID).Price; //seems shaky
-            newTransactionLine.NetValue = 0;
+            newTransactionLine.NetValue = newTransactionLine.ItemPrice * newTransactionLine.Quantity;
             newTransactionLine.DiscountPercent = transLine.DiscountPercent;
             newTransactionLine.DiscountValue = 0;
             newTransactionLine.TotalValue = 0;

@@ -161,6 +161,30 @@ namespace FuelStation.Win
         {
             e.Cancel = true;
         }
+
+        private async void btn_trans_delete_Click(object sender, EventArgs e)
+        {
+            TransactionListDTO transDEL = (TransactionListDTO)bsTransaction.Current;
+            HttpResponseMessage response = null;
+            response = await _client.DeleteAsync($"transaction/{transDEL.ID}");
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Delete Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Delete unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            await SetControlProperties();
+
+
+        }
+
+        private async void btn_trans_Load_Click(object sender, EventArgs e)
+        {
+            bsTransaction.DataSource = null;
+            SetControlProperties();
+        }
     }
 
 

@@ -89,57 +89,33 @@ namespace FuelStation.Win
             bsTransLine.AddNew();
             _newLine = bsTransLine.Current as TransactionLineListDTO;
             _newLine.TransactionId = _parentTransaction.ID;
-            List<ItemListDTO> listItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
-            if (_transHandler.ValidateFuelLines(_parentTransaction) )
-            { 
-                foreach (var item in listItems ) {
-                    if(_newLine.ItemID == item.ID)
-                    {
-                        MessageBox.Show("You cannot select an item of type fuel.", "Error");
-                    }
-            }
-
-                //  ItemListDTO selection = 
-                //  List<ItemListDTO> listItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
-
-                //  foreach( var item in listItems) 
-                //  { 
-                //      if(selection.ID == item.ID)
-                //      {
-                //      MessageBox.Show("You cannot select an item of type fuel.", "Error");
-                //      }
-
-                //  }
-            }
+            
+            
 
         }
 
 
         private void bsTransLine_CurrentItemChanged(object sender, EventArgs e)
-        { 
-            
-           
-
-               //ItemListDTO itemSelection = (ItemListDTO).SelectedItem;
-
-              
-                // Check if the selected item is not fuel
-               //if (itemSelection.ItemType == ItemType.Fuel)
-               // {   
-                    //
-                    //col_ItemID.SelectedIndex = -1;
-              //  }
-               // else
-            //    {
-            //        // If the selected item is fuel, show an error message and deselect the item
-                   
-            //    }
-            //}
+        {
+            List<ItemListDTO> listItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
+            if (_transHandler.ValidateFuelLines(_parentTransaction))
+            {
+                foreach (var item in listItems)
+                {
+                    if (_newLine.ItemID == item.ID)
+                    {
+                        MessageBox.Show("You cannot select an item of type fuel.", "Error");
+                    }
+                }
 
 
-            
+            }
+
+
+
+
             //==========================Auto-Fill Item Price=================================== 
-            
+
 
             if (_newLine != null && _newLine.ItemID != 0)
             {
@@ -155,7 +131,6 @@ namespace FuelStation.Win
 
             //=============================Check for >20 AND fuel type =======================================
 
-            List<ItemListDTO> listItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
             if (_newLine.NetValue > 20 && _translineList.Any(x => listItems.Any(item => item.ID == x.ItemID)))
             {
                 _newLine.DiscountPercent = 0.1M;
@@ -200,6 +175,6 @@ namespace FuelStation.Win
 
         }
 
-      
+
     }
 }

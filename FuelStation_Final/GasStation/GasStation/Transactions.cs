@@ -38,7 +38,7 @@ namespace FuelStation.Win
 
 
         public Transactions_frm(decimal totalval)
-        {
+        {   btn_CheckAgain.Enabled = true;
             _totalValueOfTransLines = totalval;
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");
@@ -185,6 +185,14 @@ namespace FuelStation.Win
         {
             bsTransaction.DataSource = null;
             SetControlProperties();
+        }
+
+        private void btn_CheckAgain_Click(object sender, EventArgs e)
+        {
+            CustomerCheck returnCheck = new CustomerCheck();
+            returnCheck.ShowDialog();
+            this.Dispose();
+            this.Close();
         }
     }
 

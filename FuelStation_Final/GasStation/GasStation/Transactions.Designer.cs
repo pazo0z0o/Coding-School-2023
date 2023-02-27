@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grv_Transactions = new System.Windows.Forms.DataGridView();
             this.trans_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,6 +46,7 @@
             this.btn_Back = new System.Windows.Forms.Button();
             this.bsTransaction = new System.Windows.Forms.BindingSource(this.components);
             this.btn_procceed = new System.Windows.Forms.Button();
+            this.btn_CheckAgain = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grv_Transactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransaction)).BeginInit();
             this.SuspendLayout();
@@ -79,9 +80,9 @@
             // col_Date
             // 
             this.col_Date.DataPropertyName = "Date";
-            dataGridViewCellStyle4.Format = "g";
-            dataGridViewCellStyle4.NullValue = null;
-            this.col_Date.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Format = "g";
+            dataGridViewCellStyle1.NullValue = null;
+            this.col_Date.DefaultCellStyle = dataGridViewCellStyle1;
             this.col_Date.HeaderText = "Date";
             this.col_Date.Name = "col_Date";
             // 
@@ -96,8 +97,8 @@
             // col_CustomerID
             // 
             this.col_CustomerID.DataPropertyName = "CustomerId";
-            dataGridViewCellStyle5.NullValue = null;
-            this.col_CustomerID.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.NullValue = null;
+            this.col_CustomerID.DefaultCellStyle = dataGridViewCellStyle2;
             this.col_CustomerID.HeaderText = "CustomerID";
             this.col_CustomerID.Name = "col_CustomerID";
             this.col_CustomerID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -114,9 +115,9 @@
             // col_Total
             // 
             this.col_Total.DataPropertyName = "TotalValue";
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = "0";
-            this.col_Total.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = "0";
+            this.col_Total.DefaultCellStyle = dataGridViewCellStyle3;
             this.col_Total.HeaderText = "Total Value";
             this.col_Total.Name = "col_Total";
             this.col_Total.ReadOnly = true;
@@ -194,12 +195,26 @@
             this.btn_procceed.UseVisualStyleBackColor = false;
             this.btn_procceed.Click += new System.EventHandler(this.btn_procceed_Click);
             // 
+            // btn_CheckAgain
+            // 
+            this.btn_CheckAgain.BackColor = System.Drawing.Color.Crimson;
+            this.btn_CheckAgain.Enabled = false;
+            this.btn_CheckAgain.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_CheckAgain.Location = new System.Drawing.Point(875, 287);
+            this.btn_CheckAgain.Name = "btn_CheckAgain";
+            this.btn_CheckAgain.Size = new System.Drawing.Size(149, 43);
+            this.btn_CheckAgain.TabIndex = 33;
+            this.btn_CheckAgain.Text = "New Transaction ";
+            this.btn_CheckAgain.UseVisualStyleBackColor = false;
+            this.btn_CheckAgain.Click += new System.EventHandler(this.btn_CheckAgain_Click);
+            // 
             // Transactions_frm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1036, 561);
+            this.Controls.Add(this.btn_CheckAgain);
             this.Controls.Add(this.btn_procceed);
             this.Controls.Add(this.btn_Back);
             this.Controls.Add(this.btn_trans_Add);
@@ -232,5 +247,6 @@
         private DataGridViewComboBoxColumn col_CustomerID;
         private DataGridViewComboBoxColumn col_Payment;
         private DataGridViewTextBoxColumn col_Total;
+        private Button btn_CheckAgain;
     }
 }

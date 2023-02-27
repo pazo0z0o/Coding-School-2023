@@ -36,9 +36,11 @@ namespace FuelStation.Win
         public TransactionListDTO newTrans = new TransactionListDTO() { Date = DateTime.Now };
         private decimal _totalValueOfTransLines = 0 ;
 
+        private bool returnFromTransactionLines = false ;
 
         public Transactions_frm(decimal totalval)
         {   btn_CheckAgain.Enabled = true;
+            returnFromTransactionLines = true;
             _totalValueOfTransLines = totalval;
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");
@@ -68,8 +70,10 @@ namespace FuelStation.Win
                 _employeeList = await _client.GetFromJsonAsync<List<EmployeeListDTO>>("employee");
                 _transactionList = await _client.GetFromJsonAsync<List<TransactionListDTO>>("transaction");
 
+
                 bsTransaction.DataSource = _transactionList;
-                newTrans.TotalValue = _totalValueOfTransLines; 
+                if (returnFromTransactionLines) { CheckAfterTransLines(bsTransaction); }
+
                 grv_Transactions.DataSource = bsTransaction;
 
                 DataGridViewComboBoxColumn col_EmployeeID = grv_Transactions.Columns["col_EmployeeID"] as DataGridViewComboBoxColumn;
@@ -90,6 +94,16 @@ namespace FuelStation.Win
                 MessageBox.Show($"An error occurred while loading data: {ex.Message}");
             }
         }
+
+        private void CheckAfterTransLines(BindingSource bsTransaction)
+        {
+            TransactionListDTO temporaryBsCurrent = (TransactionListDTO)bsTransaction.Current;
+            temporaryBsCurrent.TotalValue = _totalValueOfTransLines; 
+            if(temporaryBsCurrent.TotalValue> 50) 
+            { temporaryBsCurrent.PaymentMethod = PaymentMethod.Cash; }
+            returnFromTransactionLines = false;
+        }
+
         //===============================Transaction  Button s=============================================
         private async void btn_trans_Add_Click(object sender, EventArgs e)
         {

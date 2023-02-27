@@ -97,22 +97,16 @@ namespace FuelStation.Win
 
         private void bsTransLine_CurrentItemChanged(object sender, EventArgs e)
         {
-            List<ItemListDTO> listItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
-            if (_transHandler.ValidateFuelLines(_parentTransaction))
+            List<ItemListDTO> fuelItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();  
+
+            var itemSelection = (TransactionLineListDTO)bsTransLine.Current;
+      
+            if (fuelItems.Any(item => item.ID == itemSelection.ItemID))
             {
-                foreach (var item in listItems)
-                {
-                    if (_newLine.ItemID == item.ID)
-                    {
-                        MessageBox.Show("You cannot select an item of type fuel.", "Error");
-                    }
-                }
-
-
+                // Show message box or prevent user from selecting another fuel item
+                MessageBox.Show("You cannot select an item of type fuel more than once!","Error");
+                itemSelection.ItemID = _translineList.Find(x => x.ID == itemSelection.ID)?.ItemID ?? 0;
             }
-
-
-
 
             //==========================Auto-Fill Item Price=================================== 
 
@@ -131,7 +125,7 @@ namespace FuelStation.Win
 
             //=============================Check for >20 AND fuel type =======================================
 
-            if (_newLine.NetValue > 20 && _translineList.Any(x => listItems.Any(item => item.ID == x.ItemID)))
+            if (_newLine.NetValue > 20 && _translineList.Any(x => fuelItems.Any(item => item.ID == x.ItemID)))
             {
                 _newLine.DiscountPercent = 0.1M;
             }

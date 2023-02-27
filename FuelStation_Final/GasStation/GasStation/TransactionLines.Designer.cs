@@ -135,6 +135,7 @@
             this.grv_TransactionLine.RowTemplate.Height = 25;
             this.grv_TransactionLine.Size = new System.Drawing.Size(1077, 180);
             this.grv_TransactionLine.TabIndex = 32;
+            this.grv_TransactionLine.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_TransactionLine_CellValueChanged);
             this.grv_TransactionLine.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grv_TransactionLine_DataError);
             // 
             // col_trl_ID

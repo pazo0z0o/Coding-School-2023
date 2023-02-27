@@ -99,14 +99,14 @@ namespace FuelStation.Win
         {
             List<ItemListDTO> fuelItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();  
 
-            var itemSelection = (TransactionLineListDTO)bsTransLine.Current;
-      
-            if (fuelItems.Any(item => item.ID == itemSelection.ItemID))
-            {
-                // Show message box or prevent user from selecting another fuel item
-                MessageBox.Show("You cannot select an item of type fuel more than once!","Error");
-                itemSelection.ItemID = _translineList.Find(x => x.ID == itemSelection.ID)?.ItemID ?? 0;
-            }
+            //var itemSelection = (TransactionLineListDTO)bsTransLine.Current;
+        
+            //if (fuelItems.Any(item => item.ID == itemSelection.ItemID))
+            //{
+            //    // Show message box or prevent user from selecting another fuel item
+            //    MessageBox.Show("You cannot select an item of type fuel more than once!","Error");
+            //    itemSelection.ItemID = _translineList.Find(x => x.ID == itemSelection.ID)?.ItemID ?? 0;
+            //}
 
             //==========================Auto-Fill Item Price=================================== 
 
@@ -169,6 +169,18 @@ namespace FuelStation.Win
 
         }
 
-
+        private void grv_TransactionLine_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == grv_TransactionLine.Columns["ItemID"].Index && e.RowIndex >= 0)
+            {
+                var currentItem = (TransactionLineListDTO)bsTransLine.Current;
+                var fuelItems = _itemList.Where(i => i.ItemType == ItemType.Fuel).ToList();
+                if (fuelItems.Any(fi => fi.ID == currentItem.ItemID))
+                {
+                    MessageBox.Show("You cannot select an item of type fuel.", "Error");
+                    bsTransLine.ResetCurrentItem();
+                }
+            }
+        }
     }
 }

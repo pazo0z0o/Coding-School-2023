@@ -39,7 +39,7 @@ namespace FuelStation.Win
         private bool returnFromTransactionLines = false ;
 
         public Transactions_frm(decimal totalval)
-        {   btn_CheckAgain.Enabled = true;
+        {   
             returnFromTransactionLines = true;
             _totalValueOfTransLines = totalval;
             _client = new HttpClient(new HttpClientHandler());
@@ -73,6 +73,7 @@ namespace FuelStation.Win
 
                 bsTransaction.DataSource = _transactionList;
                 if (returnFromTransactionLines) { CheckAfterTransLines(bsTransaction); }
+                bsTransaction.ResetCurrentItem();
 
                 grv_Transactions.DataSource = bsTransaction;
 

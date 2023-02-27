@@ -78,28 +78,31 @@ namespace FuelStation.Web.Server.Controllers
         }
 
         [HttpPost]
-        public async Task Post(TransactionListDTO transaction)
+        public async Task<ActionResult> Post(TransactionListDTO transaction)
         {
             Transaction newTransaction = new Transaction(transaction.PaymentMethod, transaction.TotalValue, transaction.Date)
             {
                 ID = transaction.ID,
                 CustomerId = transaction.CustomerId,
                 EmployeeId = transaction.EmployeeId,
-                TransactionLines = transaction.TransactionLines.Select(transactionLine => new TransactionLine(
-                    transactionLine.Quantity,
-                    transactionLine.ItemPrice,
-                    transactionLine.NetValue,
-                    transactionLine.DiscountPercent,
-                    transactionLine.DiscountValue, transactionLine.TotalValue)
-                {
-                    ID = transactionLine.ID,
-                    TransactionID = transactionLine.TransactionID,
-                    ItemID = transactionLine.ItemID,
-                }).ToList()
+                TransactionLines = null!
             };
+            //     transaction.TransactionLines.Select(transactionLine => new TransactionLine(
+            //        transactionLine.Quantity,
+            //        transactionLine.ItemPrice,
+            //        transactionLine.NetValue,
+            //        transactionLine.DiscountPercent,
+            //        transactionLine.DiscountValue, transactionLine.TotalValue)
+            //    {
+            //        ID = transactionLine.ID,
+            //        TransactionID = transactionLine.TransactionID,
+            //        ItemID = transactionLine.ItemID,
+            //    }).ToList()
+            //};
          
             _transactionRepo.Add(newTransaction);
-             
+            return Ok();
+
         }
 
         [HttpGet("{id}")]

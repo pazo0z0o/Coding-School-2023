@@ -80,21 +80,17 @@ namespace FuelStation.Win
                 col_CustomerID.ValueMember = "ID";
                 col_CustomerID.DisplayMember = "Surname";
 
-
-
                 DataGridViewComboBoxColumn col_PaymentMethod = grv_Transactions.Columns["col_Payment"] as DataGridViewComboBoxColumn;
                 col_PaymentMethod.DataSource = Enum.GetValues(typeof(PaymentMethod));
             }
             catch (Exception ex)
             {
-                // handle any exceptions thrown by the async methods
                 MessageBox.Show($"An error occurred while loading data: {ex.Message}");
             }
         }
         //===============================Transaction  Button s=============================================
         private async void btn_trans_Add_Click(object sender, EventArgs e)
         {
-
             bsTransaction.AddNew();
 
             newTrans = bsTransaction.Current as TransactionListDTO;
@@ -122,7 +118,7 @@ namespace FuelStation.Win
 
         private async void btn_procceed_Click(object sender, EventArgs e)
         {//NEED TO BE ABLE TO PASS to the DATABASE ID AFTER PULLING FROM IT AGAIN
-            await OnSave();
+            await OnSave(newTrans);
             await SetControlProperties();
             
             var tmpTrans = bsTransaction.Current as TransactionListDTO;
@@ -133,14 +129,14 @@ namespace FuelStation.Win
             tlines.ShowDialog();
         }
 
-        private async Task OnSave()
+        private async Task OnSave(TransactionListDTO newTrans)
         {
             HttpResponseMessage response = null;
             if (newTrans.ID == 0)
             {
-                TransactionEditDTO transactionToSave = new TransactionEditDTO()
-                {
-                    ID = newTrans.ID,
+                TransactionListDTO transactionToSave = new TransactionListDTO()
+                {   ID= newTrans.ID,
+                    CustomerId = newTrans.CustomerId,
                     Date = newTrans.Date,
                     EmployeeId = newTrans.EmployeeId,
                     PaymentMethod = newTrans.PaymentMethod,

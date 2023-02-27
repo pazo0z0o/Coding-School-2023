@@ -77,7 +77,7 @@ namespace FuelStation.Win
             //col_ItemPrice.ValueMember = "col_ItemID.ValueMember.Value";
             //col_ItemPrice.DisplayMember = "Price";
 
-
+        
 
         }
 
@@ -96,16 +96,17 @@ namespace FuelStation.Win
             //maybe a post before creating a new line?
             bsTransLine.AddNew();
             _newLine = bsTransLine.Current as TransactionLineListDTO;
-            
-            if( _newLine.TransactionId != null ) 
-            { 
+            decimal tmpItemPrice ; 
+            if( _newLine.TransactionId != null  ) 
+            {
+                //_newLine.
                
                 //logic  CHECK APO CONTROLLER K AN OXI, IMPLEMENT STO ONSAVE    
                 //_newLine.NetValue
                 
 
-                bsTransLine.EndEdit();
-                grv_TransactionLine.DataSource = bsTransLine;
+             //   bsTransLine.EndEdit();
+               // grv_TransactionLine.DataSource = bsTransLine;
 
             }
         }
@@ -138,19 +139,22 @@ namespace FuelStation.Win
 
         }
 
-        private void grv_TransactionLine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+       
+
+        private void bsTransLine_CurrentItemChanged(object sender, EventArgs e)
         {
-            // check if the edited cell is in the ItemID column
-            if (e.ColumnIndex == grv_TransactionLine.Columns["col_ItemID"].Index && e.RowIndex >= 0)
+            var _newLine = bsTransLine.Current as TransactionLineListDTO;
+
+            // check if the current line is not null and has a valid item selected
+            if (_newLine != null && _newLine.ItemID != 0)
             {
-                // get the selected Item from the ItemID combobox column
-                var selectedItem = (grv_TransactionLine.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewComboBoxCell)?.Value as ItemListDTO;
+                // find the item corresponding to the selected item ID
+                var selectedItem = _itemList.FirstOrDefault(i => i.ID == _newLine.ItemID);
 
                 // update the ItemPrice textbox column with the selected item's price
                 if (selectedItem != null)
                 {
-                    var itemPriceColumnIndex = grv_TransactionLine.Columns["col_ItemPrice"].Index;
-                    grv_TransactionLine.Rows[e.RowIndex].Cells[itemPriceColumnIndex].Value = selectedItem.Price.ToString();
+                    _newLine.ItemPrice = selectedItem.Price;
                 }
             }
         }

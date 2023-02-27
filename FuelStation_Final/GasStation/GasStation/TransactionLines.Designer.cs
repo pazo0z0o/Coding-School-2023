@@ -129,6 +129,7 @@
             // 
             // grv_TransactionLine
             // 
+            this.grv_TransactionLine.AllowUserToAddRows = false;
             this.grv_TransactionLine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grv_TransactionLine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grv_TransactionLine.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -146,8 +147,6 @@
             this.grv_TransactionLine.RowTemplate.Height = 25;
             this.grv_TransactionLine.Size = new System.Drawing.Size(1077, 180);
             this.grv_TransactionLine.TabIndex = 32;
-            this.grv_TransactionLine.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_TransactionLine_CellContentClick);
-            this.grv_TransactionLine.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_TransactionLine_CellEndEdit);
             this.grv_TransactionLine.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grv_TransactionLine_DataError);
             // 
             // col_trl_ID
@@ -228,6 +227,10 @@
             this.col_transID.HeaderText = "TransactionID";
             this.col_transID.Name = "col_transID";
             this.col_transID.Visible = false;
+            // 
+            // bsTransLine
+            // 
+            this.bsTransLine.CurrentItemChanged += new System.EventHandler(this.bsTransLine_CurrentItemChanged);
             // 
             // frm_TransactionLines
             // 

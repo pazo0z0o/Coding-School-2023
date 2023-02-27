@@ -37,13 +37,12 @@ namespace FuelStation.Web.Server.Controllers
         {
             var tr = _transactionLineRepo.GetById(id).TransactionID;
             _transactionLineRepo.Delete(id);
-            _transHandler.CalculateTotalValue(_transactionRepo.GetById(tr));
+            
         }
 
         [HttpPut]
         public async Task<ActionResult> Put(TransactionLineEditDTO transLine)
         {
-            var trans = _transactionRepo.GetById(transLine.TransactionId);
             var itemToUpdate = _transactionLineRepo.GetById(transLine.ID);
             itemToUpdate.ID = transLine.ID;
             itemToUpdate.TransactionID = transLine.TransactionId;
@@ -52,55 +51,26 @@ namespace FuelStation.Web.Server.Controllers
             itemToUpdate.NetValue = transLine.NetValue;
             itemToUpdate.DiscountPercent = transLine.DiscountPercent;
             itemToUpdate.DiscountValue = transLine.DiscountValue;
-            itemToUpdate.TotalValue = transLine.TotalValue;         //Could call a method to auto update
-                                                                    //if (_transHandler.HasMultipleFuelLines(trans))
-                                                                    //{
-                                                                    //    _transactionLineRepo.Add(itemToUpdate);
-                                                                    //    itemToUpdate.NetValue = _transHandler.CalcNetValue(itemToUpdate);
-                                                                    //    if (itemToUpdate.Item.ItemType == ItemType.Fuel && itemToUpdate.NetValue > 20)
-                                                                    //    {
-                                                                    //        itemToUpdate.DiscountPercent = 0.10M;
-                                                                    //        itemToUpdate.DiscountValue = _transHandler.CalculateDiscountValue(itemToUpdate);
-                                                                    //    }
-                                                                    //    itemToUpdate.TotalValue = _transHandler.CalcTransactionLineTotal(itemToUpdate);
-                                                                    //    _transactionLineRepo.Update(itemToUpdate.ID, itemToUpdate);
-                                                                    //    var tmpTrans = _transactionRepo.GetById(itemToUpdate.TransactionID);
-                                                                    //    _transactionRepo.Update(itemToUpdate.TransactionID, tmpTrans);
+            itemToUpdate.TotalValue = transLine.TotalValue;
+            _transactionLineRepo.Update(itemToUpdate.ID,itemToUpdate);
             return Ok();
-
         }
 
 
         [HttpPost]
         public async Task<ActionResult> Post(TransactionLineListDTO transLine)
         {
-            var trans = _transactionRepo.GetById(transLine.TransactionId);
+            
             var newTransactionLine = new TransactionLine();
             newTransactionLine.TransactionID = transLine.TransactionId;
             newTransactionLine.ItemID = transLine.ItemID;
             newTransactionLine.Quantity = transLine.Quantity;
             newTransactionLine.ItemPrice = newTransactionLine.ItemPrice; //seems shaky
-            newTransactionLine.NetValue = 0;
+            newTransactionLine.NetValue = transLine.NetValue;
             newTransactionLine.DiscountPercent = transLine.DiscountPercent;
-            newTransactionLine.DiscountValue = 0;
-            newTransactionLine.TotalValue = 0;
+            newTransactionLine.DiscountValue = transLine.DiscountValue;
+            newTransactionLine.TotalValue = transLine.TotalValue;
 
-            // var tmpTransLine = _transactionLineRepo.GetById(newTransactionLine.ID);
-            //if (_transHandler.HasMultipleFuelLines(trans))
-            //{
-            //    _transactionLineRepo.Add(newTransactionLine);
-
-
-            //    newTransactionLine.NetValue = _transHandler.CalcNetValue(newTransactionLine);
-            //    if (newTransactionLine.Item.ItemType == ItemType.Fuel && newTransactionLine.NetValue > 20)
-            //    {
-            //        newTransactionLine.DiscountPercent = 0.10M;
-            //        newTransactionLine.DiscountValue = _transHandler.CalculateDiscountValue(newTransactionLine);
-            //    }
-            //    newTransactionLine.TotalValue = _transHandler.CalcTransactionLineTotal(newTransactionLine);
-            //    _transactionLineRepo.Update(newTransactionLine.ID, newTransactionLine);
-            //    var tmpTrans = _transactionRepo.GetById(newTransactionLine.TransactionID);
-            //    _transactionRepo.Update(newTransactionLine.TransactionID, tmpTrans);
             return Ok();
         }
 

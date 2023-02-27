@@ -114,6 +114,7 @@
             this.btn_trl_save.TabIndex = 33;
             this.btn_trl_save.Text = "Save";
             this.btn_trl_save.UseVisualStyleBackColor = false;
+            this.btn_trl_save.Click += new System.EventHandler(this.btn_trl_save_Click);
             // 
             // grv_TransactionLine
             // 
@@ -135,7 +136,6 @@
             this.grv_TransactionLine.RowTemplate.Height = 25;
             this.grv_TransactionLine.Size = new System.Drawing.Size(1077, 180);
             this.grv_TransactionLine.TabIndex = 32;
-            this.grv_TransactionLine.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_TransactionLine_CellValueChanged);
             this.grv_TransactionLine.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grv_TransactionLine_DataError);
             // 
             // col_trl_ID

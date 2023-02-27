@@ -21,6 +21,7 @@ using FuelStation.Web.Client.Pages.Customer;
 using static System.Net.WebRequestMethods;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
+using System.Diagnostics.Metrics;
 
 namespace FuelStation.Win
 {
@@ -72,16 +73,17 @@ namespace FuelStation.Win
 
         }
 
-        private async Task OnSave(TransactionLine newLine)
+        private async Task OnSave(TransactionLineListDTO newLine)
         {
             HttpResponseMessage response = null;
 
-
+            MessageBox.Show("Save cAlled");
+            // pushare ola ta transactionLines ston controller
+            //kane update to total sto transaction
 
         }
-
         //========================== Transaction Lines Buttons ============================
-
+        #region add Button
         private void btn_trl_Add_Click(object sender, EventArgs e)
         {
             //maybe a post before creating a new line?
@@ -89,25 +91,14 @@ namespace FuelStation.Win
             bsTransLine.AddNew();
             _newLine = bsTransLine.Current as TransactionLineListDTO;
             _newLine.TransactionId = _parentTransaction.ID;
-            
-            
 
         }
+        #endregion
 
-
+        #region bussiness logic
         private void bsTransLine_CurrentItemChanged(object sender, EventArgs e)
         {
             List<ItemListDTO> fuelItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();  
-
-            //var itemSelection = (TransactionLineListDTO)bsTransLine.Current;
-        
-            //if (fuelItems.Any(item => item.ID == itemSelection.ItemID))
-            //{
-            //    // Show message box or prevent user from selecting another fuel item
-            //    MessageBox.Show("You cannot select an item of type fuel more than once!","Error");
-            //    itemSelection.ItemID = _translineList.Find(x => x.ID == itemSelection.ID)?.ItemID ?? 0;
-            //}
-
             //==========================Auto-Fill Item Price=================================== 
 
 
@@ -139,6 +130,7 @@ namespace FuelStation.Win
             grv_TransactionLine.DataSource = bsTransLine;
 
         }
+        #endregion
 
         //END TRANSACTION BUTTON -- will decide what to send other than total value
         private void button1_Click(object sender, EventArgs e)
@@ -154,9 +146,11 @@ namespace FuelStation.Win
         {
             TransactionLineListDTO transLineDelete = (TransactionLineListDTO)bsTransLine.Current;
             HttpResponseMessage response = null;
-            response = await _client.DeleteAsync($"transaction/{transLineDelete.ID}");
 
+            response = await _client.DeleteAsync($"transaction/{transLineDelete.ID}");
+            _translineList.Remove(transLineDelete);
             await SetControlProperties();
+
         }
 
         private void grv_TransactionLine_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -164,23 +158,75 @@ namespace FuelStation.Win
             e.Cancel = true;
         }
 
-        private void grv_TransactionLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btn_trl_save_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void grv_TransactionLine_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == grv_TransactionLine.Columns["ItemID"].Index && e.RowIndex >= 0)
-            {
-                var currentItem = (TransactionLineListDTO)bsTransLine.Current;
-                var fuelItems = _itemList.Where(i => i.ItemType == ItemType.Fuel).ToList();
-                if (fuelItems.Any(fi => fi.ID == currentItem.ItemID))
-                {
-                    MessageBox.Show("You cannot select an item of type fuel.", "Error");
-                    bsTransLine.ResetCurrentItem();
-                }
+            if (ValidateTransLines(_translineList, _itemList)){
+                OnSave(_newLine);
+            }
+            else { 
+                MessageBox.Show("There is some error with overlaping fuel type Transaction lines"); 
             }
         }
+       
+        
+        public bool ValidateTransLines(List<TransactionLineListDTO> list, List<ItemListDTO> itemList)
+        {
+            int counter = 0;
+            List<ItemListDTO> fuelItems = itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
+            foreach(var tr in list)
+            {
+                foreach(var item in fuelItems)
+                {
+                    if(item.ID == tr.ItemID)
+                    {
+                        counter++;
+                    }
+                }
+            }
+            if (counter>1){ return false; } else { return true; }
+        }
+
+        /* private void grv_TransactionLine_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+         {
+             if (e.ColumnIndex >= 0 && e.RowIndex >= 0 && grv_TransactionLine.Columns[e.ColumnIndex].Name == "ItemID")
+             {
+                 var currentItem = (TransactionLineListDTO)bsTransLine.Current;
+                 var fuelItems = _itemList.Where(i => i.ItemType == ItemType.Fuel).ToList();
+                 if (fuelItems.Any(fi => fi.ID == currentItem.ItemID))
+                 {
+                     MessageBox.Show("You cannot select an item of type fuel.", "Error");
+                     bsTransLine.ResetCurrentItem();
+                 }
+             }
+         }*/
+
+        /* private void grv_TransactionLine_RowValidated(object sender, DataGridViewCellEventArgs e)
+         {
+             if (e.RowIndex >= 0)
+             {
+                 var currentItem = (TransactionLineListDTO)bsTransLine.List[e.RowIndex];
+                 var fuelItems = _itemList.Where(i => i.ItemType == ItemType.Fuel).ToList();
+                 if (fuelItems.Any(fi => fi.ID == currentItem.ItemID))
+                 {
+                     MessageBox.Show("You cannot select an item of type fuel.", "Error");
+                    // e.Cancel = true;
+                 }
+             }
+         }*/
+
+        /* private void grv_TransactionLine_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
+         {
+
+             if (e.RowIndex >= 0)
+             {
+                 var currentItem = (TransactionLineListDTO)bsTransLine.List[e.RowIndex];
+                 var fuelItems = _itemList.Where(i => i.ItemType == ItemType.Fuel).ToList();
+                 if (fuelItems.Any(fi => fi.ID == currentItem.ItemID))
+                 {
+                     MessageBox.Show("You cannot select an item of type fuel.", "Error");
+                      e.Cancel = true;
+                 }
+             }
+         }*/
     }
 }

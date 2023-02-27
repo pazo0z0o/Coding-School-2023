@@ -42,16 +42,16 @@
             this.btn_trl_load = new System.Windows.Forms.Button();
             this.btn_trl_save = new System.Windows.Forms.Button();
             this.grv_TransactionLine = new System.Windows.Forms.DataGridView();
-            this.bsTransLine = new System.Windows.Forms.BindingSource(this.components);
             this.col_trl_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ItemID = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.col_ItemPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_NetValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_DiscountPercent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_DiscountValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_TotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_transID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_ItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsTransLine = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.grv_TransactionLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransLine)).BeginInit();
             this.SuspendLayout();
@@ -133,19 +133,22 @@
             this.grv_TransactionLine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grv_TransactionLine.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_trl_ID,
-            this.col_Quantity,
+            this.col_ItemID,
             this.col_ItemPrice,
+            this.col_Quantity,
             this.col_NetValue,
             this.col_DiscountPercent,
             this.col_DiscountValue,
             this.col_TotalValue,
-            this.col_transID,
-            this.col_ItemID});
+            this.col_transID});
             this.grv_TransactionLine.Location = new System.Drawing.Point(-1, 8);
             this.grv_TransactionLine.Name = "grv_TransactionLine";
             this.grv_TransactionLine.RowTemplate.Height = 25;
             this.grv_TransactionLine.Size = new System.Drawing.Size(1077, 180);
             this.grv_TransactionLine.TabIndex = 32;
+            this.grv_TransactionLine.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_TransactionLine_CellContentClick);
+            this.grv_TransactionLine.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.grv_TransactionLine_CellEndEdit);
+            this.grv_TransactionLine.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grv_TransactionLine_DataError);
             // 
             // col_trl_ID
             // 
@@ -154,24 +157,33 @@
             this.col_trl_ID.Name = "col_trl_ID";
             this.col_trl_ID.Visible = false;
             // 
-            // col_Quantity
+            // col_ItemID
             // 
-            this.col_Quantity.DataPropertyName = "Quantity";
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = "0";
-            this.col_Quantity.DefaultCellStyle = dataGridViewCellStyle1;
-            this.col_Quantity.HeaderText = "Quantity";
-            this.col_Quantity.Name = "col_Quantity";
+            this.col_ItemID.DataPropertyName = "ItemID";
+            this.col_ItemID.HeaderText = "Item ID";
+            this.col_ItemID.Name = "col_ItemID";
+            this.col_ItemID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_ItemID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // col_ItemPrice
             // 
             this.col_ItemPrice.DataPropertyName = "ItemPrice";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.col_ItemPrice.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Format = "C2";
+            this.col_ItemPrice.DefaultCellStyle = dataGridViewCellStyle1;
             this.col_ItemPrice.HeaderText = "Item Price";
             this.col_ItemPrice.Name = "col_ItemPrice";
+            this.col_ItemPrice.ReadOnly = true;
+            this.col_ItemPrice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // col_Quantity
+            // 
+            this.col_Quantity.DataPropertyName = "Quantity";
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = "0";
+            this.col_Quantity.DefaultCellStyle = dataGridViewCellStyle2;
+            this.col_Quantity.HeaderText = "Quantity";
+            this.col_Quantity.Name = "col_Quantity";
             // 
             // col_NetValue
             // 
@@ -217,13 +229,6 @@
             this.col_transID.Name = "col_transID";
             this.col_transID.Visible = false;
             // 
-            // col_ItemID
-            // 
-            this.col_ItemID.DataPropertyName = "ItemID";
-            this.col_ItemID.HeaderText = "Item ID";
-            this.col_ItemID.Name = "col_ItemID";
-            this.col_ItemID.Visible = false;
-            // 
             // frm_TransactionLines
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -259,13 +264,13 @@
         private DataGridView grv_TransactionLine;
         private BindingSource bsTransLine;
         private DataGridViewTextBoxColumn col_trl_ID;
-        private DataGridViewTextBoxColumn col_Quantity;
+        private DataGridViewComboBoxColumn col_ItemID;
         private DataGridViewTextBoxColumn col_ItemPrice;
+        private DataGridViewTextBoxColumn col_Quantity;
         private DataGridViewTextBoxColumn col_NetValue;
         private DataGridViewTextBoxColumn col_DiscountPercent;
         private DataGridViewTextBoxColumn col_DiscountValue;
         private DataGridViewTextBoxColumn col_TotalValue;
         private DataGridViewTextBoxColumn col_transID;
-        private DataGridViewTextBoxColumn col_ItemID;
     }
 }

@@ -30,6 +30,7 @@ namespace FuelStation.Win
         private List<TransactionLineListDTO> _translineList = new();
         private List<CustomerListDTO> _customerList = new();
         private List<EmployeeListDTO> _employeeList = new();
+        
         private readonly CustomerListDTO _foundCustomer = new();
         private readonly int _employeeHandledTransation ;
         public TransactionListDTO newTrans = new TransactionListDTO() { Date = DateTime.Now };
@@ -140,10 +141,10 @@ namespace FuelStation.Win
                     TotalValue = newTrans.TotalValue
                 };
                 response = await _client.PostAsJsonAsync("transaction", transactionToSave);
-                if (response.IsSuccessStatusCode)
-                { MessageBox.Show("Save successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-                else
-                { MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                //if (response.IsSuccessStatusCode)
+                //{ MessageBox.Show("Save successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                //else
+                //{ MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
         }
 

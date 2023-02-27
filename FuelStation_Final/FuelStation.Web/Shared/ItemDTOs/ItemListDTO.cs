@@ -16,7 +16,7 @@ namespace FuelStation.Web.Shared.ItemDTOs
         public ItemType ItemType { get; set; }
         public decimal Price { get; set; }
         public decimal Cost { get; set; }
-        //==========================
+        //========================================
         
         //Relationships
         public List<TransactionLine> TransactionLines { get; set; } = new();

@@ -33,7 +33,7 @@ namespace FuelStation.Win
         //private List<CustomerListDTO> _customerList = new();
         //private List<EmployeeListDTO> _employeeList = new();
         private readonly TransactionHandler _transHandler = new();
-        private TransactionLine _newLine = new();
+        private TransactionLineListDTO _newLine = new();
 
 
         //Constructors
@@ -46,7 +46,7 @@ namespace FuelStation.Win
         public frm_TransactionLines(int newTransactionID, List<TransactionLineListDTO> transactionLines)
         {
             _translineList = transactionLines;
-            _newLine.TransactionID = newTransactionID;
+            _newLine.TransactionId = newTransactionID;
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
@@ -58,15 +58,27 @@ namespace FuelStation.Win
         }
 
         private async Task SetControlProperties()
-        {
+        {   
+            _itemList = await _client.GetFromJsonAsync<List<ItemListDTO>>("item");
+            
             grv_TransactionLine.AutoGenerateColumns = false;
             bsTransLine.DataSource = _translineList;
             grv_TransactionLine.DataSource = bsTransLine;
-
+            
+       
+           
             DataGridViewComboBoxColumn col_ItemID = grv_TransactionLine.Columns["col_ItemID"] as DataGridViewComboBoxColumn;
             col_ItemID.DataSource = _itemList.ToList();
             col_ItemID.ValueMember = "ID";
             col_ItemID.DisplayMember = "Description";
+
+            //DataGridViewComboBoxColumn col_ItemPrice = grv_TransactionLine.Columns["col_ItemPrice_"] as DataGridViewComboBoxColumn;
+            //col_ItemPrice.DataSource = col_ItemID;
+            //col_ItemPrice.ValueMember = "col_ItemID.ValueMember.Value";
+            //col_ItemPrice.DisplayMember = "Price";
+
+
+
         }
 
         private async Task OnSave(TransactionLine newLine)
@@ -80,12 +92,14 @@ namespace FuelStation.Win
     //========================== Transaction Lines Buttons ============================
         
         private void btn_trl_Add_Click(object sender, EventArgs e)
-        {
+        {   
+            //maybe a post before creating a new line?
             bsTransLine.AddNew();
-            _newLine = bsTransLine.Current as TransactionLine;
+            _newLine = bsTransLine.Current as TransactionLineListDTO;
             
-            if( _newLine.TransactionID != null ) 
+            if( _newLine.TransactionId != null ) 
             { 
+               
                 //logic  CHECK APO CONTROLLER K AN OXI, IMPLEMENT STO ONSAVE    
                 //_newLine.NetValue
                 
@@ -110,17 +124,35 @@ namespace FuelStation.Win
             TransactionLineListDTO transLineDelete = (TransactionLineListDTO)bsTransLine.Current;
             HttpResponseMessage response = null;
             response = await _client.DeleteAsync($"transaction/{transLineDelete.ID}");
-            if (response.IsSuccessStatusCode)
-            {
-                MessageBox.Show("Delete Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Delete unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+           
             await SetControlProperties();
         }
 
-       
+        private void grv_TransactionLine_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        { 
+            e.Cancel= true;
+        }
+
+        private void grv_TransactionLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void grv_TransactionLine_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            // check if the edited cell is in the ItemID column
+            if (e.ColumnIndex == grv_TransactionLine.Columns["col_ItemID"].Index && e.RowIndex >= 0)
+            {
+                // get the selected Item from the ItemID combobox column
+                var selectedItem = (grv_TransactionLine.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewComboBoxCell)?.Value as ItemListDTO;
+
+                // update the ItemPrice textbox column with the selected item's price
+                if (selectedItem != null)
+                {
+                    var itemPriceColumnIndex = grv_TransactionLine.Columns["col_ItemPrice"].Index;
+                    grv_TransactionLine.Rows[e.RowIndex].Cells[itemPriceColumnIndex].Value = selectedItem.Price.ToString();
+                }
+            }
+        }
     }
 }

@@ -43,7 +43,7 @@ namespace FuelStation.Web.Shared.Services_Logic
        
         public bool HasMultipleFuelLines(Transaction transaction)
         {
-            return transaction.TransactionLines.Count(x => x.Item.ItemType == ItemType.Fuel) > 1;
+            return transaction.TransactionLines.Count(x => x.Item.ItemType == ItemType.Fuel) <= 1;
         }
         //=========================================================================
         //for posts & edits

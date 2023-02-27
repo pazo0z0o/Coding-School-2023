@@ -39,7 +39,6 @@
             this.btn_Back = new System.Windows.Forms.Button();
             this.btn_trl_Add = new System.Windows.Forms.Button();
             this.btn_trl_delete = new System.Windows.Forms.Button();
-            this.btn_trl_load = new System.Windows.Forms.Button();
             this.btn_trl_save = new System.Windows.Forms.Button();
             this.grv_TransactionLine = new System.Windows.Forms.DataGridView();
             this.col_trl_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,7 +60,7 @@
             this.btn_EndEdit.BackColor = System.Drawing.Color.Transparent;
             this.btn_EndEdit.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_EndEdit.ForeColor = System.Drawing.Color.Green;
-            this.btn_EndEdit.Location = new System.Drawing.Point(1108, 188);
+            this.btn_EndEdit.Location = new System.Drawing.Point(1108, 143);
             this.btn_EndEdit.Name = "btn_EndEdit";
             this.btn_EndEdit.Size = new System.Drawing.Size(105, 35);
             this.btn_EndEdit.TabIndex = 38;
@@ -85,7 +84,7 @@
             // 
             this.btn_trl_Add.BackColor = System.Drawing.Color.LimeGreen;
             this.btn_trl_Add.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_trl_Add.Location = new System.Drawing.Point(1108, 98);
+            this.btn_trl_Add.Location = new System.Drawing.Point(1108, 53);
             this.btn_trl_Add.Name = "btn_trl_Add";
             this.btn_trl_Add.Size = new System.Drawing.Size(105, 39);
             this.btn_trl_Add.TabIndex = 36;
@@ -97,24 +96,13 @@
             // 
             this.btn_trl_delete.BackColor = System.Drawing.Color.Red;
             this.btn_trl_delete.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_trl_delete.Location = new System.Drawing.Point(1108, 143);
+            this.btn_trl_delete.Location = new System.Drawing.Point(1108, 98);
             this.btn_trl_delete.Name = "btn_trl_delete";
             this.btn_trl_delete.Size = new System.Drawing.Size(105, 39);
             this.btn_trl_delete.TabIndex = 35;
             this.btn_trl_delete.Text = "DEL";
             this.btn_trl_delete.UseVisualStyleBackColor = false;
             this.btn_trl_delete.Click += new System.EventHandler(this.btn_trl_delete_Click);
-            // 
-            // btn_trl_load
-            // 
-            this.btn_trl_load.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.btn_trl_load.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_trl_load.Location = new System.Drawing.Point(1108, 53);
-            this.btn_trl_load.Name = "btn_trl_load";
-            this.btn_trl_load.Size = new System.Drawing.Size(105, 39);
-            this.btn_trl_load.TabIndex = 34;
-            this.btn_trl_load.Text = "Load";
-            this.btn_trl_load.UseVisualStyleBackColor = false;
             // 
             // btn_trl_save
             // 
@@ -241,7 +229,6 @@
             this.Controls.Add(this.btn_Back);
             this.Controls.Add(this.btn_trl_Add);
             this.Controls.Add(this.btn_trl_delete);
-            this.Controls.Add(this.btn_trl_load);
             this.Controls.Add(this.btn_trl_save);
             this.Controls.Add(this.grv_TransactionLine);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

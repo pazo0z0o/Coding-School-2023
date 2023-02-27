@@ -34,10 +34,12 @@ namespace FuelStation.Win
         private readonly CustomerListDTO _foundCustomer = new();
         private readonly int _employeeHandledTransation ;
         public TransactionListDTO newTrans = new TransactionListDTO() { Date = DateTime.Now };
+        private decimal _totalValueOfTransLines = 0 ;
 
 
-        public Transactions_frm()
+        public Transactions_frm(decimal totalval)
         {
+            _totalValueOfTransLines = totalval;
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
@@ -67,6 +69,7 @@ namespace FuelStation.Win
                 _transactionList = await _client.GetFromJsonAsync<List<TransactionListDTO>>("transaction");
 
                 bsTransaction.DataSource = _transactionList;
+                newTrans.TotalValue = _totalValueOfTransLines; 
                 grv_Transactions.DataSource = bsTransaction;
 
                 DataGridViewComboBoxColumn col_EmployeeID = grv_Transactions.Columns["col_EmployeeID"] as DataGridViewComboBoxColumn;

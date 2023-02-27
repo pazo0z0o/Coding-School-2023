@@ -27,7 +27,7 @@ namespace FuelStation.Win
     public partial class frm_TransactionLines : Form
     {
         private readonly HttpClient _client;
-       // private List<TransactionListDTO> _transactionList = new();
+        // private List<TransactionListDTO> _transactionList = new();
         private List<TransactionLineListDTO> _translineList = new();
         private List<ItemListDTO> _itemList = new();
         //private List<CustomerListDTO> _customerList = new();
@@ -58,13 +58,13 @@ namespace FuelStation.Win
         }
 
         private async Task SetControlProperties()
-        {   
+        {
             _itemList = await _client.GetFromJsonAsync<List<ItemListDTO>>("item");
-            
+
             grv_TransactionLine.AutoGenerateColumns = false;
             bsTransLine.DataSource = _translineList;
             grv_TransactionLine.DataSource = bsTransLine;
-            
+
             DataGridViewComboBoxColumn col_ItemID = grv_TransactionLine.Columns["col_ItemID"] as DataGridViewComboBoxColumn;
             col_ItemID.DataSource = _itemList.ToList();
             col_ItemID.ValueMember = "ID";
@@ -80,39 +80,102 @@ namespace FuelStation.Win
 
         }
 
-    //========================== Transaction Lines Buttons ============================
-        
+        //========================== Transaction Lines Buttons ============================
+
         private void btn_trl_Add_Click(object sender, EventArgs e)
-        {   
+        {
             //maybe a post before creating a new line?
-            
+
             bsTransLine.AddNew();
             _newLine = bsTransLine.Current as TransactionLineListDTO;
             _newLine.TransactionId = _parentTransaction.ID;
-            if( _newLine.TransactionId != null  ) 
-            {
-                //.Where(x => x.ID);
-                _newLine.NetValue =  _newLine.ItemPrice * _newLine.Quantity ;
-                List<ItemListDTO> listItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
-                if (_newLine.NetValue > 20 && _translineList.Any(x => listItems.Any(item => item.ID == x.ItemID)))
-                {
-                    _newLine.DiscountPercent = 0.1M;
-                }
-                _newLine.DiscountValue = _newLine.NetValue * _newLine.DiscountPercent;
-                _newLine.TotalValue = _newLine.NetValue - _newLine.DiscountValue;
-
-               bsTransLine.EndEdit();
-               grv_TransactionLine.DataSource = bsTransLine;
-
+            List<ItemListDTO> listItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
+            if (_transHandler.ValidateFuelLines(_parentTransaction) )
+            { 
+                foreach (var item in listItems ) {
+                    if(_newLine.ItemID == item.ID)
+                    {
+                        MessageBox.Show("You cannot select an item of type fuel.", "Error");
+                    }
             }
+
+                //  ItemListDTO selection = 
+                //  List<ItemListDTO> listItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
+
+                //  foreach( var item in listItems) 
+                //  { 
+                //      if(selection.ID == item.ID)
+                //      {
+                //      MessageBox.Show("You cannot select an item of type fuel.", "Error");
+                //      }
+
+                //  }
+            }
+
         }
 
 
-        //END TRANSACTION BUTTON
+        private void bsTransLine_CurrentItemChanged(object sender, EventArgs e)
+        { 
+            
+           
+
+               //ItemListDTO itemSelection = (ItemListDTO).SelectedItem;
+
+              
+                // Check if the selected item is not fuel
+               //if (itemSelection.ItemType == ItemType.Fuel)
+               // {   
+                    //
+                    //col_ItemID.SelectedIndex = -1;
+              //  }
+               // else
+            //    {
+            //        // If the selected item is fuel, show an error message and deselect the item
+                   
+            //    }
+            //}
+
+
+            
+            //==========================Auto-Fill Item Price=================================== 
+            
+
+            if (_newLine != null && _newLine.ItemID != 0)
+            {
+                var selectedItem = _itemList.FirstOrDefault(i => i.ID == _newLine.ItemID);
+                if (selectedItem != null)
+                {
+                    _newLine.ItemPrice = selectedItem.Price;
+                }
+            }
+            //=========================Auto-Fill Net Value====================================    
+            if (_newLine != null && _newLine.ItemPrice != 0 && _newLine.Quantity > 0)
+            { _newLine.NetValue = _newLine.ItemPrice * _newLine.Quantity; }
+
+            //=============================Check for >20 AND fuel type =======================================
+
+            List<ItemListDTO> listItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
+            if (_newLine.NetValue > 20 && _translineList.Any(x => listItems.Any(item => item.ID == x.ItemID)))
+            {
+                _newLine.DiscountPercent = 0.1M;
+            }
+            else _newLine.DiscountPercent = 0;
+
+            _newLine.DiscountValue = _newLine.NetValue * _newLine.DiscountPercent;
+            _newLine.TotalValue = _newLine.NetValue - _newLine.DiscountValue;
+
+            //=============================End Gridview Edit=======================================   
+            bsTransLine.EndEdit();
+            grv_TransactionLine.DataSource = bsTransLine;
+
+        }
+
+        //END TRANSACTION BUTTON -- will decide what to send other than total value
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Transactions_frm transact = new Transactions_frm();
+            Transactions_frm transact = new Transactions_frm(_newLine.TotalValue);
             transact.ShowDialog();
             this.Dispose();
         }
@@ -123,13 +186,13 @@ namespace FuelStation.Win
             TransactionLineListDTO transLineDelete = (TransactionLineListDTO)bsTransLine.Current;
             HttpResponseMessage response = null;
             response = await _client.DeleteAsync($"transaction/{transLineDelete.ID}");
-           
+
             await SetControlProperties();
         }
 
         private void grv_TransactionLine_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        { 
-            e.Cancel= true;
+        {
+            e.Cancel = true;
         }
 
         private void grv_TransactionLine_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -137,40 +200,6 @@ namespace FuelStation.Win
 
         }
 
-       
-
-        private void bsTransLine_CurrentItemChanged(object sender, EventArgs e)
-        {
-            var _newLine = bsTransLine.Current as TransactionLineListDTO;
-
-            // check if the current line is not null and has a valid item selected
-            if (_newLine != null && _newLine.ItemID != 0)
-            {
-                // find the item corresponding to the selected item ID
-                var selectedItem = _itemList.FirstOrDefault(i => i.ID == _newLine.ItemID);
-
-                // update the ItemPrice textbox column with the selected item's price
-                if (selectedItem != null)
-                {
-                    _newLine.ItemPrice = selectedItem.Price;
-                }
-            }
-        }
-
-        //validationfor
-        private bool ValidateTransactionLines()
-        {
-            // check if the parent transaction has more than one transaction line
-            if (_parentTransaction.TransactionLines.Count() > 1)
-            {
-                // check if any of the transaction lines have a discount value greater than zero
-                if (_parentTransaction.TransactionLines.Any(x => x.DiscountValue > 0))
-                {
-                    return true; // validation succeeded
-                }
-            }
-
-            return false; // validation failed
-        }
+      
     }
 }

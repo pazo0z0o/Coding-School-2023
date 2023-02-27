@@ -9,32 +9,26 @@ using FuelStation.Web.Shared.ManagerOnlyDTOs;
 using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
 using Microsoft.EntityFrameworkCore;
 using FuelStation.EF.Repositories;
-
+using FuelStation.Web.Shared.ItemDTOs;
 
 namespace FuelStation.Web.Shared.Services_Logic
 {
-    public class TransactionHandler 
+    public class TransactionHandler
     {
         public TransactionHandler() { }
 
-       
-        public decimal CalculateDiscountValue(TransactionLine transline)
-        {
-            return transline.DiscountValue = transline.NetValue * transline.DiscountPercent;
-        }        
 
-        public decimal CalcTransactionLineTotal(TransactionLine tline)
-        {
 
-            return tline.TotalValue = tline.NetValue - tline.DiscountValue;
-        }
-
-        public decimal CalcNetValue(TransactionLine transline)
-        { return transline.NetValue = transline.Quantity * transline.ItemPrice; }
-       
-        public bool HasMultipleFuelLines(Transaction transaction)
+        public bool ValidateFuelLines(TransactionListDTO passedTransaction)
         {
-            return transaction.TransactionLines.Count(x => x.Item.ItemType == ItemType.Fuel) <= 1;
+            if (passedTransaction.TransactionLines.Count() > 1)
+            {
+                if (passedTransaction.TransactionLines.Any(x => x.DiscountValue > 0))
+                { return true; }
+            }
+            return false;
+
+
         }
         //=========================================================================
         //for posts & edits
@@ -101,7 +95,7 @@ namespace FuelStation.Web.Shared.Services_Logic
         }
 
 
-        
+
 
         // check if an employee's hire dates are valid -- Do it for Employee not datetime
         public bool HireDatesValid(DateTime hireDateStart, DateTime? hireDateEnd, out string msg)
@@ -125,46 +119,47 @@ namespace FuelStation.Web.Shared.Services_Logic
         public bool HireDateCheck(DateTime hireStart)
         {
             bool res = true;
-            if(hireStart < DateTime.Now) { res = false; }
+            if (hireStart < DateTime.Now) { res = false; }
             return res;
         }
 
-        public bool FiredDateCheck(DateTime hireStart ,DateTime? hireEnd)
-        {  bool res = true;
+        public bool FiredDateCheck(DateTime hireStart, DateTime? hireEnd)
+        {
+            bool res = true;
             if (hireEnd < hireStart || hireEnd < DateTime.Now) { res = false; }
             return res;
         }
 
         public bool CashOnlyOverFifty(Transaction transaction)
-        {   
+        {
             bool res = false;
-            if(transaction.TotalValue > 50) { res = true; }
-            return res;            
-        }           
+            if (transaction.TotalValue > 50) { res = true; }
+            return res;
+        }
 
 
-       
 
-      
+
+
         public decimal CalculateTotalValue(Transaction transaction)
         {
 
             decimal totalValue = 0;
             foreach (var trl in transaction.TransactionLines)
             {
-                totalValue = trl.NetValue - trl.DiscountValue; 
+                totalValue = trl.NetValue - trl.DiscountValue;
             }
             return totalValue;
         }
 
 
-       
 
 
 
 
 
-      
+
+
 
     }
 }

@@ -121,9 +121,9 @@ namespace FuelStation.Win
             await SetControlProperties();
             
             var tmpTrans = bsTransaction.Current as TransactionListDTO;
-            int passedTransID = tmpTrans.ID;
+            
             this.Hide();
-            frm_TransactionLines tlines = new frm_TransactionLines(passedTransID, tmpTrans.TransactionLines);
+            frm_TransactionLines tlines = new frm_TransactionLines(tmpTrans, tmpTrans.TransactionLines);
             tlines.ShowDialog();
         }
 

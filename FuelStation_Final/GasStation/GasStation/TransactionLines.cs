@@ -34,7 +34,7 @@ namespace FuelStation.Win
         //private List<EmployeeListDTO> _employeeList = new();
         private readonly TransactionHandler _transHandler = new();
         private TransactionLineListDTO _newLine = new();
-
+        private TransactionListDTO _parentTransaction = new();
 
         //Constructors
         public frm_TransactionLines()
@@ -43,10 +43,10 @@ namespace FuelStation.Win
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
         }
-        public frm_TransactionLines(int newTransactionID, List<TransactionLineListDTO> transactionLines)
+        public frm_TransactionLines(TransactionListDTO passedTransaction, List<TransactionLineListDTO> transactionLines)
         {
             _translineList = transactionLines;
-            _newLine.TransactionId = newTransactionID;
+            _parentTransaction = passedTransaction;
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
@@ -65,19 +65,10 @@ namespace FuelStation.Win
             bsTransLine.DataSource = _translineList;
             grv_TransactionLine.DataSource = bsTransLine;
             
-       
-           
             DataGridViewComboBoxColumn col_ItemID = grv_TransactionLine.Columns["col_ItemID"] as DataGridViewComboBoxColumn;
             col_ItemID.DataSource = _itemList.ToList();
             col_ItemID.ValueMember = "ID";
             col_ItemID.DisplayMember = "Description";
-
-            //DataGridViewComboBoxColumn col_ItemPrice = grv_TransactionLine.Columns["col_ItemPrice_"] as DataGridViewComboBoxColumn;
-            //col_ItemPrice.DataSource = col_ItemID;
-            //col_ItemPrice.ValueMember = "col_ItemID.ValueMember.Value";
-            //col_ItemPrice.DisplayMember = "Price";
-
-        
 
         }
 
@@ -94,22 +85,29 @@ namespace FuelStation.Win
         private void btn_trl_Add_Click(object sender, EventArgs e)
         {   
             //maybe a post before creating a new line?
+            
             bsTransLine.AddNew();
             _newLine = bsTransLine.Current as TransactionLineListDTO;
-            decimal tmpItemPrice ; 
+            _newLine.TransactionId = _parentTransaction.ID;
             if( _newLine.TransactionId != null  ) 
             {
-                //_newLine.
-               
-                //logic  CHECK APO CONTROLLER K AN OXI, IMPLEMENT STO ONSAVE    
-                //_newLine.NetValue
-                
+                //.Where(x => x.ID);
+                _newLine.NetValue =  _newLine.ItemPrice * _newLine.Quantity ;
+                List<ItemListDTO> listItems = _itemList.Where(type => type.ItemType == ItemType.Fuel).ToList();
+                if (_newLine.NetValue > 20 && _translineList.Any(x => listItems.Any(item => item.ID == x.ItemID)))
+                {
+                    _newLine.DiscountPercent = 0.1M;
+                }
+                _newLine.DiscountValue = _newLine.NetValue * _newLine.DiscountPercent;
+                _newLine.TotalValue = _newLine.NetValue - _newLine.DiscountValue;
 
-             //   bsTransLine.EndEdit();
-               // grv_TransactionLine.DataSource = bsTransLine;
+               bsTransLine.EndEdit();
+               grv_TransactionLine.DataSource = bsTransLine;
 
             }
         }
+
+
         //END TRANSACTION BUTTON
         private void button1_Click(object sender, EventArgs e)
         {

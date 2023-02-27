@@ -40,7 +40,7 @@ namespace FuelStation.Web.Server.Controllers
         public async Task<IEnumerable<TransactionListDTO>> Get()
         {
             var result = _transactionRepo.GetAll().ToList();
-           // foreach (var tr in result) { tr.TotalValue = _transHandler.CalculateTotalValue(tr); }
+           
             var transList = result.Select(transaction => new TransactionListDTO
             {
                 ID = transaction.ID,

@@ -49,31 +49,23 @@ namespace FuelStation.Web.Server.Controllers
                 CustomerId = transaction.CustomerId,
                 EmployeeId = transaction.EmployeeId,
                 PaymentMethod = transaction.PaymentMethod,
-
-               /* Customer = new CustomerListDTO()
-                {
-                    ID = transaction.Customer.ID,
-                    Name = transaction.Customer.Name,
-                    Surname = transaction.Customer.Surname,
-                    CardNumber = transaction.Customer.CardNumber
-                },
-                Employee = new EmployeeListDTO()
-                {
-                    ID = transaction.Employee.ID,
-                    Name = transaction.Employee.Name,
-                    Surname = transaction.Employee.Surname,
-                    HireDateStart = transaction.Employee.HireDateStart,
-                    HireDateEnd = transaction.Employee.HireDateEnd,
-                    SalaryPerMonth = transaction.Employee.SalaryPerMonth,
-                    EmployeeType = transaction.Employee.EmployeeType,
-                }*/
+                TransactionLines = transaction.TransactionLines.Select(t => new TransactionLineListDTO(){
+                ID = t.ID,
+                Quantity = t.Quantity,
+                ItemPrice = t.ItemPrice,
+                NetValue = t.NetValue,
+                DiscountPercent = t.DiscountPercent,
+                DiscountValue= t.DiscountValue,
+                TotalValue=t.TotalValue,
+            
+                }).ToList()
             });
             return transList;
         }
 
         [HttpDelete("{id}")]
         public async Task Delete(int id)
-        {
+        {   
             _transactionRepo.Delete(id);
         }
 
@@ -87,22 +79,8 @@ namespace FuelStation.Web.Server.Controllers
                 EmployeeId = transaction.EmployeeId,
                 TransactionLines = null!
             };
-            //     transaction.TransactionLines.Select(transactionLine => new TransactionLine(
-            //        transactionLine.Quantity,
-            //        transactionLine.ItemPrice,
-            //        transactionLine.NetValue,
-            //        transactionLine.DiscountPercent,
-            //        transactionLine.DiscountValue, transactionLine.TotalValue)
-            //    {
-            //        ID = transactionLine.ID,
-            //        TransactionID = transactionLine.TransactionID,
-            //        ItemID = transactionLine.ItemID,
-            //    }).ToList()
-            //};
-         
             _transactionRepo.Add(newTransaction);
             return Ok();
-
         }
 
         [HttpGet("{id}")]

@@ -20,19 +20,21 @@ using FuelStation.Model.Enums;
 using FuelStation.Web.Client.Pages.Customer;
 using static System.Net.WebRequestMethods;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 namespace FuelStation.Win
 {
     public partial class frm_TransactionLines : Form
     {
         private readonly HttpClient _client;
-        private List<TransactionListDTO> _transactionList = new();
+       // private List<TransactionListDTO> _transactionList = new();
         private List<TransactionLineListDTO> _translineList = new();
         private List<ItemListDTO> _itemList = new();
-        private List<CustomerListDTO> _customerList = new();
-        private List<EmployeeListDTO> _employeeList = new();
+        //private List<CustomerListDTO> _customerList = new();
+        //private List<EmployeeListDTO> _employeeList = new();
         private readonly TransactionHandler _transHandler = new();
         private TransactionLine _newLine = new();
+
 
         //Constructors
         public frm_TransactionLines()
@@ -41,8 +43,9 @@ namespace FuelStation.Win
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
         }
-        public frm_TransactionLines(int newTransactionID)
+        public frm_TransactionLines(int newTransactionID, List<TransactionLineListDTO> transactionLines)
         {
+            _translineList = transactionLines;
             _newLine.TransactionID = newTransactionID;
             _client = new HttpClient(new HttpClientHandler());
             _client.BaseAddress = new Uri("https://localhost:7086/");
@@ -57,34 +60,41 @@ namespace FuelStation.Win
         private async Task SetControlProperties()
         {
             grv_TransactionLine.AutoGenerateColumns = false;
-            _translineList = await _client.GetFromJsonAsync<List<TransactionLineListDTO>>("transactionline");   
-            bsTransLine.DataSource= _translineList;
+            bsTransLine.DataSource = _translineList;
             grv_TransactionLine.DataSource = bsTransLine;
+
+            DataGridViewComboBoxColumn col_ItemID = grv_TransactionLine.Columns["col_ItemID"] as DataGridViewComboBoxColumn;
+            col_ItemID.DataSource = _itemList.ToList();
+            col_ItemID.ValueMember = "ID";
+            col_ItemID.DisplayMember = "Description";
         }
 
         private async Task OnSave(TransactionLine newLine)
-        { 
-        //TODO: EDIT + Post functionalities
+        {
+            HttpResponseMessage response = null;
 
-        
-        
+
+
         }
-
-
-
-
-
-        
-
 
     //========================== Transaction Lines Buttons ============================
         
         private void btn_trl_Add_Click(object sender, EventArgs e)
         {
-            grv_TransactionLine.Rows.Add();
+            bsTransLine.AddNew();
+            _newLine = bsTransLine.Current as TransactionLine;
+            
+            if( _newLine.TransactionID != null ) 
+            { 
+                //logic  CHECK APO CONTROLLER K AN OXI, IMPLEMENT STO ONSAVE    
+                //_newLine.NetValue
+                
+
+                bsTransLine.EndEdit();
+                grv_TransactionLine.DataSource = bsTransLine;
+
+            }
         }
-        
-        
         //END TRANSACTION BUTTON
         private void button1_Click(object sender, EventArgs e)
         {
@@ -94,22 +104,21 @@ namespace FuelStation.Win
             this.Dispose();
         }
 
-        private async void btn_trl_load_Click(object sender, EventArgs e)
+
+        private async void btn_trl_delete_Click(object sender, EventArgs e)
         {
-            bsTransLine.DataSource= null;
+            TransactionLineListDTO transLineDelete = (TransactionLineListDTO)bsTransLine.Current;
+            HttpResponseMessage response = null;
+            response = await _client.DeleteAsync($"transaction/{transLineDelete.ID}");
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Delete Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Delete unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             await SetControlProperties();
-        }
-
-        private async void btn_trl_save_Click(object sender, EventArgs e)
-        {
-            //Save for POST PUT purposes
-            await OnSave(_newLine);
-            await SetControlProperties();
-        }
-
-        private void btn_trl_delete_Click(object sender, EventArgs e)
-        {
-
         }
 
        

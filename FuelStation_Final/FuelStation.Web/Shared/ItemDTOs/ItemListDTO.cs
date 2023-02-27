@@ -14,7 +14,6 @@ namespace FuelStation.Web.Shared.ItemDTOs
         public string Code { get; set; }
         public string Description { get; set; }
         public ItemType ItemType { get; set; }
-        public ItemType ItemTypeNoFuel { get; set; }
         public decimal Price { get; set; }
         public decimal Cost { get; set; }
         //==========================

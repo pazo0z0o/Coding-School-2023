@@ -115,7 +115,6 @@
             this.btn_trl_load.TabIndex = 34;
             this.btn_trl_load.Text = "Load";
             this.btn_trl_load.UseVisualStyleBackColor = false;
-            this.btn_trl_load.Click += new System.EventHandler(this.btn_trl_load_Click);
             // 
             // btn_trl_save
             // 
@@ -127,7 +126,6 @@
             this.btn_trl_save.TabIndex = 33;
             this.btn_trl_save.Text = "Save";
             this.btn_trl_save.UseVisualStyleBackColor = false;
-            this.btn_trl_save.Click += new System.EventHandler(this.btn_trl_save_Click);
             // 
             // grv_TransactionLine
             // 

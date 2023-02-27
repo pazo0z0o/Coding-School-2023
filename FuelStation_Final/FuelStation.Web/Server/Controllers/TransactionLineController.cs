@@ -37,7 +37,7 @@ namespace FuelStation.Web.Server.Controllers
         {
             var tr = _transactionLineRepo.GetById(id).TransactionID;
             _transactionLineRepo.Delete(id);
-           // _transHandler.CalculateTotalValue(_transactionRepo.GetById(tr));
+            _transHandler.CalculateTotalValue(_transactionRepo.GetById(tr));
         }
 
         [HttpPut]
@@ -46,7 +46,7 @@ namespace FuelStation.Web.Server.Controllers
             var trans = _transactionRepo.GetById(transLine.TransactionId);
             var itemToUpdate = _transactionLineRepo.GetById(transLine.ID);
             itemToUpdate.ID = transLine.ID;
-            //itemToUpdate.TransactionId = transLine.TransactionId;
+            itemToUpdate.TransactionID = transLine.TransactionId;
             itemToUpdate.Quantity = transLine.Quantity;
             itemToUpdate.ItemPrice = _itemRepo.GetById(transLine.ItemID).Price;
             itemToUpdate.NetValue = transLine.NetValue; 

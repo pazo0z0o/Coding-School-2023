@@ -28,10 +28,8 @@ namespace FuelStation.Win
 
         private List<TransactionListDTO> _transactionList = new();
         private List<TransactionLineListDTO> _translineList = new();
-        //  private List<ItemListDTO> _itemList = new();
         private List<CustomerListDTO> _customerList = new();
         private List<EmployeeListDTO> _employeeList = new();
-        // private readonly TransactionHandler _transHandler = new();
         private readonly CustomerListDTO _foundCustomer = new();
         private readonly int _employeeHandledTransation ;
         public TransactionListDTO newTrans = new TransactionListDTO() { Date = DateTime.Now };
@@ -117,15 +115,14 @@ namespace FuelStation.Win
         }
 
         private async void btn_procceed_Click(object sender, EventArgs e)
-        {//NEED TO BE ABLE TO PASS to the DATABASE ID AFTER PULLING FROM IT AGAIN
+        {
             await OnSave(newTrans);
             await SetControlProperties();
             
             var tmpTrans = bsTransaction.Current as TransactionListDTO;
             int passedTransID = tmpTrans.ID;
-            //Roundabout way to pass ID 
             this.Hide();
-            frm_TransactionLines tlines = new frm_TransactionLines(passedTransID);
+            frm_TransactionLines tlines = new frm_TransactionLines(passedTransID, tmpTrans.TransactionLines);
             tlines.ShowDialog();
         }
 

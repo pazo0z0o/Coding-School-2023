@@ -94,7 +94,6 @@ namespace FuelStation.Win
                 MessageBox.Show($"An error occurred while loading data: {ex.Message}");
             }
         }
-        //DUBIOUS WILL NEED TO CHANGE
         private async void CheckAfterTransLines()
         {
             bsTransaction.Position = bsTransaction.Count - 1;
@@ -105,7 +104,6 @@ namespace FuelStation.Win
             await OnSave(temporaryBsCurrent);
             returnFromTransactionLines = false;
         }
-
         //===============================Transaction  Button s=============================================
         private async void btn_trans_Add_Click(object sender, EventArgs e)
         {
@@ -216,7 +214,6 @@ namespace FuelStation.Win
             this.Dispose();
             this.Close();
         }
-
         private async void btn_Trans_save_Click(object sender, EventArgs e)
         {
             var tempBindingSourcePass = bsTransaction.Current as TransactionListDTO;

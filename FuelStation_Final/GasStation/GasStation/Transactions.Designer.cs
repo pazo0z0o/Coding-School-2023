@@ -63,10 +63,10 @@
             this.col_CustomerID,
             this.col_Payment,
             this.col_Total});
-            this.grv_Transactions.Location = new System.Drawing.Point(2, 2);
+            this.grv_Transactions.Location = new System.Drawing.Point(3, 2);
             this.grv_Transactions.Name = "grv_Transactions";
             this.grv_Transactions.RowTemplate.Height = 25;
-            this.grv_Transactions.Size = new System.Drawing.Size(858, 175);
+            this.grv_Transactions.Size = new System.Drawing.Size(858, 698);
             this.grv_Transactions.TabIndex = 0;
             this.grv_Transactions.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grv_Transactions_DataError);
             // 
@@ -175,7 +175,7 @@
             this.btn_Back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Back.BackColor = System.Drawing.Color.LightSeaGreen;
             this.btn_Back.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_Back.Location = new System.Drawing.Point(961, 510);
+            this.btn_Back.Location = new System.Drawing.Point(1017, 561);
             this.btn_Back.Name = "btn_Back";
             this.btn_Back.Size = new System.Drawing.Size(71, 39);
             this.btn_Back.TabIndex = 30;
@@ -213,7 +213,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1036, 561);
+            this.ClientSize = new System.Drawing.Size(1092, 612);
             this.Controls.Add(this.btn_CheckAgain);
             this.Controls.Add(this.btn_procceed);
             this.Controls.Add(this.btn_Back);

@@ -35,7 +35,7 @@ namespace FuelStation.Web.Server.Controllers
         }
 
         [HttpPost]
-        public async Task Post(ItemListDTO item)
+        public async Task Post(ItemCreateDTO item)
         {  
             var newItem = new Item();    
                 newItem.Code = item.Code;                 
@@ -77,7 +77,7 @@ namespace FuelStation.Web.Server.Controllers
             itemToUpdate.ItemType = item.ItemType;
             itemToUpdate.Price = item.Price;
             itemToUpdate.Cost = item.Cost;
-            itemToUpdate.TransactionLines = item.TransactionLines;
+            //itemToUpdate.TransactionLines = item.TransactionLines;
             _itemRepo.Update(item.ID, itemToUpdate);
         }
 

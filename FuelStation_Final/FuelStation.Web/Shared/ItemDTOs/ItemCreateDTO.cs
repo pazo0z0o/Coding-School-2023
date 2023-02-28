@@ -29,6 +29,6 @@ namespace FuelStation.Web.Shared.ItemDTOs
         //==========================
 
         //Relationships
-        public List<TransactionLine> TransactionLines { get; set; } = new();
+        //public List<TransactionLine> TransactionLines { get; set; } = new();
     }
 }

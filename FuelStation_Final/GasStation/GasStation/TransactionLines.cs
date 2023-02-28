@@ -121,7 +121,7 @@ namespace FuelStation.Win
             }
             else _newLine.DiscountPercent = 0;
 
-            _newLine.DiscountValue = (_newLine.NetValue * _newLine.DiscountPercent)/10;
+            _newLine.DiscountValue = (_newLine.NetValue * _newLine.DiscountPercent)/100;
             _newLine.TotalValue = _newLine.NetValue - _newLine.DiscountValue;
 
             //=============================End Gridview Edit=======================================   

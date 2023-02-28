@@ -29,13 +29,11 @@ namespace FuelStation.Win
             _client.BaseAddress = new Uri("https://localhost:7086/");
             InitializeComponent();
         }
-
         private void CustomerListF_Load(object sender, EventArgs e)
         {
             grv_Customers.AutoGenerateColumns = false;
             SetControlProperties();
         }
-
         private async Task SetControlProperties()
         {
             grv_Customers.AutoGenerateColumns = false;
@@ -43,7 +41,6 @@ namespace FuelStation.Win
             bsCustomers.DataSource = _customerList;
             grv_Customers.DataSource = bsCustomers;
         }
-
         private async Task OnSave()
         {
             CustomerListDTO cutomer = (CustomerListDTO)bsCustomers.Current;
@@ -66,7 +63,6 @@ namespace FuelStation.Win
                     Name = cutomer.Name,
                     Surname = cutomer.Surname,
                     CardNumber = cutomer.CardNumber
-
                 };
                 response = await _client.PutAsJsonAsync("customer", customerEdit);
             }
@@ -74,8 +70,6 @@ namespace FuelStation.Win
             {MessageBox.Show("Save successful!","Success",MessageBoxButtons.OK,MessageBoxIcon.Information); }
             else
             { MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-
-
         }
         //=========================== BUTTON EVENTS ===================================
         private async void btn_Customer_Load_Click(object sender, EventArgs e)
@@ -83,18 +77,15 @@ namespace FuelStation.Win
             bsCustomers.DataSource = null;
             await SetControlProperties();
         }
-
         private async void btn_Customer_save_Click(object sender, EventArgs e)
         {
             await OnSave();
             await SetControlProperties();
         }
-
         private void btn_Customer_Add_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void cash_Back_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -102,7 +93,6 @@ namespace FuelStation.Win
             form1.ShowDialog();
             this.Dispose();
         }
-
         private async void btn_Customer_delete_Click(object sender, EventArgs e)
         {
             CustomerListDTO customer = (CustomerListDTO)bsCustomers.Current;
@@ -110,11 +100,10 @@ namespace FuelStation.Win
             MessageBox.Show("Delete Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             await SetControlProperties();
         }
-
         private async void btn_Customer_edit_Click(object sender, EventArgs e)
-        {   //Repurposed edit button for a CardNumber Generator method click event
-            ((CustomerListDTO)(bsCustomers.Current)).CardNumber = await _generator.CardNumberGeneratorAsync();
-        }
+        {   ((CustomerListDTO)(bsCustomers.Current)).CardNumber = await _generator.CardNumberGeneratorAsync(); }
+           
+       
 
 
 

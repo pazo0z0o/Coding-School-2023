@@ -18,8 +18,6 @@ namespace FuelStation.Web.Server.Controllers
             private readonly decimal _rent = 5000;
             private readonly DateTime _openingDate = new DateTime(2023, 1, 1);
 
-
-
             // Constructors
             public MonthlyLedgerController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo)
             {

@@ -13,13 +13,9 @@ namespace FuelStation.Web.Server.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IEntityRepo<Customer> _customerRepo;
-        private TransactionHandler _transHandler; 
-        private RandomGenerators _randomGen;
-        public CustomerController(IEntityRepo<Customer> customerRepo, TransactionHandler transHandler) //RandomGenerators randomGen)
+        public CustomerController(IEntityRepo<Customer> customerRepo) //RandomGenerators randomGen)
         {
             _customerRepo = customerRepo;
-            _transHandler = transHandler;
-          
         }
 
         [HttpGet]
@@ -73,15 +69,6 @@ namespace FuelStation.Web.Server.Controllers
             itemToUpdate.CardNumber = customer.CardNumber;                     
             _customerRepo.Update(customer.ID, itemToUpdate);
         }
-
-
-
-
-
-
-
-
-
 
     }
 }

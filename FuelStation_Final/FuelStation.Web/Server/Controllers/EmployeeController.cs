@@ -15,17 +15,13 @@ namespace FuelStation.Web.Server.Controllers
     public class EmployeeController : Controller
     {
       private readonly IEntityRepo<Employee> _employeeRepo;
-       // private readonly IEntityRepo<FuelStation.Model.Transaction> _transactionRepo;
         private TransactionHandler _transHandler;
-        private RandomGenerators _randomGen;
 
         public EmployeeController(IEntityRepo<Employee> employeeRepo, TransactionHandler transHandler, RandomGenerators randomGen)
         {
             _employeeRepo= employeeRepo;
             _transHandler= transHandler;
-            _randomGen= randomGen;
         }
-
 
         [HttpGet]
         public async Task<IEnumerable<EmployeeListDTO>> Get()
@@ -48,7 +44,6 @@ namespace FuelStation.Web.Server.Controllers
         {   
             var employees = _employeeRepo.GetAll().ToList(); //weird error here? without ToList()
             string msg = "Success";
-            string datesMsg = "Success";
             var newEmployee = new Employee();
                 newEmployee.Name = employee.Name;
                 newEmployee.Surname = employee.Surname;
@@ -80,9 +75,7 @@ namespace FuelStation.Web.Server.Controllers
                 return Ok();
             }
             else return BadRequest(msg);
-
         }
-
 
         [HttpGet("{id}")]
         public async Task<EmployeeListDTO> GetById(int id)
@@ -99,21 +92,17 @@ namespace FuelStation.Web.Server.Controllers
                 EmployeeType = result.EmployeeType
             };
         }
-        //Put
         public async Task Put(EmployeeEditDTO employee)
         {
             var itemToUpdate = _employeeRepo.GetById(employee.ID);
             itemToUpdate.ID = employee.ID;
             itemToUpdate.Name = employee.Name;
             itemToUpdate.Surname = employee.Surname;
-           // itemToUpdate.HireDateStart = employee.HireDateStart;
             itemToUpdate.HireDateEnd = employee.HireDateEnd;
             itemToUpdate.SalaryPerMonth = employee.SalaryPerMonth;
             itemToUpdate.EmployeeType = employee.EmployeeType;
             itemToUpdate.Transactions = employee.Transactions;
             _employeeRepo.Update(employee.ID, itemToUpdate);
         }
-
-
     }
 }

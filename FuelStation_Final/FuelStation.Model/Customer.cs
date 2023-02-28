@@ -15,7 +15,6 @@ namespace FuelStation.Model
         //=======================================
         public string FullName { get { return string.Format("{0} {1}", Name, Surname); } }
 
-
         public Customer() { }
         
         public Customer(string name, string surname,string cardNumber)
@@ -26,9 +25,7 @@ namespace FuelStation.Model
             Transactions = new List<Transaction>();
         }
         //Relationships
-
         public List<Transaction> Transactions { get; set; }
-
 
     }
 }

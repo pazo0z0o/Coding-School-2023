@@ -23,7 +23,6 @@ namespace FuelStation.Win
     {
         private readonly HttpClient _client;
         private List<ItemListDTO> _itemList = new();
-        private readonly TransactionHandler _transHandler = new();
 
         public frm_Items()
         {
@@ -46,13 +45,10 @@ namespace FuelStation.Win
            
             DataGridViewComboBoxColumn col_ItemType = grv_Items.Columns["col_ItemType"] as DataGridViewComboBoxColumn;
             col_ItemType.DataSource = Enum.GetValues(typeof(ItemType));
-         
         }
-
         //==============================Buttons & Events ================================
         private async void btn_Item_save_Click(object sender, EventArgs e)
         {
-         
             HttpResponseMessage response = null;
             ItemListDTO item = (ItemListDTO)bsItems.Current;
             if (item.ID == 0)
@@ -85,7 +81,6 @@ namespace FuelStation.Win
             else
             { MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
-
             private async void btn_Item_Load_Click(object sender, EventArgs e)
         {
             bsItems.DataSource = null;
@@ -94,7 +89,6 @@ namespace FuelStation.Win
 
         private async void btn_Item_delete_Click(object sender, EventArgs e)
         {
-            //TODO: DELETE BUTTON WITH  ASYNC
             ItemListDTO items = (ItemListDTO)bsItems.Current;
             HttpResponseMessage response = null;
             response = await _client.DeleteAsync($"item/{items.ID}");
@@ -111,7 +105,6 @@ namespace FuelStation.Win
 
         private void btn_Back_Click(object sender, EventArgs e)
         {
-            //BACK TO FORM1
             this.Hide();
             Form1 form1 = new Form1();
             form1.ShowDialog();
@@ -120,7 +113,6 @@ namespace FuelStation.Win
 
         private void btn_Close_Click(object sender, EventArgs e)
         {
-            //CLOSE BUT RETURN TO FORM 1
             this.Hide();
             Form1 form1 = new Form1();
             form1.ShowDialog();

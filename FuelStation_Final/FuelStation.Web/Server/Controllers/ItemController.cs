@@ -14,14 +14,11 @@ namespace FuelStation.Web.Server.Controllers
     [ApiController]
     public class ItemController : ControllerBase
     {
-        
         private readonly IEntityRepo<Item> _itemRepo;
-
         public ItemController(IEntityRepo<Item> itemRepo)
         {
             _itemRepo= itemRepo;
         }
-
         [HttpGet]
         public async Task<IEnumerable<ItemListDTO>> Get()
         {
@@ -36,7 +33,6 @@ namespace FuelStation.Web.Server.Controllers
                 Cost = item.Cost
             });
         }
-
 
         [HttpPost]
         public async Task Post(ItemListDTO item)
@@ -85,33 +81,7 @@ namespace FuelStation.Web.Server.Controllers
             _itemRepo.Update(item.ID, itemToUpdate);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
 
 
-//public int ID { get; set; }
-//public string Code { get; set; }
-//public string Description { get; set; }
-//public ItemType ItemType { get; set; }
-//public decimal Price { get; set; }
-//public decimal Cost { get; set; }

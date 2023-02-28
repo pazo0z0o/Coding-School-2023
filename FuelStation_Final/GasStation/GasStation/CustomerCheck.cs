@@ -38,9 +38,7 @@ namespace FuelStation.Win
         {
             _customerList = await _client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
             _employeeList = await _client.GetFromJsonAsync<List<EmployeeListDTO>>("employee");
-
-            //Set a single combobox
-            
+     
             comboBox1.DataSource = _employeeList.ToList();
             comboBox1.ValueMember = "ID";
             comboBox1.DisplayMember = "Surname";
@@ -55,7 +53,6 @@ namespace FuelStation.Win
             this.Dispose();
             this.Close();
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -65,7 +62,6 @@ namespace FuelStation.Win
             this.Close();
         }
    //===================================================================================================
-
         private async Task<bool> CheckCustomerCardExists(string textboxInput)
         {
             _customerList = await _client.GetFromJsonAsync<List<CustomerListDTO>>("customer");
@@ -97,14 +93,12 @@ namespace FuelStation.Win
                 textBox1.BackColor = Color.LightCoral;
                 btn_CreateCustomer.Visible= true;
             }
-        
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
              _empIDHandler = (int)comboBox1.SelectedValue;
         }
-
    //===================================================================================================
         private void btn_back_Click(object sender, EventArgs e)
         { 

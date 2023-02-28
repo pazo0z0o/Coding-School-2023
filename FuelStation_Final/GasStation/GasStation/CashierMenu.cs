@@ -18,10 +18,7 @@ namespace FuelStation.Win
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void label1_Click(object sender, EventArgs e) { }
 
         private void btn_mng_Customer_Click(object sender, EventArgs e)
         {
@@ -48,9 +45,8 @@ namespace FuelStation.Win
             this.Close();
         }
 
-        private void CashierMenu_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void CashierMenu_Load(object sender, EventArgs e){ }
+       
+        
     }
 }

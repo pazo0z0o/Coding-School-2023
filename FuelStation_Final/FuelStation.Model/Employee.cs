@@ -20,9 +20,7 @@ namespace FuelStation.Model
         public EmployeeType EmployeeType { get; set; }
         //===============================================
         public string FullName { get { return string.Format("{0} {1}", Name, Surname); } }
-       
              public List<Transaction> Transactions { get; set; }
-
         public Employee() { }
 
         

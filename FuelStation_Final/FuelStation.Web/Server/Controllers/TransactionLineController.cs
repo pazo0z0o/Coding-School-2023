@@ -13,14 +13,12 @@ namespace FuelStation.Web.Server.Controllers
     [ApiController]
     public class TransactionLineController : ControllerBase
     {
-
         private readonly IEntityRepo<Transaction> _transactionRepo;
         private readonly IEntityRepo<Customer> _customerRepo;
         private readonly IEntityRepo<Employee> _employeeRepo;
         private readonly IEntityRepo<Item> _itemRepo;
         private readonly IEntityRepo<TransactionLine> _transactionLineRepo;
         private TransactionHandler _transHandler;
-
 
         public TransactionLineController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo, IEntityRepo<TransactionLine> transLineRepo, TransactionHandler transHandler)
         {
@@ -29,15 +27,12 @@ namespace FuelStation.Web.Server.Controllers
             _employeeRepo = employeeRepo;
             _transactionLineRepo = transLineRepo;
             _transHandler = transHandler;
-
         }
-
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
             var tr = _transactionLineRepo.GetById(id).TransactionID;
             _transactionLineRepo.Delete(id);
-            
         }
 
         [HttpPut]
@@ -56,7 +51,6 @@ namespace FuelStation.Web.Server.Controllers
             return Ok();
         }
 
-
         [HttpPost]
         public async Task<ActionResult> Post(TransactionLineListDTO transLine)
         {
@@ -73,12 +67,6 @@ namespace FuelStation.Web.Server.Controllers
             _transactionLineRepo.Add(newTransactionLine);
             return Ok();
         }
-
-
-
-
-
-
 
     }
 }

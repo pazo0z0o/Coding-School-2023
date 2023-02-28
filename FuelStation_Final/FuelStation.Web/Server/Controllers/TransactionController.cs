@@ -9,9 +9,6 @@ using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
 using FuelStation.Web.Shared.ManagerOnlyDTOs;
 using FuelStation.Web.Shared.ItemDTOs;
 
-
-
-
 namespace FuelStation.Web.Server.Controllers
 {
     [Route("[controller]")]
@@ -25,7 +22,6 @@ namespace FuelStation.Web.Server.Controllers
         private readonly IEntityRepo<TransactionLine> _transLineRepo;
         private TransactionHandler _transHandler;
 
-
         public TransactionController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo, IEntityRepo<TransactionLine> transLineRepo, TransactionHandler transHandler)
         {
             _transactionRepo = transactionRepo;
@@ -33,9 +29,7 @@ namespace FuelStation.Web.Server.Controllers
             _employeeRepo = employeeRepo;
             _transLineRepo = transLineRepo;
             _transHandler = transHandler;
-
         }
-
         [HttpGet]
         public async Task<IEnumerable<TransactionListDTO>> Get()
         {
@@ -63,13 +57,11 @@ namespace FuelStation.Web.Server.Controllers
             });
             return transList;
         }
-
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
             _transactionRepo.Delete(id);
         }
-
         [HttpPost]
         public async Task<ActionResult> Post(TransactionListDTO transaction)
         {
@@ -83,16 +75,13 @@ namespace FuelStation.Web.Server.Controllers
             _transactionRepo.Add(newTransaction);
             return Ok();
         }
-
         [HttpGet("{id}")]
         public async Task<TransactionEditDTO> GetById(int id)
         {
-
             var result = _transactionRepo.GetById(id);
             result.TotalValue = _transHandler.CalculateTotalValue(result);// implement it
             var resultEmployee = _employeeRepo.GetAll();
             var resultCustomer = _customerRepo.GetAll();
-
             var transaction = new TransactionEditDTO
             {
                 ID = id,
@@ -101,21 +90,9 @@ namespace FuelStation.Web.Server.Controllers
                 EmployeeId = result.EmployeeId,
                 PaymentMethod = result.PaymentMethod,
                 TotalValue = result.TotalValue,
-
-                ////TransactionLines = result.TransactionLines.Select(transactionLine => new TransactionLineEditDTO
-                //{
-                //    ID = transactionLine.ID,
-                //    Quantity = transactionLine.Quantity,
-                //    ItemPrice = transactionLine.ItemPrice, //<select> with bind-Value:"@Item.Price "
-                //    NetValue = transactionLine.NetValue,
-                //    DiscountPercent = transactionLine.DiscountPercent,
-                //    DiscountValue = transactionLine.DiscountValue,
-                //    TotalValue = transactionLine.TotalValue
-                //}).ToList()
             };
             return transaction;
         }
-
         [HttpPut]
         public async Task<ActionResult> Put(TransactionEditDTO transaction)
         {
@@ -124,7 +101,6 @@ namespace FuelStation.Web.Server.Controllers
             transactionUpdate.CustomerId = transaction.CustomerId;
             transactionUpdate.EmployeeId = transaction.EmployeeId;
             transactionUpdate.PaymentMethod = transaction.PaymentMethod;
-
             _transactionRepo.Update(transaction.ID, transactionUpdate);
             return Ok();
 

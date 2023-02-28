@@ -17,15 +17,10 @@ namespace FuelStation.Win
         {
             InitializeComponent();
         }
-
-
         private void frm_manager_Load(object sender, EventArgs e)
         {
 
         }
-     
-
-       
 
         private void btn_mng_Customer_Click(object sender, EventArgs e)
         {
@@ -33,8 +28,6 @@ namespace FuelStation.Win
             customF.ShowDialog();
             this.Hide();
         }
-
-
         private void btn_mng_Item_Click(object sender, EventArgs e)
         {
             frm_Items frm_Items = new frm_Items();
@@ -56,8 +49,6 @@ namespace FuelStation.Win
             form1.Show();
             this.Close();
         }
-
-        //accidental double clicks bellow here -- remember to clean up afterwards from the designer
           private void label1_Click(object sender, EventArgs e)
         {
 

@@ -21,8 +21,6 @@ namespace FuelStation.Model
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; } = null!;
 
-       
-
         public Transaction() { }
 
         public Transaction(PaymentMethod paymentMethod, decimal totalValue, DateTime date)
@@ -31,9 +29,7 @@ namespace FuelStation.Model
             TotalValue = totalValue;
             Date = date;
         }
-
         //Relationships
         public List<TransactionLine> TransactionLines { get; set; }
-
     }
 }

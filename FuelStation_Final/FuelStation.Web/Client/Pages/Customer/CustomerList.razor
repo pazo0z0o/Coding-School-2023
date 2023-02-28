@@ -1,4 +1,5 @@
 ﻿@page "/customerlist"
+@using Fuel.Station.Blazor.Client.Shared;
 @using FuelStation.Web.Shared.ManagerStaffSharedDTOs;
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
@@ -36,6 +37,7 @@ else
 
                     <td>
                         <button class="btn btn-primary" @onclick="()=> EditItem(customer)">Edit</button>
+                        <BootstrapButton ButtonType="BootstrapButtonType.Warning" OnClick="()=> DetailItem(customer)">Details</BootstrapButton>
                         <button class="btn btn-danger" @onclick="()=> DeleteItem(customer)">Delete</button>
                         
                     </td>
@@ -49,6 +51,8 @@ else
 
 @code {
     private List<CustomerListDTO> customerList = new();
+    private void DetailItem(CustomerListDTO customer)
+    { navigationManager.NavigateTo($"customerList/details/{customer.ID}"); }
     bool isLoading { get; set; } = true;
 
     protected override async Task OnInitializedAsync()

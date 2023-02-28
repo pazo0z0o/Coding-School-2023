@@ -29,18 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_EndEdit = new System.Windows.Forms.Button();
             this.btn_Back = new System.Windows.Forms.Button();
             this.btn_trl_Add = new System.Windows.Forms.Button();
             this.btn_trl_delete = new System.Windows.Forms.Button();
             this.btn_trl_save = new System.Windows.Forms.Button();
             this.grv_TransactionLine = new System.Windows.Forms.DataGridView();
+            this.bsTransLine = new System.Windows.Forms.BindingSource(this.components);
             this.col_trl_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_ItemID = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.col_ItemPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,7 +51,6 @@
             this.col_DiscountValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_TotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_transID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsTransLine = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.grv_TransactionLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTransLine)).BeginInit();
             this.SuspendLayout();
@@ -131,13 +131,17 @@
             this.col_DiscountValue,
             this.col_TotalValue,
             this.col_transID});
-            this.grv_TransactionLine.Location = new System.Drawing.Point(0, 0);
+            this.grv_TransactionLine.Location = new System.Drawing.Point(5, 12);
             this.grv_TransactionLine.MultiSelect = false;
             this.grv_TransactionLine.Name = "grv_TransactionLine";
             this.grv_TransactionLine.RowTemplate.Height = 25;
             this.grv_TransactionLine.Size = new System.Drawing.Size(1225, 180);
             this.grv_TransactionLine.TabIndex = 32;
             this.grv_TransactionLine.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grv_TransactionLine_DataError);
+            // 
+            // bsTransLine
+            // 
+            this.bsTransLine.CurrentItemChanged += new System.EventHandler(this.bsTransLine_CurrentItemChanged);
             // 
             // col_trl_ID
             // 
@@ -157,9 +161,9 @@
             // col_ItemPrice
             // 
             this.col_ItemPrice.DataPropertyName = "ItemPrice";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Format = "C2";
-            this.col_ItemPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.Format = "C2";
+            this.col_ItemPrice.DefaultCellStyle = dataGridViewCellStyle7;
             this.col_ItemPrice.HeaderText = "Item Price";
             this.col_ItemPrice.Name = "col_ItemPrice";
             this.col_ItemPrice.ReadOnly = true;
@@ -168,46 +172,49 @@
             // col_Quantity
             // 
             this.col_Quantity.DataPropertyName = "Quantity";
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            this.col_Quantity.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Format = "N0";
+            dataGridViewCellStyle8.NullValue = "0";
+            this.col_Quantity.DefaultCellStyle = dataGridViewCellStyle8;
             this.col_Quantity.HeaderText = "Quantity";
             this.col_Quantity.Name = "col_Quantity";
             // 
             // col_NetValue
             // 
             this.col_NetValue.DataPropertyName = "NetValue";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = "0";
-            this.col_NetValue.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.Format = "C2";
+            dataGridViewCellStyle9.NullValue = "0";
+            this.col_NetValue.DefaultCellStyle = dataGridViewCellStyle9;
             this.col_NetValue.HeaderText = "Net Value";
             this.col_NetValue.Name = "col_NetValue";
+            this.col_NetValue.ReadOnly = true;
             // 
             // col_DiscountPercent
             // 
             this.col_DiscountPercent.DataPropertyName = "DiscountPercentage";
-            dataGridViewCellStyle4.Format = "N1";
-            dataGridViewCellStyle4.NullValue = "0";
-            this.col_DiscountPercent.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Format = "N1";
+            dataGridViewCellStyle10.NullValue = "0";
+            this.col_DiscountPercent.DefaultCellStyle = dataGridViewCellStyle10;
             this.col_DiscountPercent.HeaderText = "Discount Percentage";
             this.col_DiscountPercent.Name = "col_DiscountPercent";
+            this.col_DiscountPercent.ReadOnly = true;
             // 
             // col_DiscountValue
             // 
             this.col_DiscountValue.DataPropertyName = "DiscountValue";
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.col_DiscountValue.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Format = "C2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.col_DiscountValue.DefaultCellStyle = dataGridViewCellStyle11;
             this.col_DiscountValue.HeaderText = "Discount Value";
             this.col_DiscountValue.Name = "col_DiscountValue";
+            this.col_DiscountValue.ReadOnly = true;
             // 
             // col_TotalValue
             // 
             this.col_TotalValue.DataPropertyName = "TotalValue";
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.col_TotalValue.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Format = "C2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.col_TotalValue.DefaultCellStyle = dataGridViewCellStyle12;
             this.col_TotalValue.HeaderText = "Total Value";
             this.col_TotalValue.Name = "col_TotalValue";
             // 
@@ -217,10 +224,6 @@
             this.col_transID.HeaderText = "TransactionID";
             this.col_transID.Name = "col_transID";
             this.col_transID.Visible = false;
-            // 
-            // bsTransLine
-            // 
-            this.bsTransLine.CurrentItemChanged += new System.EventHandler(this.bsTransLine_CurrentItemChanged);
             // 
             // frm_TransactionLines
             // 

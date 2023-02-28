@@ -60,7 +60,7 @@
             this.btn_EndEdit.BackColor = System.Drawing.Color.Transparent;
             this.btn_EndEdit.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_EndEdit.ForeColor = System.Drawing.Color.Green;
-            this.btn_EndEdit.Location = new System.Drawing.Point(1108, 143);
+            this.btn_EndEdit.Location = new System.Drawing.Point(1236, 145);
             this.btn_EndEdit.Name = "btn_EndEdit";
             this.btn_EndEdit.Size = new System.Drawing.Size(105, 35);
             this.btn_EndEdit.TabIndex = 38;
@@ -73,7 +73,7 @@
             this.btn_Back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Back.BackColor = System.Drawing.Color.LightSeaGreen;
             this.btn_Back.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_Back.Location = new System.Drawing.Point(1266, 490);
+            this.btn_Back.Location = new System.Drawing.Point(1394, 490);
             this.btn_Back.Name = "btn_Back";
             this.btn_Back.Size = new System.Drawing.Size(71, 39);
             this.btn_Back.TabIndex = 37;
@@ -84,7 +84,7 @@
             // 
             this.btn_trl_Add.BackColor = System.Drawing.Color.LimeGreen;
             this.btn_trl_Add.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_trl_Add.Location = new System.Drawing.Point(1108, 53);
+            this.btn_trl_Add.Location = new System.Drawing.Point(1236, 57);
             this.btn_trl_Add.Name = "btn_trl_Add";
             this.btn_trl_Add.Size = new System.Drawing.Size(105, 39);
             this.btn_trl_Add.TabIndex = 36;
@@ -96,7 +96,7 @@
             // 
             this.btn_trl_delete.BackColor = System.Drawing.Color.Red;
             this.btn_trl_delete.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_trl_delete.Location = new System.Drawing.Point(1108, 98);
+            this.btn_trl_delete.Location = new System.Drawing.Point(1236, 102);
             this.btn_trl_delete.Name = "btn_trl_delete";
             this.btn_trl_delete.Size = new System.Drawing.Size(105, 39);
             this.btn_trl_delete.TabIndex = 35;
@@ -108,7 +108,7 @@
             // 
             this.btn_trl_save.BackColor = System.Drawing.Color.Gold;
             this.btn_trl_save.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_trl_save.Location = new System.Drawing.Point(1108, 8);
+            this.btn_trl_save.Location = new System.Drawing.Point(1236, 12);
             this.btn_trl_save.Name = "btn_trl_save";
             this.btn_trl_save.Size = new System.Drawing.Size(105, 39);
             this.btn_trl_save.TabIndex = 33;
@@ -131,10 +131,11 @@
             this.col_DiscountValue,
             this.col_TotalValue,
             this.col_transID});
-            this.grv_TransactionLine.Location = new System.Drawing.Point(-1, 8);
+            this.grv_TransactionLine.Location = new System.Drawing.Point(0, 0);
+            this.grv_TransactionLine.MultiSelect = false;
             this.grv_TransactionLine.Name = "grv_TransactionLine";
             this.grv_TransactionLine.RowTemplate.Height = 25;
-            this.grv_TransactionLine.Size = new System.Drawing.Size(1077, 180);
+            this.grv_TransactionLine.Size = new System.Drawing.Size(1225, 180);
             this.grv_TransactionLine.TabIndex = 32;
             this.grv_TransactionLine.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.grv_TransactionLine_DataError);
             // 
@@ -225,7 +226,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1225, 636);
+            this.ClientSize = new System.Drawing.Size(1353, 636);
             this.Controls.Add(this.btn_EndEdit);
             this.Controls.Add(this.btn_Back);
             this.Controls.Add(this.btn_trl_Add);

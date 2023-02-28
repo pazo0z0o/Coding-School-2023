@@ -14,8 +14,7 @@ namespace FuelStation.Web.Server.Controllers
     [ApiController]
     public class ItemController : ControllerBase
     {
-        private TransactionHandler _transHandler;
-        private RandomGenerators _randomGen;
+        
         private readonly IEntityRepo<Item> _itemRepo;
 
         public ItemController(IEntityRepo<Item> itemRepo)
@@ -79,7 +78,6 @@ namespace FuelStation.Web.Server.Controllers
             itemToUpdate.ID = item.ID;
             itemToUpdate.Code = item.Code;
             itemToUpdate.Description = item.Description;
-            // itemToUpdate.HireDateStart = employee.HireDateStart;
             itemToUpdate.ItemType = item.ItemType;
             itemToUpdate.Price = item.Price;
             itemToUpdate.Cost = item.Cost;

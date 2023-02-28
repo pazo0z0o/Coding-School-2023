@@ -20,8 +20,6 @@ namespace FuelStation.Web.Shared.ManagerStaffSharedDTOs
         public int CustomerId { get; set; }
         public int EmployeeId { get; set; }
 
-        //public CustomerListDTO Customer { get; set; } = null;
-        //public EmployeeListDTO Employee { get; set; } = null;
-       public List<TransactionLineEditDTO> TransactionLines { get; set; } = null;
+       //public List<TransactionLineEditDTO> TransactionLines { get; set; } = null;
     }
 }

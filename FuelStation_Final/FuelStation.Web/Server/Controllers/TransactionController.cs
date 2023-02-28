@@ -24,7 +24,7 @@ namespace FuelStation.Web.Server.Controllers
         private readonly IEntityRepo<Item> _itemRepo;
         private readonly IEntityRepo<TransactionLine> _transLineRepo;
         private TransactionHandler _transHandler;
-       
+
 
         public TransactionController(IEntityRepo<Transaction> transactionRepo, IEntityRepo<Customer> customerRepo, IEntityRepo<Employee> employeeRepo, IEntityRepo<Item> itemRepo, IEntityRepo<TransactionLine> transLineRepo, TransactionHandler transHandler)
         {
@@ -33,14 +33,14 @@ namespace FuelStation.Web.Server.Controllers
             _employeeRepo = employeeRepo;
             _transLineRepo = transLineRepo;
             _transHandler = transHandler;
-            
+
         }
 
         [HttpGet]
         public async Task<IEnumerable<TransactionListDTO>> Get()
         {
             var result = _transactionRepo.GetAll().ToList();
-           
+
             var transList = result.Select(transaction => new TransactionListDTO
             {
                 ID = transaction.ID,
@@ -49,15 +49,16 @@ namespace FuelStation.Web.Server.Controllers
                 CustomerId = transaction.CustomerId,
                 EmployeeId = transaction.EmployeeId,
                 PaymentMethod = transaction.PaymentMethod,
-                TransactionLines = transaction.TransactionLines.Select(t => new TransactionLineListDTO(){
-                ID = t.ID,
-                Quantity = t.Quantity,
-                ItemPrice = t.ItemPrice,
-                NetValue = t.NetValue,
-                DiscountPercent = t.DiscountPercent,
-                DiscountValue= t.DiscountValue,
-                TotalValue=t.TotalValue,
-            
+                TransactionLines = transaction.TransactionLines.Select(t => new TransactionLineListDTO()
+                {
+                    ID = t.ID,
+                    Quantity = t.Quantity,
+                    ItemPrice = t.ItemPrice,
+                    NetValue = t.NetValue,
+                    DiscountPercent = t.DiscountPercent,
+                    DiscountValue = t.DiscountValue,
+                    TotalValue = t.TotalValue,
+
                 }).ToList()
             });
             return transList;
@@ -65,7 +66,7 @@ namespace FuelStation.Web.Server.Controllers
 
         [HttpDelete("{id}")]
         public async Task Delete(int id)
-        {   
+        {
             _transactionRepo.Delete(id);
         }
 
@@ -84,14 +85,16 @@ namespace FuelStation.Web.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<TransactionEditDTO> GetById(int id) {
+        public async Task<TransactionEditDTO> GetById(int id)
+        {
 
             var result = _transactionRepo.GetById(id);
             result.TotalValue = _transHandler.CalculateTotalValue(result);// implement it
             var resultEmployee = _employeeRepo.GetAll();
             var resultCustomer = _customerRepo.GetAll();
-            
-                var transaction = new TransactionEditDTO {
+
+            var transaction = new TransactionEditDTO
+            {
                 ID = id,
                 Date = result.Date,
                 CustomerId = result.CustomerId,
@@ -99,16 +102,16 @@ namespace FuelStation.Web.Server.Controllers
                 PaymentMethod = result.PaymentMethod,
                 TotalValue = result.TotalValue,
 
-                TransactionLines = result.TransactionLines.Select(transactionLine => new TransactionLineEditDTO
-                {
-                    ID = transactionLine.ID,
-                    Quantity = transactionLine.Quantity,
-                    ItemPrice = transactionLine.ItemPrice, //<select> with bind-Value:"@Item.Price "
-                    NetValue = transactionLine.NetValue,
-                    DiscountPercent = transactionLine.DiscountPercent,
-                    DiscountValue = transactionLine.DiscountValue,
-                    TotalValue= transactionLine.TotalValue
-                }).ToList()
+                ////TransactionLines = result.TransactionLines.Select(transactionLine => new TransactionLineEditDTO
+                //{
+                //    ID = transactionLine.ID,
+                //    Quantity = transactionLine.Quantity,
+                //    ItemPrice = transactionLine.ItemPrice, //<select> with bind-Value:"@Item.Price "
+                //    NetValue = transactionLine.NetValue,
+                //    DiscountPercent = transactionLine.DiscountPercent,
+                //    DiscountValue = transactionLine.DiscountValue,
+                //    TotalValue = transactionLine.TotalValue
+                //}).ToList()
             };
             return transaction;
         }
@@ -116,71 +119,14 @@ namespace FuelStation.Web.Server.Controllers
         [HttpPut]
         public async Task<ActionResult> Put(TransactionEditDTO transaction)
         {
-            //var transactionList = _transactionRepo.GetAll().ToList();
-            {
-                var transactionUpdate = _transactionRepo.GetById(transaction.ID);
-                // transactionUpdate.Date = transaction.Date;  logically shouldn't be able to touch it!
-                transactionUpdate.TotalValue = transaction.TotalValue;
-                transactionUpdate.CustomerId = transaction.CustomerId;
-                transactionUpdate.EmployeeId = transaction.EmployeeId;
-                transactionUpdate.PaymentMethod = transaction.PaymentMethod;
-                try
-                {
-                    if (transactionUpdate.TransactionLines.Count > 0 && _transHandler.CashOnlyOverFifty(transactionUpdate))
-                    { transactionUpdate.PaymentMethod = PaymentMethod.Cash; }
-                    else
-                    { transactionUpdate.PaymentMethod = transaction.PaymentMethod; }
-                }
-                catch (Exception ex)
-                { Console.WriteLine($"An exception occurred: {ex.Message}"); }
-               
+            var transactionUpdate = _transactionRepo.GetById(transaction.ID);
+            transactionUpdate.TotalValue = transaction.TotalValue;
+            transactionUpdate.CustomerId = transaction.CustomerId;
+            transactionUpdate.EmployeeId = transaction.EmployeeId;
+            transactionUpdate.PaymentMethod = transaction.PaymentMethod;
 
-                _transactionRepo.Update(transaction.ID, transactionUpdate);
-                return Ok();
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            _transactionRepo.Update(transaction.ID, transactionUpdate);
+            return Ok();
 
         }
 

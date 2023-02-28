@@ -56,10 +56,8 @@ namespace FuelStation.Win
         }
         private void Transactions_frm_Load(object sender, EventArgs e)
         {
-
             grv_Transactions.AutoGenerateColumns = false;
             SetControlProperties();
-
         }
         private async Task SetControlProperties()
         {
@@ -72,8 +70,9 @@ namespace FuelStation.Win
 
 
                 bsTransaction.DataSource = _transactionList;
-                if (returnFromTransactionLines) { CheckAfterTransLines(bsTransaction); }
-                bsTransaction.ResetCurrentItem();
+                
+                if (returnFromTransactionLines) { CheckAfterTransLines(); }
+                
 
                 grv_Transactions.DataSource = bsTransaction;
 
@@ -95,13 +94,15 @@ namespace FuelStation.Win
                 MessageBox.Show($"An error occurred while loading data: {ex.Message}");
             }
         }
-
-        private void CheckAfterTransLines(BindingSource bsTransaction)
+        //DUBIOUS WILL NEED TO CHANGE
+        private async void CheckAfterTransLines()
         {
+            bsTransaction.Position = bsTransaction.Count - 1;
             TransactionListDTO temporaryBsCurrent = (TransactionListDTO)bsTransaction.Current;
-            temporaryBsCurrent.TotalValue = _totalValueOfTransLines; 
-            if(temporaryBsCurrent.TotalValue> 50) 
+            temporaryBsCurrent.TotalValue= _totalValueOfTransLines;
+            if (temporaryBsCurrent.TotalValue> 50) 
             { temporaryBsCurrent.PaymentMethod = PaymentMethod.Cash; }
+            await OnSave(temporaryBsCurrent);
             returnFromTransactionLines = false;
         }
 
@@ -158,11 +159,19 @@ namespace FuelStation.Win
                     PaymentMethod = newTrans.PaymentMethod,
                     TotalValue = newTrans.TotalValue
                 };
-                response = await _client.PostAsJsonAsync("transaction", transactionToSave);
-                //if (response.IsSuccessStatusCode)
-                //{ MessageBox.Show("Save successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-                //else
-                //{ MessageBox.Show("Save unsuccessful!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                response = await _client.PostAsJsonAsync("transaction", transactionToSave);                
+            }
+            else{
+                TransactionEditDTO transactionToUpdate = new TransactionEditDTO()
+                {
+                    ID = newTrans.ID,
+                    CustomerId = newTrans.CustomerId,
+                    Date = newTrans.Date,
+                    EmployeeId = newTrans.EmployeeId,
+                    PaymentMethod = newTrans.PaymentMethod,
+                    TotalValue = newTrans.TotalValue
+                };
+                response = await _client.PutAsJsonAsync("transaction", transactionToUpdate);
             }
         }
 
@@ -177,7 +186,6 @@ namespace FuelStation.Win
         {
             e.Cancel = true;
         }
-
         private async void btn_trans_delete_Click(object sender, EventArgs e)
         {
             TransactionListDTO transDEL = (TransactionListDTO)bsTransaction.Current;
@@ -201,7 +209,6 @@ namespace FuelStation.Win
             bsTransaction.DataSource = null;
             SetControlProperties();
         }
-
         private void btn_CheckAgain_Click(object sender, EventArgs e)
         {
             CustomerCheck returnCheck = new CustomerCheck();
@@ -209,13 +216,14 @@ namespace FuelStation.Win
             this.Dispose();
             this.Close();
         }
+
+        private async void btn_Trans_save_Click(object sender, EventArgs e)
+        {
+            var tempBindingSourcePass = bsTransaction.Current as TransactionListDTO;
+            await OnSave(tempBindingSourcePass);
+            await SetControlProperties();
+        }
     }
-
-
-
-
-
-
 
 }
 

@@ -70,7 +70,7 @@ namespace FuelStation.Web.Server.Controllers
             newTransactionLine.DiscountPercent = transLine.DiscountPercent;
             newTransactionLine.DiscountValue = transLine.DiscountValue;
             newTransactionLine.TotalValue = transLine.TotalValue;
-
+            _transactionLineRepo.Add(newTransactionLine);
             return Ok();
         }
 

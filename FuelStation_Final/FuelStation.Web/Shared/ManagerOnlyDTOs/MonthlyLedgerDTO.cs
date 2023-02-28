@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace FuelStation.Web.Shared.ManagerOnlyDTOs
 {
-    public class LedgerDTO
+
+    public class MonthlyLedgerDTO
     {
         public int Year { get; set; }
         public int Month { get; set; }
@@ -15,9 +16,22 @@ namespace FuelStation.Web.Shared.ManagerOnlyDTOs
         public decimal Expenses { get; set; }
         public decimal Total { get; set; }
 
+        public List<Transaction?> Transactions { get; set; } = new();
 
-        // Relations
-        public List<Transaction> Transactions { get; set; }
-        public List<Employee> Employees { get; set; }
+        public MonthlyLedgerDTO()
+        {
+        }
+
+        public MonthlyLedgerDTO(DateTime datetime)
+        {
+            Year = datetime.Year;
+            Month = datetime.Month;
+        }
+
+        public void AddRent(decimal rent)
+        {
+            Expenses += rent;
+        }
     }
 }
+

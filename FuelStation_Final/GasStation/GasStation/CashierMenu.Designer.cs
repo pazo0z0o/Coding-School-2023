@@ -40,7 +40,7 @@
             this.btn_mng_Transaction.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btn_mng_Transaction.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
-            this.btn_mng_Transaction.Location = new System.Drawing.Point(761, 245);
+            this.btn_mng_Transaction.Location = new System.Drawing.Point(567, 231);
             this.btn_mng_Transaction.Name = "btn_mng_Transaction";
             this.btn_mng_Transaction.Size = new System.Drawing.Size(202, 114);
             this.btn_mng_Transaction.TabIndex = 6;
@@ -55,7 +55,7 @@
             this.btn_mng_Customer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_mng_Customer.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
-            this.btn_mng_Customer.Location = new System.Drawing.Point(511, 245);
+            this.btn_mng_Customer.Location = new System.Drawing.Point(317, 231);
             this.btn_mng_Customer.Name = "btn_mng_Customer";
             this.btn_mng_Customer.Size = new System.Drawing.Size(202, 114);
             this.btn_mng_Customer.TabIndex = 5;
@@ -68,7 +68,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(695, 169);
+            this.label1.Location = new System.Drawing.Point(475, 157);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(147, 25);
             this.label1.TabIndex = 7;
@@ -77,7 +77,7 @@
             // 
             // cash_Back
             // 
-            this.cash_Back.Location = new System.Drawing.Point(1449, 590);
+            this.cash_Back.Location = new System.Drawing.Point(1049, 547);
             this.cash_Back.Name = "cash_Back";
             this.cash_Back.Size = new System.Drawing.Size(83, 37);
             this.cash_Back.TabIndex = 8;
@@ -89,8 +89,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1544, 639);
+            this.BackColor = System.Drawing.Color.Maroon;
+            this.ClientSize = new System.Drawing.Size(1157, 611);
             this.Controls.Add(this.cash_Back);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_mng_Transaction);

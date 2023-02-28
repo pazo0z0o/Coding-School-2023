@@ -132,6 +132,7 @@
             this.btn_Trans_save.TabIndex = 2;
             this.btn_Trans_save.Text = "Save";
             this.btn_Trans_save.UseVisualStyleBackColor = false;
+            this.btn_Trans_save.Click += new System.EventHandler(this.btn_Trans_save_Click);
             // 
             // btn_trans_Load
             // 
@@ -198,7 +199,6 @@
             // btn_CheckAgain
             // 
             this.btn_CheckAgain.BackColor = System.Drawing.Color.Crimson;
-            this.btn_CheckAgain.Enabled = false;
             this.btn_CheckAgain.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_CheckAgain.Location = new System.Drawing.Point(875, 287);
             this.btn_CheckAgain.Name = "btn_CheckAgain";

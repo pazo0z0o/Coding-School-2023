@@ -4,13 +4,13 @@ namespace PetShop.Model
 {
     public class Transaction
     {
-        public Transaction(decimal petPrice, int petFoodQty, decimal petFoodPrice, decimal totalPrice,PetFoodQuality pfoodQuality)
+        public Transaction(decimal petPrice, int petFoodQty, decimal petFoodPrice, decimal totalPrice)
         {
             Date = DateTime.Now;
             PetPrice = petPrice;
             PetFoodPrice = petFoodPrice;
             PetFoodQty = petFoodQty;
-            PetFoodQuality = pfoodQuality;
+         
             TotalPrice = totalPrice;
         }
 

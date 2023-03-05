@@ -1,6 +1,11 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using PetShop.EF.Repositories;
+using PetShop.Model;
+
+//TODO: DEPEDENCY INJECTIONS FOR EVERYTHING,HANDLERS INCLUDED
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<IEntityRepo<Customer>, CustomerRepo>();
 
 // Add services to the container.
 

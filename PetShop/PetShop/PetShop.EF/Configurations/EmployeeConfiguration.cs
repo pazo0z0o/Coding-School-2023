@@ -23,7 +23,8 @@ namespace PetShop.EF.Configurations
             builder.Property(t => t.SalaryPerMonth).HasPrecision(10,2).IsRequired();
             builder.Property(t => t.EmployeeType).IsRequired();
 
-            // Relations
+            
+            // Relations 
         }
     }
 }

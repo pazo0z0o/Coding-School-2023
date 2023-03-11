@@ -17,7 +17,6 @@ namespace PetShop.EF.Repositories
             using var context = new PetShopDbContext();
             context.Add(entity);
             context.SaveChanges();
-
         }
 
         public void Delete(int id)
@@ -41,9 +40,9 @@ namespace PetShop.EF.Repositories
         public Customer? GetById(int id)
         {
             using var context = new PetShopDbContext();
-            return context.Customers.Include(customer => customer.Transactions)
-                .ThenInclude(transaction => transaction.Employee)
-                .Where(customer => customer.Id == id)
+            return context.Customers.Where(customer => customer.Id == id)
+                .Include(customer => customer.Transactions)
+                //.ThenInclude(transaction => transaction.Employee)
                 .SingleOrDefault();
 
         }

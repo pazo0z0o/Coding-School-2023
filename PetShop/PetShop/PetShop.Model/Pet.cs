@@ -24,6 +24,6 @@ namespace PetShop.Model
 
         // Relations
         public List<Transaction> Transactions { get; set; }
-        public TransactionLine TransactionLine { get; set; } = new TransactionLine();
+        public TransactionLine TransactionLines { get; set; } = new();
     }
 }

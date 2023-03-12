@@ -29,9 +29,9 @@ namespace PetShop.Model
         public Transaction Transaction { get; set; } = null!;
 
         public int PetId { get; set; }
-        public Pet Pet { get; set; } = null!;
+        public Pet Pet { get; set; } = null!; //TODO: might present a problem in the future 
 
         public int PetFoodId { get; set; }
-        public PetFood petFood { get; set; } = null!; 
+        public PetFood PetFood { get; set; } = null!; 
     }
 }

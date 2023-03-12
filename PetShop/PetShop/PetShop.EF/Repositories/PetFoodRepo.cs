@@ -32,14 +32,14 @@ namespace PetShop.EF.Repositories
         public IList<PetFood> GetAll()
         {
             using var context = new PetShopDbContext();
-            return context.PetFoods.Include(pf => pf.Transactions).ToList();
+            return context.PetFoods.Include(pf => pf.TransactionLines).ToList();
         }
 
         public PetFood? GetById(int id)
         {
             using var context = new PetShopDbContext();
             return context.PetFoods.Where(pf=>pf.Id == id)
-                .Include(pf => pf.Transactions)
+                .Include(pf => pf.TransactionLines)
                 .SingleOrDefault();
         }
 

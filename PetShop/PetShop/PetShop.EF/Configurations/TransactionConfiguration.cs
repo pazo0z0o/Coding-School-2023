@@ -18,10 +18,7 @@ namespace PetShop.EF.Configurations
 
             // Properties
             builder.Property(t => t.Date).IsRequired();
-            builder.Property(t => t.PetPrice).HasPrecision(10, 2).IsRequired();
-           // builder.Property(t => t.PetFoodQty).IsRequired();
-            //builder.Property(t => t.PetFoodQuality).IsRequired();
-            //builder.Property(t => t.PetFoodPrice).HasPrecision(10, 2).IsRequired();
+            needs_a_fixin;
             builder.Property(t => t.TotalPrice).HasPrecision(10, 2).IsRequired();
 
             // Relations
@@ -35,15 +32,6 @@ namespace PetShop.EF.Configurations
                 .HasForeignKey(t => t.EmployeeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            /*builder.HasOne(t => t.Pet)
-                .WithMany(t => t.Transactions)
-                .HasForeignKey(t => t.PetId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(t => t.PetFood)
-                .WithMany(t => t.Transactions)
-                .HasForeignKey(t => t.PetFoodId)
-                .OnDelete(DeleteBehavior.Restrict);*/
         }
     }
 }

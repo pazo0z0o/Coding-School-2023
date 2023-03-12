@@ -4,23 +4,17 @@ namespace PetShop.Model
 {
     public class Transaction
     {
-        public Transaction(/*decimal petPrice, int petFoodQty, decimal petFoodPrice,*/ decimal totalPrice)
+        public Transaction(){}
+
+        public Transaction( decimal totalPrice)
         {
             Date = DateTime.Now;
             TotalPrice = totalPrice;
-
-            //PetPrice = petPrice;
-            //PetFoodPrice = petFoodPrice;
-            //PetFoodQty = petFoodQty;
-         
         }
 
         public int Id { get; set; }
         public DateTime Date { get; set; }
-       // public decimal PetPrice { get; set; }
-       // public int PetFoodQty { get; set; }
-       // public PetFoodQuality PetFoodQuality { get; set; }
-       // public decimal PetFoodPrice { get; set; }
+       
         public decimal TotalPrice { get; set; }
 
         // Relations
@@ -30,11 +24,6 @@ namespace PetShop.Model
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; } = null!;
 
-        //public int PetId { get; set; }
-        //public Pet Pet { get; set; } = null!;
-
-        //public int PetFoodId { get; set; }
-        //public PetFood PetFood { get; set; } = null!;
 
         public List<TransactionLine> TransactionLines { get; set; } = new();
 

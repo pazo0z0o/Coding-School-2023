@@ -28,8 +28,6 @@ namespace PetShop.EF.Repositories
             using var context = new PetShopDbContext();
             return context.Transactions.Include(transaction => transaction.Customer)
             .Include(transaction => transaction.Employee)
-            .Include(transaction => transaction.PetFood)
-            .Include(transaction=> transaction.Pet)
             .ToList();
            
         }
@@ -39,8 +37,7 @@ namespace PetShop.EF.Repositories
             using var context = new PetShopDbContext();
             return context.Transactions.Where(transaction=>transaction.Id == id).Include(transaction => transaction.Customer)
            .Include(transaction => transaction.Employee)
-           .Include(transaction => transaction.PetFood)
-           .Include(transaction => transaction.Pet).SingleOrDefault();
+           .SingleOrDefault();
         }
 
         public void Update(int id, Transaction entity)

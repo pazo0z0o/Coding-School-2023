@@ -49,7 +49,6 @@ namespace PetShop.EF.Repositories
             if (dbPets is null)
             {
                 throw new KeyNotFoundException("The given key was not found!");
-
             }
             else
             {
@@ -64,8 +63,6 @@ namespace PetShop.EF.Repositories
             {
                 throw ex; 
             }
-
-
         }
     }
 }

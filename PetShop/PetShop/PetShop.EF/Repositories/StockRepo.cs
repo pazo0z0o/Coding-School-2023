@@ -1,4 +1,6 @@
-﻿using PetShop.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using PetShop.EF.Context;
+using PetShop.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,30 +10,52 @@ using System.Threading.Tasks;
 namespace PetShop.EF.Repositories
 {
     public class StockRepo : IEntityRepo<Stock>
-    { //TODO: implement Repo for Stock
+    { 
         public void Add(Stock entity)
         {
-            throw new NotImplementedException();
+            using var context = new PetShopDbContext();
+            context.Add(entity);
+            context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using var context = new PetShopDbContext();
+            var dbStock = context.Stock.Where(stock => stock.Id == id)
+                .Include(stock => stock.PetFoods)
+                .SingleOrDefault();
+            if (dbStock is null) return;
+            context.Remove(dbStock);
+            context.SaveChanges();       
         }
 
         public IList<Stock> GetAll()
         {
-            throw new NotImplementedException();
+            using var context = new PetShopDbContext();
+            return context.Stock.Include(stock => stock.PetFoods).ToList();
         }
 
         public Stock? GetById(int id)
         {
-            throw new NotImplementedException();
+            using var context = new PetShopDbContext();
+            return context.Stock.Where(stock => stock.Id == id).Include(stock => stock.PetFoods).SingleOrDefault();
         }
 
         public void Update(int id, Stock entity)
         {
-            throw new NotImplementedException();
+            using var context = new PetShopDbContext();
+            var dbStock = context.Stock.Where(stock => stock.Id == id).SingleOrDefault();
+            if(dbStock is null)
+            {
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
+                return;
+            }
+            dbStock.AnimalType = entity.AnimalType;
+            dbStock.PetFoodQuality = entity.PetFoodQuality;
+            dbStock.StockQuantity = entity.StockQuantity;
+            dbStock.Month = entity.Month;
+            dbStock.Year = entity.Year;
+            context.SaveChanges();
         }
     }
 }

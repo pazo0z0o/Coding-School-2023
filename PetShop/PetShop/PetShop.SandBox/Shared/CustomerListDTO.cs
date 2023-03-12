@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace PetShop.SandBox.Shared
 {
     public class CustomerListDTO
-    {//TODO: Implement CustomerListDTO
+    {
     }
 }

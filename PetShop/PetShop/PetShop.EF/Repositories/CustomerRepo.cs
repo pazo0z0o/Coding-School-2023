@@ -23,11 +23,9 @@ namespace PetShop.EF.Repositories
         {
             using var ctx = new PetShopDbContext();
             var dbCustomer = ctx.Customers.Where(customer => customer.Id == id).SingleOrDefault();
-            if (dbCustomer is null)
-            {
+            if (dbCustomer is null) { throw new KeyNotFoundException($"Given id '{id}' was not found"); }
                 ctx.Remove(dbCustomer);
-                ctx.SaveChanges();
-            }
+                ctx.SaveChanges(); 
         }
 
         public IList<Customer> GetAll()
@@ -42,11 +40,8 @@ namespace PetShop.EF.Repositories
             using var context = new PetShopDbContext();
             return context.Customers.Where(customer => customer.Id == id)
                 .Include(customer => customer.Transactions)
-                //.ThenInclude(transaction => transaction.Employee)
                 .SingleOrDefault();
-
         }
-
         public void Update(int id, Customer entity)
         {
             using var ctx = new PetShopDbContext();

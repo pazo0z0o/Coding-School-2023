@@ -22,8 +22,7 @@ namespace PetShop.EF.Repositories
         {
             using var context = new PetShopDbContext();
             var dbEmployee = context.Employees.Where(empl => empl.Id == id).Include(empl => empl.Transactions).SingleOrDefault();
-            if (dbEmployee is null)
-                throw new KeyNotFoundException($"Given Employee Id was not found!");
+            if (dbEmployee is null) { throw new KeyNotFoundException($"Given id '{id}' was not found"); }
             context.Remove(dbEmployee);
             context.SaveChanges();
 
@@ -48,7 +47,11 @@ namespace PetShop.EF.Repositories
                 .Where(employee => employee.Id == id)
                 .Include(employee => employee.Transactions)
                 .SingleOrDefault();
-            if (EmployeeDb is null) throw new KeyNotFoundException($"Given id '{id}' was not found");
+            if (EmployeeDb is null) 
+            {
+                throw new KeyNotFoundException($"Given id '{id}' was not found");
+                return;
+            }
             EmployeeDb.Name = entity.Name;
             EmployeeDb.Surname = entity.Surname;
             EmployeeDb.SalaryPerMonth = entity.SalaryPerMonth;

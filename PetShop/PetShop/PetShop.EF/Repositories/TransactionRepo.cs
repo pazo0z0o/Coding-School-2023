@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PetShop.EF.Repositories
-{//TODO: Implement TransactionRepo FORM TRANSACTION LINES
+{
     public class TransactionRepo : IEntityRepo<Transaction>
     {
         public void Add(Transaction entity)
@@ -35,7 +35,8 @@ namespace PetShop.EF.Repositories
         public Transaction? GetById(int id)
         {
             using var context = new PetShopDbContext();
-            return context.Transactions.Where(transaction=>transaction.Id == id).Include(transaction => transaction.Customer)
+            return context.Transactions.Where(transaction=>transaction.Id == id)
+           .Include(transaction => transaction.Customer)
            .Include(transaction => transaction.Employee)
            .SingleOrDefault();
         }
@@ -43,7 +44,15 @@ namespace PetShop.EF.Repositories
         public void Update(int id, Transaction entity)
         {
             using var context = new PetShopDbContext();
-            throw new NotImplementedException();
+            var TransactionDb = context.Transactions
+                .Where(tr => tr.Id == id)
+                .SingleOrDefault();
+            if (TransactionDb is null)
+            { throw new KeyNotFoundException($"Given id '{id}' was not found");
+                return;
+            }
+            TransactionDb.TotalPrice = entity.TotalPrice;
+            context.SaveChanges();
         }
     }
 }

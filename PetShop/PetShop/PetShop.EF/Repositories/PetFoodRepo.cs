@@ -22,11 +22,11 @@ namespace PetShop.EF.Repositories
         {
             using var context = new PetShopDbContext();
             var dbPetFood = context.PetFoods.Where(pf => pf.Id == id).SingleOrDefault();
-            if (dbPetFood is null)
-            {
+            if (dbPetFood is null) { throw new KeyNotFoundException($"Given id '{id}' was not found"); }
+            
                 context.Remove(dbPetFood);
                 context.SaveChanges();
-            }
+            
         }
 
         public IList<PetFood> GetAll()

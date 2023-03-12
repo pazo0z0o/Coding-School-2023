@@ -18,7 +18,6 @@ namespace PetShop.EF.Configurations
 
             // Properties
             builder.Property(t => t.Date).IsRequired();
-            needs_a_fixin;
             builder.Property(t => t.TotalPrice).HasPrecision(10, 2).IsRequired();
 
             // Relations

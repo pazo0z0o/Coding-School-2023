@@ -18,21 +18,25 @@ namespace PetShop.Model
         public int Id { get; set; }
 
         public int StockQuantity { get; set; }
-        public int Remaining { get; set; }
+       
         public int Month { get; set; }
         public int Year { get; set; }
-        
-        //Relation
-        public int PetFoodId { get; set; }
-        public  PetFood PetFood { get; set; }
 
         public AnimalType AnimalType { get; set; }
         public PetFoodQuality PetFoodQuality { get; set; }
+        
+        //Relation
+        public int StockFoodId { get; set; }
+        public  PetFood PetFood { get; set; } = null!;
+        //ctor
 
-        public Stock(int quantity, int remains, AnimalType animalType,PetFoodQuality petFoodQuality)
+       public Stock()
+        {
+
+        }
+        public Stock(int quantity, AnimalType animalType,PetFoodQuality petFoodQuality)
         {
             StockQuantity = quantity;
-            Remaining = remains;
             AnimalType= animalType;
             PetFoodQuality= petFoodQuality;
         }

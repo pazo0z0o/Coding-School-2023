@@ -27,7 +27,7 @@ namespace PetShop.Model
         
         //Relation
         public int StockFoodId { get; set; }
-        public  PetFood PetFood { get; set; } = null!;
+        public  PetFood PetFoods { get; set; } = null!;
         //ctor
 
        public Stock()

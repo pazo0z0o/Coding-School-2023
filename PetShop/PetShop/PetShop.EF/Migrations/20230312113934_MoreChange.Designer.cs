@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetShop.EF.Context;
 
@@ -11,9 +12,11 @@ using PetShop.EF.Context;
 namespace PetShop.EF.Migrations
 {
     [DbContext(typeof(PetShopDbContext))]
-    partial class PetShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230312113934_MoreChange")]
+    partial class MoreChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,6 +201,9 @@ namespace PetShop.EF.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PetId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TotalPrice")
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
@@ -207,6 +213,8 @@ namespace PetShop.EF.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("PetId");
 
                     b.ToTable("Transactions", (string)null);
                 });
@@ -291,6 +299,10 @@ namespace PetShop.EF.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("PetShop.Model.Pet", null)
+                        .WithMany("Transactions")
+                        .HasForeignKey("PetId");
+
                     b.Navigation("Customer");
 
                     b.Navigation("Employee");
@@ -337,6 +349,8 @@ namespace PetShop.EF.Migrations
                 {
                     b.Navigation("TransactionLines")
                         .IsRequired();
+
+                    b.Navigation("Transactions");
                 });
 
             modelBuilder.Entity("PetShop.Model.PetFood", b =>

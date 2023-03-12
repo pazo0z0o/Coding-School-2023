@@ -26,7 +26,7 @@ namespace PetShop.EF.Configurations
             builder.Property(stock => stock.StockQuantity).IsRequired();
             builder.Property(stock => stock.StockQuantity).IsRequired();
 
-            builder.HasOne(stock => stock.PetFood)
+            builder.HasOne(stock => stock.PetFoods)
                 .WithOne(pf => pf.Stock)
                 .HasForeignKey<Stock>(stock => stock.StockFoodId)
                 .OnDelete(DeleteBehavior.Restrict);

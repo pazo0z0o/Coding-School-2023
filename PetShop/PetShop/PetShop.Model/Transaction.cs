@@ -24,7 +24,6 @@ namespace PetShop.Model
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; } = null!;
 
-
         public List<TransactionLine> TransactionLines { get; set; } = new();
 
     }

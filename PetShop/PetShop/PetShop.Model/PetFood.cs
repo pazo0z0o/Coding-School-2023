@@ -21,7 +21,7 @@ namespace PetShop.Model
         public decimal Cost { get; set; }
 
         // Relations
-        public Stock Stock { get; set; } = new(); // 1-1 relationship
+        public Stock Stock { get; set; } //= new(); // 1-1 relationship
         public List<TransactionLine> TransactionLines { get; set; } = new List<TransactionLine>();
     }
 }

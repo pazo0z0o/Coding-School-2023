@@ -29,7 +29,7 @@ namespace PetShop.EF.Repositories
         public IList<Pet> GetAll()
         {
             using var context = new PetShopDbContext();
-            return context.Pets.Include(p => p.Transactions).ToList();
+            return context.Pets.Include(p => p.TransactionLines).ToList();
 
         }
 
@@ -37,7 +37,7 @@ namespace PetShop.EF.Repositories
         {
             using var context = new PetShopDbContext();
             var dbPets = context.Pets.Where(p => p.Id == id)
-                .Include(p => p.Transactions)
+                .Include(p => p.TransactionLines)
                 .SingleOrDefault();
             return dbPets;
         }

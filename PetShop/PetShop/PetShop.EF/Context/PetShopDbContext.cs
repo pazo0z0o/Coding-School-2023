@@ -12,7 +12,8 @@ namespace PetShop.EF.Context
         public DbSet<Pet> Pets { get; set; } = null!;
         public DbSet<PetFood> PetFoods { get; set; } = null!;
         public DbSet<Transaction> Transactions { get; set; } = null!;
-
+        public DbSet<TransactionLine> TransactionLines { get; set; } = null!;
+        public DbSet<Stock> Stock { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
@@ -20,6 +21,8 @@ namespace PetShop.EF.Context
             modelBuilder.ApplyConfiguration(new PetConfiguration());
             modelBuilder.ApplyConfiguration(new PetFoodConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.ApplyConfiguration(new StockConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionLineConfig());
             base.OnModelCreating(modelBuilder);
         }
 

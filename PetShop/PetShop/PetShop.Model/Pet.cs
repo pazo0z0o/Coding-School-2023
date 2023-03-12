@@ -12,7 +12,7 @@ namespace PetShop.Model
             Price = price;
             Cost = cost;
 
-            Transactions = new List<Transaction>();
+            TransactionLines = new TransactionLine();
         }
 
         public int Id { get; set; }
@@ -23,7 +23,7 @@ namespace PetShop.Model
         public decimal Cost { get; set; }
 
         // Relations
-        public List<Transaction> Transactions { get; set; }
+        
         public TransactionLine TransactionLines { get; set; } = new();
     }
 }

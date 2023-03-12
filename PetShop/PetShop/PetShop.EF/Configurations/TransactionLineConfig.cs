@@ -27,7 +27,6 @@ namespace PetShop.EF.Configurations
             builder.Property(tl => tl.Quantity).IsRequired();
             builder.Property(tl => tl.PetPrice).HasPrecision(10, 2).IsRequired();
             builder.Property(tl => tl.PetBreed).HasMaxLength(50).IsRequired();
-            builder.Property(tl => tl.PetPrice).HasPrecision(10, 2).IsRequired();
 
             // Relations
             builder.HasOne(tl => tl.Transaction)

@@ -31,7 +31,7 @@ namespace PetShop.EF.Repositories
         public IEnumerable<Employee> GetAll()
         {
             using var context = new PetShopDbContext();
-            return context.Employees.Include(emps => emps.Transactions).ToList();
+            return context.Employees;//.Include(emps => emps.Transactions).ToList();
         }
 
         public Employee? GetById(int? id)

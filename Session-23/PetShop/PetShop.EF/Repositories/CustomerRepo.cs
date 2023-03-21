@@ -33,7 +33,7 @@ namespace PetShop.EF.Repositories
         public IEnumerable<Customer> GetAll()
         {
             using var context = new PetShopDbContext();
-            return context.Customers.Include(customs => customs.Transactions).ToList();
+            return context.Customers;//.Include(customs => customs.Transactions).ToList();
         }
 
         public Customer? GetById(int? id)

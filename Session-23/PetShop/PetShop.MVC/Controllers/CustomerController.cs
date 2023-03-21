@@ -20,7 +20,7 @@ namespace PetShop.MVC.Controllers
 
         public ActionResult Index()
         {
-            var customers = _customerRepo.GetAll().ToList();
+            var customers = _customerRepo.GetAll();
             return View(model: customers);
         }
 

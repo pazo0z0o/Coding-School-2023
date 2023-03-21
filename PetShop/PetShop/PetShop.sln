@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop.Model", "PetShop.Mo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop.EF", "PetShop.EF\PetShop.EF.csproj", "{E42060DE-F138-4661-B222-95DE1750A19F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShop.SandBox.Server", "PetShop.SandBox\Server\PetShop.SandBox.Server.csproj", "{8DD764AB-A220-4D25-A297-57483E177471}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop.SandBox.Server", "PetShop.SandBox\Server\PetShop.SandBox.Server.csproj", "{8DD764AB-A220-4D25-A297-57483E177471}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShop.SandBox.Client", "PetShop.SandBox\Client\PetShop.SandBox.Client.csproj", "{F7FE7FE5-130B-45F9-B5C1-BD00606E57EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop.SandBox.Client", "PetShop.SandBox\Client\PetShop.SandBox.Client.csproj", "{F7FE7FE5-130B-45F9-B5C1-BD00606E57EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShop.SandBox.Shared", "PetShop.SandBox\Shared\PetShop.SandBox.Shared.csproj", "{7B221C00-5628-4339-AAE3-52DAAEA8E454}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop.SandBox.Shared", "PetShop.SandBox\Shared\PetShop.SandBox.Shared.csproj", "{7B221C00-5628-4339-AAE3-52DAAEA8E454}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -30,8 +30,8 @@ namespace PetShop.SandBox.Server.Controllers
             });
 
         }
-
-        [HttpGet("{id:int}")]
+       [Route( "customerList/details/{id}")]
+        [HttpGet]
         public async Task<CustomerDetailsDTO> GetCustomerDetails(int id)
         {
             var result = _customerRepo.GetById(id);
@@ -73,7 +73,7 @@ namespace PetShop.SandBox.Server.Controllers
                 };
             return customerDetails; 
         }
-
+        [Route("customerList/edit")]
         [HttpPost]
         public async Task<ActionResult> Post(CustomerDetailsDTO customer)
         { 
@@ -93,7 +93,7 @@ namespace PetShop.SandBox.Server.Controllers
              }      
             return Ok();
         }
-
+        [Route("customerList/edit/{id}")]
         [HttpPut]
         public async Task<ActionResult> Put (CustomerEditDTO customer)
         {

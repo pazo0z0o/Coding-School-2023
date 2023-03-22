@@ -47,12 +47,14 @@ else
     private List<CustomerListDTO> customerList = new();
     bool isLoading { get; set; } = true;
 
+    //init
     protected override async Task OnInitializedAsync()
     {
         await LoadItemsFromServer();
         isLoading = false;
     }
 
+    //getall
     private async Task LoadItemsFromServer()
     {
         customerList = await httpClient.GetFromJsonAsync<List<CustomerListDTO>>("customer"); //looks to the controller for action

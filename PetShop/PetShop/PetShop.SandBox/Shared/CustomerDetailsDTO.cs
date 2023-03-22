@@ -16,6 +16,6 @@ namespace PetShop.SandBox.Shared
         public string Tin { get; set; }
 
         // Relations
-        public List<Transaction>? Transactions { get; set; }
+        public List<Transaction>? Transactions { get; set; } = new();
     }
 }

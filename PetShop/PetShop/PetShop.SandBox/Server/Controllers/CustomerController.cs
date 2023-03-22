@@ -30,7 +30,7 @@ namespace PetShop.SandBox.Server.Controllers
             });
 
         }
-       [Route( "customerList/details/{id}")]
+        [Route("customerList/details/{id}")]
         [HttpGet]
         public async Task<CustomerDetailsDTO> GetCustomerDetails(int id)
         {
@@ -38,20 +38,20 @@ namespace PetShop.SandBox.Server.Controllers
 
             if (result is null) return null;
 
-                CustomerDetailsDTO customerDetails = new()
-                {
-                    Id = result.Id,
-                    Name = result.Name,
-                    Surname = result.Surname,
-                    Phone = result.Phone,
-                    Tin = result.Tin,
-                    //TODO: Get TransactionDetails done
-                    //Transactions = result.Transactions.Select(transact => new TransactionListDTO
-                    //{
-                    //    Date = transact.Date,
-                    //    TotalPrice = transact.TotalPrice,
-                    //}).ToList()
-                };
+            CustomerDetailsDTO customerDetails = new()
+            {
+                Id = result.Id,
+                Name = result.Name,
+                Surname = result.Surname,
+                Phone = result.Phone,
+                Tin = result.Tin,
+                //TODO: Get TransactionDetails done
+                //Transactions = result.Transactions.Select(transact => new TransactionListDTO
+                //{
+                //    Date = transact.Date,
+                //    TotalPrice = transact.TotalPrice,
+                //}).ToList()
+            };
             return customerDetails;
         }
 
@@ -60,23 +60,23 @@ namespace PetShop.SandBox.Server.Controllers
         {
             var result = _customerRepo.GetById(id);
 
-            if (result is null)  { return null; }
-            
-                CustomerDetailsDTO customerDetails = new()
-                {
-                    Id = result.Id,
-                    Name = result.Name,
-                    Surname = result.Surname,
-                    Phone = result.Phone,
-                    Tin = result.Tin,
-                    
-                };
-            return customerDetails; 
+            if (result is null) { return null; }
+
+            CustomerDetailsDTO customerDetails = new()
+            {
+                Id = result.Id,
+                Name = result.Name,
+                Surname = result.Surname,
+                Phone = result.Phone,
+                Tin = result.Tin,
+
+            };
+            return customerDetails;
         }
         [Route("customerList/edit")]
         [HttpPost]
         public async Task<ActionResult> Post(CustomerDetailsDTO customer)
-        { 
+        {
             var customerToAdd = new Customer
             {
                 Id = customer.Id,
@@ -85,17 +85,17 @@ namespace PetShop.SandBox.Server.Controllers
                 Phone = customer.Phone,
                 Tin = customer.Tin,
             };
-             try
-             {_customerRepo.Add(customerToAdd); }
-             catch (Exception ex)
-             {
-                 throw ex;
-             }      
+            try
+            { _customerRepo.Add(customerToAdd); }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             return Ok();
         }
         [Route("customerList/edit/{id}")]
         [HttpPut]
-        public async Task<ActionResult> Put (CustomerEditDTO customer)
+        public async Task<ActionResult> Put(CustomerEditDTO customer)
         {
             var customerToEdit = _customerRepo.GetById(customer.Id);
             if (customerToEdit is null) return StatusCode(StatusCodes.Status404NotFound, "Customer not found!");
@@ -104,14 +104,14 @@ namespace PetShop.SandBox.Server.Controllers
             customerToEdit.Surname = customer.Surname;
             customerToEdit.Phone = customer.Phone;
             customerToEdit.Tin = customer.Tin;
-           
+
             try
             {
                 _customerRepo.Update(customer.Id, customerToEdit);
             }
             catch (Exception ex)
             {
-            return BadRequest("Something Went Wrong");   
+                return BadRequest("Something Went Wrong");
             }
             return Ok();
         }

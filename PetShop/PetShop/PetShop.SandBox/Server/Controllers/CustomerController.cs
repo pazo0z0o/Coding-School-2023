@@ -73,9 +73,9 @@ namespace PetShop.SandBox.Server.Controllers
             };
             return customerDetails;
         }
-        [Route("customerList/edit")]
+     
         [HttpPost]
-        public async Task<ActionResult> Post(CustomerDetailsDTO customer)
+        public async Task<ActionResult> Post(CustomerEditDTO customer)
         {
             var customerToAdd = new Customer
             {
@@ -93,7 +93,7 @@ namespace PetShop.SandBox.Server.Controllers
             }
             return Ok();
         }
-        [Route("customerList/edit/{id}")]
+       
         [HttpPut]
         public async Task<ActionResult> Put(CustomerEditDTO customer)
         {

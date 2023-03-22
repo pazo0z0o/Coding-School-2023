@@ -1,0 +1,75 @@
+﻿@page "/customerlist/edit/{id:int}"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+@using PetShop.SandBox.Shared;
+@using System.Net.Http.Headers;
+
+
+<h3>Customer Edit</h3>
+@if (isLoading)
+{
+    <div class="lds-roller"></div>
+}
+else
+{
+    <EditForm Model="@customer" OnValidSubmit="@OnSave">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <InputText class="form-control" id="description" @bind-Value="customer.Name" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Surname</label>
+                <InputText class="form-control" id="description" @bind-Value="customer.Surname" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Phone</label>
+                <InputNumber class="form-control" id="description" @bind-Value="customer.Phone" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">TIN</label>
+                <InputText class="form-control" id="description" @bind-Value="customer.Tin" />
+            </div>
+           
+            <div class="row mt-4">
+                <div class="col">
+                    <button class="btn btn-success" type="submit">Save</button>
+                    <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+                  
+                </div>
+            </div>
+        </div>
+    </EditForm>
+}
+
+
+@code {
+    private bool isLoading = true;
+    private CustomerEditDTO customer = new();
+    [Parameter] public int? Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadItemsFromServer();
+        isLoading = false;
+    }
+    private async Task LoadItemsFromServer()
+    {
+        if (Id.HasValue)
+            customer = await httpClient.GetFromJsonAsync<CustomerEditDTO>($"customer/{Id}");
+    }
+    private void OnCancel()
+    {
+        navigationManager.NavigateTo("customerlist");
+    }
+    private async Task OnSave()
+    {
+        HttpResponseMessage? response;
+        response = await httpClient.PutAsJsonAsync("customer", customer);
+        response.EnsureSuccessStatusCode();
+        navigationManager.NavigateTo("customerlist");
+    }
+}

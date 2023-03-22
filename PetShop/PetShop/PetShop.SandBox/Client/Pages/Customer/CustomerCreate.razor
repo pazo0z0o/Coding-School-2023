@@ -1,0 +1,89 @@
+﻿@page "/customerlist/edit"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+@using PetShop.SandBox.Shared;
+@using System.Net.Http.Headers;
+
+<h3>Customer Creation</h3>
+@if (isLoading)
+{
+    <div class="lds-roller"></div>
+}
+else
+{
+    <EditForm Model="@customer" OnValidSubmit="@OnSave">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <InputText class="form-control" id="description" @bind-Value="customer.Name" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Surname</label>
+                <InputText class="form-control" id="description" @bind-Value="customer.Surname" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Phone</label>
+                <InputNumber class="form-control" id="description" @bind-Value="customer.Phone" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">TIN</label>
+                <InputText class="form-control" id="description" @bind-Value="customer.Tin" />
+            </div>
+
+            <div class="row mt-4">
+                <div class="col">
+                    <button class="btn btn-success" type="submit">Save</button>
+                    <button class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+
+                </div>
+            </div>
+        </div>
+    </EditForm>
+}
+
+
+
+@code {
+    private bool isLoading = true;
+    private CustomerEditDTO customer = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadItemsFromServer();
+        isLoading = false;
+    }
+    private async Task LoadItemsFromServer()
+    {
+        customer = await httpClient.GetFromJsonAsync<CustomerEditDTO>($"customer");
+    }
+    private void OnCancel()
+    {
+        navigationManager.NavigateTo("customerlist");
+    }
+    private async Task OnSave()
+    { 
+        HttpResponseMessage? response;
+        try
+        {
+            response = await httpClient.PostAsJsonAsync("customer", customer);
+            response.EnsureSuccessStatusCode();
+            navigationManager.NavigateTo("customerlist");
+           
+            if (!response.IsSuccessStatusCode) { await jsRuntime.InvokeVoidAsync("alert", "Something Went Wrong!");  }
+            else if(response.IsSuccessStatusCode)
+            { 
+                await jsRuntime.InvokeVoidAsync("alert", "Success");
+                navigationManager.NavigateTo("customerList");
+            }
+            else { await jsRuntime.InvokeVoidAsync("alert", "Unexpected Error. Please try again."); }
+        }
+        catch (Exception)
+        {
+
+            await jsRuntime.InvokeVoidAsync("alert", "Unexpected Error. Please try again.");
+        }
+    }
+}

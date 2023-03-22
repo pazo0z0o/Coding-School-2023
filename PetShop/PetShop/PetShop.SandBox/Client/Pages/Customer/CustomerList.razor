@@ -31,7 +31,7 @@ else
                     <td>@customer.Surname</td>
                     <td>
                         <button class="btn btn-warning" @onclick="()=> EditCustomer(customer)">Edit</button>
-                        <button class="btn btn-primary" @onclick="()=> DetailItem(customer)">Details</button>
+                        <button class="btn btn-primary" @onclick="()=> CustomerDetails(customer)">Details</button>
                         <button class="btn btn-Danger" @onclick="()=> DeleteCustomer(customer)">Delete</button>
                     </td>
                 </tr>
@@ -83,7 +83,7 @@ else
         navigationManager.NavigateTo($"customerlist/edit/{customer.Id}");
     }
 
-    private void DetailItem(CustomerListDTO customer)
+    private void CustomerDetails(CustomerListDTO customer)
     {
         navigationManager.NavigateTo($"customerList/details/{customer.Id}");
     }
